@@ -19,30 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Git常用命令总结最近一直被git命令困扰，这次来写写怎么用git">
+    <meta name="description" content="好的函数的品质都强化了函数是抽象的想法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="怎么用git命令搭建一个GitHub仓库？">
-<meta property="og:url" content="https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="设计函数">
+<meta property="og:url" content="https://sajlle.github.io/2023/04/15/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Alicia&#39;s Blog">
-<meta property="og:description" content="Git常用命令总结最近一直被git命令困扰，这次来写写怎么用git">
+<meta property="og:description" content="好的函数的品质都强化了函数是抽象的想法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-14T20:01:40.000Z">
-<meta property="article:modified_time" content="2023-04-15T02:27:05.699Z">
+<meta property="article:published_time" content="2023-04-15T14:08:52.000Z">
+<meta property="article:modified_time" content="2023-04-15T06:22:30.502Z">
 <meta property="article:author" content="Alicia">
-<meta property="article:tag" content="总结">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="github">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="SICP">
+<meta property="article:tag" content="函数式编程">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="https://sajlle.github.io/2023/04/15/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/","path":"2023/04/15/git常用命令总结/","title":"怎么用git命令搭建一个GitHub仓库？"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/04/15/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/","path":"2023/04/15/设计函数/","title":"设计函数"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>怎么用git命令搭建一个GitHub仓库？ | Alicia's Blog</title>
+<title>设计函数 | Alicia's Blog</title>
   
 
 
@@ -133,7 +135,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -146,7 +148,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">Git常用命令总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E4%BA%8B%E6%83%85"><span class="nav-number">1.0.1.</span> <span class="nav-text">这是不一样的事情</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%99%E5%BE%88%E6%9C%89%E8%B6%A3"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">这很有趣</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +220,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/04/15/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
@@ -232,12 +233,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="怎么用git命令搭建一个GitHub仓库？ | Alicia's Blog">
+      <meta itemprop="name" content="设计函数 | Alicia's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          怎么用git命令搭建一个GitHub仓库？
+          设计函数
         </h1>
 
         <div class="post-meta-container">
@@ -247,15 +248,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-04-14 20:01:40" itemprop="dateCreated datePublished" datetime="2023-04-14T20:01:40Z">2023-04-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-15 02:27:05" itemprop="dateModified" datetime="2023-04-15T02:27:05Z">2023-04-15</time>
+      <time title="创建时间：2023-04-15 14:08:52 / 修改时间：06:22:30" itemprop="dateCreated datePublished" datetime="2023-04-15T14:08:52Z">2023-04-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,7 +258,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
         </span>
     </span>
 
@@ -281,14 +276,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>43</span>
+      <span>754</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -299,10 +294,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Git常用命令总结"><a href="#Git常用命令总结" class="headerlink" title="Git常用命令总结"></a>Git常用命令总结</h1><p>最近一直被git命令困扰，这次来写写怎么用git</p>
+        <p>好的函数的品质都强化了函数是抽象的想法。</p>
 <span id="more"></span>
 
-<h3 id="这是不一样的事情"><a href="#这是不一样的事情" class="headerlink" title="这是不一样的事情"></a>这是不一样的事情</h3><h5 id="这很有趣"><a href="#这很有趣" class="headerlink" title="这很有趣"></a>这很有趣</h5><p><a target="_blank" rel="noopener" href="https://cn.bing.com/search?q=next%E4%B8%BB%E9%A2%98%E6%96%87%E6%A1%A3&amp;form=ANSPH1&amp;refig=25b594ca938540cfabb2307c7e96e46f&amp;pc=U531">我是链接</a></p>
+<ul>
+<li>  每个功能应该<strong>只有一个</strong>工作。该工作应该可以用一个简短的名称来识别，并且可以在一行文本中进行描述。按顺序执行多个作业的函数应分为多个函数。</li>
+<li>  ==_<strong>不要重复自己</strong>==_是软件工程的核心原则。所谓的 DRY 原则指出，多个代码片段不应描述冗余逻辑。相反，==该逻辑应该实现一次，命名并多次应用==。如果您发现自己正在复制和粘贴一段代码，那么您可能已经找到了进行功能抽象的机会。</li>
+<li>  函数应该被一般地（genrally）定义。平方不在 Python 库中正是因为它是pow函数的特例，pow将数字计算为任意幂。</li>
+</ul>
+<p>函数定义通常包括描述函数的文档，称为_==docstring==_，它==必须与函数体一起缩进==。文档字符串通常是==三引号==。第一行在一行中描述了函数的工作。以下几行可以描述参数并阐明函数的行为：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n</span>):</span><br><span class="line">        <span class="string">"""Compute the pressure in pascals of an ideal gas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Applies the ideal gas law: http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- volume of gas, in cubic meters</span></span><br><span class="line"><span class="string">        t -- absolute temperature in degrees kelvin</span></span><br><span class="line"><span class="string">        n -- particles of gas</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># Boltzmann's constant</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></tbody></table></figure>
+<p>When you call&nbsp;<code>help</code>&nbsp;with the name of a function as an argument, you see its docstring (type&nbsp;<code>q</code>&nbsp;to quit Python help).</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></tbody></table></figure>
+<p>代码只写一次，但往往要读很多遍。<br>The Python docs include&nbsp;<a target="_blank" rel="noopener" href="http://www.python.org/dev/peps/pep-0257/">docstring guidelines</a>&nbsp;that maintain consistency across different Python projects.</p>
+<p><strong>Comments</strong>. Comments in Python can be attached to the end of a line following the&nbsp;#&nbsp;symbol. For example, the comment&nbsp;Boltzmann’s constant&nbsp;above describes&nbsp;k. ==These comments don’t ever appear in Python’s&nbsp;help, and they are ignored by the interpreter.== They exist for humans alone.</p>
+<p>A consequence of defining general functions is the introduction of additional arguments. ==Functions with many arguments can be awkward to call and difficult to read.==<br>In Python, we can provide ==default values== for the arguments of a function. When calling that function, arguments with ==default values are optional==. ==If they are not provided, then the default value is bound to the formal parameter(形式参数) name instead.== For instance, if an application commonly computes pressure for one mole of particles, this value can be provided as a default:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n=<span class="number">6.022e23</span></span>):</span><br><span class="line">        <span class="string">"""Compute the pressure in pascals of an ideal gas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- volume of gas, in cubic meters</span></span><br><span class="line"><span class="string">        t -- absolute temperature in degrees kelvin</span></span><br><span class="line"><span class="string">        n -- particles of gas (default: one mole)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># Boltzmann's constant</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></tbody></table></figure>
+
+<p>The&nbsp;<code>=&nbsp;</code>symbol means two different things in this example, depending on the context in which it is used. In the<code>&nbsp;def&nbsp;</code>statement header,<code>&nbsp;=&nbsp;</code>==does not perform assignment==, but instead ==indicates a default value to use== when the&nbsp;pressure&nbsp;function is called. By contrast, the assignment statement to<code>&nbsp;k</code>&nbsp;==in the body of the function binds the name&nbsp;k&nbsp;to an approximation(近似值) of Boltzmann’s constant.==</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pressure(<span class="number">1</span>, <span class="number">273.15</span>)</span><br><span class="line"><span class="number">2269.974834</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pressure(<span class="number">1</span>, <span class="number">273.15</span>, <span class="number">3</span> * <span class="number">6.022e23</span>)</span><br><span class="line"><span class="number">6809.924502</span></span><br></pre></td></tr></tbody></table></figure>
+<p>The&nbsp;<code>pressure</code>&nbsp;function is defined to take three arguments, but only two are provided in the first call expression above. In this case, the value for&nbsp;<code>n&nbsp;</code>is taken from the&nbsp;<code>def&nbsp;</code>statement default. If a third argument is provided, the default is ignored.</p>
+<p>As a guideline, most data values used in a function’s body should be expressed as default values to named arguments, so that they are easy to inspect and can be changed by the function caller. Some values that never change, such as the fundamental constant&nbsp;k, can be bound in the function body or in the global frame.</p>
 
     </div>
 
@@ -359,19 +371,24 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%80%BB%E7%BB%93/" rel="tag"><i class="fa-solid fa-tag"></i> 总结</a>
-              <a href="/tags/git/" rel="tag"><i class="fa-solid fa-tag"></i> git</a>
-              <a href="/tags/github/" rel="tag"><i class="fa-solid fa-tag"></i> github</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa-solid fa-tag"></i> Python</a>
+              <a href="/tags/CS61A/" rel="tag"><i class="fa-solid fa-tag"></i> CS61A</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa-solid fa-tag"></i> 笔记</a>
+              <a href="/tags/SICP/" rel="tag"><i class="fa-solid fa-tag"></i> SICP</a>
+              <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa-solid fa-tag"></i> 函数式编程</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2023/04/15/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BC%96%E7%A8%8B/" rel="prev" title="面向对象的编程">
+                  <i class="fa fa-chevron-left"></i> 面向对象的编程
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/04/15/%E5%A6%82%E4%BD%95%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/" rel="next" title="如何用hexo搭建一个博客？">
-                  如何用hexo搭建一个博客？ <i class="fa fa-chevron-right"></i>
+                <a href="/2023/04/15/%E9%9A%90%E5%BA%8F%E5%88%97/" rel="next" title="隐序列">
+                  隐序列 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

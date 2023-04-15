@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="控制语句&amp;nbsp;（control statement）将赋予我们这种能力。它们是根据逻辑比较的结果控制程序执行流程的语句。语句（statement）与我们目前研究过的表达式有着根本的不同。他们没有值（value）。执行控制语句决定了解释器接下来应该做什么，而不是计算某些东西。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流程控制">
+<meta property="og:url" content="https://sajlle.github.io/2023/04/15/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="Alicia&#39;s Blog">
+<meta property="og:description" content="控制语句&amp;nbsp;（control statement）将赋予我们这种能力。它们是根据逻辑比较的结果控制程序执行流程的语句。语句（statement）与我们目前研究过的表达式有着根本的不同。他们没有值（value）。执行控制语句决定了解释器接下来应该做什么，而不是计算某些东西。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T14:10:33.000Z">
+<meta property="article:modified_time" content="2023-04-15T06:20:24.431Z">
+<meta property="article:author" content="Alicia">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2023/04/15/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/04/15/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/","path":"2023/04/15/流程控制/","title":"流程控制"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>流程控制 | Alicia's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Alicia's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/sajlle" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Alicia's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a way to get closer to technique</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Statement%EF%BC%88%E8%AF%AD%E5%8F%A5%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Statement（语句）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Compound-Statements%EF%BC%88%E5%A4%8D%E5%90%88%E8%AF%AD%E5%8F%A5%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Compound Statements（复合语句）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Defining-Functions-II-Local-Assignment%EF%BC%88%E5%B1%80%E9%83%A8%E8%B5%8B%E5%80%BC%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Defining Functions II: Local Assignment（局部赋值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conditional-Statements-%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">Conditional Statements 条件控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iteration-%E8%BF%AD%E4%BB%A3"><span class="nav-number">5.</span> <span class="nav-text">Iteration 迭代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Testing-%E6%B5%8B%E8%AF%95%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">Testing 测试函数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Alicia"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Alicia</p>
+  <div class="site-description" itemprop="description">Alicia's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sajlle" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sajlle" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:szaboivan221@gmail.com" title="E-Mail → mailto:szaboivan221@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">友情链接</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/04/15/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Alicia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alicia's Blog">
+      <meta itemprop="description" content="Alicia's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="流程控制 | Alicia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          流程控制
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-15 14:10:33 / 修改时间：06:20:24" itemprop="dateCreated datePublished" datetime="2023-04-15T14:10:33Z">2023-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><em>控制语句</em>&nbsp;（control statement）将赋予我们这种能力。它们是根据逻辑比较的结果控制程序执行流程的语句。<br>语句（statement）与我们目前研究过的表达式有着根本的不同。他们没有值（value）。执行控制语句决定了解释器接下来应该做什么，而不是计算某些东西。</p>
+<span id="more"></span>
+
+<h4 id="Statement（语句）"><a href="#Statement（语句）" class="headerlink" title="Statement（语句）"></a>Statement（语句）</h4><p>我们已经看到了三种语句：赋值（assignment）、def和&nbsp;return语句。这些 Python 代码行本身并不是表达式，尽管它们都包含表达式作为组件。</p>
+<p>语句不是被评估（evaluated），而是被==执行==。<strong>每个语句都描述了对解释器状态的一些更改，并且执行语句会应用该更改</strong>。正如我们在<code>return</code>和赋值语句中看到的那样，==<strong>执行语句可能涉及评估其中包含的子表达式</strong>==。</p>
+<p>表达式也可以作为语句执行，在这种情况下，它们==会被求值，但它们的值会被丢弃。==执行纯函数没有效果，但执行非纯函数会因为函数应用而产生效果。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span>  <span class="title function_">square</span> ( x ): </span><br><span class="line">		mul ( x , x ) <span class="comment"># 注意！此调用不返回值。</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这个例子是有效的 Python，但可能不是预期的。函数体由一个表达式组成。一个表达式本身是一个有效的语句，但该语句的效果是调用了<code>mul</code>函数，结果被丢弃。如果你想对表达式的结果做些什么，你需要这样说：你可以用==赋值语句存储它==或用 <code>return </code>语句==返回==它：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span>  <span class="title function_">square</span> ( x ):</span><br><span class="line">		<span class="keyword">return</span> mul ( x , x )</span><br></pre></td></tr></tbody></table></figure>
+<p>有时，当调用像<code>print</code>这样的<mark style="background: #FF5582A6;">非纯函数</mark>时，拥有一个主体是表达式的函数确实有意义。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span>  <span class="title function_">print_square</span> ( x ):</span><br><span class="line">		<span class="built_in">print</span>(square( x ))</span><br></pre></td></tr></tbody></table></figure>
+<p>Python 解释器的工作是执行由语句组成的程序。然而，许多有趣的计算工作都来自对表达式的求值。语句控制程序中不同表达式之间的关系以及它们的结果会发生什么。(Statements govern the relationship among different expressions in a program and what happens to their results.)</p>
+<h4 id="Compound-Statements（复合语句）"><a href="#Compound-Statements（复合语句）" class="headerlink" title="Compound Statements（复合语句）"></a>Compound Statements（复合语句）</h4><p>通常，Python 代码是一系列语句。<strong>简单语句是不以冒号结尾的单行</strong>。之所以称为==复合语句，是因为它由其他语句（简单语句和复合语句）组成==。复合语句通常跨越多行，并以单行标题开头，以冒号结尾，冒号标识语句的类型。标题和缩进的语句组(intended suite)一起称为子句。复合语句由一个或多个子句组成：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;:</span><br><span class="line">	&lt;statement&gt;</span><br><span class="line">	&lt;statement&gt;</span><br><span class="line">	...</span><br><span class="line">&lt;separating header&gt;:</span><br><span class="line">	&lt;statement&gt;</span><br><span class="line">	&lt;statement&gt;</span><br><span class="line">	...</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>  表达式、返回语句和赋值语句都是简单的语句。</li>
+<li> <code>def</code>语句是复合语句。<code>def</code> header后面的suite&nbsp;定义了函数体。<br>Specialized evaluation rules for each kind of header dictate when and if the statements in its suite are executed.<br>We say that the ==header controls its suite==.<br>例如，在def语句的情况下，我们看到 return 表达式不会立即求值，而是存储起来以供最终调用定义的函数时使用。</li>
+</ul>
+<p>我们现在也可以理解多行程序了。<br>To execute a sequence of statements, execute the first statement. If that statement does not redirect control, then proceed（继续） to execute the rest of the sequence of statements, if any remain.<br>This definition exposes the essential structure of a recursively(递归地) defined&nbsp;<em>sequence</em>: a sequence can be decomposed into its first element and the rest of its elements. The “rest” of a sequence of statements is itself a sequence of statements! Thus, we can recursively apply this execution rule. This view of sequences as recursive data structures will appear again in later chapters.<br>The important consequence of this rule is that statements are executed in order, but later statements may never be reached, because of redirected control.</p>
+<p><strong>实用指南。</strong> 缩进套件时，所有行必须以相同的方式缩进相同的量（<strong>使用空格，而不是制表符</strong>）。缩进的任何变化都会导致错误。</p>
+<h4 id="Defining-Functions-II-Local-Assignment（局部赋值）"><a href="#Defining-Functions-II-Local-Assignment（局部赋值）" class="headerlink" title="Defining Functions II: Local Assignment（局部赋值）"></a>Defining Functions II: Local Assignment（局部赋值）</h4><p>每当应用用户定义的函数时，其定义套件中的子句序列将在本地环境中执行——该环境以通过调用该函数创建的本地框架开始。return语句重定向控制：每当执行第一个return语句&nbsp;时，函数应用程序终止，&nbsp;return表达式的值是被应用函数的返回值。<br>赋值语句可以出现在函数体内。</p>
+<p>赋值语句的作用是将名称绑定到&nbsp;当前环境的第一帧中的值（The effect of an assignment statement is to bind a name to a value in the first frame of the current environment.）<br>因此，函数体内的赋值语句不会影响全局框架（As a consequence, assignment statements within a function body cannot affect the global frame.）。函数只能操纵其本地环境这一事实对于创建==<em>模块化</em>==程序至关重要，在模块化程序中，纯函数仅通过它们获取和返回的值进行交互。（The fact that functions can only manipulate their local environment is critical to creating modular programs, in which pure functions interact only via the values they take and return.）</p>
+<p>So far, local assignment hasn’t increased the expressive power of our function definitions. It will do so, when combined with other control statements. In addition, local assignment also plays a critical role in clarifying the meaning of complex expressions by assigning names to intermediate quantities.</p>
+<h4 id="Conditional-Statements-条件控制"><a href="#Conditional-Statements-条件控制" class="headerlink" title="Conditional Statements 条件控制"></a>Conditional Statements 条件控制</h4><p><strong>Conditional statements</strong>. A conditional statement in Python consists of a series of headers and suites: a required&nbsp;if&nbsp;clause, an optional sequence of&nbsp;elif&nbsp;clauses, and finally an optional&nbsp;else&nbsp;clause:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;expression&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;expression&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;suite&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>When executing a conditional statement, each clause is considered in order. The computational process of executing a conditional clause follows.</p>
+<ol>
+<li> Evaluate the header’s expression.</li>
+<li> If it is a true value, execute the suite. Then, skip over all subsequent clauses in the conditional statement.</li>
+</ol>
+<p>If the&nbsp;<code>else</code>&nbsp;clause is reached (which only happens if all&nbsp;<code>if&nbsp;</code>and<code>&nbsp;elif&nbsp;</code>expressions evaluate to false values), its suite is executed.</p>
+<p><strong>Boolean contexts</strong>. Above, the execution procedures mention “a false value” and “a true value.” The expressions inside the header statements of conditional blocks are said to be in&nbsp;<em>boolean contexts</em>: their truth values matter to control flow, but otherwise their values are not assigned or returned. Python includes several false values, including <code>0</code>,&nbsp;<code>None</code>, and the&nbsp;<em>boolean</em>&nbsp;value&nbsp;<code>False</code>. All other numbers are true values. In Chapter 2, we will see that <strong>every built-in kind of data in Python has both true and false values.</strong></p>
+<p><strong>Boolean values</strong>. Python has two boolean values, called<code>&nbsp;True</code>&nbsp;and<code>&nbsp;False</code>. Boolean values represent truth values in logical expressions. The built-in comparison operations,<code>&nbsp;&gt;, &lt;, &gt;=, &lt;=, ==, !=, </code>return these values.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4</span> &lt; <span class="number">2</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> &gt;= <span class="number">5</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></tbody></table></figure>
+<p>第二个例子读作“5 大于等于 5”，对应于operator模块中的函数<code>ge</code> (greater equal) 。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span> == -<span class="number">0</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></tbody></table></figure>
+<p>This final example reads “0 equals -0”, and corresponds to&nbsp;eq&nbsp;in the&nbsp;operator&nbsp;module. Notice that Python distinguishes assignment (<code>=</code>) from equality comparison (<code>==</code>), a convention shared across many programming languages.</p>
+<p><strong>Boolean operators</strong>. Three basic logical operators are also built into Python:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span> <span class="keyword">and</span> <span class="literal">False</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">not</span> <span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></tbody></table></figure>
+<p>逻辑表达式有相应的求值过程。这些过程利用了这样一个事实，即逻辑表达式的真值有时可以在不评估其所有子表达式的情况下确定，这一特性称为&nbsp;<em>短路</em>(short-circuiting)。</p>
+<p>评估表达式<code>&lt;left&gt; and &lt;right&gt;</code>：</p>
+<ul>
+<li>计算子表达式<code>&lt;left&gt;</code>。</li>
+<li>如果结果为假值v，则表达式的计算结果为v。</li>
+<li>否则，表达式的计算结果为子表达式<code>&nbsp;&lt;right&gt;</code>的值。</li>
+</ul>
+<p>评估表达式 <code>&lt;left&gt; or &lt;right&gt;</code>：</p>
+<ol>
+<li> 计算子表达式<code>&lt;left&gt;</code>。</li>
+<li> 如果结果为真值v，则表达式的计算结果为v。</li>
+<li> 否则，表达式的计算结果为子表达式<code>&nbsp;&lt;right&gt;</code>的值。</li>
+</ol>
+<p>评估表达式 <code>not &lt;exp&gt;</code>：</p>
+<ol>
+<li> 评估<code>&lt;exp&gt;</code>&nbsp;;&nbsp;如果结果为假值，则值为<code>True </code>，否则为<code>False</code>。</li>
+</ol>
+<p>这些值、规则和运算符为我们提供了一种组合比较结果的方法。执行比较并返回布尔值的函数通常以<code>is</code>开头，后面不跟下划线（例如<code>isfinite</code>、<code>&nbsp;isdigit</code>、<code>isinstance</code>等）。【These values, rules, and operators provide us with a way to combine the results of comparisons. Functions that perform comparisons and return boolean values typically begin with&nbsp;is, not followed by an underscore (e.g.,&nbsp;isfinite,&nbsp;isdigit,&nbsp;isinstance, etc.).】</p>
+<h4 id="Iteration-迭代"><a href="#Iteration-迭代" class="headerlink" title="Iteration 迭代"></a>Iteration 迭代</h4><p>一个函数可以被多次应用，尽管它只被定义一次。迭代控制结构是另一种多次执行相同语句的机制。<br>考虑斐波那契数列，其中每个数都是前两个数的和：<br><code>0, 1, 1, 2, 3, 5, 8, 13, 21, ...</code><br>每个值都是通过重复应用 s<code>um-previous-two </code>规则构建的。第一个和第二个固定为 0 和 1。例如，第八个斐波那契数是 13。</p>
+<p>我们可以使用<code>while</code>语句来枚举<code>n </code>个斐波那契数列。我们需要跟踪我们创建了多少个值 (<code>&nbsp;k</code>&nbsp;)，以及第<code> k</code> 个值 (&nbsp;<code>curr</code>&nbsp;) 及其前身 (&nbsp;<code>pred&nbsp;</code>)。单步执行此函数并观察斐波那契数如何一个一个地演化，绑定到<code>curr</code>。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span>&nbsp;<span class="title function_">fib</span>(<span class="params">n</span>):</span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"""Compute&nbsp;the&nbsp;nth&nbsp;Fibonacci&nbsp;number,&nbsp;for&nbsp;n&nbsp;&gt;=&nbsp;2."""</span></span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;pred,&nbsp;curr&nbsp;=&nbsp;<span class="number">0</span>,&nbsp;<span class="number">1</span>&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;Fibonacci&nbsp;numbers&nbsp;1&nbsp;and&nbsp;2</span></span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;k&nbsp;=&nbsp;<span class="number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;Which&nbsp;Fib&nbsp;number&nbsp;is&nbsp;curr?</span></span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;k&nbsp;&lt;&nbsp;n:</span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pred,&nbsp;curr&nbsp;=&nbsp;curr,&nbsp;pred&nbsp;+&nbsp;curr</span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k&nbsp;=&nbsp;k&nbsp;+&nbsp;<span class="number">1</span></span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;curr</span><br><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;</span><br><span class="line">result&nbsp;=&nbsp;fib(<span class="number">8</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>请记住，逗号分隔赋值语句中的多个名称和值。该行：<br><code>pred，curr = curr，pred + curr</code><br>具有将名称<code>pred</code>重新绑定到<code>curr</code>的值的效果，同时将 <code>curr</code> 重新绑定到<code>pred + curr</code>的值。<code>=</code>==右侧的所有表达式都在重新绑定发生之前进行计算==。<br>这种事件顺序——<strong>在更新左侧的任何绑定之前评估<code>=</code>右侧的所有内容</strong>——对于此函数的正确性至关重要。</p>
+<p>A&nbsp;while&nbsp;clause contains a header expression followed by a suite:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> &lt;expression&gt;:</span><br><span class="line">	&lt;suite&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>To execute a&nbsp;while&nbsp;clause:</p>
+<ol>
+<li> Evaluate the header’s expression.</li>
+<li> If it is a true value, execute the suite, then return to step 1.</li>
+</ol>
+<p>In step 2, the entire suite of the&nbsp;while&nbsp;clause is executed before the header expression is evaluated again.</p>
+<p>In order to prevent the suite of a&nbsp;while&nbsp;clause from being executed indefinitely, the suite should always change some binding in each pass.</p>
+<p>A&nbsp;while&nbsp;statement that does not terminate is called an infinite loop. Press&nbsp;<control>-C&nbsp;to force Python to stop looping.</control></p>
+<h4 id="Testing-测试函数"><a href="#Testing-测试函数" class="headerlink" title="Testing 测试函数"></a>Testing 测试函数</h4><p>_测试_函数（testing function）是验证函数的行为是否符合预期的行为。我们的函数语言现在已经足够复杂，我们需要开始测试我们的实现。<br>A&nbsp;<em>test</em>&nbsp;is a mechanism for systematically performing this verification. Tests typically take the form of another function that contains one or more sample calls to the function being tested. The returned value is then verified against an expected result. Unlike most functions, which are meant to be general, tests involve selecting and validating calls with specific argument values. Tests also serve as documentation: they demonstrate how to call a function and what argument values are appropriate.</p>
+<p><strong>Assertions.</strong>&nbsp;Programmers use&nbsp;assert&nbsp;statements to verify expectations, such as the output of a function being tested. An&nbsp;assert&nbsp;statement has an expression in a boolean context, followed by a quoted line of text (single or double quotes are both fine, but be consistent) that will be displayed if the expression evaluates to a false value.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> fib(<span class="number">8</span>) == <span class="number">13</span>, <span class="string">'The 8th Fibonacci number should be 13'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>当被断言的表达式的计算结果为真值时，执行断言语句无效。当它是假值时，断言会导致停止执行的错误。</p>
+<p>fib的测试函数应该测试几个参数，包括n的极值。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span>  <span class="title function_">fib_test</span> (): </span><br><span class="line"><span class="keyword">assert</span> fib ( <span class="number">2</span> ) == <span class="number">1</span> , <span class="string">'第二个斐波那契数应该是 1'</span> </span><br><span class="line"><span class="keyword">assert</span> fib ( <span class="number">3</span> ) == <span class="number">1</span> , <span class="string">'第三个斐波那契数应该是 1 '</span> </span><br><span class="line"><span class="keyword">assert</span> fib ( <span class="number">50</span> ) = = <span class="number">7778742049</span> , <span class="string">'第 50 个斐波那契数列错误'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>当在文件中而不是直接在解释器中编写 Python 时，测试通常在同一个文件或后缀&nbsp;为 <code>_test.py</code>的相邻文件中编写。</p>
+<p><strong>Doctests</strong><br>Python 提供了一种方便的方法，可以将简单的测试直接放在函数的<strong>文档字符串</strong> (docstring)中。==文档字符串的第一行应该包含函数的单行描述==，==然后是一个空行==。参数和行为的详细描述可能如下。此外，文档字符串可能包含调用该函数的示例交互式会话：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">sum_naturals</span>(<span class="params">n</span>): </span><br><span class="line">        <span class="string">"""返回前n个自然数的和。</span></span><br><span class="line"><span class="string">        &gt;&gt;&gt; sum_naturals(10) </span></span><br><span class="line"><span class="string">		55 			</span></span><br><span class="line"><span class="string">		&gt;&gt;&gt;sum_naturals(100) </span></span><br><span class="line"><span class="string">		5050 """</span></span><br><span class="line">		total, k = <span class="number">0</span>, <span class="number">1</span> </span><br><span class="line">		<span class="keyword">while</span> k &lt;= n: </span><br><span class="line">            total, k = total + k, k + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> total</span><br></pre></td></tr></tbody></table></figure>
+<p>Then, the interaction can be verified via the&nbsp;<a target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/doctest.html">doctest module</a>. Below, the&nbsp;globals&nbsp;function returns a representation of the global environment, which the interpreter needs in order to evaluate expressions. 然后，可以通过<a target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/doctest.html">doctest 模块</a>验证交互。下面，&nbsp;globals函数返回全局环境的表示，解释器需要它来评估表达式。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> doctest <span class="keyword">import</span> testmod</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testmod()</span><br><span class="line">TestResults(failed=<span class="number">0</span>, attempted=<span class="number">2</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p>为了仅验证单个函数的 doctest 交互，我们使用&nbsp;名为run_docstring_examples的doctest函数。这个函数（不幸的是）调用起来有点复杂。它的第一个参数是要测试的函数。第二个应该始终是表达式&nbsp;globals()的结果，这是一个返回全局环境的内置函数。第三个参数为True表示我们想要“详细”输出：所有测试运行的目录。</p>
+<pre><code class="python">&gt;&gt;&gt; from  doctest  import  run_docstring_examples 
+&gt;&gt;&gt; run_docstring_examples ( sum_naturals ,  globals (),  True )
+在 NoName 中寻找测试
+Trying: 
+sum_naturals ( 10 ) Expecting: 55 ok Trying: sum_naturals ( 100 ) Expecting: 5050 ok```
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Alicia 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Alicia 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa-solid fa-tag"></i> Python</a>
+              <a href="/tags/CS61A/" rel="tag"><i class="fa-solid fa-tag"></i> CS61A</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa-solid fa-tag"></i> 笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/15/%E9%9A%90%E5%BA%8F%E5%88%97/" rel="prev" title="隐序列">
+                  <i class="fa fa-chevron-left"></i> 隐序列
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/" rel="next" title="报错信息">
+                  报错信息 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alicia</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">19k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

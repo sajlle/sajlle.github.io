@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="编程时，学会读取报错信息也是必要的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="报错信息">
+<meta property="og:url" content="https://sajlle.github.io/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/index.html">
+<meta property="og:site_name" content="Alicia&#39;s Blog">
+<meta property="og:description" content="编程时，学会读取报错信息也是必要的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T14:10:59.000Z">
+<meta property="article:modified_time" content="2023-04-15T06:18:32.090Z">
+<meta property="article:author" content="Alicia">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="BugFix">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/","path":"2023/04/15/报错信息/","title":"报错信息"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>报错信息 | Alicia's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Alicia's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/sajlle" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Alicia's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a way to get closer to technique</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Format"><span class="nav-number">1.</span> <span class="nav-text">Format:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Messages"><span class="nav-number"></span> <span class="nav-text">Error Messages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging-Techniques"><span class="nav-number"></span> <span class="nav-text">Debugging Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Running-doctests"><span class="nav-number"></span> <span class="nav-text">Running doctests</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Writing-your-own-tests"><span class="nav-number"></span> <span class="nav-text">Writing your own tests</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-print-statements"><span class="nav-number"></span> <span class="nav-text">Using print statements</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Long-term-debugging"><span class="nav-number">1.</span> <span class="nav-text">Long-term debugging</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interactive-Debugging"><span class="nav-number"></span> <span class="nav-text">Interactive Debugging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-assert-statements"><span class="nav-number"></span> <span class="nav-text">Using assert statements</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Types"><span class="nav-number"></span> <span class="nav-text">Error Types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SyntaxError"><span class="nav-number"></span> <span class="nav-text">SyntaxError</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IndentationError"><span class="nav-number"></span> <span class="nav-text">IndentationError</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TypeError"><span class="nav-number"></span> <span class="nav-text">TypeError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NameError"><span class="nav-number"></span> <span class="nav-text">NameError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IndexError"><span class="nav-number"></span> <span class="nav-text">IndexError</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Bugs"><span class="nav-number"></span> <span class="nav-text">Common Bugs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spelling"><span class="nav-number"></span> <span class="nav-text">Spelling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Missing-Parentheses"><span class="nav-number"></span> <span class="nav-text">Missing Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Missing-close-quotes%EF%BC%88%E5%BC%95%E5%8F%B7%EF%BC%89"><span class="nav-number"></span> <span class="nav-text">Missing close quotes（引号）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs"><span class="nav-number"></span> <span class="nav-text">&#x3D; vs. &#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infinite-Loops"><span class="nav-number"></span> <span class="nav-text">Infinite Loops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Off-by-one-errors"><span class="nav-number"></span> <span class="nav-text">Off-by-one errors</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Alicia"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Alicia</p>
+  <div class="site-description" itemprop="description">Alicia's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sajlle" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sajlle" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:szaboivan221@gmail.com" title="E-Mail → mailto:szaboivan221@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">友情链接</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Alicia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alicia's Blog">
+      <meta itemprop="description" content="Alicia's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="报错信息 | Alicia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          报错信息
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-15 14:10:59 / 修改时间：06:18:32" itemprop="dateCreated datePublished" datetime="2023-04-15T14:10:59Z">2023-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>编程时，学会读取报错信息也是必要的。</p>
+<span id="more"></span>
+
+<p>Instance: </p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last): </span><br><span class="line">	File <span class="string">"&lt;pyshell#29&gt;"</span>, line <span class="number">3</span> <span class="keyword">in</span> &lt;module&gt; </span><br><span class="line">	result = buggy(<span class="number">5</span>) </span><br><span class="line">File <span class="string">"&lt;pyshell#29&gt;"</span>, line <span class="number">5</span> <span class="keyword">in</span> buggy </span><br><span class="line">	<span class="keyword">return</span> f + x </span><br><span class="line">TypeError: unsupported operand <span class="built_in">type</span>(s) <span class="keyword">for</span> +: <span class="string">'function'</span> <span class="keyword">and</span> <span class="string">'int'</span></span><br></pre></td></tr></tbody></table></figure>
+<h5 id="Format"><a href="#Format" class="headerlink" title="Format:"></a>Format:</h5><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"&lt;file name&gt;"</span>, line &lt;number&gt;, <span class="keyword">in</span> &lt;function&gt;</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>  <strong>File name</strong>: the name of the file that contains the problem.</li>
+<li>  <strong>Number</strong>: the line number in the file that caused the problem, or the line number that contains the next function call</li>
+<li>  <strong>Function</strong>: the name of the function in which the line can be found.<br>The&nbsp;<strong>second</strong>&nbsp;line in the pair (it’s indented farther in than the first) displays the actual line of code that makes the&nbsp;<em>next</em>&nbsp;function call. This gives you a quick look at what arguments were passed into the function, in what context the function was being used, etc.<br>Finally, remember that the traceback is organized with the “<strong>most recent call last.</strong>“</li>
+</ul>
+<h3 id="Error-Messages"><a href="#Error-Messages" class="headerlink" title="Error Messages"></a>Error Messages</h3><ul>
+<li>The very last line in the traceback message is the error statement. An&nbsp;<em>error statement</em>&nbsp;has the following format:<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;error <span class="built_in">type</span>&gt;: &lt;error message&gt;</span><br></pre></td></tr></tbody></table></figure></li>
+<li>  <strong>Error type</strong>: the type of error that was caused (e.g.&nbsp;<code>SyntaxError</code>,&nbsp;<code>TypeError</code>). These are usually <strong>descriptive enough</strong> to help you narrow down your search for the cause of error.</li>
+<li>  <strong>Error message</strong>: a <strong>more detailed description</strong> of exactly what caused the error. Different error types produce different error messages.</li>
+</ul>
+<h3 id="Debugging-Techniques"><a href="#Debugging-Techniques" class="headerlink" title="Debugging Techniques"></a>Debugging Techniques</h3><h4 id="Running-doctests"><a href="#Running-doctests" class="headerlink" title="Running doctests"></a>Running doctests</h4><p>Python has a great way to quickly write tests for your code. These are called doctests, and look like this:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>(<span class="params">x</span>): </span><br><span class="line">	<span class="string">"""A random function. </span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	 &gt;&gt;&gt;foo(4) </span></span><br><span class="line"><span class="string">	 4 </span></span><br><span class="line"><span class="string">	 &gt;&gt;&gt; foo(5) </span></span><br><span class="line"><span class="string">	 5  </span></span><br><span class="line"><span class="string">	 """</span></span><br></pre></td></tr></tbody></table></figure>
+<p>The lines in the docstring that look like interpreter outputs are the&nbsp;<strong>doctests</strong>. To run them, go to your terminal and type:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m doctest file.py</span><br></pre></td></tr></tbody></table></figure>
+<p>This effectively loads your file into the Python interpreter, and checks to see if each doctest input (e.g.&nbsp;<code>foo(4)</code>) is the same as the specified output (e.g.&nbsp;<code>4</code>). If it isn’t, a message will tell you which doctests you failed.</p>
+<p>The command line tool has a&nbsp;<code>-v</code>&nbsp;option that stands for&nbsp;<em>verbose</em>.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m doctest file.py -v</span><br></pre></td></tr></tbody></table></figure>
+<p>In addition to telling you which doctests you failed, it will also ==tell you which doctests passed==.</p>
+<h4 id="Writing-your-own-tests"><a href="#Writing-your-own-tests" class="headerlink" title="Writing your own tests"></a>Writing your own tests</h4><p>Some advice in writing tests:</p>
+<ul>
+<li>  <strong>Write some tests before you write code</strong>: this is called test-driven development. Writing down how you expect the function to behave first – this can guide you when writing the actual code.</li>
+<li>  <strong>Write more tests after you write code</strong>: once you are sure your code passes the initial doctests, write some more tests to take care of edge cases.</li>
+<li>  <strong>Test edge cases</strong>: make sure your code works for all special cases.</li>
+</ul>
+<h4 id="Using-print-statements"><a href="#Using-print-statements" class="headerlink" title="Using&nbsp;print&nbsp;statements"></a>Using&nbsp;<code>print</code>&nbsp;statements</h4><p>Once the doctests tell you where the error is, you have to figure what went wrong. If the doctest gave you a traceback message, look at what&nbsp;<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/fa20/articles/debugging.html#error-types">type of error</a>&nbsp;it is to help narrow your search. Also check that you aren’t making any&nbsp;<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/fa20/articles/debugging.html#common-bugs">common mistakes</a>.</p>
+<p>When you first learn how to program, it can be hard to spot bugs in your code. One common practice is to add&nbsp;<code>print</code>&nbsp;statements.</p>
+<p>Some advice:</p>
+<ul>
+<li>  Don’t just print out a variable – ==add some sort of message to make it easier for you to read:==<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(tmp) <span class="comment"># harder to keep track </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">'DEBUG: tmp was this:'</span>, tmp) <span class="comment"># easier</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>  Use&nbsp;<code>print</code>&nbsp;statements to view the results of function calls (i.e. after function calls).</li>
+<li>  Use&nbsp;<code>print</code>&nbsp;statements at the end of a&nbsp;<code>while</code>&nbsp;loop to view the state of the counter variables after each iteration:<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span> </span><br><span class="line"><span class="keyword">while</span> i &lt; n: </span><br><span class="line">	i += func(i) </span><br><span class="line">	<span class="built_in">print</span>(<span class="string">'DEBUG: i is'</span>, i)</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h5 id="Long-term-debugging"><a href="#Long-term-debugging" class="headerlink" title="Long-term debugging"></a>Long-term debugging</h5><p>The&nbsp;<code>print</code>&nbsp;statements described above are meant for <em><strong>quick debugging of one-time errors</strong></em> – after figuring out the error, you would remove all the&nbsp;<code>print</code>&nbsp;statements.</p>
+<p>However, sometimes we would like to leave the debugging code if we need to periodically test our file. It can get kind of annoying if every time we run our file, debugging messages pop up. One way to avoid this is to use a global&nbsp;<code>debug</code>&nbsp;variable:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">debug = <span class="literal">True</span> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>(<span class="params">n</span>): </span><br><span class="line">	i = <span class="number">0</span> </span><br><span class="line">	<span class="keyword">while</span> i &lt; n: </span><br><span class="line">		i += func(i) </span><br><span class="line">	<span class="keyword">if</span> debug: </span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'DEBUG: i is'</span>, i)</span><br></pre></td></tr></tbody></table></figure>
+<p>Now, whenever we want to do some debugging, we can set the global&nbsp;<code>debug</code>&nbsp;variable to&nbsp;<code>True</code>, and ==when we don’t want to see any debugging input, we can turn it to==&nbsp;<code>False</code>&nbsp;(such a variable is called a <em><strong>“flag”</strong></em>).</p>
+<h4 id="Interactive-Debugging"><a href="#Interactive-Debugging" class="headerlink" title="Interactive Debugging"></a>Interactive Debugging</h4><p>One way a lot of programmers like to investigate their code is by use of an interactive <strong>REPL</strong>.. That is, a terminal where you can directly run functions and inspect their outputs.<br>Typically, to accomplish this, you can run</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -i file.py</span><br></pre></td></tr></tbody></table></figure>
+<p>and one then has a session of python where all the definitions of&nbsp;<code>file.py</code>&nbsp;have already been executed.<br>If you are using the&nbsp;<code>ok</code>&nbsp;autograder, it has a specific tool that enables you to jump into the middle of a failing test case. Just run</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ok -q &lt;question name&gt; -i</span><br></pre></td></tr></tbody></table></figure>
+<p>and if you have a failing test case for that question, the setup code and doctest will be printed on the screen and run, and you will then have access to a terminal where you can execute commands related to the program.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ok -q &lt;question name&gt; --trace</span><br></pre></td></tr></tbody></table></figure>
+<p>and a browser window should open up with your code.</p>
+<h4 id="Using-assert-statements"><a href="#Using-assert-statements" class="headerlink" title="Using&nbsp;assert&nbsp;statements"></a>Using&nbsp;<code>assert</code>&nbsp;statements</h4><p>A key principle in software development is tha==<strong>t it is generally better for code to crash than produce an incorrect result,</strong>== and having asserts in your code makes it far more likely that your code will crash if it has a bug in it.</p>
+<h3 id="Error-Types"><a href="#Error-Types" class="headerlink" title="Error Types"></a>Error Types</h3><h4 id="SyntaxError"><a href="#SyntaxError" class="headerlink" title="SyntaxError"></a>SyntaxError</h4><ul>
+<li>  <strong>Cause</strong>: code syntax mistake</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  File <span class="string">"file name"</span>, line number</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">incorrect</span>(<span class="params">f</span>)</span><br><span class="line">                    ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></tbody></table></figure></li>
+<li>  <strong>Solution</strong>: the&nbsp;<code>^</code>&nbsp;symbol points to the code that contains invalid syntax. <mark style="background: #FF5582A6;">The error message doesn’t tell you&nbsp;<em>what</em>&nbsp;is wrong, but it does tell you&nbsp;<em>where</em>.</mark></li>
+<li>  <strong>Notes</strong>: Python will check for&nbsp;<code>SyntaxErrors</code>&nbsp;<mark style="background: #FF5582A6;">before executing any code</mark>. This is different from other errors, which are only raised during runtime</li>
+</ul>
+<h4 id="IndentationError"><a href="#IndentationError" class="headerlink" title="IndentationError"></a><code>IndentationError</code></h4><ul>
+<li>  <strong>Cause</strong>: improper indentation</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  File <span class="string">"file name"</span>, line number</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'improper indentation'</span>)</span><br><span class="line">IndentationError: unindent does <span class="keyword">not</span> <span class="keyword">match</span> <span class="built_in">any</span> outer indentation level</span><br></pre></td></tr></tbody></table></figure></li>
+<li>  <strong>Solution</strong>: The line that is improperly indented is displayed. ==Simply re-indent it==.</li>
+<li>  <strong>Notes</strong>: If you are inconsistent with tabs and spaces, Python will raise one of these. <strong>Make sure you use spaces!</strong> (It’s just less of a headache in general in Python to use spaces and all cs61a content uses spaces).</li>
+</ul>
+<hr>
+<h3 id="TypeError"><a href="#TypeError" class="headerlink" title="TypeError"></a><code>TypeError</code></h3><ul>
+<li><strong>Cause 1</strong>:<ul>
+<li>  ==Invalid operand types== for primitive operators. You are probably trying to add/subract/multiply/divide incompatible types.</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: unsupported operand <span class="built_in">type</span>(s) <span class="keyword">for</span> +: <span class="string">'function'</span> <span class="keyword">and</span> <span class="string">'int'</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><strong>Cause 2</strong>:<ul>
+<li>  Using ==non-function objects== in function calls.</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>square = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>square(<span class="number">3</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">TypeError: <span class="string">'int'</span> <span class="built_in">object</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="built_in">callable</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><strong>Cause 3</strong>:<ul>
+<li>  Passing an incorrect number of arguments to a function.</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add(<span class="number">3</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">TypeError: add expected <span class="number">2</span> arguments, got <span class="number">1</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="NameError"><a href="#NameError" class="headerlink" title="NameError"></a><code>NameError</code></h3><ul>
+<li><p>  <strong>Cause</strong>: variable not assigned(赋值) to anything OR it doesn’t exist. ==This includes function names==.</p>
+</li>
+<li><p><strong>Example</strong>:</p>
+  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"file name"</span>, line number</span><br><span class="line">  y = x + <span class="number">3</span></span><br><span class="line">NameError: <span class="keyword">global</span> name <span class="string">'x'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>  <strong>Solution</strong>: Make sure you are <strong>initializing the variable</strong> (i.e. assigning the variable to a value) before you use it.</p>
+</li>
+<li><p>  <strong>Notes</strong>: The reason the error message says “global name” is because Python will start searching for the variable from a function’s local frame. If the variable is not found there, Python will keep searching the parent frames until it reaches the global frame. If it still can’t find the variable, Python raises the error.</p>
+</li>
+</ul>
+<h3 id="IndexError"><a href="#IndexError" class="headerlink" title="IndexError"></a><code>IndexError</code></h3><ul>
+<li>  <strong>Cause</strong>: trying to index(索引) a sequence（序列） (e.g. a tuple（元组）, list, string) with a number that exceeds（超过，胜过） the size of the sequence.</li>
+<li><strong>Example</strong>:  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"file name"</span>, line number</span><br><span class="line">  x[<span class="number">100</span>]</span><br><span class="line">IndexError: <span class="built_in">tuple</span> index out of <span class="built_in">range</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>  <strong>Solution</strong>: Make sure the index is within the bounds(边界) of the sequence. If you’re using a variable as an index (e.g.&nbsp;<code>seq[x]</code>, make sure the variable is assigned to a proper index.</li>
+</ul>
+<h2 id="Common-Bugs"><a href="#Common-Bugs" class="headerlink" title="Common Bugs"></a>Common Bugs</h2><h3 id="Spelling"><a href="#Spelling" class="headerlink" title="Spelling"></a>Spelling</h3><p>Python is&nbsp;<em><strong>case sensitive</strong></em>. The variable&nbsp;<code>hello</code>&nbsp;is not the same as&nbsp;<code>Hello</code>&nbsp;or&nbsp;<code>hello</code>&nbsp;or&nbsp;<code>helo</code>. This will usually show up as a&nbsp;<code>NameError</code>, but sometimes misspelled variables will actually have been defined. In that case, it can be difficult to find errors, and it is never gratifying to discover it’s just a spelling mistake.</p>
+<h3 id="Missing-Parentheses"><a href="#Missing-Parentheses" class="headerlink" title="Missing Parentheses"></a>Missing Parentheses</h3><p>A common bug is to leave off the closing parenthesis. This will show up as a&nbsp;<code>SyntaxError</code>. Consider the following code:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fun</span>():</span><br><span class="line">    <span class="keyword">return</span> foo(bar()   <span class="comment"># missing a parenthesis here</span></span><br><span class="line"></span><br><span class="line">fun()</span><br></pre></td></tr></tbody></table></figure>
+
+<p>==Python will raise a&nbsp;<code>SyntaxError</code>, but will point to the line&nbsp;<em>after</em>&nbsp;the missing parenthesis:==</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"file name"</span>, line <span class="string">"number"</span></span><br><span class="line">    fun()</span><br><span class="line">      ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></tbody></table></figure>
+
+<p>In general, if Python points a&nbsp;<code>SyntaxError</code>&nbsp;to a seemingly correct line, you are probably forgetting a parenthesis somewhere.</p>
+<h3 id="Missing-close-quotes（引号）"><a href="#Missing-close-quotes（引号）" class="headerlink" title="Missing close quotes（引号）"></a>Missing close quotes（引号）</h3><p>This is similar to the previous bug, but much easier to catch. Python will actually tell you the line that is missing the <strong>quote</strong>:(引号)</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"file name"</span>, line <span class="string">"number"</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hi</span></span><br><span class="line"><span class="string">           ^</span></span><br><span class="line"><span class="string">SyntaxError: EOL while scanning string literal</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>EOL</code>&nbsp;stands for “<strong>==End of Line==</strong>.”</p>
+<h3 id="vs"><a href="#vs" class="headerlink" title="=&nbsp;vs.&nbsp;=="></a><code>=</code>&nbsp;vs.&nbsp;<code>==</code></h3><p>The single equal sign&nbsp;<code>=</code>&nbsp;is used for&nbsp;<em>assignment</em>; the double equal sign&nbsp;<code>==</code>&nbsp;is used for testing equivalence. The most common error of this form is something like:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x = <span class="number">3</span>:</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Infinite-Loops"><a href="#Infinite-Loops" class="headerlink" title="Infinite Loops"></a>Infinite Loops</h3><p>Infinite loops are often caused by&nbsp;<code>while</code>&nbsp;loops whose conditions never change. For example:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = 0</span><br><span class="line">while i &lt; 10:</span><br><span class="line">    print(i)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Sometimes you might have incremented the wrong counter:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i, n = 0, 0</span><br><span class="line">while i &lt; 10:</span><br><span class="line">    print(i)</span><br><span class="line">    n += 1</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Off-by-one-errors"><a href="#Off-by-one-errors" class="headerlink" title="Off-by-one errors"></a>Off-by-one errors</h3><p>Sometimes a&nbsp;<code>while</code>&nbsp;loop or recursive function might stop one iteration too short. Here, it’s best to walk through the iteration/recursion to see what number the loop stops at.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Alicia 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Alicia 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa-solid fa-tag"></i> Python</a>
+              <a href="/tags/CS61A/" rel="tag"><i class="fa-solid fa-tag"></i> CS61A</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa-solid fa-tag"></i> 笔记</a>
+              <a href="/tags/BugFix/" rel="tag"><i class="fa-solid fa-tag"></i> BugFix</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/15/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" rel="prev" title="流程控制">
+                  <i class="fa fa-chevron-left"></i> 流程控制
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alicia</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">19k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
