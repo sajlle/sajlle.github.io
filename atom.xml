@@ -3,11 +3,11 @@
   <title>Alicia&#39;s Blog</title>
   
   <subtitle>a way to get closer to technique</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://sajlle.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://sajlle.github.io/"/>
   <updated>2023-04-14T13:44:32.037Z</updated>
-  <id>http://example.com/</id>
+  <id>https://sajlle.github.io/</id>
   
   <author>
     <name>Alicia</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>git常用命里总结</title>
-    <link href="http://example.com/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E9%87%8C%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E9%87%8C%E6%80%BB%E7%BB%93/</id>
+    <link href="https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E9%87%8C%E6%80%BB%E7%BB%93/"/>
+    <id>https://sajlle.github.io/2023/04/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E9%87%8C%E6%80%BB%E7%BB%93/</id>
     <published>2023-04-14T20:01:40.000Z</published>
     <updated>2023-04-14T13:44:32.037Z</updated>
     
@@ -30,21 +30,21 @@
     
     
     
-    <category term="前端" scheme="http://example.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    <category term="前端" scheme="https://sajlle.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-    <category term="总结" scheme="http://example.com/tags/%E6%80%BB%E7%BB%93/"/>
+    <category term="总结" scheme="https://sajlle.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
-    <category term="git" scheme="http://example.com/tags/git/"/>
+    <category term="git" scheme="https://sajlle.github.io/tags/git/"/>
     
-    <category term="github" scheme="http://example.com/tags/github/"/>
+    <category term="github" scheme="https://sajlle.github.io/tags/github/"/>
     
   </entry>
   
   <entry>
     <title>testing</title>
-    <link href="http://example.com/2023/04/14/testing/"/>
-    <id>http://example.com/2023/04/14/testing/</id>
+    <link href="https://sajlle.github.io/2023/04/14/testing/"/>
+    <id>https://sajlle.github.io/2023/04/14/testing/</id>
     <published>2023-04-13T22:57:17.000Z</published>
     <updated>2023-04-13T14:58:39.134Z</updated>
     
@@ -64,8 +64,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2023/04/13/hello-world/"/>
-    <id>http://example.com/2023/04/13/hello-world/</id>
+    <link href="https://sajlle.github.io/2023/04/13/hello-world/"/>
+    <id>https://sajlle.github.io/2023/04/13/hello-world/</id>
     <published>2023-04-13T14:51:48.574Z</published>
     <updated>2023-04-13T14:44:31.409Z</updated>
     
