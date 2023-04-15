@@ -27,7 +27,7 @@
 <meta property="og:description" content="我们在第一章集中讨论了计算过程和函数在程序设计中的作用。 我们了解了如何使用原始数据(数字)和原始操作(算术)，如何通过组合和控制来形成复合函数，以及如何通过给过程命名来创建函数抽象。 我们还发现，高阶函数增强了语言的能力，使我们能够根据通用的计算方法进行操作，从而进行推理。 这就是编程的精髓所在。 本章的重点是数据。 我们在这里研究的技术将允许我们表示和操作许多不同领域的信息。 由于互联网的爆炸">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-15T14:41:43.000Z">
-<meta property="article:modified_time" content="2023-04-15T06:49:34.220Z">
+<meta property="article:modified_time" content="2023-04-15T07:23:26.378Z">
 <meta property="article:author" content="Alicia">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="CS61A">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E5%8E%9F%E7%94%9F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">2.1.1 原生数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E5%8E%9F%E7%94%9F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">2.1.1 原生数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">2.2 数据抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E7%A4%BA%E4%BE%8B-%E6%9C%89%E7%90%86%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 示例:有理数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-%E5%A4%8D%E5%90%88%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.2 复合结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-%E6%8A%BD%E8%B1%A1%E9%9A%9C%E7%A2%8D"><span class="nav-number">2.3.</span> <span class="nav-text">2.2.3 抽象障碍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">2.2.4 数据属性</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-04-15 14:41:43 / 修改时间：06:49:34" itemprop="dateCreated datePublished" datetime="2023-04-15T14:41:43Z">2023-04-15</time>
+      <time title="创建时间：2023-04-15 14:41:43 / 修改时间：07:23:26" itemprop="dateCreated datePublished" datetime="2023-04-15T14:41:43Z">2023-04-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
+      <span>4.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -308,160 +308,77 @@
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">12</span> + <span class="number">3000000000000000000000000</span></span><br><span class="line"><span class="number">3000000000000000000000012</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>Python包含三种原生数字类型:==整数(int)、浮点数(float)和复数(complex)。==</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(1.5)</span><br><span class="line"></span><br><span class="line">&lt;class 'float'&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; type(1+1j)</span><br><span class="line"></span><br><span class="line">&lt;class 'complex'&gt;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(<span class="number">1.5</span>)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">'float'</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(<span class="number">1</span>+<span class="number">1j</span>)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">'complex'</span>&gt;</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>浮点数。</strong> float这个名字来自于Python和许多其他编程语言中实数的表示方式:“==浮点”==表示。 虽然数字如何表示的细节不是本文的主题，但了解int和float对象之间的一些高级区别是很重要的。 特别是，==int对象精确地表示整数==，没有任何近似值或对其大小的限制。 另一方面，浮动对象可以表示范围很广的小数，但==并不是所有的数字都可以精确地表示==，==有最小值和最大值==。 因此，浮点数应该被看作是实数的近似值。 这些近似的精确度是有限的。 组合浮点值会导致近似误差; 如果不是为了近似，下面的两个表达式都将计算为7。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 7 / 3 * 3</span><br><span class="line"></span><br><span class="line">7.0</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; 1 / 3 * 7 * 3</span><br><span class="line"></span><br><span class="line">6.999999999999999</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> / <span class="number">3</span> * <span class="number">3</span></span><br><span class="line"><span class="number">7.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span> / <span class="number">3</span> * <span class="number">7</span> * <span class="number">3</span></span><br><span class="line"><span class="number">6.999999999999999</span></span><br></pre></td></tr></tbody></table></figure>
 <p>虽然上面合并了整型值，但一个整型除以另一个整型会得到一个浮点值：两个整型除以的实际比率的截断有限近似值。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(1/3)</span><br><span class="line"></span><br><span class="line">&lt;class 'float'&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; 1/3</span><br><span class="line"></span><br><span class="line">0.3333333333333333</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">'float'</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>/<span class="number">3</span></span><br><span class="line"><span class="number">0.3333333333333333</span></span><br></pre></td></tr></tbody></table></figure>
 <p>当我们进行等式检验时，这种近似的问题就出现了。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 1/3 == 0.333333333333333312345 # Beware of float approximation</span><br><span class="line"></span><br><span class="line">True```</span><br><span class="line"></span><br><span class="line">int和float类之间的这些细微差别对编写程序有广泛的影响，因此程序员必须记住这些细节。 幸运的是，只有少数几种本机数据类型，这就限制了精通一门编程语言所需的记忆量。 此外，这些相同的细节在许多编程语言中都是一致的，由[IEEE 754浮点标准](http://en.wikipedia.org/wiki/IEEE_floating_point)等社区指南强制执行。</span><br><span class="line"></span><br><span class="line">**非数字类型。** 值可以表示许多其他类型的数据，比如声音、图像、位置、web地址、网络连接等等。 少数是用本地数据类型表示的，例如bool类用于值True和False。 大多数值的类型必须由程序员使用，我们将在本章中开发的组合和抽象方法来定义。</span><br><span class="line"></span><br><span class="line">下面几节将更多地介绍Python的原生数据类型，重点介绍它们在创建有用的数据抽象中所扮演的角色。 对于那些对进一步细节感兴趣的人，在线书籍[Dive Into Python 3](http://getpython3.com/diveintopython3/native-datatypes.html)中关于原生数据类型的一章给出了所有Python原生数据类型以及如何操作它们的实用概述，包括大量的使用示例和实用技巧。</span><br><span class="line"></span><br><span class="line">### 2.2 数据抽象</span><br><span class="line"></span><br><span class="line">当我们考虑世界上我们想要在程序中表示的大量事物时，我们发现它们中的大多数都有复合结构。 例如，地理位置包含纬度和经度坐标。 为了表示位置，我们希望我们的编程语言能够将纬度和经度结合在一起形成一对，这是一个复合数据值，我们的程序可以将其作为单个概念单元进行操作，但它也有两个可以单独考虑的部分。</span><br><span class="line"></span><br><span class="line">==复合数据的使用使我们能够增加程序的模块化==。 如果我们可以将地理位置作为整体值来操作，那么我们就可以将程序中使用位置计算的部分从这些位置如何表示的细节中屏蔽掉。 将处理数据如何表示的程序部分与处理数据如何操作的程序部分隔离开来的通用技术是一种强大的设计方法论，称为数据抽象。 ==数据抽象使程序更容易设计、维护和修改==。</span><br><span class="line"></span><br><span class="line">数据抽象在性质上与功能抽象相似。 当我们创建一个函数抽象时，函数如何实现的细节可以被抑制，并且特定的函数本身可以被具有相同总体行为的任何其他函数所替代。 换句话说，==我们可以进行抽象，将函数的使用方式与函数如何实现的细节分离开来。== 类似地，数据抽象将如何使用复合数据值与如何构造复合数据值的细节分离开来。</span><br><span class="line"></span><br><span class="line">==数据抽象的基本思想是对程序进行结构化==，以便它们能够对抽象数据进行操作。 也就是说，我们的程序应该以这样一种方式使用数据，即尽可能少地对数据做出假设。 同时，一个具体的数据表示被定义为程序的独立部分。</span><br><span class="line"></span><br><span class="line">程序的这两个部分，==操作抽象数据的部分和定义具体表示的部分，由一组根据具体表示实现抽象数据的函数连接起来。== 为了说明这种技术，我们将考虑如何设计一组用于处理有理数的函数。</span><br><span class="line"></span><br><span class="line">### </span><br><span class="line"></span><br><span class="line">2.2.1 示例:有理数[](https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.1-shi-li-you-li-shu)</span><br><span class="line"></span><br><span class="line">有理数是整数的比率，有理数是实数的一个重要子类。有理数，如1/3或17/29通常写成：</span><br><span class="line"></span><br><span class="line">&lt;numerator&gt;/&lt;denominator&gt;</span><br><span class="line"></span><br><span class="line">&lt;分子&gt;和&lt;分母&gt;都是整数值的占位符。这两部分都需要准确地描述有理数的值。实际上，整数的除法会产生一个浮点近似值，从而失去整数的精确精度。</span><br><span class="line"></span><br><span class="line">```&gt;&gt;&gt; 1/3</span><br><span class="line"></span><br><span class="line">0.3333333333333333</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; 1/3 == 0.333333333333333300000 # Dividing integers yields an approximation</span><br><span class="line"></span><br><span class="line">True```</span><br><span class="line"></span><br><span class="line">然而，我们可以通过结合分子和分母来创建有理数的精确表示。</span><br><span class="line"></span><br><span class="line">通过使用函数抽象，我们知道，在实现程序的某些部分之前，我们可以开始高效地编程。 让我们先假设我们已经有了一种从分子和分母构造有理数的方法。 我们还假设，给定一个有理数，我们有一种选择其分子和分母成分的方法。 让我们进一步假设构造函数和选择器可以使用以下三个函数：</span><br><span class="line"></span><br><span class="line">-   1.rational(n, d)返回分子n、分母d的有理数。</span><br><span class="line">-   2.number (x)返回有理数x的分子。</span><br><span class="line">-   3.denom(x)返回有理数x的分母。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">==我们在这里使用的是一个设计程序的强大策略：一厢情愿== 我们还没有阐述一个有理数是如何表示的，或者numer, denom, rational函数是如何实现的。即便如此，如果我们确实定义了这三个函数，我们就可以进行加法、乘法、打印和测试有理数是否相等：</span><br><span class="line"></span><br><span class="line">```&gt;&gt;&gt; def add_rationals(x, y):</span><br><span class="line">    nx, dx = numer(x), denom(x)</span><br><span class="line">    ny, dy = numer(y), denom(y)</span><br><span class="line">    return rational(nx * dy + ny * dx, dx * dy)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; def mul_rationals(x, y):</span><br><span class="line">    return rational(numer(x) * numer(y), denom(x) * denom(y))</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; def print_rational(x):</span><br><span class="line">    print(numer(x), '/', denom(x))</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; def rationals_are_equal(x, y):</span><br><span class="line">    return numer(x) * denom(y) == numer(y) * denom(x)```</span><br><span class="line"></span><br><span class="line">现在，我们已经根据选择器函数number和denom以及构造器函数rational定义了有理数的操作，但我们还没有定义这些函数。我们需要的是一种把分子和分母结合成复合值的方法。</span><br><span class="line"></span><br><span class="line">### </span><br><span class="line"></span><br><span class="line">2.2.2 对[](https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.2-dui)</span><br><span class="line"></span><br><span class="line">为了使我们能够实现数据抽象的具体级别，Python提供了一个称为列表的复合结构，可以通过将表达式放在用逗号分隔的方括号中来构造。这样的表达式称为列表字面量。</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>pair = [10, 20]<br>pair<br>[10, 20]<br>x, y = pair<br>x<br>10<br>y<br>20```</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>/<span class="number">3</span> == <span class="number">0.333333333333333312345</span> <span class="comment"># Beware of float approximation</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>int和float类之间的这些细微差别对编写程序有广泛的影响，因此程序员必须记住这些细节。 幸运的是，只有少数几种本机数据类型，这就限制了精通一门编程语言所需的记忆量。 此外，这些相同的细节在许多编程语言中都是一致的，由<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754浮点标准</a>等社区指南强制执行。</p>
+<p><strong>非数字类型。</strong> 值可以表示许多其他类型的数据，比如声音、图像、位置、web地址、网络连接等等。 少数是用本地数据类型表示的，例如bool类用于值True和False。 大多数值的类型必须由程序员使用，我们将在本章中开发的组合和抽象方法来定义。</p>
+<p>下面几节将更多地介绍Python的原生数据类型，重点介绍它们在创建有用的数据抽象中所扮演的角色。 对于那些对进一步细节感兴趣的人，在线书籍<a target="_blank" rel="noopener" href="http://getpython3.com/diveintopython3/native-datatypes.html">Dive Into Python 3</a>中关于原生数据类型的一章给出了所有Python原生数据类型以及如何操作它们的实用概述，包括大量的使用示例和实用技巧。</p>
+<h3 id="2-2-数据抽象"><a href="#2-2-数据抽象" class="headerlink" title="2.2 数据抽象"></a>2.2 数据抽象</h3><p>当我们考虑世界上我们想要在程序中表示的大量事物时，我们发现它们中的大多数都有复合结构。 例如，地理位置包含纬度和经度坐标。 为了表示位置，我们希望我们的编程语言能够将纬度和经度结合在一起形成一对，这是一个复合数据值，我们的程序可以将其作为单个概念单元进行操作，但它也有两个可以单独考虑的部分。</p>
+<p>==复合数据的使用使我们能够增加程序的模块化==。 如果我们可以将地理位置作为整体值来操作，那么我们就可以将程序中使用位置计算的部分从这些位置如何表示的细节中屏蔽掉。 将处理数据如何表示的程序部分与处理数据如何操作的程序部分隔离开来的通用技术是一种强大的设计方法论，称为数据抽象。 ==数据抽象使程序更容易设计、维护和修改==。</p>
+<p>数据抽象在性质上与功能抽象相似。 当我们创建一个函数抽象时，函数如何实现的细节可以被抑制，并且特定的函数本身可以被具有相同总体行为的任何其他函数所替代。 换句话说，==我们可以进行抽象，将函数的使用方式与函数如何实现的细节分离开来。== 类似地，数据抽象将如何使用复合数据值与如何构造复合数据值的细节分离开来。</p>
+<p>==数据抽象的基本思想是对程序进行结构化==，以便它们能够对抽象数据进行操作。 也就是说，我们的程序应该以这样一种方式使用数据，即尽可能少地对数据做出假设。 同时，一个具体的数据表示被定义为程序的独立部分。</p>
+<p>程序的这两个部分，==操作抽象数据的部分和定义具体表示的部分，由一组根据具体表示实现抽象数据的函数连接起来。== 为了说明这种技术，我们将考虑如何设计一组用于处理有理数的函数。</p>
+<h4 id="2-2-1-示例-有理数"><a href="#2-2-1-示例-有理数" class="headerlink" title="2.2.1 示例:有理数"></a>2.2.1 示例:<a target="_blank" rel="noopener" href="https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.1-shi-li-you-li-shu">有理数</a></h4><p>有理数是整数的比率，有理数是实数的一个重要子类。有理数，如1/3或17/29通常写成：<code>&lt;numerator&gt;/&lt;denominator&gt;</code><br>&lt;分子&gt;和&lt;分母&gt;都是整数值的占位符。这两部分都需要准确地描述有理数的值。实际上，整数的除法会产生一个浮点近似值，从而失去整数的精确精度。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>/<span class="number">3</span></span><br><span class="line"><span class="number">0.3333333333333333</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>/<span class="number">3</span> == <span class="number">0.333333333333333300000</span> <span class="comment"># Dividing integers yields an approximation</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然而，我们可以通过结合分子和分母来创建有理数的精确表示。</p>
+<p>通过使用函数抽象，我们知道，在实现程序的某些部分之前，我们可以开始高效地编程。 让我们先假设我们已经有了一种从分子和分母构造有理数的方法。 我们还假设，给定一个有理数，我们有一种选择其分子和分母成分的方法。 让我们进一步假设构造函数和选择器可以使用以下三个函数：</p>
+<ul>
+<li>  1.rational(n, d)返回分子n、分母d的有理数。</li>
+<li>  2.number (x)返回有理数x的分子。</li>
+<li>3.denom(x)返回有理数x的分母。</li>
+</ul>
+<p>==我们在这里使用的是一个设计程序的强大策略：一厢情愿== 我们还没有阐述一个有理数是如何表示的，或者numer, denom, rational函数是如何实现的。即便如此，如果我们确实定义了这三个函数，我们就可以进行加法、乘法、打印和测试有理数是否相等：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">add_rationals</span>(<span class="params">x, y</span>):</span><br><span class="line">    nx, dx = numer(x), denom(x)</span><br><span class="line">    ny, dy = numer(y), denom(y)</span><br><span class="line">    <span class="keyword">return</span> rational(nx * dy + ny * dx, dx * dy)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">mul_rationals</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> rational(numer(x) * numer(y), denom(x) * denom(y))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">print_rational</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="built_in">print</span>(numer(x), <span class="string">'/'</span>, denom(x))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">rationals_are_equal</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> numer(x) * denom(y) == numer(y) * denom(x)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在，我们已经根据选择器函数number和denom以及构造器函数rational定义了有理数的操作，但我们还没有定义这些函数。我们需要的是一种把分子和分母结合成复合值的方法。</p>
+<h4 id="2-2-2-复合结构"><a href="#2-2-2-复合结构" class="headerlink" title="2.2.2 复合结构"></a>2.2.2 <a target="_blank" rel="noopener" href="https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.2-dui">复合结构</a></h4><p>为了使我们能够实现数据抽象的具体级别，Python提供了一个称为列表的复合结构，可以通过将表达式放在用逗号分隔的方括号中来构造。这样的表达式称为列表字面量。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair = [<span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair</span><br><span class="line">[<span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x, y = pair</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line"><span class="number">20</span></span><br></pre></td></tr></tbody></table></figure>
 <p>访问列表中元素的第二种方法是通过元素选择操作符，也使用方括号表示。与列表文字不同，直接跟在另一个表达式后面的方括号表达式并不求值为列表值，而是从前一个表达式的值中选择元素。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; pair[0]</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; pair[1]</span><br><span class="line">20```</span><br><span class="line"></span><br><span class="line">Python中的列表(以及大多数其他编程语言中的序列)是0索引的，这意味着索引0选择第一个元素，索引1选择第二个元素，以此类推。支持这种索引约定的一种直观感觉是，索引表示元素从列表开始的偏移量。</span><br><span class="line"></span><br><span class="line">元素选择操作符的等效函数称为getitem，它还使用0索引位置从列表中选择元素。</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from operator import getitem</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>getitem(pair, 0)<br>10</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>getitem(pair, 1)<br>20```</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair[<span class="number">0</span>]</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair[<span class="number">1</span>]</span><br><span class="line"><span class="number">20</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Python中的列表(以及大多数其他编程语言中的序列)是0索引的，这意味着索引0选择第一个元素，索引1选择第二个元素，以此类推。支持这种索引约定的一种直观感觉是，索引表示元素从列表开始的偏移量。</p>
+<p>元素选择操作符的等效函数称为getitem，它还使用0索引位置从列表中选择元素。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> getitem</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>getitem(pair, <span class="number">0</span>)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>getitem(pair, <span class="number">1</span>)</span><br><span class="line"><span class="number">20</span></span><br></pre></td></tr></tbody></table></figure>
 <p>在Python中，双元素列表并不是表示对的唯一方法。将两个值捆绑成一个值的任何方式都可以被认为是一对。列表是一种常见的方法。列表也可以包含两个以上的元素，我们将在本章后面讨论。</p>
 <p><strong>表示有理数。</strong>我们现在可以用一对整数表示一个有理数：一个分子和一个分母。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def rational(n, d):<br>    return [n, d]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def numer(x):<br>    return x[0]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def denom(x):<br>    return x[1]</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">rational</span>(<span class="params">n, d</span>): </span><br><span class="line">    <span class="keyword">return</span> [n, d]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">numer</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">denom</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span><br></pre></td></tr></tbody></table></figure>
+
 <p>再加上我们前面定义的算术运算，我们可以用我们定义的函数来处理有理数。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>half = rational(1, 2)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>print_rational(half)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>1 / 2</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>third = rational(1, 3)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>print_rational(mul_rationals(half, third))</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>1 / 6</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>print_rational(add_rationals(third, third))</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>6 / 9</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>half = rational(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print_rational(half)</span><br><span class="line"><span class="number">1</span> / <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>third = rational(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print_rational(mul_rationals(half, third))</span><br><span class="line"><span class="number">1</span> / <span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print_rational(add_rationals(third, third))</span><br><span class="line"><span class="number">6</span> / <span class="number">9</span></span><br></pre></td></tr></tbody></table></figure>
 <p>如上例所示，我们的有理数实现不会将有理数减少到最低项。我们可以通过改变rational的实现来弥补这个缺陷。如果我们有一个计算两个整数的最大公分母的函数，我们可以使用它在构造对之前将分子和分母降为最低项。与许多有用的工具一样，这样的函数已经存在于Python库中。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from fractions import gcd</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def rational(n, d):</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>g = gcd(n, d)</p>
-<p>return (n//g, d//g)</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> fractions <span class="keyword">import</span> gcd</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">rational</span>(<span class="params">n, d</span>):  </span><br><span class="line">        g = gcd(n, d)</span><br><span class="line">        <span class="keyword">return</span> (n//g, d//g)</span><br></pre></td></tr></tbody></table></figure>
 <p>层除法运算符，//表示整数除法，它将除法结果的小数部分舍入。因为我们知道g能将n和d都整除，所以在这种情况下整数除法是正确的。这个修改过的rational实现确保了用最低的术语表达rational。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>print_rational(add_rationals(third, third))</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>2 / 3</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print_rational(add_rationals(third, third))</span><br><span class="line"><span class="number">2</span> / <span class="number">3</span></span><br></pre></td></tr></tbody></table></figure>
 <p>这种改进是通过改变构造函数而不改变任何实现实际算术操作的函数来实现的。</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>2.2.3 抽象的障碍<a target="_blank" rel="noopener" href="https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.3-chou-xiang-de-zhang-ai"></a></p>
-<p>在继续讨论复合数据和数据抽象的更多示例之前，让我们考虑一下有理数示例所提出的一些问题。 我们用构造函数rational和选择器number和denom来定义操作。 一般来说，数据抽象的基本思想是识别一组基本的操作，根据这些操作，某种类型的值的所有操作都将被表示出来，然后在操作数据时只使用这些操作。 通过以这种方式限制操作的使用，在不改变程序行为的情况下更容易改变抽象数据的表示。</p>
-<p>对于有理数，程序的不同部分使用不同的运算操作有理数，如下表所述。</p>
-<p>程序的部分是…</p>
-<p>把理性当…</p>
-<p>单独利用……</p>
-<p>使用有理数进行计算</p>
-<p>整个数据值</p>
-<p>add_rational, mul_rational, rationals_are_equal, print_rational</p>
-<p>创建rational或实现rational操作</p>
-<p>分子和分母</p>
-<p>rational, numer, denom</p>
-<p>为有理函数实现选择器和构造函数</p>
-<p>双元素列表</p>
-<p>列表文字和元素选择</p>
-<p>在上面的每一层中，最后一列中的函数强制了一个抽象障碍。这些函数由较高的级别调用，并使用较低的抽象级别实现。</p>
+<h4 id="2-2-3-抽象障碍"><a href="#2-2-3-抽象障碍" class="headerlink" title="2.2.3 抽象障碍"></a>2.2.3 <a target="_blank" rel="noopener" href="https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.3-chou-xiang-de-zhang-ai">抽象障碍</a></h4><p>在继续讨论复合数据和数据抽象的更多示例之前，让我们考虑一下有理数示例所提出的一些问题。 我们用构造函数rational和选择器number和denom来定义操作。 一般来说，数据抽象的基本思想是识别一组基本的操作，根据这些操作，某种类型的值的所有操作都将被表示出来，然后在操作数据时只使用这些操作。 通过以这种方式限制操作的使用，在不改变程序行为的情况下更容易改变抽象数据的表示。</p>
 <p>当程序的某个部分可以使用较高级别的函数而不是使用较低级别的函数时，就会发生抽象障碍冲突。例如，一个计算有理数平方的函数最好使用mul_rational来实现，它不假设任何关于有理数实现的事情。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square_rational</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> mul_rational(x, x)```</span><br><span class="line"></span><br><span class="line">直接引用分子和分母会违反一个抽象障碍。</span><br><span class="line"></span><br><span class="line">```Python</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square_rational_violating_once</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> rational(numer(x) * numer(x), denom(x) * denom(x))```</span><br><span class="line"></span><br><span class="line">假设用两元素列表来表示有理数会违反两个抽象障碍。</span><br><span class="line"></span><br><span class="line">```&gt;&gt;&gt; <span class="keyword">def</span> <span class="title function_">square_rational_violating_twice</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> [x[<span class="number">0</span>] * x[<span class="number">0</span>], x[<span class="number">1</span>] * x[<span class="number">1</span>]]```</span><br><span class="line"></span><br><span class="line">抽象障碍使程序更容易维护和修改。 依赖于特定表示的函数越少，当人们想要改变这种表示时，所需要的更改就越少。 square_rational的所有这些实现都有正确的行为，但只有第一个实现对未来的更改是健壮的。 即使我们改变了有理数的表示形式，square_rational函数也不需要更新。 相比之下，square_rational_violating_once在选择器或构造器签名发生更改时需要更改，而square_rational_violating_twice在有理数的实现发生更改时需要更新。</span><br><span class="line"></span><br><span class="line"><span class="comment">### </span></span><br><span class="line"></span><br><span class="line"><span class="number">2.2</span><span class="number">.4</span> 数据属性[](https://zlt-shadow.gitbook.io/sicp-<span class="keyword">in</span>-python-cn/di-<span class="number">2</span>-zhang-shu-ju-gou-jian-chou-xiang/<span class="number">2.2</span>-shu-ju-chou-xiang<span class="comment">#2.2.4-shu-ju-shu-xing)</span></span><br><span class="line"></span><br><span class="line">抽象障碍塑造了我们思考数据的方式。 有理数的有效表示不受任何特定实现的限制(如双元素列表); 它是一个由rational返回的值，可以传递给number和denom。 此外，构造函数和选择器之间必须保持适当的关系。 也就是说，如果我们从整数n和d构造一个有理数x，那么number (x)/denom(x)等于n/d。</span><br><span class="line"></span><br><span class="line">一般来说，我们可以使用选择器和构造器的集合，以及一些行为条件来表达抽象数据。 只要满足行为条件(如上面的分割属性)，选择器和构造器就构成了一种数据的有效表示。 抽象障碍下面的实现细节可能会改变，但如果行为没有改变，那么数据抽象仍然有效，使用该数据抽象编写的任何程序都将保持正确。</span><br><span class="line"></span><br><span class="line">这个观点可以广泛地应用，包括我们用来实现有理数的对值。 实际上，我们从未详细说明什么是pair，只是说该语言提供了创建和操作带有两个元素的列表的方法。 我们需要实现pair的行为是将两个值粘合在一起。 作为一种行为条件，</span><br><span class="line"></span><br><span class="line">-   如果由值x和y构造一对p，则select(p, <span class="number">0</span>)返回x, select(p, <span class="number">1</span>)返回y。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">我们实际上并不需要<span class="built_in">list</span>类型来创建pair。相反，我们可以实现两个函数pair和select来满足这个描述，就像实现一个两个元素的列表一样。</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pair</span>(<span class="params">x, y</span>):</span><br><span class="line"></span><br><span class="line">    <span class="string">"""Return a function that represents a pair."""</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">index</span>):</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">elif</span> index == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> y</span><br><span class="line">    <span class="keyword">return</span> get</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">select</span>(<span class="params">p, i</span>):</span><br><span class="line">    <span class="string">"""Return the element at index i of pair p."""</span></span><br><span class="line"><span class="keyword">return</span> p(i)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square_rational</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> mul_rational(x, x)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>直接引用分子和分母会违反一个抽象障碍。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square_rational_violating_once</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> rational(numer(x) * numer(x), denom(x) * denom(x))</span><br></pre></td></tr></tbody></table></figure>
+
+<p>假设用两元素列表来表示有理数会违反两个抽象障碍。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square_rational_violating_twice</span>(<span class="params">x</span>):</span><br><span class="line"><span class="keyword">return</span> [x[<span class="number">0</span>] * x[<span class="number">0</span>], x[<span class="number">1</span>] * x[<span class="number">1</span>]]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>抽象障碍使程序更容易维护和修改。 依赖于特定表示的函数越少，当人们想要改变这种表示时，所需要的更改就越少。 square_rational的所有这些实现都有正确的行为，但只有第一个实现对未来的更改是健壮的。 即使我们改变了有理数的表示形式，square_rational函数也不需要更新。 相比之下，square_rational_violating_once在选择器或构造器签名发生更改时需要更改，而square_rational_violating_twice在有理数的实现发生更改时需要更新。</p>
+<h4 id="2-2-4-数据属性"><a href="#2-2-4-数据属性" class="headerlink" title="2.2.4 数据属性"></a>2.2.4 <a target="_blank" rel="noopener" href="https://zlt-shadow.gitbook.io/sicp-in-python-cn/di-2-zhang-shu-ju-gou-jian-chou-xiang/2.2-shu-ju-chou-xiang#2.2.4-shu-ju-shu-xing">数据属性</a></h4><p>抽象障碍塑造了我们思考数据的方式。 有理数的有效表示不受任何特定实现的限制(如双元素列表); 它是一个由rational返回的值，可以传递给number和denom。 此外，构造函数和选择器之间必须保持适当的关系。 也就是说，如果我们从整数n和d构造一个有理数x，那么number (x)/denom(x)等于n/d。</p>
+<p>一般来说，我们可以使用选择器和构造器的集合，以及一些行为条件来表达抽象数据。 只要满足行为条件(如上面的分割属性)，选择器和构造器就构成了一种数据的有效表示。 抽象障碍下面的实现细节可能会改变，但如果行为没有改变，那么数据抽象仍然有效，使用该数据抽象编写的任何程序都将保持正确。</p>
+<p>这个观点可以广泛地应用，包括我们用来实现有理数的对值。 实际上，我们从未详细说明什么是pair，只是说该语言提供了创建和操作带有两个元素的列表的方法。 我们需要实现pair的行为是将两个值粘合在一起。 作为一种行为条件，</p>
+<ul>
+<li>  如果由值x和y构造一对p，则select(p, 0)返回x, select(p, 1)返回y。</li>
+</ul>
+<p>我们实际上并不需要list类型来创建pair。相反，我们可以实现两个函数pair和select来满足这个描述，就像实现一个两个元素的列表一样。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pair</span>(<span class="params">x, y</span>):</span><br><span class="line"></span><br><span class="line">    <span class="string">"""Return a function that represents a pair."""</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">index</span>):</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">elif</span> index == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> y</span><br><span class="line">    <span class="keyword">return</span> get</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">select</span>(<span class="params">p, i</span>):</span><br><span class="line">    <span class="string">"""Return the element at index i of pair p."""</span></span><br><span class="line">        <span class="keyword">return</span> p(i)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>通过这个实现，我们可以创建和操作对。</p>
-<p>```python</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>p = pair(20, 14)<br>select(p, 0)<br>20<br>select(p, 1)<br>14```</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>p = pair(<span class="number">20</span>, <span class="number">14</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>select(p, <span class="number">0</span>)</span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>select(p, <span class="number">1</span>)</span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></tbody></table></figure>
+
 <p>这种高阶函数的使用与我们对数据应该是什么的直观概念完全不同。 然而，这些函数足以在程序中表示对。 函数足以表示复合数据。</p>
 <p>展示pair的函数表示的意义并不在于Python实际上是这样工作的(出于效率原因，列表实现得更直接)，而是它可以这样工作。 函数表示虽然晦涩，但却是表示成对的一种完全合适的方式，因为它满足成对需要满足的唯一条件。 数据抽象的实践使我们能够轻松地在表示之间切换。</p>
 
