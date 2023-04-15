@@ -6,7 +6,7 @@
   <link href="https://sajlle.github.io/atom.xml" rel="self"/>
   
   <link href="https://sajlle.github.io/"/>
-  <updated>2023-04-15T06:55:42.297Z</updated>
+  <updated>2023-04-15T14:15:39.537Z</updated>
   <id>https://sajlle.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git基础指南</title>
+    <link href="https://sajlle.github.io/2023/04/16/git%E5%9F%BA%E7%A1%80%E6%8C%87%E5%8D%97/"/>
+    <id>https://sajlle.github.io/2023/04/16/git%E5%9F%BA%E7%A1%80%E6%8C%87%E5%8D%97/</id>
+    <published>2023-04-15T22:13:43.000Z</published>
+    <updated>2023-04-15T14:15:39.537Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近刚刚注册GitHub账号，想要建仓，遇到了种种神奇的问题，让俺再次对GitHub的复杂提升了认识。<br>遂决定把这次建仓折腾的经过记录下来，以作备用。</p><span id="more"></span><p>注册账号掠过不提，从建仓库说起。</p><h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><ul><li>输入<code>git config --global user.name 'yourname'</code>，添加用户名<ul><li><code>yourname</code>是你GitHub账号名称</li></ul></li><li>输入<code>git config --global user.email 'youremail'</code>，添加邮箱<ul><li><code>youremail</code>是GitHub注册的邮箱地址</li></ul></li><li>以上两条命令配置的文件会被写入文件夹下的.gitconfig文件中，该文件是git的全局配置文件。</li><li>如何检查是否配置成功了呢？<ul><li>输入<code>git config user.name</code> ，如果返回<code>yourname</code>，则表示配置成功</li></ul></li></ul><h3 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h3><ul><li>打开准备作为git仓库的文件夹，运行git bash</li><li>输入 <code>git init</code> 初始化仓库<ul><li>该命令会创建一个.git的隐藏目录，这个目录里包含了初始文件（很重要，不要随便移除它哦）</li></ul></li></ul><h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="git中的文件有四种状态"><a href="#git中的文件有四种状态" class="headerlink" title="git中的文件有四种状态"></a>git中的文件有四种状态</h4><ul><li>未管理</li><li>已管理<ul><li>未修改</li><li>已修改</li><li>已暂存</li><li>已提交<h4 id="操作未提交的文件"><a href="#操作未提交的文件" class="headerlink" title="操作未提交的文件"></a>操作未提交的文件</h4></li></ul></li><li>使用<code>git status</code>检查文件状态<ul><li>可用<code>git status -s</code>精简输出</li></ul></li><li>使用<code>git add filename</code>开始追踪一个文件</li><li>使用<code>git commit -m "message"</code>提交文件<h4 id="操作已提交的文件"><a href="#操作已提交的文件" class="headerlink" title="操作已提交的文件"></a>操作已提交的文件</h4></li><li>文件修改之后，使用<code>git add filename</code>把文件添加到暂存区</li><li>使用<code>git commit -m "message"</code>提交修改后的文件</li><li>使用<code>git checkout --filename</code>撤销修改，（所有修改均会消息，慎用）<h4 id="暂存文件"><a href="#暂存文件" class="headerlink" title="暂存文件"></a>暂存文件</h4></li><li>使用<code>git add .</code>一次添加多个文件到暂存区</li><li>使用<code>git reset HEAD filename</code>，从暂存区移除文件</li><li>使用<code>git commit -a -m "messge"</code> 跳过暂存，直接提交<h4 id="移除文件"><a href="#移除文件" class="headerlink" title="移除文件"></a>移除文件</h4></li><li><code>git rm -f filename</code>从仓库和工作区中移除文件</li><li><code>git rm --cached filename</code>从仓库中移除，工作区保留<h4 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h4>在根目录下创建<code>.gitignore</code>文件，写明要忽略的文件<br>该文件的规范如下：</li><li><code>#</code>开头的是注释</li><li><code>/</code>结尾的是目录</li><li><code>/</code>开头的是防止递归</li><li><code>！</code>开头的是取反</li><li>可以使用glob模式进行文件和文件夹的匹配<h4 id="glob模式"><a href="#glob模式" class="headerlink" title="glob模式"></a>glob模式</h4></li><li><code>*</code>匹配&gt;=0个字符</li><li><code>[abc]</code>匹配方括号中任意一个字符</li><li><code>?</code>匹配1个任意字符</li><li><code>**</code>匹配任意中间目录，例如：<code>a/**/z</code>可以匹配<code>a/z</code>，<code>a/c/z</code>等<h4 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h4></li><li><code>git log</code>查看所有提交历史</li><li><code>git log -2</code>只显示最近的2条提交历史</li><li><code>git log -2 --pretty=oneline</code>在一行上显示最近的两条提交历史</li><li><code>git log -2 --pretty=format:"%h | %an | %ar | %s "</code>以规定格式显示最近提交历史，<code>%h</code>表示简写哈希，<code>%an</code>表示作者，<code>%ar</code>表示作者修订日期，<code>%s</code>表示提交说明<h4 id="回退到指定版本"><a href="#回退到指定版本" class="headerlink" title="回退到指定版本"></a>回退到指定版本</h4></li><li><code>git reset --hard &lt;CommitID&gt;</code>根据指定的提交ID回退到指定版本</li><li><code>git relog --pretty=oneline</code>查看命令操作历史</li><li><code>git reset --hard &lt;CommitID&gt;</code>根据最新的提交ID，跳到最新版本</li></ul><h3 id="Github远程仓库使用"><a href="#Github远程仓库使用" class="headerlink" title="Github远程仓库使用"></a>Github远程仓库使用</h3><h4 id="访问GitHub远程仓库"><a href="#访问GitHub远程仓库" class="headerlink" title="访问GitHub远程仓库"></a>访问GitHub远程仓库</h4><ul><li>获取仓库地址（ssh地址或者http地址）</li><li>复制GitHub仓库的https地址（或者ssh地址）</li><li>在git bash 中输入以下命令<code>git remote add 远程仓库名称 远程仓库地址</code>，访问远程仓库</li><li>使用<code>git push -u 仓库名称 仓库分支</code>，将内容推送到远程仓库指定分支上<h4 id="设置ssh密钥"><a href="#设置ssh密钥" class="headerlink" title="设置ssh密钥"></a>设置ssh密钥</h4>远程登陆GitHub仓库有两种方式，一种是http登陆，一种是ssh登陆。http登陆每次要输入用户名密码比较麻烦，所以常用ssh登陆。<br>ssh登陆需要设置ssh密钥，下面我们就开始配置ssh。<ul><li>打开仓库文件夹，运行git bash</li><li>输入<code>ssh-keygen -t rsa -b 4096 -C 'youremail'</code>，该命令会在指定目录设立一个.ssh文件夹，文件夹里保存了公钥和私钥。</li><li>用记事本打开.pub文件（公钥文件），复制内容，粘贴到GitHub上的ssh配置页面。</li><li>回到git bash，运行<code>ssh -T git@github.com</code>，检测ssh是否配置成功。<h4 id="将远程仓库克隆到本地"><a href="#将远程仓库克隆到本地" class="headerlink" title="将远程仓库克隆到本地"></a>将远程仓库克隆到本地</h4></li></ul></li><li><code>git clone 远程仓库地址</code></li></ul><h4 id="Git分支操作"><a href="#Git分支操作" class="headerlink" title="Git分支操作"></a>Git分支操作</h4><h5 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h5><ul><li><code>git branch</code> 查看分支列表</li><li><code>git branch newbranch</code>创建新分支</li><li><code>git checkout newbranch</code>切到指定分支上</li><li><code>git checkout -b name</code>创建并切换到name分支上</li><li><code>git merge name</code>合并分支name到当前所在分支</li><li><code>git branch -d name </code>删除name分支<h5 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h5></li><li><code>git remote show 远程仓库名称</code> ，查看远程仓中所有分支列表</li><li>跟踪分支<ul><li><code>git checkout 远程分支名称</code>，下载远程分支到本地</li><li><code>git checkout -b 本地分支名称 远程仓库名称/远程分支名称</code>，下载远程分支到本地并重命名</li></ul></li><li>拉取远程分支最新代码<ul><li><code>git pull</code>从远程仓里拉取当前分支最新代码，保持当前分支和远程分支代码一致</li></ul></li><li>删除远程分支<ul><li><code>git push 远程仓库名称 --delete 远程分支名称</code></li></ul></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;最近刚刚注册GitHub账号，想要建仓，遇到了种种神奇的问题，让俺再次对GitHub的复杂提升了认识。&lt;br&gt;遂决定把这次建仓折腾的经过记录下来，以作备用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="工具使用" scheme="https://sajlle.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+    
+    <category term="git" scheme="https://sajlle.github.io/tags/git/"/>
+    
+    <category term="笔记" scheme="https://sajlle.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="GitHub" scheme="https://sajlle.github.io/tags/GitHub/"/>
+    
+  </entry>
   
   <entry>
     <title>如何快速上手shell？</title>
