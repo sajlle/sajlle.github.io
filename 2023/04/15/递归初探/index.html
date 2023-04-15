@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在许多递归函数体中可以找到一个常见的模式。 主体以基本情况开始，这是一个条件语句，它定义了对于最容易处理的输入函数的行为。 在sum_digits的情况下，基本情况是任何单个数字参数，我们只需返回该参数。有些递归函数会有多个基本情况。 基本用例之后是一个或多个递归调用。 递归调用总是有一个特定的特征:它们简化了原来的问题。 递归函数通过增量地简化问题来表示计算。 例如，7的数字加起来比73的数字加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归初探">
+<meta property="og:url" content="https://sajlle.github.io/2023/04/15/%E9%80%92%E5%BD%92%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="Alicia&#39;s Blog">
+<meta property="og:description" content="在许多递归函数体中可以找到一个常见的模式。 主体以基本情况开始，这是一个条件语句，它定义了对于最容易处理的输入函数的行为。 在sum_digits的情况下，基本情况是任何单个数字参数，我们只需返回该参数。有些递归函数会有多个基本情况。 基本用例之后是一个或多个递归调用。 递归调用总是有一个特定的特征:它们简化了原来的问题。 递归函数通过增量地简化问题来表示计算。 例如，7的数字加起来比73的数字加">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T14:31:24.000Z">
+<meta property="article:modified_time" content="2023-04-15T06:33:38.848Z">
+<meta property="article:author" content="Alicia">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2023/04/15/%E9%80%92%E5%BD%92%E5%88%9D%E6%8E%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/04/15/%E9%80%92%E5%BD%92%E5%88%9D%E6%8E%A2/","path":"2023/04/15/递归初探/","title":"递归初探"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>递归初探 | Alicia's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Alicia's Blog" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/sajlle" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Alicia's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a way to get closer to technique</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BA%92%E9%80%92%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">相互递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0"><span class="nav-number">2.</span> <span class="nav-text">递归函数中的打印</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E9%80%92%E5%BD%92"><span class="nav-number">3.</span> <span class="nav-text">树递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E8%87%AA%E7%84%B6%E6%95%B0%E5%88%86%E5%8C%BA"><span class="nav-number">4.</span> <span class="nav-text">案例：自然数分区</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Alicia"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Alicia</p>
+  <div class="site-description" itemprop="description">Alicia's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sajlle" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sajlle" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:szaboivan221@gmail.com" title="E-Mail → mailto:szaboivan221@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">友情链接</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/04/15/%E9%80%92%E5%BD%92%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Alicia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alicia's Blog">
+      <meta itemprop="description" content="Alicia's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="递归初探 | Alicia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          递归初探
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-15 14:31:24 / 修改时间：06:33:38" itemprop="dateCreated datePublished" datetime="2023-04-15T14:31:24Z">2023-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在许多递归函数体中可以找到一个常见的模式。 主体以基本情况开始，这是一个条件语句，它定义了对于最容易处理的输入函数的行为。 在sum_digits的情况下，基本情况是任何单个数字参数，我们只需返回该参数。有些递归函数会有多个基本情况。</p>
+<p>基本用例之后是一个或多个递归调用。 递归调用总是有一个特定的特征:它们简化了原来的问题。 递归函数通过增量地简化问题来表示计算。 例如，7的数字加起来比73的数字加起来简单，73的数字加起来又比738的数字加起来简单。 对于每一个后续调用，需要完成的工作就更少了。</p>
+<span id="more"></span>
+
+<p>以阶乘函数为例子，例如fact(4)计算4! =4x3x2x1=24。<br>如果使用while循环，则从最小值开始乘到给定值，使用递归则从给定值乘到1。n! = nx(n-1)……1<br>我们不应该关心fact(n-1)在fact主体中是如何实现的; 我们应该相信它计算的是n-1的阶乘。<br>我们根据函数本身来定义函数，但只是在验证函数的正确性时相信更简单的情况将正确工作。</p>
+<p>迭代函数必须保持一些在整个计算过程中变化的局部状态。 在迭代的任何点上，该状态描述了已完成工作的结果和剩余工作量。</p>
+<h2 id="相互递归"><a href="#相互递归" class="headerlink" title="相互递归"></a>相互递归</h2><p>递归过程被两个相互调用的函数分割时，这些函数称为相互递归。<br>当递归过程被两个相互调用的函数分割时，这些函数称为相互递归。作为例子，考虑以下非负整数的偶数和奇数的定义：</p>
+<ul>
+<li>  一个数比奇数多一，它就是偶数</li>
+<li>  一个数比偶数多一，它就是奇数</li>
+<li>  0是偶数</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_even</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:  <span class="comment"># 先写最简单的情况</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> is_odd(n-<span class="number">1</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_odd</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> is_even(n-<span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可将<code>is_odd</code>合并到<code>is_even</code>中，如下</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_even</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">if</span> n-<span class="number">1</span> == <span class="number">0</span>:  <span class="comment"># 把is_odd中的n替换为n-1，因为is_even传给is_odd的实参是n-1</span></span><br><span class="line">			<span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> is_even((n-<span class="number">1</span>)-<span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="递归函数中的打印"><a href="#递归函数中的打印" class="headerlink" title="递归函数中的打印"></a>递归函数中的打印</h2><p>递归函数演进的计算过程通常可以通过调用print来可视化。例如：我们将实现一个函数cascade，它从最大到最小到最大打印一个数字的所有前缀。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cascade</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="string">"""Print a cascade of prefixes of n. """</span></span><br><span class="line">	<span class="keyword">if</span> n &lt; <span class="number">10</span>:</span><br><span class="line">		<span class="built_in">print</span>(n)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="built_in">print</span>(n)</span><br><span class="line">		cascade(n//<span class="number">10</span>)</span><br><span class="line">		<span class="built_in">print</span>(n)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cascade(<span class="number">2013</span>)</span><br><span class="line"><span class="number">2013</span></span><br><span class="line"><span class="number">201</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="number">201</span></span><br><span class="line"><span class="number">2013</span></span><br></pre></td></tr></tbody></table></figure>
+<p>也可简化一下：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cascade</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="built_in">print</span>(n)</span><br><span class="line">	<span class="keyword">if</span> n &gt;= <span class="number">10</span>:</span><br><span class="line">		cascade(n//<span class="number">10</span>)</span><br><span class="line">		<span class="built_in">print</span>(n)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>相互递归案例2：<br>有n个初始鹅卵石的双人博弈。玩家轮流从桌子上拿走一颗或两颗石子，拿走最后一颗石子的玩家获胜。假设Alice和Bob玩这个游戏，每人都使用一个简单的策略：</p>
+<ul>
+<li>  Alice总是拿走一块石子</li>
+<li>  如果桌子上有偶数个石子，Bob拿走两个石子，否则拿走一个石子</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">alice</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'Bob wins'</span>)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> bob(n-<span class="number">1</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bob</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'Alice wins'</span>)</span><br><span class="line">	<span class="keyword">elif</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> alice(n-<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> alice(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>alice(<span class="number">20</span>)</span><br><span class="line">Bob wins</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="树递归"><a href="#树递归" class="headerlink" title="树递归"></a>树递归</h2><p>在树递归中，一个函数多次调用自己。考虑计算<a target="_blank" rel="noopener" href="http://composingprograms.com/tutor.html#code=def+fib(n)%3A%0A++++if+n+%3D%3D+1%3A%0A++++++++return+0%0A++++if+n+%3D%3D+2%3A%0A++++++++return+1%0A++++else%3A%0A++++++++return+fib(n-2)+%2B+fib(n-1)%0A%0Aresult+%3D+fib(6)">斐波那契数列</a>，其中每个数字都是前面两个数字的和。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>):</span><br><span class="line">	<span class="string">"""返回斐波那契数列中第n个数字的值"""</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> fib(n-<span class="number">2</span>) + fib(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fib(<span class="number">6</span>)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="案例：自然数分区"><a href="#案例：自然数分区" class="headerlink" title="案例：自然数分区"></a>案例：自然数分区</h2><ul>
+<li>啥是<a target="_blank" rel="noopener" href="https://ja.wikipedia.org/wiki/%E8%87%AA%E7%84%B6%E6%95%B0%E3%81%AE%E5%88%86%E5%89%B2">自然数分区</a>？<ul>
+<li>将给定<strong>的</strong>正整数n<strong>划分</strong>为正整数。</li>
+<li>例如，4的分区是：<ol>
+<li>4</li>
+<li>3+1</li>
+<li>2+2</li>
+<li>2+1+1</li>
+<li>1+1+1+1</li>
+</ol>
+</li>
+<li>8的分区是：<ol>
+<li> 8</li>
+<li> 7 + 1</li>
+<li> 6 + 2</li>
+<li> 6 + 1 + 1</li>
+<li> 5 + 3</li>
+<li> 5 + 2 + 1</li>
+<li> 5 + 1 + 1 + 1</li>
+<li> 4 + 4</li>
+<li> 4 + 3 + 1</li>
+<li> 4 + 2 + 2</li>
+<li> 4 + 2 + 1 + 1</li>
+<li> 4 + 1 + 1 + 1 + 1</li>
+<li> 3 + 3 + 2</li>
+<li> 3 + 3 + 1 + 1</li>
+<li> 3 + 2 + 2 + 1</li>
+<li> 3 + 2 + 1 + 1 + 1</li>
+<li> 3 + 1 + 1 + 1 + 1 + 1</li>
+<li> 2 + 2 + 2 + 2</li>
+<li> 2 + 2 + 2 + 1 + 1</li>
+<li> 2 + 2 + 1 + 1 + 1 + 1</li>
+<li> 2 + 1 + 1 + 1 + 1 + 1 + 1</li>
+<li> 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1<br>有限分区：</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>筛掉包含重复数字的分区<ul>
+<li>案例，8的有限分区是：<ul>
+<li>  8</li>
+<li>  7 + 1</li>
+<li>  6 + 2</li>
+<li>  5 + 3</li>
+<li>  5 + 2 + 1</li>
+<li>  4 + 3 + 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>奇数分区：<ul>
+<li>案例，8的奇数分区是：<ul>
+<li>  7 + 1</li>
+<li>  5 + 3</li>
+<li>  5 + 1 + 1 + 1</li>
+<li>  3 + 3 + 1 + 1</li>
+<li>  3 + 1 + 1 + 1 + 1 + 1</li>
+<li>  1 + 1 + 1 + 1 + 1 + 1 + 1 + 1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>We will define a function&nbsp;count_partitions(n, m)&nbsp;that returns the number of different partitions of&nbsp;n&nbsp;using parts up to&nbsp;m. This function has a simple solution as a tree-recursive function, based on the following observation:</p>
+<p>The number of ways to partition&nbsp;n&nbsp;using integers up to&nbsp;m&nbsp;equals</p>
+<ol>
+<li> the number of ways to partition&nbsp;n-m&nbsp;using integers up to&nbsp;m, and</li>
+<li> the number of ways to partition&nbsp;n&nbsp;using integers up to&nbsp;m-1.</li>
+</ol>
+<p>To see why this is true, observe that all the ways of partitioning&nbsp;n&nbsp;can be divided into two groups: those that include at least one&nbsp;m&nbsp;and those that do not. Moreover, each partition in the first group is a partition of&nbsp;n-m, followed by&nbsp;m&nbsp;added at the end. In the example above, the first two partitions contain 4, and the rest do not.</p>
+<p>Therefore, we can recursively reduce the problem of partitioning&nbsp;n&nbsp;using integers up to&nbsp;m&nbsp;into two simpler problems: (1) partition a smaller number&nbsp;n-m, and (2) partition with smaller components up to&nbsp;m-1.</p>
+<p>To complete the implementation, we need to specify the following base cases:</p>
+<ol>
+<li> There is one way to partition 0: include no parts.</li>
+<li> There are 0 ways to partition a negative&nbsp;n.</li>
+<li>There are 0 ways to partition any&nbsp;n&nbsp;greater than 0 using parts of size 0 or less.<br>```python<br>def count_partitions(n,m):<br> “””Count the ways to partition n using parts to m”””<br> if n == 0:<pre><code> return 1
+</code></pre>
+ elif n &lt; 0:<pre><code> return 0
+</code></pre>
+ elif m == 0:<pre><code> return 0
+</code></pre>
+ else:<pre><code> return count_partitions(n-m,m)+count_partitions(n,m-1)
+</code></pre>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Alicia 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Alicia 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa-solid fa-tag"></i> Python</a>
+              <a href="/tags/CS61A/" rel="tag"><i class="fa-solid fa-tag"></i> CS61A</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa-solid fa-tag"></i> 笔记</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa-solid fa-tag"></i> 数据结构</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"><i class="fa-solid fa-tag"></i> 递归</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/15/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/" rel="prev" title="报错信息">
+                  <i class="fa fa-chevron-left"></i> 报错信息
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/15/%E9%93%BE%E8%A1%A8%E5%88%9D%E6%8E%A2/" rel="next" title="链表初探">
+                  链表初探 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alicia</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">42k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:21</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
