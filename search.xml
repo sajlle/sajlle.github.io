@@ -2443,6 +2443,8 @@ sum_naturals ( 10 ) Expecting: 55 ok Trying: sum_naturals ( 100 ) Expecting: 505
 <p>配置script</p>
 <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"scripts"</span><span class="punctuation">:</span><span class="punctuation">{</span></span><br><span class="line">	<span class="attr">"build"</span><span class="punctuation">:</span><span class="string">"webpack"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
 
+<span id="more"></span>
+
 <h2 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h2><ul>
 <li>新建文件夹folder， folder/src</li>
 <li>新建文件src/index.js</li>
@@ -2546,6 +2548,7 @@ sum_naturals ( 10 ) Expecting: 55 ok Trying: sum_naturals ( 100 ) Expecting: 505
 <li>构词</li>
 </ul>
 <p>あい 爱</p>
+<span id="more"></span>
 <h2 id="さしすせそ"><a href="#さしすせそ" class="headerlink" title="さしすせそ"></a>さしすせそ</h2><p>せかい、世界<br>おさき、酒<br>おいしい、美味的<br>うそ、假话<br>いちご、いちえ、一期一会</p>
 <p>すごい、好厉害</p>
 <h2 id="たちつてと"><a href="#たちつてと" class="headerlink" title="たちつてと"></a>たちつてと</h2><p>うた、歌<br>ちしき、知识<br>ちかてつ、地铁<br>すてき、绝妙的<br>いと、线</p>
