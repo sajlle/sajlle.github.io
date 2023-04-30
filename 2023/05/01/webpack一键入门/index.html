@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="环境准备123npm i yarn -gyarn inityarn add webpack webpack-cli -D 配置script 123&quot;scripts&quot;:{	&quot;build&quot;:&quot;webpack&quot;}  压缩文件 新建文件夹folder， folder&#x2F;src 新建文件src&#x2F;index.js 新建文件src&#x2F;add&#x2F;add.js 运行命令yarn build生成foler&#x2F;dist&#x2F;mai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack一键入门">
+<meta property="og:url" content="https://sajlle.github.io/2023/05/01/webpack%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Alicia&#39;s Blog">
+<meta property="og:description" content="环境准备123npm i yarn -gyarn inityarn add webpack webpack-cli -D 配置script 123&quot;scripts&quot;:{	&quot;build&quot;:&quot;webpack&quot;}  压缩文件 新建文件夹folder， folder&#x2F;src 新建文件src&#x2F;index.js 新建文件src&#x2F;add&#x2F;add.js 运行命令yarn build生成foler&#x2F;dist&#x2F;mai">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-30T19:39:13.000Z">
+<meta property="article:modified_time" content="2023-04-30T11:41:11.762Z">
+<meta property="article:author" content="Alicia">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="工具使用">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2023/05/01/webpack%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2023/05/01/webpack%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/","path":"2023/05/01/webpack一键入门/","title":"webpack一键入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>webpack一键入门 | Alicia's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Alicia's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/sajlle" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Alicia's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a way to get closer to technique</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">压缩文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEwebpack"><span class="nav-number">3.</span> <span class="nav-text">配置webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9webpack%E7%9A%84%E5%87%BA%E5%8F%A3%E5%92%8C%E5%85%A5%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">更改webpack的出口和入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html-webpack-plugin"><span class="nav-number">3.2.</span> <span class="nav-text">html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85css%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.1.</span> <span class="nav-text">打包css文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85less%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.2.</span> <span class="nav-text">打包less文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%9B%BE%E7%89%87"><span class="nav-number">3.4.</span> <span class="nav-text">打包图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">webpack加载文件优缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87"><span class="nav-number">3.5.</span> <span class="nav-text">处理字体图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9js%E8%BF%9B%E8%A1%8C%E8%AF%AD%E6%B3%95%E9%99%8D%E7%BA%A7"><span class="nav-number">3.6.</span> <span class="nav-text">对js进行语法降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack%E5%BC%80%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.7.</span> <span class="nav-text">webpack开发服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack-dev-server"><span class="nav-number">3.7.1.</span> <span class="nav-text">webpack-dev-server</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugFix"><span class="nav-number">4.</span> <span class="nav-text">bugFix</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Alicia"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Alicia</p>
+  <div class="site-description" itemprop="description">Alicia's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sajlle" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sajlle" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:szaboivan221@gmail.com" title="E-Mail → mailto:szaboivan221@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com" rel="noopener" target="_blank">友情链接</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2023/05/01/webpack%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Alicia">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alicia's Blog">
+      <meta itemprop="description" content="Alicia's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="webpack一键入门 | Alicia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webpack一键入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-30 19:39:13 / 修改时间：11:41:11" itemprop="dateCreated datePublished" datetime="2023-04-30T19:39:13Z">2023-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>972</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i yarn -g</span><br><span class="line">yarn init</span><br><span class="line">yarn add webpack webpack-cli -D</span><br></pre></td></tr></tbody></table></figure>
+<p>配置script</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"scripts"</span><span class="punctuation">:</span><span class="punctuation">{</span></span><br><span class="line">	<span class="attr">"build"</span><span class="punctuation">:</span><span class="string">"webpack"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h2><ul>
+<li>新建文件夹folder， folder/src</li>
+<li>新建文件src/index.js</li>
+<li>新建文件src/add/add.js</li>
+<li>运行命令<code>yarn build</code>生成foler/dist/main.js</li>
+</ul>
+<h2 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h2><h3 id="更改webpack的出口和入口"><a href="#更改webpack的出口和入口" class="headerlink" title="更改webpack的出口和入口"></a>更改webpack的出口和入口</h3><ul>
+<li>[配置文档](<a target="_blank" rel="noopener" href="https://webpack.docschina.org/concepts/#entry">概念 | webpack 中文文档 (docschina.org)</a>)<ul>
+<li>新建webpack.config.js（如果更改了package.json，在里面添加了<code>"type":"module"</code>则需要把后缀名改为cjs</li>
+<li>在上述文件里<ul>
+<li>通过entry设置文件入口</li>
+<li>通过output设置出口，文件名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所有打包资源都要跟入口产生直接的或者间接的引用关系</li>
+</ul>
+<h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><ul>
+<li>(document)[<a target="_blank" rel="noopener" href="https://webpack.docschina.org/plugins/html-webpack-plugin/">HtmlWebpackPlugin | webpack 中文文档 (docschina.org)</a>]</li>
+<li>添加配置<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">javascript</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = {</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">'index.js'</span>,</span><br><span class="line">  <span class="attr">output</span>: {</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">'index_bundle.js'</span>,</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>({</span><br><span class="line">	  <span class="attr">template</span>: <span class="string">'./public/index.html'</span> <span class="comment">// 入口html文件地址</span></span><br><span class="line">  })],</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="加载器"><a href="#加载器" class="headerlink" title="加载器"></a>加载器</h3><h4 id="打包css文件"><a href="#打包css文件" class="headerlink" title="打包css文件"></a>打包css文件</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/css-loader/">css-loader | webpack 中文文档 (docschina.org)</a></li>
+<li><a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/style-loader/">style-loader | webpack 中文文档 (docschina.org)</a></li>
+<li>css代码被打包进js文件中</li>
+<li>style-loader会把css代码插入到head下style标签内</li>
+</ul>
+<h4 id="打包less文件"><a href="#打包less文件" class="headerlink" title="打包less文件"></a>打包less文件</h4><p><a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/less-loader/">less-loader | webpack 中文文档 (docschina.org)</a>可以把less编译为css文件</p>
+<ul>
+<li>新建src/less/index.less – 设置li字体大小</li>
+<li>把index.less引入到入口处</li>
+<li>下载加载器来处理less文件、</li>
+<li>webpack.config.js针对less配置</li>
+</ul>
+<p>webpack如何支持less打包? 需要注意什么? </p>
+<ol>
+<li>依赖less-loader和less模块包 </li>
+<li>转换css后还需要css-loader和style-loader的处理</li>
+</ol>
+<h3 id="打包图片"><a href="#打包图片" class="headerlink" title="打包图片"></a>打包图片</h3><p>webpack5, 使用asset module技术实现字体文件和图片文件处理, 无需配置额外loader</p>
+<ul>
+<li>(document)[<a target="_blank" rel="noopener" href="https://webpack.docschina.org/guides/asset-modules/">资源模块 | webpack 中文文档 (docschina.org)</a>]</li>
+<li>以前用url-loader和file-loader来处理 现在webpack.config.js – 针对图片文件设置type: “assets“<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`diff</span></span><br><span class="line"><span class="string">module: {</span></span><br><span class="line"><span class="string">  rules: [</span></span><br><span class="line"><span class="string">    {</span></span><br><span class="line"><span class="string">      test: /\.png/,</span></span><br><span class="line"><span class="string">      type: 'assets' </span></span><br><span class="line"><span class="string">    }</span></span><br><span class="line"><span class="string">   ]</span></span><br><span class="line"><span class="string">},</span></span><br></pre></td></tr></tbody></table></figure>
+小于8KB文件, 文件转base64打包在js中, 大于8KB, 文件自动命名输出到dist下</li>
+</ul>
+<h5 id="webpack加载文件优缺点"><a href="#webpack加载文件优缺点" class="headerlink" title="webpack加载文件优缺点"></a>webpack加载文件优缺点</h5><p>图片翻译成了base64, 放到了js文件中 </p>
+<ul>
+<li>好处: 浏览器不用发请求了，直接可以读取, 速度快 </li>
+<li>坏处: 图片太大，再转<code>base64</code>就会让图片的体积增大 30% 左右, 得不偿失</li>
+</ul>
+<h3 id="处理字体图标"><a href="#处理字体图标" class="headerlink" title="处理字体图标"></a>处理字体图标</h3><p>在webpack.configjs的rules里针对字体图标文件类型 设置asset/resource, 直接输出到dist下</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">module</span>: {</span><br><span class="line">   <span class="attr">rules</span>: [</span><br><span class="line">   {</span><br><span class="line">     <span class="attr">test</span>: <span class="regexp">/\.(eot|svg|ttf|woff|woff2)$/</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">'asset/resource'</span>,</span><br><span class="line">	    <span class="attr">generator</span>:{</span><br><span class="line">			<span class="attr">filename</span>: <span class="string">'font/[name].[hash][ext]'</span></span><br><span class="line">		}</span><br><span class="line">     }</span><br><span class="line">  ]</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="对js进行语法降级"><a href="#对js进行语法降级" class="headerlink" title="对js进行语法降级"></a>对js进行语法降级</h3><p>babel官网: <a target="_blank" rel="noopener" href="https://www.babeljs.cn/">https://www.babeljs.cn/</a><br>babel-loader文档: <a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/babel-loader/">https://webpack.docschina.org/loaders/babel-loader/</a></p>
+<p>babel: 一个javascript编译器, 把高版本js语法降级处理输出兼容的低版本语法；<br>babel-loader: 可以让webpack转译打包的js代码</p>
+<h3 id="webpack开发服务器"><a href="#webpack开发服务器" class="headerlink" title="webpack开发服务器"></a>webpack开发服务器</h3><p>webpack开发服务器, 把代码运行在内存中, 自动更新, 实时返回给浏览器显示</p>
+<p>为什么要使用webpack开发服务器呢? </p>
+<ol>
+<li>打包在内存中, 速度快 </li>
+<li>自动更新打包变化的代码, 实时返回给浏览器显示</li>
+</ol>
+<h4 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h4><p>webpack-dev-server文档: <a target="_blank" rel="noopener" href="https://webpack.docschina.org/configuration/dev-server/">https://webpack.docschina.org/configuration/dev-server/</a></p>
+<ol>
+<li>下载</li>
+<li>package.json里配置自定义命令<code>"serve":"webpack serve"</code></li>
+<li>启动服务器<code>yarn serve</code></li>
+<li>改变端口号<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>={</span><br><span class="line">	devServer :{</span><br><span class="line">		<span class="attr">port</span>:<span class="number">3000</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="bugFix"><a href="#bugFix" class="headerlink" title="bugFix"></a>bugFix</h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The <span class="string">'mode'</span> option has not been <span class="built_in">set</span>, webpack will fallback to <span class="string">'production'</span> <span class="keyword">for</span> this value.</span><br><span class="line">Set <span class="string">'mode'</span> option to <span class="string">'development'</span> or <span class="string">'production'</span> to <span class="built_in">enable</span> defaults <span class="keyword">for</span> each environment.</span><br><span class="line">You can also <span class="built_in">set</span> it to <span class="string">'none'</span> to <span class="built_in">disable</span> any default behavior. Learn more: https://webpack.js.org/configuration/mode/</span><br></pre></td></tr></tbody></table></figure>
+<p>在package.json里配置：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"scripts"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="attr">"dev"</span><span class="punctuation">:</span> <span class="string">"webpack --mode development"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="attr">"build"</span><span class="punctuation">:</span> <span class="string">"webpack --mode production"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>在webpack.config.cjs里配置：</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = {</span><br><span class="line">	<span class="attr">mode</span>: <span class="string">"development"</span>,</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>遇到报错：</p>
+<ul>
+<li><code> The Less implementation "undefined" not found</code>是less-loader版本高，webpack版本低。<br>解决办法是，下载低版本的less-loader</li>
+</ul>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ERROR <span class="keyword">in</span> ./src/css/style.css 1:3</span><br><span class="line">Module parse failed: Unexpected token (1:3)</span><br><span class="line">You may need an appropriate loader to handle this file <span class="built_in">type</span>, currently no loaders are configured to process this file. See https://webpack.js.org/concepts<span class="comment">#loaders</span></span><br><span class="line">&gt; h1 {</span><br><span class="line">|     color: red;</span><br><span class="line">| }</span><br><span class="line"> @ ./src/main.js 7:0-24</span><br><span class="line"></span><br><span class="line">webpack 5.80.0 compiled with 1 error and 1 warning <span class="keyword">in</span> 960 ms</span><br><span class="line">error Command failed with <span class="built_in">exit</span> code 1.</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>是因为对一个文件同时引入了less和css文件，样式冲突了。只引用一个样式文件即可。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Alicia 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Alicia 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa-solid fa-tag"></i> 笔记</a>
+              <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag"><i class="fa-solid fa-tag"></i> 工具使用</a>
+              <a href="/tags/webpack/" rel="tag"><i class="fa-solid fa-tag"></i> webpack</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/22/ES6%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="prev" title="ES6模块化与异步编程基础">
+                  <i class="fa fa-chevron-left"></i> ES6模块化与异步编程基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/01/%E6%97%A5%E8%AF%AD%E4%BA%94%E5%8D%81%E9%9F%B3%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/" rel="next" title="日语五十音一键入门">
+                  日语五十音一键入门 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alicia</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">55k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:05</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -2436,4 +2436,206 @@ sum_naturals ( 10 ) Expecting: 55 ok Trying: sum_naturals ( 100 ) Expecting: 505
         <tag>ES6</tag>
       </tags>
   </entry>
+  <entry>
+    <title>webpack一键入门</title>
+    <url>/2023/05/01/webpack%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">npm i yarn -g</span><br><span class="line">yarn init</span><br><span class="line">yarn add webpack webpack-cli -D</span><br></pre></td></tr></tbody></table></figure>
+<p>配置script</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"scripts"</span><span class="punctuation">:</span><span class="punctuation">{</span></span><br><span class="line">	<span class="attr">"build"</span><span class="punctuation">:</span><span class="string">"webpack"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h2><ul>
+<li>新建文件夹folder， folder/src</li>
+<li>新建文件src/index.js</li>
+<li>新建文件src/add/add.js</li>
+<li>运行命令<code>yarn build</code>生成foler/dist/main.js</li>
+</ul>
+<h2 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h2><h3 id="更改webpack的出口和入口"><a href="#更改webpack的出口和入口" class="headerlink" title="更改webpack的出口和入口"></a>更改webpack的出口和入口</h3><ul>
+<li>[配置文档](<a href="https://webpack.docschina.org/concepts/#entry">概念 | webpack 中文文档 (docschina.org)</a>)<ul>
+<li>新建webpack.config.js（如果更改了package.json，在里面添加了<code>"type":"module"</code>则需要把后缀名改为cjs</li>
+<li>在上述文件里<ul>
+<li>通过entry设置文件入口</li>
+<li>通过output设置出口，文件名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所有打包资源都要跟入口产生直接的或者间接的引用关系</li>
+</ul>
+<h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><ul>
+<li>(document)[<a href="https://webpack.docschina.org/plugins/html-webpack-plugin/">HtmlWebpackPlugin | webpack 中文文档 (docschina.org)</a>]</li>
+<li>添加配置<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line">javascript</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = {</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">'index.js'</span>,</span><br><span class="line">  <span class="attr">output</span>: {</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">'index_bundle.js'</span>,</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>({</span><br><span class="line">	  <span class="attr">template</span>: <span class="string">'./public/index.html'</span> <span class="comment">// 入口html文件地址</span></span><br><span class="line">  })],</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="加载器"><a href="#加载器" class="headerlink" title="加载器"></a>加载器</h3><h4 id="打包css文件"><a href="#打包css文件" class="headerlink" title="打包css文件"></a>打包css文件</h4><ul>
+<li><a href="https://webpack.docschina.org/loaders/css-loader/">css-loader | webpack 中文文档 (docschina.org)</a></li>
+<li><a href="https://webpack.docschina.org/loaders/style-loader/">style-loader | webpack 中文文档 (docschina.org)</a></li>
+<li>css代码被打包进js文件中</li>
+<li>style-loader会把css代码插入到head下style标签内</li>
+</ul>
+<h4 id="打包less文件"><a href="#打包less文件" class="headerlink" title="打包less文件"></a>打包less文件</h4><p><a href="https://webpack.docschina.org/loaders/less-loader/">less-loader | webpack 中文文档 (docschina.org)</a>可以把less编译为css文件</p>
+<ul>
+<li>新建src/less/index.less – 设置li字体大小</li>
+<li>把index.less引入到入口处</li>
+<li>下载加载器来处理less文件、</li>
+<li>webpack.config.js针对less配置</li>
+</ul>
+<p>webpack如何支持less打包? 需要注意什么? </p>
+<ol>
+<li>依赖less-loader和less模块包 </li>
+<li>转换css后还需要css-loader和style-loader的处理</li>
+</ol>
+<h3 id="打包图片"><a href="#打包图片" class="headerlink" title="打包图片"></a>打包图片</h3><p>webpack5, 使用asset module技术实现字体文件和图片文件处理, 无需配置额外loader</p>
+<ul>
+<li>(document)[<a href="https://webpack.docschina.org/guides/asset-modules/">资源模块 | webpack 中文文档 (docschina.org)</a>]</li>
+<li>以前用url-loader和file-loader来处理 现在webpack.config.js – 针对图片文件设置type: “assets“<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`diff</span></span><br><span class="line"><span class="string">module: {</span></span><br><span class="line"><span class="string">  rules: [</span></span><br><span class="line"><span class="string">    {</span></span><br><span class="line"><span class="string">      test: /\.png/,</span></span><br><span class="line"><span class="string">      type: 'assets' </span></span><br><span class="line"><span class="string">    }</span></span><br><span class="line"><span class="string">   ]</span></span><br><span class="line"><span class="string">},</span></span><br></pre></td></tr></tbody></table></figure>
+小于8KB文件, 文件转base64打包在js中, 大于8KB, 文件自动命名输出到dist下</li>
+</ul>
+<h5 id="webpack加载文件优缺点"><a href="#webpack加载文件优缺点" class="headerlink" title="webpack加载文件优缺点"></a>webpack加载文件优缺点</h5><p>图片翻译成了base64, 放到了js文件中 </p>
+<ul>
+<li>好处: 浏览器不用发请求了，直接可以读取, 速度快 </li>
+<li>坏处: 图片太大，再转<code>base64</code>就会让图片的体积增大 30% 左右, 得不偿失</li>
+</ul>
+<h3 id="处理字体图标"><a href="#处理字体图标" class="headerlink" title="处理字体图标"></a>处理字体图标</h3><p>在webpack.configjs的rules里针对字体图标文件类型 设置asset/resource, 直接输出到dist下</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">module</span>: {</span><br><span class="line">   <span class="attr">rules</span>: [</span><br><span class="line">   {</span><br><span class="line">     <span class="attr">test</span>: <span class="regexp">/\.(eot|svg|ttf|woff|woff2)$/</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">'asset/resource'</span>,</span><br><span class="line">	    <span class="attr">generator</span>:{</span><br><span class="line">			<span class="attr">filename</span>: <span class="string">'font/[name].[hash][ext]'</span></span><br><span class="line">		}</span><br><span class="line">     }</span><br><span class="line">  ]</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="对js进行语法降级"><a href="#对js进行语法降级" class="headerlink" title="对js进行语法降级"></a>对js进行语法降级</h3><p>babel官网: <a href="https://www.babeljs.cn/">https://www.babeljs.cn/</a><br>babel-loader文档: <a href="https://webpack.docschina.org/loaders/babel-loader/">https://webpack.docschina.org/loaders/babel-loader/</a></p>
+<p>babel: 一个javascript编译器, 把高版本js语法降级处理输出兼容的低版本语法；<br>babel-loader: 可以让webpack转译打包的js代码</p>
+<h3 id="webpack开发服务器"><a href="#webpack开发服务器" class="headerlink" title="webpack开发服务器"></a>webpack开发服务器</h3><p>webpack开发服务器, 把代码运行在内存中, 自动更新, 实时返回给浏览器显示</p>
+<p>为什么要使用webpack开发服务器呢? </p>
+<ol>
+<li>打包在内存中, 速度快 </li>
+<li>自动更新打包变化的代码, 实时返回给浏览器显示</li>
+</ol>
+<h4 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h4><p>webpack-dev-server文档: <a href="https://webpack.docschina.org/configuration/dev-server/">https://webpack.docschina.org/configuration/dev-server/</a></p>
+<ol>
+<li>下载</li>
+<li>package.json里配置自定义命令<code>"serve":"webpack serve"</code></li>
+<li>启动服务器<code>yarn serve</code></li>
+<li>改变端口号<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>={</span><br><span class="line">	devServer :{</span><br><span class="line">		<span class="attr">port</span>:<span class="number">3000</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="bugFix"><a href="#bugFix" class="headerlink" title="bugFix"></a>bugFix</h2><figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">The <span class="string">'mode'</span> option has not been <span class="built_in">set</span>, webpack will fallback to <span class="string">'production'</span> <span class="keyword">for</span> this value.</span><br><span class="line">Set <span class="string">'mode'</span> option to <span class="string">'development'</span> or <span class="string">'production'</span> to <span class="built_in">enable</span> defaults <span class="keyword">for</span> each environment.</span><br><span class="line">You can also <span class="built_in">set</span> it to <span class="string">'none'</span> to <span class="built_in">disable</span> any default behavior. Learn more: https://webpack.js.org/configuration/mode/</span><br></pre></td></tr></tbody></table></figure>
+<p>在package.json里配置：</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"scripts"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="attr">"dev"</span><span class="punctuation">:</span> <span class="string">"webpack --mode development"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="attr">"build"</span><span class="punctuation">:</span> <span class="string">"webpack --mode production"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; <span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>在webpack.config.cjs里配置：</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = {</span><br><span class="line">	<span class="attr">mode</span>: <span class="string">"development"</span>,</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>遇到报错：</p>
+<ul>
+<li><code> The Less implementation "undefined" not found</code>是less-loader版本高，webpack版本低。<br>解决办法是，下载低版本的less-loader</li>
+</ul>
+<figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">ERROR <span class="keyword">in</span> ./src/css/style.css 1:3</span><br><span class="line">Module parse failed: Unexpected token (1:3)</span><br><span class="line">You may need an appropriate loader to handle this file <span class="built_in">type</span>, currently no loaders are configured to process this file. See https://webpack.js.org/concepts<span class="comment">#loaders</span></span><br><span class="line">&gt; h1 {</span><br><span class="line">|     color: red;</span><br><span class="line">| }</span><br><span class="line"> @ ./src/main.js 7:0-24</span><br><span class="line"></span><br><span class="line">webpack 5.80.0 compiled with 1 error and 1 warning <span class="keyword">in</span> 960 ms</span><br><span class="line">error Command failed with <span class="built_in">exit</span> code 1.</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>是因为对一个文件同时引入了less和css文件，样式冲突了。只引用一个样式文件即可。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>工具使用</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>日语五十音一键入门</title>
+    <url>/2023/05/01/%E6%97%A5%E8%AF%AD%E4%BA%94%E5%8D%81%E9%9F%B3%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="あいうえお"><a href="#あいうえお" class="headerlink" title="あいうえお"></a>あいうえお</h2><p>作用：</p>
+<ul>
+<li>注音</li>
+<li>构词</li>
+</ul>
+<p>あい 爱</p>
+<h2 id="さしすせそ"><a href="#さしすせそ" class="headerlink" title="さしすせそ"></a>さしすせそ</h2><p>せかい、世界<br>おさき、酒<br>おいしい、美味的<br>うそ、假话<br>いちご、いちえ、一期一会</p>
+<p>すごい、好厉害</p>
+<h2 id="たちつてと"><a href="#たちつてと" class="headerlink" title="たちつてと"></a>たちつてと</h2><p>うた、歌<br>ちしき、知识<br>ちかてつ、地铁<br>すてき、绝妙的<br>いと、线</p>
+<p>たすかて、help！救命！</p>
+<h2 id="なにぬねの"><a href="#なにぬねの" class="headerlink" title="なにぬねの"></a>なにぬねの</h2><p>おさきなな、尾崎娜娜<br>にこ、笑眯眯的<br>なに、什么<br>いぬ、狗<br>ねこ、猫<br>ぬの、布</p>
+<p>なるほど、原来如此</p>
+<h2 id="はひふへほ"><a href="#はひふへほ" class="headerlink" title="はひふへほ"></a>はひふへほ</h2><p>こくはく、告白<br>ひと、人<br>ふく、服装<br>へた、不擅长某事<br>ほほ、脸颊</p>
+<p>はやく、快点</p>
+<h2 id="まみむめも"><a href="#まみむめも" class="headerlink" title="まみむめも"></a>まみむめも</h2><p>くま、熊<br>うみ、海<br>むかし、过去<br>あめ、雨<br>きもち、情感</p>
+<p>うらやましい、好羡慕啊</p>
+<h2 id="かきくえこ"><a href="#かきくえこ" class="headerlink" title="かきくえこ"></a>かきくえこ</h2><p>かお、脸<br>かく、书写<br>きおく、记忆<br>いけ、池塘<br>こえ、声音</p>
+<p>けち、小气！</p>
+<h2 id="やゆよ"><a href="#やゆよ" class="headerlink" title="やゆよ"></a>やゆよ</h2><p>へや、屋<br>やくそく、约定<br>ゆめ、梦<br>ゆき、雪<br>よめ、老婆</p>
+<p>やめて、住手，停下。</p>
+<h2 id="らりるれろ"><a href="#らりるれろ" class="headerlink" title="らりるれろ"></a>らりるれろ</h2><p>さくら、樱花<br>くすり、药<br>はる、春天<br>れきし、历史<br>ろく、六</p>
+<p>がんばれ、加油！</p>
+<h2 id="わをん"><a href="#わをん" class="headerlink" title="わをん"></a>わをん</h2><p>わたし，我<br>わくわく、表示激动的心情<br>おんせん、温泉<br>てしき、天气<br>みんな、大家</p>
+<p>きをつけて、小心哦</p>
+<h2 id="浊音"><a href="#浊音" class="headerlink" title="浊音"></a>浊音</h2><p>がぎぐげご<br>ざじずぜぞ<br>だぢづでど<br>ばびぶべぼ<br>じandぢ the same tone<br>ずandづ the same tone</p>
+<h2 id="鼻浊音"><a href="#鼻浊音" class="headerlink" title="鼻浊音"></a>鼻浊音</h2><p>がぎぐげご用于词中词尾可读鼻浊音<br>年轻人很少使用鼻浊音</p>
+<h2 id="半浊音"><a href="#半浊音" class="headerlink" title="半浊音"></a>半浊音</h2><p>ぱぴぷぺぽ<br>かきくけこ<br>たちつてと<br>以上三行假名位于词中词尾时不发送气音</p>
+<p>如何分辨不送气音，浊音？</p>
+<ul>
+<li>背单词</li>
+<li>学语法</li>
+</ul>
+<p>だれ、谁<br>てがみ、信<br>ざんねん、残念，遗憾，可惜<br>てんふら、天妇罗（油炸食品）</p>
+<p>ただいま、おすえり。我回来了，你回来啦。</p>
+<h2 id="拗音"><a href="#拗音" class="headerlink" title="拗音"></a>拗音</h2><p>除了い之外的い段假名和复元音やゆよ拼合起来的音节</p>
+<ul>
+<li>除了い之外的い段假名：<ul>
+<li>きしちにひみりぎじびぴ、</li>
+</ul>
+</li>
+</ul>
+<p>しゅみ，趣味<br>かのじょ，她，女朋友<br>かいしゃ，会社，公司<br>おもちゃ、玩具</p>
+<p>じゃあね，再见</p>
+<h2 id="声调"><a href="#声调" class="headerlink" title="声调"></a>声调</h2><ul>
+<li>数字标记法<ul>
+<li>一个假名是一拍</li>
+<li>0 第一个假名低音，后面的假名高音</li>
+<li>1 第一个假名高音，后面的假名低音</li>
+<li>2 第一个假名低音，第二个假名高音，第三个假名低音</li>
+<li>3 第一个假名低音，第二个，第三个假名高音，第四个假名低音</li>
+<li>4 第一个假名低音，第二个，第三个，第四个假名高音，第五个假名低音</li>
+</ul>
+</li>
+</ul>
+<h2 id="长音"><a href="#长音" class="headerlink" title="长音"></a>长音</h2><ul>
+<li><p>音节分为长音节，短音节，音节长短可改变意思。</p>
+<ul>
+<li>例如啤酒和大厦</li>
+</ul>
+</li>
+<li><p>长音：把短音拖长一倍</p>
+</li>
+<li><p>浊音，半浊音，拗音都有长音</p>
+</li>
+</ul>
+<p>长音写法：</p>
+<ul>
+<li>あいう列后加あいう。</li>
+<li>え加い（默认）え加え（少见）</li>
+<li>お加う（默认）お加お（少见）</li>
+<li>片假名加ー<ul>
+<li>可通过减号打出片假名的长音符号</li>
+</ul>
+</li>
+</ul>
+<h2 id="促音"><a href="#促音" class="headerlink" title="促音"></a>促音</h2><ul>
+<li>符号：っ<ul>
+<li>双打促音后的辅音即可输入促音符号</li>
+</ul>
+</li>
+<li>停顿一个假名的拍子，然后读促音之后的单词</li>
+</ul>
+<p>きって ，切手<br>インターネット，Internet</p>
+<p>おかあさん、妈妈<br>べんきょう、学习<br>すうがく、数学<br>きっさてん、咖啡店</p>
+<p>ちょっとまって、稍等一下</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>日语发音短平快</li>
+<li>要输入小一号的假名，只需要日语罗马音前输入l或者x即可</li>
+</ul>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>日语</tag>
+        <tag>五十音图</tag>
+      </tags>
+  </entry>
 </search>
