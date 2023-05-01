@@ -2641,4 +2641,107 @@ sum_naturals ( 10 ) Expecting: 55 ok Trying: sum_naturals ( 100 ) Expecting: 505
         <tag>五十音图</tag>
       </tags>
   </entry>
+  <entry>
+    <title>vue3基础一键入门</title>
+    <url>/2023/05/02/vue3%E5%9F%BA%E7%A1%80%E4%B8%80%E9%94%AE%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>迫不得已使用yarn，因为使用npm总是有网络超时的问题。以下是使用yarn创建项目的步骤：<br>不得不说vite是真的好用。<br>顺便，再次强调100遍数都不为过的——遇到问题用Google搜索，一定要屏蔽csdn！</p>
+<span id="more"></span>
+<figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">yarn add vue</span><br><span class="line"></span><br><span class="line">yarn create vite my-vite-project</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> my-vite-project</span><br><span class="line">yarn </span><br><span class="line">yarn dev</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">&nbsp; &nbsp; export default{</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; data(){</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return {</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; msg:'hello, world',</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url:'https://www.baidu.com/',</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; count:0</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; },</span><br><span class="line"></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; methods:{</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; addOne(){</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.count += 1</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; changeWorld(){</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let arr = this.msg.split('')</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.msg=arr.reverse().join('')</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; }</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="简单指令大全"><a href="#简单指令大全" class="headerlink" title="简单指令大全"></a>简单指令大全</h2><h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p> v-bind语法和简写  </p>
+<ul>
+<li>语法：v-bind:属性名=”vue变量” </li>
+<li>简写：:属性名=”vue变量”<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;a :href="url" @click="preventBaidu(1,$event)"&gt;preventDefault&lt;/a&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3></li>
+<li>语法：<ul>
+<li>v-on: 事件名称=”函数”</li>
+<li>简写：@事件名称=”函数”<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;a :href="url" @click="btn"&gt;zuzhibaidumorentiaozhuan&lt;/a&gt;</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="v-on获取事件对象"><a href="#v-on获取事件对象" class="headerlink" title="v-on获取事件对象"></a>v-on获取事件对象</h3><ul>
+<li>无形参<ul>
+<li>@事件名称=”函数”</li>
+<li>methods里的函数：<code>func(e){{e.preventDefault()}</code></li>
+</ul>
+</li>
+<li>有形参<ul>
+<li><code>@事件名称="函数(形参，$event)"</code></li>
+<li>methods里的函数：<code>func(形参，e){e.preventDefault()}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="阻止默认行为"><a href="#阻止默认行为" class="headerlink" title="阻止默认行为"></a>阻止默认行为</h3><ul>
+<li>事件.prevent：阻止默认行为</li>
+<li>事件.stop：阻止冒泡</li>
+<li>事件.once：只执行一次该事件<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&nbsp;&lt;button @click.once="addN(20)"&gt;addN&lt;/button&gt;</span><br><span class="line">&nbsp;&lt;button @click.stop="son"&gt;sonn&lt;/button&gt;</span><br><span class="line">&nbsp;&lt;a :href="url" @click.prevent="btn"&gt;prevent baidu&lt;/a&gt;</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="获取按键修饰符"><a href="#获取按键修饰符" class="headerlink" title="获取按键修饰符"></a>获取按键修饰符</h3><ul>
+<li><code>@keydown.enter = "fn"</code>按下enter执行fn</li>
+<li><code>@keydown.esc = "fn"</code>按下esc执行fn</li>
+</ul>
+<h3 id="练习翻转世界"><a href="#练习翻转世界" class="headerlink" title="练习翻转世界"></a>练习翻转世界</h3><p>需求：点击按钮 - 把文字取反显示 - 再点击取反显示(回来了) 提示: 点击事件里, 把Vue变量值挨个字母取反赋予回来 (提示跟数组有关系)</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div @click="father"&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;h1&gt;{{msg}}&lt;/h1&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;button @click="changeWorld"&gt;change world&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">&nbsp; &nbsp; export default{</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; data(){</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return {</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; msg:'hello, world',</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; },</span><br><span class="line"></span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; methods:{</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; changeWorld(){</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let arr = this.msg.split('')</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.msg = arr.reverse().join('')</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br><span class="line">&nbsp; &nbsp; }</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>用处：将表单标签和值双向绑定<br>语法：<code>v-model="vue变量"</code><br>注意：只能用在表单标签上</p>
+<h4 id="下拉菜单v-model写哪里？"><a href="#下拉菜单v-model写哪里？" class="headerlink" title="下拉菜单v-model写哪里？"></a>下拉菜单v-model写哪里？</h4><p>写在select标签上<br>value值写在option上</p>
+<h4 id="复选框v-model注意事项"><a href="#复选框v-model注意事项" class="headerlink" title="复选框v-model注意事项"></a>复选框v-model注意事项</h4><ul>
+<li>v-model的变量是非数组，关联的是check属性</li>
+<li>v-model的变量是数组，关联的是value属性</li>
+<li>所以要把复选框的变量写成数组</li>
+</ul>
+<h4 id="单选框v-model注意事项"><a href="#单选框v-model注意事项" class="headerlink" title="单选框v-model注意事项"></a>单选框v-model注意事项</h4><ul>
+<li>注意要写name，name值等于分类，value值是选项值</li>
+</ul>
+<h4 id="vue变量初始值会不会影响表单的默认状态"><a href="#vue变量初始值会不会影响表单的默认状态" class="headerlink" title="vue变量初始值会不会影响表单的默认状态?"></a>vue变量初始值会不会影响表单的默认状态?</h4><ul>
+<li>会，因为数据是双向绑定的</li>
+</ul>
+<h3 id="v-model的修饰符"><a href="#v-model的修饰符" class="headerlink" title="v-model的修饰符"></a>v-model的修饰符</h3><ul>
+<li><code>v-model.number</code>以<code>parseFloat</code>把值转换为数值型</li>
+<li><code>v-model.trim</code>清除字符串两端的空格</li>
+<li><code>v-model.lazy</code>当发生更改且失去焦点时才触发事件</li>
+</ul>
+<h3 id="v-text和v-html"><a href="#v-text和v-html" class="headerlink" title="v-text和v-html"></a>v-text和v-html</h3><ul>
+<li>语法：<ul>
+<li><code>v-text = "vue变量"</code>——把值当成普通字符串显示</li>
+<li><code>v-html = "vue变量"</code>——把值解析成标签再显示</li>
+</ul>
+</li>
+<li>二者会覆盖插值表达式，在vue3中，如果写了二者再写插值表达式会报错</li>
+</ul>
+<h3 id="v-show-和-v-if"><a href="#v-show-和-v-if" class="headerlink" title="v-show 和 v-if"></a>v-show 和 v-if</h3><ul>
+<li>语法：<ul>
+<li><code>v-show="vue变量(true/false)"</code>——采用<code>display:none</code>对标签进行显示隐藏</li>
+<li><code>v-if="vue变量(true/false)"</code>——采用移除dom标签的方式对标签进行显示隐藏</li>
+</ul>
+</li>
+<li><code>v-if</code>可配合<code>v-else-if</code>和<code>v-else</code>使用<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;p v-if="age&lt;18"&gt;未成年&lt;/p&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;p v-else-if="age&lt;50 &amp;&amp; age &gt;= 18"&gt;成年了&lt;/p&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;p v-else&gt;中年了&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><ul>
+<li>作用：列表渲染, 按照所在标签结构, 数据数量, 循环生成列表</li>
+<li>语法<ul>
+<li><code>v-for="(值，索引) in 目标结构"</code></li>
+<li><code>v-for= 值 in 目标结构</code></li>
+</ul>
+</li>
+<li>目标结构 <ul>
+<li>数组</li>
+<li>对象</li>
+<li>列表</li>
+<li>数字<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">		&lt;!--遍历数组--&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;ul&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li v-for="(item,index) in arr"&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ item }} ---- {{ index }}</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!--遍历列表里的对象--&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;ul&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li v-for="item in stuArr"&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ item.name }}--{{ item.sex }}--{{ item.hobby }}</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!--遍历对象--&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;ul &gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li v-for="(value,key) in tObj"&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ key }}: {{ value }}</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!--遍历数字--&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;ul&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;li v-for="index in count"&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ index }}</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/li&gt;</span><br><span class="line">&nbsp; &nbsp; &nbsp; &nbsp; &lt;/ul&gt;</span><br><span class="line">&nbsp; &nbsp; &lt;/div&gt;</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>vue3</tag>
+        <tag>前端框架</tag>
+      </tags>
+  </entry>
 </search>
