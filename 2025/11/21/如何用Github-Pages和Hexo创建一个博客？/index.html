@@ -19,24 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="节点人生">
-<meta property="og:url" content="https://sajlle.github.io/index.html">
+    <meta name="description" content="登陆Git用Token当密码 打开Github网页，登陆自己账号sajlle 右上角头像 –&gt; Settings 左侧拉到最下方 –&gt; Developer settings 选Personal access tokens 点击Generate new token Note随便写，例如hexo-blog之类 Expiration：可以选90天 Scopes选：repo   点生成 复制这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何用Github Pages和Hexo创建一个博客？">
+<meta property="og:url" content="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/index.html">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="人生不是一条平滑直线，而是一串离散的节点。">
+<meta property="og:description" content="登陆Git用Token当密码 打开Github网页，登陆自己账号sajlle 右上角头像 –&gt; Settings 左侧拉到最下方 –&gt; Developer settings 选Personal access tokens 点击Generate new token Note随便写，例如hexo-blog之类 Expiration：可以选90天 Scopes选：repo   点生成 复制这">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-21T12:29:31.000Z">
+<meta property="article:modified_time" content="2025-11-21T13:11:11.404Z">
 <meta property="article:author" content="之瑞">
+<meta property="article:tag" content="Github Actions">
+<meta property="article:tag" content="Github Pages">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="博客搭建">
+<meta property="article:tag" content="自动部署">
+<meta property="article:tag" content="部署流程">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://sajlle.github.io/">
+<link rel="canonical" href="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/","path":"2025/11/21/如何用Github-Pages和Hexo创建一个博客？/","title":"如何用Github Pages和Hexo创建一个博客？"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>节点人生</title>
+<title>如何用Github Pages和Hexo创建一个博客？ | 节点人生</title>
   
 
 
@@ -86,7 +94,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">节点人生</h1>
+      <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
@@ -113,7 +121,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -126,6 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E9%99%86Git"><span class="nav-number">1.</span> <span class="nav-text">登陆Git</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8Token%E5%BD%93%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">用Token当密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAGithub%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">新建Github仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">保存一键脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">下载配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%86%E6%94%AF"><span class="nav-number">4.</span> <span class="nav-text">推送分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8Hexo%E9%83%A8%E7%BD%B2%E5%88%B0Github-Pages"><span class="nav-number">5.</span> <span class="nav-text">用Hexo部署到Github Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Actions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2"><span class="nav-number">6.</span> <span class="nav-text">Github Actions自动部署博客</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -168,16 +177,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -191,13 +201,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="name" content="如何用Github Pages和Hexo创建一个博客？ | 节点人生">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/" class="post-title-link" itemprop="url">如何用Github Pages和Hexo创建一个博客？</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          如何用Github Pages和Hexo创建一个博客？
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -233,8 +243,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="登陆Git"><a href="#登陆Git" class="headerlink" title="登陆Git"></a>登陆Git</h3><h4 id="用Token当密码"><a href="#用Token当密码" class="headerlink" title="用Token当密码"></a>用Token当密码</h4><ol>
+    <div class="post-body" itemprop="articleBody"><h3 id="登陆Git"><a href="#登陆Git" class="headerlink" title="登陆Git"></a>登陆Git</h3><h4 id="用Token当密码"><a href="#用Token当密码" class="headerlink" title="用Token当密码"></a>用Token当密码</h4><ol>
 <li>打开Github网页，登陆自己账号sajlle</li>
 <li>右上角头像 –&gt; Settings</li>
 <li>左侧拉到最下方 –&gt; Developer settings</li>
@@ -349,7 +358,6 @@
 <p>然后去 GitHub 仓库页面：<br>点 Actions 标签<br>能看到 Deploy Hexo to GitHub Pages workflow 在跑<br>等它变成 ✅ 绿色成功</p>
 <p>成功后：仓库列表里会多一个 gh-pages 分支（不用你手动建）<br>GitHub Pages 自动从 gh-pages 读取</p>
 
-      
     </div>
 
     
@@ -357,162 +365,30 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Github-Pages/" rel="tag"># Github Pages</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># 博客搭建</a>
+              <a href="/tags/%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/" rel="tag"># 部署流程</a>
+              <a href="/tags/Github-Actions/" rel="tag"># Github Actions</a>
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" rel="tag"># 自动部署</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/21/%E3%80%8C%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F%C2%B7%E7%AC%AC%E4%B8%80%E7%AF%87%E3%80%8D/" rel="prev" title="节点人生·第一篇">
+                  <i class="fa fa-angle-left"></i> 节点人生·第一篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/11/21/%E3%80%8C%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F%C2%B7%E7%AC%AC%E4%B8%80%E7%AF%87%E3%80%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/21/%E3%80%8C%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F%C2%B7%E7%AC%AC%E4%B8%80%E7%AF%87%E3%80%8D/" class="post-title-link" itemprop="url">节点人生·第一篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-11-21 17:57:25 / 修改时间：18:45:12" itemprop="dateCreated datePublished" datetime="2025-11-21T17:57:25+08:00">2025-11-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>人生不是一条平滑的直线，而是一个个离散的‘节点’。 在 Input 和 Output 之间，我试图记录下每一次 Commit 的意义。 欢迎来到我的节点，这里没有 404，只有正在加载的真实生活。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/11/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/21/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-11-21 16:15:57" itemprop="dateCreated datePublished" datetime="2025-11-21T16:15:57+08:00">2025-11-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
