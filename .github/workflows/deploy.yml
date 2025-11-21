@@ -1,5 +1,8 @@
 name: Deploy Hexo to GitHub Pages
 
+permissions:
+  contents: write       #允许往仓库写（push gh-pages分支用)
+
 on:
   push:
     branches:
