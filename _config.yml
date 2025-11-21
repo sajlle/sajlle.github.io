@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 节点人生
+subtitle: '之瑞的节点人生与技术存档'
+description: '人生不是一条平滑直线，而是一串离散的节点。'
 keywords:
-author: John Doe
-language: en
+author: 之瑞
+language: zh-CN
 timezone: ''
 
 # URL
