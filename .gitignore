@@ -6,3 +6,8 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+
+source/uploads/raw/*
+!source/uploads/raw/.gitkeep
+.deploy_git/
+
