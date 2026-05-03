@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="关于事务的状态 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景： 一个se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术手记｜几个关于事务的思考">
+<meta property="og:url" content="https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="关于事务的状态 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景： 一个se">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-29T02:24:05.000Z">
+<meta property="article:modified_time" content="2026-03-29T03:37:43.824Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="ACID">
+<meta property="article:tag" content="事务">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/","path":"2026/03/29/技术手记｜几个关于事务的思考/","title":"技术手记｜几个关于事务的思考"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>技术手记｜几个关于事务的思考 | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">关于事务的状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA-%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">关于事务传播行为 + 事务的使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">关于事务的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.</span> <span class="nav-text">一些简单实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E9%80%BB%E8%BE%91"><span class="nav-number">5.</span> <span class="nav-text">项目中的使用逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BA%8B%E5%8A%A1%EF%BC%88REUQIRED%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">主事务（REUQIRED）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E4%BA%8B%E5%8A%A1%EF%BC%88REQUIRES-NEW%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">独立事务（REQUIRES_NEW）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E8%BF%9B%E5%85%A5%E4%BA%8B%E5%8A%A1"><span class="nav-number">5.3.</span> <span class="nav-text">不需要进入事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="nav-number">5.4.</span> <span class="nav-text">简单总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="技术手记｜几个关于事务的思考 | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          技术手记｜几个关于事务的思考
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-29 10:24:05 / 修改时间：11:37:43" itemprop="dateCreated datePublished" datetime="2026-03-29T10:24:05+08:00">2026-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="关于事务的状态"><a href="#关于事务的状态" class="headerlink" title="关于事务的状态"></a>关于事务的状态</h1><ol>
+<li>执行状态<ul>
+<li>ACTIVE：事务正在执行中，还没提交</li>
+<li>ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了</li>
+<li>COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了</li>
+</ul>
+</li>
+<li>事务传播行为<ul>
+<li>就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。</li>
+</ul>
+</li>
+</ol>
+<h1 id="关于事务传播行为-事务的使用场景"><a href="#关于事务传播行为-事务的使用场景" class="headerlink" title="关于事务传播行为 + 事务的使用场景"></a>关于事务传播行为 + 事务的使用场景</h1><ol>
+<li>REQUIRED:<ul>
+<li>有事务就加入，没事务就新建</li>
+<li>适用场景：<ul>
+<li>一个service下调用多个service子步骤</li>
+<li>这些子步骤必须作为一个整体提交或者回滚</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>closeTimeoutOrder()里一起改订单状态，预定状态，库存，用户次数等。</li>
+</ul>
+</li>
+<li>坑：如果内层REQUIRED方法把事务标记成了<code>rollback-only</code>，外层还想提交，就会报错<code>UnexpectedRollbackException</code></li>
+</ul>
+</li>
+<li>REQUIRES_NEW:<ul>
+<li>不管有没有事务，都新建一个事务</li>
+<li>适用场景：<ul>
+<li>需要独立提交或者回滚的操作</li>
+<li>例如：日志记录，审计等</li>
+<li>独立状态的留痕</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>saveMqExceptionLog()，记录日志的事务不受业务事务的影响</li>
+<li>savePaymentCallbackRawBody()，记录回调原始数据的事务不受业务事务的影响</li>
+<li>定时任务跑批失败时的明细记录</li>
+</ul>
+</li>
+<li>坑：多占一个数据库连接，高并发下，外层事务还绑着连接，内层又再拿一个，连接池小了之后，可能会耗尽或者卡死。</li>
+</ul>
+</li>
+<li>NESTED:<ul>
+<li>外层有事务，就在同一个事务里savepoint，内层失败可以回滚到savepoint，不影响外层事务，外层没有事务，就新建一个事务。</li>
+<li>开箱即用：<code>DataSourceTransactionManager</code>默认支持嵌套事务</li>
+<li>适用场景：<ul>
+<li>需要局部失败不拖死整体</li>
+<li>确认底层事务管理器支持savepoint</li>
+<li>例子：<ul>
+<li>不常见。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>坑：底层事务管理器不支持savepoint，就退化成REQUIRED了，内层失败了，整个事务都失败了。</li>
+</ul>
+</li>
+<li>SUPPORTS:<ul>
+<li>有事务就加入，没事务就不用事务</li>
+<li>适用场景：<ul>
+<li>查询类方法</li>
+<li>工具型读取逻辑</li>
+<li>不要求强事务语义，但如果上层已有事务，也愿意跟着走</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>loadVoucherConfig()</code></li>
+<li><code>queryReservationForDisplay()</code></li>
+</ul>
+</li>
+<li>注意：它不是只读事务的同义词，只是可跟可不跟，跟只读的区别是，只读里面还有个read-Only。</li>
+</ul>
+</li>
+<li>NOT_SUPPORTED:<ul>
+<li>外面有事务，先挂起，自己非事务运行。</li>
+<li>适用场景：<ul>
+<li>明确不想让某段代码被事务拖住</li>
+<li>大量纯查询，报表，非关键读取</li>
+<li>一些你不想继承上层锁范围&#x2F;事务时长的逻辑</li>
+</ul>
+</li>
+<li>例子<ul>
+<li>大批量报表查询</li>
+<li>纯展示性聚合查询</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MANDATORY:<ul>
+<li>外面必须有事务，没事务就抛异常</li>
+<li>适用场景：<ul>
+<li>某个方法只能作为更大事务的一部分存在</li>
+<li>想强调约束方，防止别人单独乱调</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>某个只能在「统一结算事务」里调用库存调整步骤</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NEVER:<ul>
+<li>外面有事务就抛异常，自己非事务运行</li>
+<li>适用场景：<ul>
+<li>明确不想让某段代码被事务拖住</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="关于事务的坑"><a href="#关于事务的坑" class="headerlink" title="关于事务的坑"></a>关于事务的坑</h1><ol>
+<li>同类内部调用，事务注解可能失效，因为Spring的事务是基于AOP实现的，只有通过代理对象调用的方法才会被事务管理器拦截到。如果在同一个类内部直接调用另一个带有事务注解的方法，这个调用不会经过代理对象，因此事务注解不会生效。</li>
+</ol>
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.saveLogError(); <span class="comment">// 以为 REQUIRES_NEW 生效，结果根本没生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<ul>
+<li>通过AOP代理对象调用方法，可以使用<code>AopContext.currentProxy()</code>获取当前代理对象，然后调用方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    ((YourServiceClass) AopContext.currentProxy()).saveLogError(); <span class="comment">// 通过代理对象调用，事务注解生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将需要事务的方法提取到另一个类中，通过Spring注入调用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogService</span> &#123;</span><br><span class="line">    <span class="meta">@Transactional(propagation = Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveLogError</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 记录日志的逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;       </span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourServiceClass</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService logService;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">        logService.saveLogError(); <span class="comment">// 通过注入的LogService调用，事务注解生效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>以为catch住异常就万事大吉</li>
+</ol>
+<ul>
+<li>事务默认只对RuntimeException及其子类进行回滚，如果catch住了异常，事务管理器就认为操作成功了，不会回滚。</li>
+<li>解决办法：</li>
+<li>在catch块里手动标记事务回滚，可以使用<code>TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</code>来标记当前事务为回滚状态。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 可能抛出异常的代码</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// 处理异常</span></span><br><span class="line">    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); <span class="comment">// 标记事务回滚</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>或者在@Transactional注解上指定回滚的异常类型，例如<code>@Transactional(rollbackFor = Exception.class)</code>，这样即使catch住了异常，事务也会回滚。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 可能抛出异常的代码        </span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 处理异常</span></span><br><span class="line">        <span class="comment">// 不需要手动标记事务回滚，因为rollbackFor已经指定了回滚</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="一些简单实践"><a href="#一些简单实践" class="headerlink" title="一些简单实践"></a>一些简单实践</h1><ol>
+<li>业务逻辑中，尽量让事务边界清晰，避免过长的事务，减少锁竞争和资源占用。</li>
+<li>对于需要独立提交的操作，使用REQUIRES_NEW，确保它们不受外层事务的影响。</li>
+<li>对于查询类方法，使用SUPPORTS，既可以在事务中执行，也可以在非事务中执行，灵活适应不同场景。</li>
+<li>注意事务传播行为的选择，确保它们符合业务需求，避免不必要的事务嵌套和资源浪费。</li>
+<li>定期检查和优化事务的使用，确保它们的性能和可靠性，避免潜在的死锁和性能问题。</li>
+</ol>
+<h1 id="项目中的使用逻辑"><a href="#项目中的使用逻辑" class="headerlink" title="项目中的使用逻辑"></a>项目中的使用逻辑</h1><h2 id="主事务（REUQIRED）"><a href="#主事务（REUQIRED）" class="headerlink" title="主事务（REUQIRED）"></a>主事务（<code>REUQIRED</code>）</h2><ul>
+<li>校验订单是否超时，状态是否关闭</li>
+<li>条件更新订单状态</li>
+<li>条件更新预定状态</li>
+<li>回滚库存</li>
+<li>回滚用户已抢购次数</li>
+<li>写一条关单成功明细<br>注意：这些步骤放在主事务里，可以确保它们作为一个整体提交或者回滚，如果其中任何一步失败了，整个事务都会回滚，保证了数据的一致性和完整性。</li>
+</ul>
+<h2 id="独立事务（REQUIRES-NEW）"><a href="#独立事务（REQUIRES-NEW）" class="headerlink" title="独立事务（REQUIRES_NEW）"></a>独立事务（<code>REQUIRES_NEW</code>）</h2><ul>
+<li>异常日志</li>
+<li>poision message&#x2F; 原始消息体</li>
+<li>审计失败明细</li>
+<li>定时任务失败记录<br>注意：这些步骤放到独立事务里，可以确保它们不受主事务的影响，无论主事务成功还是失败，这些日志和记录都能独立提交，保证了数据的完整性和可靠性。</li>
+</ul>
+<h2 id="不需要进入事务"><a href="#不需要进入事务" class="headerlink" title="不需要进入事务"></a>不需要进入事务</h2><ul>
+<li>查询候选超时订单列表</li>
+<li>打印日志</li>
+<li>组装返回对象</li>
+<li>非关键查询<br>注意：这些步骤不需要进入事务，可以避免不必要的事务开销，提高性能和响应速度，同时也减少了锁竞争和资源占用。</li>
+</ul>
+<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ul>
+<li>失败必须撤销主流程的步骤，放在主事务里</li>
+<li>失败不需要撤销主流程的步骤，放在独立事务里</li>
+<li>不需要事务的步骤，直接执行，不进入事务</li>
+</ul>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag"># 事务</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/ACID/" rel="tag"># ACID</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/25/%E5%AE%B6%E5%BA%AD%E6%9A%B4%E5%8A%9B%E5%86%B2%E7%AA%81%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%B2%B3%E5%8D%97%E5%91%A8%E5%8F%A3%E8%A5%BF%E5%8D%8E%E5%8E%BF%E9%80%8D%E9%81%A5%E9%95%87%E8%80%81%E5%AE%B6%E5%86%B2%E7%AA%81%E5%8D%87%E7%BA%A7%EF%BC%8C%E7%88%B6%E6%AF%8D%E5%A8%81%E8%83%81%E9%80%81%E6%88%91%E5%8E%BB%E7%B2%BE%E7%A5%9E%E7%97%85%E9%99%A2%EF%BC%8C%E4%B8%94%E6%9A%B4%E5%8A%9B%E9%98%BB%E6%8B%A6%E6%88%91%E5%A4%96%E5%87%BA/" rel="prev" title="家庭暴力冲突记录｜河南周口西华县逍遥镇老家冲突升级，父母威胁送我去精神病院，且暴力阻拦我外出">
+                  <i class="fa fa-angle-left"></i> 家庭暴力冲突记录｜河南周口西华县逍遥镇老家冲突升级，父母威胁送我去精神病院，且暴力阻拦我外出
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E5%8F%91%E7%8E%B0codex%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E6%90%9E%E9%94%99%E4%BA%86%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BF%BD%E7%84%B6%E6%9C%89%E7%82%B9%E5%AE%89%E6%85%B0%EF%BC%8CAI%E5%B9%B6%E9%9D%9E%E4%B8%87%E8%83%BD/" rel="next" title="日常记录｜当我发现codex改代码搞错变量名之后，我忽然有点安慰，AI并非万能">
+                  日常记录｜当我发现codex改代码搞错变量名之后，我忽然有点安慰，AI并非万能 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="好久没写随笔了，摘几段最近写的随笔 关于AI的创意写作创意写作本身不仅仅关乎文字游戏，更关乎意图识别，知道用户要什么，现象建模，知道故事背后的隐喻，风格匹配，知道用什么风格达到用户的目标。创意写作完全不是文字游戏，它拼的是对生活的建模和压缩，然后用策略性的表达展示这一点。 关于AI编程AI不会收敛。虽然它能准确讲出哪个点错了。但它不会把经验压缩得足够简洁。人理解之后，会对理解过的东西做压缩，这个压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常记录｜最近忙着写代码，好久没写随笔了，补上去～">
+<meta property="og:url" content="https://sajlle.github.io/2026/03/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E5%BF%99%E7%9D%80%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E9%9A%8F%E7%AC%94%E4%BA%86%EF%BC%8C%E8%A1%A5%E4%B8%8A%E5%8E%BB%EF%BD%9E/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="好久没写随笔了，摘几段最近写的随笔 关于AI的创意写作创意写作本身不仅仅关乎文字游戏，更关乎意图识别，知道用户要什么，现象建模，知道故事背后的隐喻，风格匹配，知道用什么风格达到用户的目标。创意写作完全不是文字游戏，它拼的是对生活的建模和压缩，然后用策略性的表达展示这一点。 关于AI编程AI不会收敛。虽然它能准确讲出哪个点错了。但它不会把经验压缩得足够简洁。人理解之后，会对理解过的东西做压缩，这个压">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-08T13:24:58.000Z">
+<meta property="article:modified_time" content="2026-03-09T00:28:07.037Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/03/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E5%BF%99%E7%9D%80%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E9%9A%8F%E7%AC%94%E4%BA%86%EF%BC%8C%E8%A1%A5%E4%B8%8A%E5%8E%BB%EF%BD%9E/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/03/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E5%BF%99%E7%9D%80%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E9%9A%8F%E7%AC%94%E4%BA%86%EF%BC%8C%E8%A1%A5%E4%B8%8A%E5%8E%BB%EF%BD%9E/","path":"2026/03/08/日常记录｜最近忙着写代码，好久没写随笔了，补上去～/","title":"日常记录｜最近忙着写代码，好久没写随笔了，补上去～"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>日常记录｜最近忙着写代码，好久没写随笔了，补上去～ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EAI%E7%9A%84%E5%88%9B%E6%84%8F%E5%86%99%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">关于AI的创意写作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EAI%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">关于AI编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BD%AC%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">关于转行代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%8C%E4%B8%9A%E7%A8%B3%E5%AE%9A%E5%B7%B2%E7%BB%8F%E5%8F%98%E6%88%90%E7%A8%80%E8%96%84%E7%A5%9E%E8%AF%9D"><span class="nav-number">4.</span> <span class="nav-text">职业稳定已经变成稀薄神话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%97%A5%E5%B8%B8%E6%95%88%E7%8E%87"><span class="nav-number">5.</span> <span class="nav-text">关于日常效率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%87%AA%E5%B7%B1"><span class="nav-number">6.</span> <span class="nav-text">关于自己</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AA%E6%9D%A5"><span class="nav-number">7.</span> <span class="nav-text">关于未来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%88%B1%E6%83%85%E5%92%8C%E5%B7%A5%E4%BD%9C%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">8.</span> <span class="nav-text">关于爱情和工作的优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%A9%AC%E5%B9%B4"><span class="nav-number">9.</span> <span class="nav-text">关于马年</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/03/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E5%BF%99%E7%9D%80%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E9%9A%8F%E7%AC%94%E4%BA%86%EF%BC%8C%E8%A1%A5%E4%B8%8A%E5%8E%BB%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="日常记录｜最近忙着写代码，好久没写随笔了，补上去～ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日常记录｜最近忙着写代码，好久没写随笔了，补上去～
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-08 21:24:58" itemprop="dateCreated datePublished" datetime="2026-03-08T21:24:58+08:00">2026-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-09 08:28:07" itemprop="dateModified" datetime="2026-03-09T08:28:07+08:00">2026-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">节点人生</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>好久没写随笔了，摘几段最近写的随笔</p>
+<h1 id="关于AI的创意写作"><a href="#关于AI的创意写作" class="headerlink" title="关于AI的创意写作"></a>关于AI的创意写作</h1><p>创意写作本身不仅仅关乎文字游戏，更关乎意图识别，知道用户要什么，现象建模，知道故事背后的隐喻，风格匹配，知道用什么风格达到用户的目标。<br>创意写作完全不是文字游戏，它拼的是对生活的建模和压缩，然后用策略性的表达展示这一点。</p>
+<h1 id="关于AI编程"><a href="#关于AI编程" class="headerlink" title="关于AI编程"></a>关于AI编程</h1><p>AI不会收敛。虽然它能准确讲出哪个点错了。但它不会把经验压缩得足够简洁。<br>人理解之后，会对理解过的东西做压缩，这个压缩是个钩子，信息够抽象，而且很神奇地会自己匹配合适场景。</p>
+<p>你能用 AI 编程的内容，永远是你已经理解的内容。<br>你用 AI 学习新内容，因为 AI 不会压缩，如果你也懒得理解，那就导致只学皮毛。</p>
+<p>未来值钱的，是能验证 AI 是否做错的专家。</p>
+<h1 id="关于转行代码"><a href="#关于转行代码" class="headerlink" title="关于转行代码"></a>关于转行代码</h1><p>没有哪个时候是完美的时机，完美的条件。<br>很多人总抱怨，要是早十年，转代码会很轻松。<br>但那个时候的人，也吐槽代码难写。<br>本质上这就是在找那个完美的条件，但我观察，完美的条件，就跟地平线一样，可望不可及。</p>
+<p>很多人不是在等机会，他们是在等一个能让自己不用承担风险的机会。<br>不利因素存在，不等于人可以无限延期自己的路线。</p>
+<h1 id="职业稳定已经变成稀薄神话"><a href="#职业稳定已经变成稀薄神话" class="headerlink" title="职业稳定已经变成稀薄神话"></a>职业稳定已经变成稀薄神话</h1><p>教培曾经看着稳，后面也塌；<br>老师曾经是县城神职，现在也越来越挤；<br>体制内被很多人当宗教，但那不是我的宗教；<br>“找个稳定工作”这句老话，本身越来越像上个时代的回音。</p>
+<p>与其为了一个根本不大现实的稳定幻想，吃很多苦，不如干自己喜欢干的职业。<br>反正上班就是找自己能吃的苦吃下去。</p>
+<h1 id="关于日常效率"><a href="#关于日常效率" class="headerlink" title="关于日常效率"></a>关于日常效率</h1><p>一天也就 3～4 个小时是高效率时间，这段时间能干一天之内 85% 的任务。<br>其余时间，就是分神，看文档，折腾工具，改改 bug</p>
+<p>绝不能轻忽饮食&#x2F;环境的影响。<br>这是基本生存线保证。没有这一条，效率就无从谈起。</p>
+<h1 id="关于自己"><a href="#关于自己" class="headerlink" title="关于自己"></a>关于自己</h1><p>我不确定自己是否进步，但缺乏外界反馈，我没有底。<br>但我真的超喜欢自己的状态。<br>我还是对自己很有信心的，扫清障碍，提高行动速度，我应该能进步得很快。</p>
+<h1 id="关于未来"><a href="#关于未来" class="headerlink" title="关于未来"></a>关于未来</h1><p>我想过个几年，我也许会开自己的公司。<br>因为我：</p>
+<ul>
+<li>不喜欢被低效系统管着；</li>
+<li>很在意自由流动性；</li>
+<li>对结构、方法、效率、边界很敏感；</li>
+<li>对把经验抽象成模型这件事有兴趣；</li>
+<li>不只是想干活，还想理解“这活怎么组织才更合理”。</li>
+</ul>
+<p>我不只想进入一个系统，然后活下去，还想这个系统能否被我重新搭建一下。</p>
+<p>所以，「以后开公司」，对我来说不是发财梦，更像是一种延长线：</p>
+<blockquote>
+<p>从现在的「我要活的自由」到未来的「我要定义组织形式」</p>
+</blockquote>
+<h1 id="关于爱情和工作的优先级"><a href="#关于爱情和工作的优先级" class="headerlink" title="关于爱情和工作的优先级"></a>关于爱情和工作的优先级</h1><p>我一直觉得生存的基础就是工作，而爱情或者其他亲密关系，是生存之上的东西。<br>没了爱情，人可以活。但没了工作，下顿饭的着落就没了。</p>
+<h1 id="关于马年"><a href="#关于马年" class="headerlink" title="关于马年"></a>关于马年</h1><p>马年，我喜欢，别人说是赤马红羊劫，我反而觉得，这是价值回归期。退潮了，才知道谁在裸泳。</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E8%A2%AB%E9%94%81%E5%9C%A8%E9%99%A2%E5%AD%90%E9%87%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%A2%AB%E5%91%A8%E6%88%90%E7%AB%8B%EF%BC%88%E7%94%9F%E7%89%A9%E7%88%B9%EF%BC%89%E5%A8%81%E8%83%81%EF%BC%8C%E4%BD%A0%E5%9C%A8%E8%AF%B4%E4%B8%80%E5%8F%A5%EF%BC%8C%E6%88%91%E6%89%93%E6%AD%BB%E4%BD%A0%EF%BD%9E/" rel="prev" title="家庭暴力冲突记录｜我被锁在院子里之后，被爹威胁，你在说一句，我打死你～">
+                  <i class="fa fa-angle-left"></i> 家庭暴力冲突记录｜我被锁在院子里之后，被爹威胁，你在说一句，我打死你～
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%94%A8AI%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E6%84%9F%E8%A7%89%E8%B6%8A%E6%9D%A5%E8%B6%8A%E7%96%B2%E6%83%AB%EF%BD%9E/" rel="next" title="日常记录｜用AI学不懂的技术点，跟真人相比，区别是？">
+                  日常记录｜用AI学不懂的技术点，跟真人相比，区别是？ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

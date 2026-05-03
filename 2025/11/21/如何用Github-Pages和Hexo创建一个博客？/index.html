@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="登陆Git用Token当密码 打开Github网页，登陆自己账号sajlle 右上角头像 –&gt; Settings 左侧拉到最下方 –&gt; Developer settings 选Personal access tokens 点击Generate new token Note随便写，例如hexo-blog之类 Expiration：可以选90天 Scopes选：repo   点生成 复制这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何用Github Pages和Hexo创建一个博客？">
+<meta property="og:url" content="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="登陆Git用Token当密码 打开Github网页，登陆自己账号sajlle 右上角头像 –&gt; Settings 左侧拉到最下方 –&gt; Developer settings 选Personal access tokens 点击Generate new token Note随便写，例如hexo-blog之类 Expiration：可以选90天 Scopes选：repo   点生成 复制这">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-21T12:29:31.000Z">
+<meta property="article:modified_time" content="2025-11-21T13:11:11.404Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="Github Actions">
+<meta property="article:tag" content="Github Pages">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="博客搭建">
+<meta property="article:tag" content="自动部署">
+<meta property="article:tag" content="部署流程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/","path":"2025/11/21/如何用Github-Pages和Hexo创建一个博客？/","title":"如何用Github Pages和Hexo创建一个博客？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何用Github Pages和Hexo创建一个博客？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E9%99%86Git"><span class="nav-number">1.</span> <span class="nav-text">登陆Git</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8Token%E5%BD%93%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">用Token当密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAGithub%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">新建Github仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">保存一键脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">下载配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%86%E6%94%AF"><span class="nav-number">4.</span> <span class="nav-text">推送分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8Hexo%E9%83%A8%E7%BD%B2%E5%88%B0Github-Pages"><span class="nav-number">5.</span> <span class="nav-text">用Hexo部署到Github Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Actions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2"><span class="nav-number">6.</span> <span class="nav-text">Github Actions自动部署博客</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/11/21/%E5%A6%82%E4%BD%95%E7%94%A8Github-Pages%E5%92%8CHexo%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何用Github Pages和Hexo创建一个博客？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何用Github Pages和Hexo创建一个博客？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-11-21 20:29:31 / 修改时间：21:11:11" itemprop="dateCreated datePublished" datetime="2025-11-21T20:29:31+08:00">2025-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="登陆Git"><a href="#登陆Git" class="headerlink" title="登陆Git"></a>登陆Git</h3><h4 id="用Token当密码"><a href="#用Token当密码" class="headerlink" title="用Token当密码"></a>用Token当密码</h4><ol>
+<li>打开Github网页，登陆自己账号sajlle</li>
+<li>右上角头像 –&gt; Settings</li>
+<li>左侧拉到最下方 –&gt; Developer settings</li>
+<li>选Personal access tokens</li>
+<li>点击Generate new token<ul>
+<li>Note随便写，例如<code>hexo-blog</code>之类</li>
+<li>Expiration：可以选90天</li>
+<li>Scopes选：repo</li>
+</ul>
+</li>
+<li>点生成</li>
+<li>复制这个Token，保存好（只会显示一次）</li>
+<li>这个Token就是以后<code>git push</code>时的密码</li>
+</ol>
+<h4 id="新建Github仓库"><a href="#新建Github仓库" class="headerlink" title="新建Github仓库"></a>新建Github仓库</h4><ol>
+<li>打开Settings，选择新建仓库</li>
+<li>仓库名称写成<code>username.github.io</code></li>
+<li>选择公开</li>
+<li>新建仓库的时候，不要勾选<ul>
+<li>Add a README file</li>
+<li>Add .gitignore</li>
+<li>Add a license<br>否则后期给仓库推送博客的时候，会推送失败</li>
+</ul>
+</li>
+</ol>
+<h3 id="保存一键脚本"><a href="#保存一键脚本" class="headerlink" title="保存一键脚本"></a>保存一键脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;====== Hexo + GitHub Pages 一键初始化脚本 ======&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 收集信息</span></span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&quot;GitHub 用户名（例如 yourname）： &quot;</span> GH_USER</span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&quot;仓库名（例如 yourname.github.io 或 my-blog）： &quot;</span> REPO_NAME</span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&quot;本地博客目录名（例如 blog）： &quot;</span> BLOG_DIR</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ -z <span class="string">&quot;<span class="variable">$GH_USER</span>&quot;</span> || -z <span class="string">&quot;<span class="variable">$REPO_NAME</span>&quot;</span> || -z <span class="string">&quot;<span class="variable">$BLOG_DIR</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;有字段为空，请重新运行脚本。&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 基础检查</span></span><br><span class="line"><span class="built_in">command</span> -v git &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="built_in">echo</span> <span class="string">&quot;未检测到 git，请先安装 git。&quot;</span>; <span class="built_in">exit</span> 1; &#125;</span><br><span class="line"><span class="built_in">command</span> -v node &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="built_in">echo</span> <span class="string">&quot;未检测到 node，请先安装 Node.js。&quot;</span>; <span class="built_in">exit</span> 1; &#125;</span><br><span class="line"><span class="built_in">command</span> -v npm &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="built_in">echo</span> <span class="string">&quot;未检测到 npm，请先安装 npm。&quot;</span>; <span class="built_in">exit</span> 1; &#125;</span><br><span class="line"><span class="built_in">command</span> -v npx &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="built_in">echo</span> <span class="string">&quot;未检测到 npx，请确认 Node.js 版本在 8+。&quot;</span>; <span class="built_in">exit</span> 1; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ -d <span class="string">&quot;<span class="variable">$BLOG_DIR</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;目录 <span class="variable">$BLOG_DIR</span> 已存在，请换一个目录名，或者先删除该目录。&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 计算 url &amp; root</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$REPO_NAME</span>&quot;</span> == <span class="string">&quot;<span class="variable">$GH_USER</span>.github.io&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  BLOG_URL=<span class="string">&quot;https://<span class="variable">$GH_USER</span>.github.io&quot;</span></span><br><span class="line">  BLOG_ROOT=<span class="string">&quot;/&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;检测到用户主页仓库，将以根域名部署：<span class="variable">$BLOG_URL</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  BLOG_URL=<span class="string">&quot;https://<span class="variable">$GH_USER</span>.github.io/<span class="variable">$REPO_NAME</span>&quot;</span></span><br><span class="line">  BLOG_ROOT=<span class="string">&quot;/<span class="variable">$REPO_NAME</span>/&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;检测到项目页仓库，将以子路径部署：<span class="variable">$BLOG_URL</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> BLOG_URL</span><br><span class="line"><span class="built_in">export</span> BLOG_ROOT</span><br><span class="line"><span class="built_in">export</span> GH_USER</span><br><span class="line"><span class="built_in">export</span> REPO_NAME</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;===============================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;GitHub 用户名 : <span class="variable">$GH_USER</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;仓库名        : <span class="variable">$REPO_NAME</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;本地目录      : <span class="variable">$BLOG_DIR</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;部署 URL      : <span class="variable">$BLOG_URL</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;root          : <span class="variable">$BLOG_ROOT</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;===============================================&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&quot;确认以上信息无误？(y/N)： &quot;</span> CONFIRM</span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$CONFIRM</span>&quot;</span> != <span class="string">&quot;y&quot;</span> &amp;&amp; <span class="string">&quot;<span class="variable">$CONFIRM</span>&quot;</span> != <span class="string">&quot;Y&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;已取消。&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 初始化 Hexo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 开始初始化 Hexo 项目...&quot;</span></span><br><span class="line">npx hexo-cli init <span class="string">&quot;<span class="variable">$BLOG_DIR</span>&quot;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$BLOG_DIR</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 安装依赖...&quot;</span></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 安装 hexo-deployer-git...&quot;</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 修改 _config.yml 的 url &amp; root</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 配置 _config.yml 的 url &amp; root...&quot;</span></span><br><span class="line"></span><br><span class="line">python3 &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">import os</span><br><span class="line">from pathlib import Path</span><br><span class="line"></span><br><span class="line">cfg = Path(<span class="string">&quot;_config.yml&quot;</span>)</span><br><span class="line">text = cfg.read_text(encoding=<span class="string">&quot;utf-8&quot;</span>).splitlines()</span><br><span class="line"></span><br><span class="line">url = os.environ[<span class="string">&quot;BLOG_URL&quot;</span>]</span><br><span class="line">root = os.environ[<span class="string">&quot;BLOG_ROOT&quot;</span>]</span><br><span class="line"></span><br><span class="line">out = []</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> text:</span><br><span class="line">    stripped = line.strip()</span><br><span class="line">    <span class="keyword">if</span> stripped.startswith(<span class="string">&quot;url:&quot;</span>):</span><br><span class="line">        out.append(f<span class="string">&quot;url: &#123;url&#125;&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> stripped.startswith(<span class="string">&quot;root:&quot;</span>):</span><br><span class="line">        out.append(f<span class="string">&quot;root: &#123;root&#125;&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        out.append(line)</span><br><span class="line"></span><br><span class="line">cfg.write_text(<span class="string">&quot;\n&quot;</span>.<span class="built_in">join</span>(out) + <span class="string">&quot;\n&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 配置 deploy 块</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 配置 Hexo 部署到 gh-pages 分支...&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; _config.yml &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># ==== 自动添加的部署配置 ====</span></span><br><span class="line"><span class="string">deploy:</span></span><br><span class="line"><span class="string">  type: git</span></span><br><span class="line"><span class="string">  repo: https://github.com/$&#123;GH_USER&#125;/$&#123;REPO_NAME&#125;.git</span></span><br><span class="line"><span class="string">  branch: gh-pages</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 初始化 git 仓库并关联远程</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 初始化 git 仓库并关联远程...&quot;</span></span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;Init Hexo blog&quot;</span></span><br><span class="line"></span><br><span class="line">git branch -M main || <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">git remote remove origin &gt;/dev/null 2&gt;&amp;1 || <span class="literal">true</span></span><br><span class="line">git remote add origin <span class="string">&quot;https://github.com/<span class="variable">$&#123;GH_USER&#125;</span>/<span class="variable">$&#123;REPO_NAME&#125;</span>.git&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;👉 本地仓库已初始化并绑定到：https://github.com/<span class="variable">$&#123;GH_USER&#125;</span>/<span class="variable">$&#123;REPO_NAME&#125;</span>.git&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 可选：立即推送</span></span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&quot;是否现在推送到 GitHub？(y/N)： &quot;</span> PUSH_NOW</span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$PUSH_NOW</span>&quot;</span> == <span class="string">&quot;y&quot;</span> || <span class="string">&quot;<span class="variable">$PUSH_NOW</span>&quot;</span> == <span class="string">&quot;Y&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;👉 正在推送 main 分支到远程...&quot;</span></span><br><span class="line">  git push -u origin main</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;✅ 推送完成。&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;ℹ️ 你可以稍后手动执行： git push -u origin main&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;===============================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;✅ Hexo 博客初始化完毕！&quot;</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;下一步你可以：&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;1) 本地写文章：&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;   npx hexo new \&quot;first-post\&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;2) 本地预览：&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;   npx hexo server   # 打开 http://localhost:4000&quot;</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;3) 部署到 GitHub Pages（生成并推 gh-pages 分支）：&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;   npx hexo generate &amp;&amp; npx hexo deploy&quot;</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;记得在 GitHub 仓库设置里，把 Pages 的 Source 设为：gh-pages 分支。&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;===============================================&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="下载配置"><a href="#下载配置" class="headerlink" title="下载配置"></a>下载配置</h3><ol>
+<li>新建一个空目录，比如<code>my-blog</code>，把脚本放进去</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> my-blog    <span class="comment"># 新建目录</span></span><br><span class="line"><span class="built_in">cd</span> my-blog    <span class="comment"># 进入目录</span></span><br><span class="line">vi setup_hexo_github_pages.sh   <span class="comment"># 新建文件</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>把脚本内容贴进去，保存。</li>
+<li>设置脚本执行权限</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x setup_hexo_github_pages.sh</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>运行脚本</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./setup_hexo_github_pages.sh</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>按照提示输入：</li>
+</ol>
+<ul>
+<li>Github用户名</li>
+<li>仓库名称</li>
+<li>本地目录名称</li>
+</ul>
+<ol start="6">
+<li>跑完之后，进入目录.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> BLOG_DIR</span><br><span class="line">npx hexo new <span class="string">&quot;first-post&quot;</span></span><br><span class="line">npx hexo generate &amp;&amp; npx hexo deploy</span><br></pre></td></tr></table></figure>
+<p>把Github仓库设置里的Pages的Source改成gh-pages分支，即可上线</p>
+<h3 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h3><p>进入<code>BLOG_DIR</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /你的路径/BLOG_DIR</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+<p>它会问你</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Username <span class="keyword">for</span> <span class="string">&#x27;https://github.com&#x27;</span>: </span><br><span class="line">Password <span class="keyword">for</span> <span class="string">&#x27;https://sajlle@github.com&#x27;</span>: </span><br></pre></td></tr></table></figure>
+<p>Username 输入 <code>sajlle</code><br>Password 粘贴第一步生成的Token，这就推送成功啦</p>
+<h3 id="用Hexo部署到Github-Pages"><a href="#用Hexo部署到Github-Pages" class="headerlink" title="用Hexo部署到Github Pages"></a>用Hexo部署到Github Pages</h3><p>之后博客流程就是</p>
+<ol>
+<li>本地写文章</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx hexo new <span class="string">&quot;first-post&quot;</span></span><br><span class="line">npx hexo generate</span><br><span class="line">npx hexo deploy</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>第一次部署之后，到Github仓库的：<br> Settings –&gt; Pages –&gt; Source选<br> - Branch: <code>gh-pages</code><br> - 目录：<code>/(root)</code></li>
+</ol>
+<p>等几分钟，用浏览器打开：<code>https:\\username.github.io</code></p>
+<h3 id="Github-Actions自动部署博客"><a href="#Github-Actions自动部署博客" class="headerlink" title="Github Actions自动部署博客"></a>Github Actions自动部署博客</h3><ol>
+<li>确认hexo基础没问题，进入目录，运行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /你/的/路径/life-node-blog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安全一点，先把依赖装好</span></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地试跑一下</span></span><br><span class="line">npx hexo clean</span><br><span class="line">npx hexo generate</span><br><span class="line">npx hexo server</span><br></pre></td></tr></table></figure>
+<p>打开浏览器：<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a><br>——能看到页面就说明 Hexo 本体没问题。</p>
+<p>看完 Ctrl + C 关掉服务。</p>
+<ol start="2">
+<li>选一个主题，用Hexo NexT（稳定，好看，中文资料多）<br>2.1 安装主题<br>在<code>BLOG_DIR</code>目录执行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进到博客目录</span></span><br><span class="line"><span class="built_in">cd</span> /你/的/路径/BLOG_DIR</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆主题到 themes/next</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
+
+<p>2.2 启动主题<br>找到根目录的<code>_config.yml</code>文件，找到<code>theme: landscape</code>，换成<code>theme: next</code></p>
+<ol start="3">
+<li>手动部署一次Github Pages<br>3.1 只靠着Hexo生成静态文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /你/的/路径/life-node-blog</span><br><span class="line">npx hexo clean</span><br><span class="line">npx hexo generate</span><br></pre></td></tr></table></figure>
+<p>这会生成<code>public/</code>目录，里面就是最终要给Github Pages用的静态文件</p>
+<p>3.2 直接靠着Actions 推送gh-pages<br>套路如下：Hexo生成静态文件 –&gt; Github Actions把<code>public/</code>推到<code>gh-pages</code>分支</p>
+<p>3.3 开启Github Pages</p>
+<ol>
+<li><p>打开博客仓库</p>
+</li>
+<li><p>点击博客顶部Settings</p>
+</li>
+<li><p>左侧找到Pages</p>
+</li>
+<li><p>在Build and Deployment –&gt; Source里选择：</p>
+<ul>
+<li>Deploy from a branch </li>
+<li>Branch: 选<code>gh-pages</code></li>
+<li>Directory: <code>/</code><br>如果现在还没有 gh-pages 分支，不要慌，下面我们用 Actions 自动建。</li>
+</ul>
+</li>
+<li><p>GitHub Actions自动发布<br>目标：<br>你只要往 main 推代码，Actions 自动：<br>Node 环境 → 安装依赖 → hexo generate → 把 public 推到 gh-pages → GitHub Pages 自动上线。</p>
+</li>
+</ol>
+<p>创建 workflow文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p .github/workflows</span><br></pre></td></tr></table></figure>
+
+<p>新建 .github&#x2F;workflows&#x2F;deploy.yml，内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">name: Deploy Hexo to GitHub Pages</span><br><span class="line"></span><br><span class="line">permissions:</span><br><span class="line">  contents: write   <span class="comment"># 允许往仓库写（push gh-pages 分支用）</span></span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line">  push:</span><br><span class="line">    branches:</span><br><span class="line">      - main</span><br><span class="line">  workflow_dispatch:</span><br><span class="line"></span><br><span class="line"><span class="built_in">jobs</span>:</span><br><span class="line">  build-deploy:</span><br><span class="line">    runs-on: ubuntu-latest</span><br><span class="line"></span><br><span class="line">    steps:</span><br><span class="line">      - name: Checkout</span><br><span class="line">        uses: actions/checkout@v4</span><br><span class="line"></span><br><span class="line">      - name: Setup Node.js</span><br><span class="line">        uses: actions/setup-node@v4</span><br><span class="line">        with:</span><br><span class="line">          node-version: <span class="string">&#x27;20&#x27;</span></span><br><span class="line">          cache: <span class="string">&#x27;npm&#x27;</span></span><br><span class="line"></span><br><span class="line">      - name: Install dependencies</span><br><span class="line">        run: |</span><br><span class="line">          npm ci || npm install</span><br><span class="line"></span><br><span class="line">      - name: Build hexo</span><br><span class="line">        run: |</span><br><span class="line">          npx hexo clean</span><br><span class="line">          npx hexo generate</span><br><span class="line"></span><br><span class="line">      - name: Deploy to GitHub Pages</span><br><span class="line">        uses: peaceiris/actions-gh-pages@v3</span><br><span class="line">        with:</span><br><span class="line">          github_token: <span class="variable">$&#123;&#123; secrets.GITHUB_TOKEN &#125;</span>&#125;</span><br><span class="line">          publish_dir: ./public</span><br><span class="line">          publish_branch: gh-pages</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提交并推送</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /你/的/路径/BLOG_DIR</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;Add Hexo NexT theme and deploy workflow&quot;</span></span><br><span class="line">git push origin main</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后去 GitHub 仓库页面：<br>点 Actions 标签<br>能看到 Deploy Hexo to GitHub Pages workflow 在跑<br>等它变成 ✅ 绿色成功</p>
+<p>成功后：仓库列表里会多一个 gh-pages 分支（不用你手动建）<br>GitHub Pages 自动从 gh-pages 读取</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Github-Pages/" rel="tag"># Github Pages</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># 博客搭建</a>
+              <a href="/tags/%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/" rel="tag"># 部署流程</a>
+              <a href="/tags/Github-Actions/" rel="tag"># Github Actions</a>
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" rel="tag"># 自动部署</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/21/%E3%80%8C%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F%C2%B7%E7%AC%AC%E4%B8%80%E7%AF%87%E3%80%8D/" rel="prev" title="节点人生·第一篇">
+                  <i class="fa fa-angle-left"></i> 节点人生·第一篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/06/%E7%9C%9F%E7%9A%84%E8%87%AA%E5%B7%B1%E6%90%AD%E5%8D%9A%E5%AE%A2%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0IDEA%E6%AF%94Typora%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%B9%E4%BE%BF%E5%A4%9A%E4%BA%86%EF%BC%81/" rel="next" title="真的自己搭博客之后，发现IDEA比Typora写博客方便多了！.md">
+                  真的自己搭博客之后，发现IDEA比Typora写博客方便多了！.md <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

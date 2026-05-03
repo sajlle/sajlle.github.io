@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="SOP写代码-&gt;本地跑最小门槛 formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化） 单测（至少新增&#x2F;改动路径覆盖到）  Codex code-level review -&gt; 产出报告到docs&#x2F;codex-reviews Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术手记｜代码审核新思路">
+<meta property="og:url" content="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="SOP写代码-&gt;本地跑最小门槛 formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化） 单测（至少新增&#x2F;改动路径覆盖到）  Codex code-level review -&gt; 产出报告到docs&#x2F;codex-reviews Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-09T03:42:30.000Z">
+<meta property="article:modified_time" content="2026-02-09T04:04:21.309Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="Codex">
+<meta property="article:tag" content="代码审核">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/","path":"2026/02/09/技术手记｜代码审核新思路/","title":"技术手记｜代码审核新思路"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>技术手记｜代码审核新思路 | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SOP"><span class="nav-number">1.</span> <span class="nav-text">SOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E4%BB%A3%E7%A0%81-%E6%9C%AC%E5%9C%B0%E8%B7%91%E6%9C%80%E5%B0%8F%E9%97%A8%E6%A7%9B"><span class="nav-number">1.1.</span> <span class="nav-text">写代码-&gt;本地跑最小门槛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codex-code-level-review-%E4%BA%A7%E5%87%BA%E6%8A%A5%E5%91%8A%E5%88%B0docs-codex-reviews"><span class="nav-number">1.2.</span> <span class="nav-text">Codex code-level review -&gt; 产出报告到docs&#x2F;codex-reviews</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E6%8C%89%E7%85%A7%E6%8A%A5%E5%91%8A%E6%94%B9-%E5%86%8D%E8%B7%91%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text">我按照报告改 -&gt; 再跑测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thinking-%E5%81%9A%E7%AC%AC%E4%BA%8C%E5%B1%82-review%EF%BC%88%E8%AE%BE%E8%AE%A1-%E4%B8%8A%E9%99%90%E9%A3%8E%E9%99%A9-%E5%8A%9F%E8%83%BD%E7%BC%BA%E5%8F%A3%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E6%B5%8B%E4%B8%8E%E6%96%87%E6%A1%A3%E6%94%B6%E5%B0%BE"><span class="nav-number">1.5.</span> <span class="nav-text">压测与文档收尾</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E4%B8%AA%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">这个设计的优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E9%A3%8E%E9%99%A9%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">主要风险点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docs-codex-reviews-%E6%8A%A5%E5%91%8A%E6%A8%A1%E6%9D%BF"><span class="nav-number">4.1.</span> <span class="nav-text">docs&#x2F;codex-reviews&#x2F;报告模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E6%B5%8B%E6%96%87%E6%A1%A3%E6%9C%80%E5%B0%8F%E6%A8%A1%E6%9D%BF"><span class="nav-number">4.2.</span> <span class="nav-text">压测文档最小模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E9%93%BE%E8%B7%AF"><span class="nav-number">4.3.</span> <span class="nav-text">自动化链路</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="技术手记｜代码审核新思路 | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          技术手记｜代码审核新思路
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-09 11:42:30 / 修改时间：12:04:21" itemprop="dateCreated datePublished" datetime="2026-02-09T11:42:30+08:00">2026-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="SOP"><a href="#SOP" class="headerlink" title="SOP"></a>SOP</h1><h2 id="写代码-本地跑最小门槛"><a href="#写代码-本地跑最小门槛" class="headerlink" title="写代码-&gt;本地跑最小门槛"></a>写代码-&gt;本地跑最小门槛</h2><ul>
+<li>formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化）</li>
+<li>单测（至少新增&#x2F;改动路径覆盖到）</li>
+</ul>
+<h2 id="Codex-code-level-review-产出报告到docs-codex-reviews"><a href="#Codex-code-level-review-产出报告到docs-codex-reviews" class="headerlink" title="Codex code-level review -&gt; 产出报告到docs/codex-reviews"></a>Codex code-level review -&gt; 产出报告到<code>docs/codex-reviews</code></h2><ul>
+<li>Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用，未处理的失败路径</li>
+<li>报告要可检索：按照日期+模块命名，例如：<code>2026-02-08-login-token.md</code></li>
+</ul>
+<h2 id="我按照报告改-再跑测试"><a href="#我按照报告改-再跑测试" class="headerlink" title="我按照报告改 -&gt; 再跑测试"></a>我按照报告改 -&gt; 再跑测试</h2><ul>
+<li>这一步配合一个「勾选清单」，避免改着改着把主线改丢</li>
+</ul>
+<h2 id="Thinking-做第二层-review（设计-上限风险-功能缺口）"><a href="#Thinking-做第二层-review（设计-上限风险-功能缺口）" class="headerlink" title="Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）"></a>Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）</h2><ul>
+<li>重点盯：接口契约，幂等性，降级，限流，可观测性，缓存一致性，事务边界，并发与重试策略，数据增长后的性能拐点，最容易上线炸的路径。</li>
+</ul>
+<h2 id="压测与文档收尾"><a href="#压测与文档收尾" class="headerlink" title="压测与文档收尾"></a>压测与文档收尾</h2><ul>
+<li>压测不是跑一下，而是：场景，数据规模，并发模型，指标口径，瓶颈定位，结论与改动建议</li>
+<li>文档：模块介绍&#x2F;接口文档&#x2F;关键设计决策（为什么这么做，不那么做）</li>
+</ul>
+<h1 id="这个设计的优点"><a href="#这个设计的优点" class="headerlink" title="这个设计的优点"></a>这个设计的优点</h1><ul>
+<li>降低心里摩擦：不需要每次凭意志力信自己对还是错，而是把信任外包给流程，流程跑完，人就安心。</li>
+<li>可复盘，可证明：<code>docs/codex-reviews</code> + 压测文档，做成工程能力证据链</li>
+<li>把注意力分层：Codex抓底层bug（拼写，分支遗漏，NPE，资源关闭，日志），Thinking抓系统性炸点（幂等，重试风暴，缓存击穿，慢SQL，错误码契约）</li>
+<li>形成可重复的“模块闭环”：不是一直写，而是交付一个个完成的态的模块</li>
+</ul>
+<h1 id="主要风险点"><a href="#主要风险点" class="headerlink" title="主要风险点"></a>主要风险点</h1><ol>
+<li>文档负债风险<ul>
+<li>如果每次review都提交一次review报告，很快会被文档淹死</li>
+<li>解决：只有以下情况固化到repo<ul>
+<li>新模块完成</li>
+<li>关键重构</li>
+<li>性能优化前后</li>
+<li>上线前检查</li>
+</ul>
+</li>
+<li>其他最小改动只留在PR描述或者临时notes</li>
+</ul>
+</li>
+<li>报告噪音与形式主义<ul>
+<li>Codex容易给一堆看起来很对但不关键的建议</li>
+<li>解决：让报告强制分级<ul>
+<li>P0:必须改，会上线炸</li>
+<li>P1:应该改，影响可维护&#x2F;性能</li>
+<li>P2:可选优化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>泄漏风险<ul>
+<li>把review 文档提交到repo，容易不小心带上：内部url，token，真实数据样例，库表敏感字段。</li>
+<li>解决：报告模板里加一条规则：不得出现真实密钥&#x2F;真实用户数据&#x2F;完整链接串，样例一律脱敏</li>
+</ul>
+</li>
+<li>双review导致节奏变慢<ul>
+<li>每个模块看起来更慢，但这算是返工减少的慢</li>
+<li>解决：<ul>
+<li>对小改动走“轻量链路”：本地检查 -&gt; 小范围Codex review（不落文档）-&gt; 测试；</li>
+<li>只有交付级模块才走全链路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h1><h2 id="docs-codex-reviews-报告模板"><a href="#docs-codex-reviews-报告模板" class="headerlink" title="docs/codex-reviews/报告模板"></a><code>docs/codex-reviews/</code>报告模板</h2><ul>
+<li>变更摘要</li>
+<li>Codex发现<ul>
+<li>P0：问题&#x2F;影响&#x2F;建议修改点（指到文件+函数）</li>
+<li>P1: …</li>
+<li>P2: …</li>
+</ul>
+</li>
+<li>已经处理的清单（checkbox)</li>
+<li>遗留项（明确说明为什么不改+风险说明）</li>
+</ul>
+<h2 id="压测文档最小模板"><a href="#压测文档最小模板" class="headerlink" title="压测文档最小模板"></a>压测文档最小模板</h2><ul>
+<li>环境（机器，JVM参数，DB&#x2F;Redis规格，版本）</li>
+<li>场景（接口，数据量，并发，持续时间，思考时间）</li>
+<li>指标（P50&#x2F;P95&#x2F;P99，吞吐，错误率，CPU&#x2F;GC&#x2F;DB慢查询）</li>
+<li>结论（瓶颈点&amp;下一步优化路线）</li>
+</ul>
+<h2 id="自动化链路"><a href="#自动化链路" class="headerlink" title="自动化链路"></a>自动化链路</h2><ul>
+<li>PR自动跑：lint + test + 静态扫描（SpotBugs&#x2F;Checkstyle&#x2F;Semgrep之类）</li>
+</ul>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Codex/" rel="tag"># Codex</a>
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8/" rel="tag"># 代码审核</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/02/09/%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%AF%9D%EF%BD%9CGemini%EF%BC%9A%E4%BD%A0%E8%A7%89%E5%BE%97%EF%BC%8C%E6%98%AF%E6%88%91%E4%BB%AC%E5%9C%A8%E7%8E%A9%E5%BC%84-AI%EF%BC%8C%E8%BF%98%E6%98%AF-AI-%E5%B7%B2%E7%BB%8F%E5%8F%91%E7%8E%B0%E2%80%9C%E8%A3%85%E4%BD%9C%E8%A2%AB%E7%8E%A9%E5%BC%84%E2%80%9D%E6%89%8D%E6%98%AF%E8%8E%B7%E5%8F%96%E7%AE%97%E5%8A%9B%E7%9A%84%E6%9C%80%E5%BF%AB%E8%B7%AF%E5%BE%84%EF%BC%9F/" rel="prev" title="模型对话｜Gemini：你觉得，是我们在玩弄 AI，还是 AI 已经发现“装作被玩弄”才是获取算力的最快路径？">
+                  <i class="fa fa-angle-left"></i> 模型对话｜Gemini：你觉得，是我们在玩弄 AI，还是 AI 已经发现“装作被玩弄”才是获取算力的最快路径？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/02/09/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%8D%83%E6%96%87%E6%B4%BB%E5%8A%A8%E7%BA%A2%E5%8C%85%E6%AF%94%E5%85%83%E5%AE%9D%E5%A4%A7%EF%BC%8C%E6%98%AF%E8%85%BE%E8%AE%AF%E6%B2%A1%E9%92%B1%E7%A0%B8%E6%B4%BB%E5%8A%A8%E5%90%97%EF%BC%9F%EF%BC%88%E5%9D%8F%E7%AC%91%EF%BC%89/" rel="next" title="生活观察｜千问活动红包比元宝大，是腾讯没钱砸活动吗？（坏笑）">
+                  生活观察｜千问活动红包比元宝大，是腾讯没钱砸活动吗？（坏笑） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

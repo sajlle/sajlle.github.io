@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="第一类：定位服务里的系统服务常见误区：关了app定位就觉得安全了。但是系统设置里以下几个地方没关：  基于位置的Apple广告 重要地点 iPhone分析  第二类：分析与数据用作行为画像常见误区：这不影响功能，但会用你的数据做行为样本，需要关闭：  共享iPhone分析 共享iCloud分析 改进Siri与停歇  第三类：App跟踪透明度，防止被跨App拼凑画像重点：这是“去电子裸奔”的地基需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPhone隐私设置里，有哪些隐形漏点？">
+<meta property="og:url" content="https://sajlle.github.io/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="第一类：定位服务里的系统服务常见误区：关了app定位就觉得安全了。但是系统设置里以下几个地方没关：  基于位置的Apple广告 重要地点 iPhone分析  第二类：分析与数据用作行为画像常见误区：这不影响功能，但会用你的数据做行为样本，需要关闭：  共享iPhone分析 共享iCloud分析 改进Siri与停歇  第三类：App跟踪透明度，防止被跨App拼凑画像重点：这是“去电子裸奔”的地基需要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-01T08:32:53.000Z">
+<meta property="article:modified_time" content="2026-01-01T08:41:00.195Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="iPhone">
+<meta property="article:tag" content="设备">
+<meta property="article:tag" content="隐私">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/","path":"2026/01/01/iPhone隐私设置里，有哪些隐形漏点？/","title":"iPhone隐私设置里，有哪些隐形漏点？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>iPhone隐私设置里，有哪些隐形漏点？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%EF%BC%9A%E5%AE%9A%E4%BD%8D%E6%9C%8D%E5%8A%A1%E9%87%8C%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">第一类：定位服务里的系统服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%EF%BC%9A%E5%88%86%E6%9E%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%94%A8%E4%BD%9C%E8%A1%8C%E4%B8%BA%E7%94%BB%E5%83%8F"><span class="nav-number">2.</span> <span class="nav-text">第二类：分析与数据用作行为画像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%B1%BB%EF%BC%9AApp%E8%B7%9F%E8%B8%AA%E9%80%8F%E6%98%8E%E5%BA%A6%EF%BC%8C%E9%98%B2%E6%AD%A2%E8%A2%AB%E8%B7%A8App%E6%8B%BC%E5%87%91%E7%94%BB%E5%83%8F"><span class="nav-number">3.</span> <span class="nav-text">第三类：App跟踪透明度，防止被跨App拼凑画像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%B1%BB%EF%BC%9A%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%BB%9C%E6%9D%83%E9%99%90"><span class="nav-number">4.</span> <span class="nav-text">第四类：本地网络权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%B1%BB%EF%BC%9A%E5%85%B3%E9%97%ADSafari%E5%92%8C%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E9%80%89%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">第五类：关闭Safari和系统默认选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari%E5%BB%BA%E8%AE%AE%E5%85%B3%E9%97%AD%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">Safari建议关闭：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="iPhone隐私设置里，有哪些隐形漏点？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iPhone隐私设置里，有哪些隐形漏点？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-01-01 16:32:53 / 修改时间：16:41:00" itemprop="dateCreated datePublished" datetime="2026-01-01T16:32:53+08:00">2026-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="第一类：定位服务里的系统服务"><a href="#第一类：定位服务里的系统服务" class="headerlink" title="第一类：定位服务里的系统服务"></a>第一类：定位服务里的系统服务</h1><p>常见误区：关了app定位就觉得安全了。但是系统设置里以下几个地方没关：</p>
+<ol>
+<li>基于位置的Apple广告</li>
+<li>重要地点</li>
+<li>iPhone分析</li>
+</ol>
+<h1 id="第二类：分析与数据用作行为画像"><a href="#第二类：分析与数据用作行为画像" class="headerlink" title="第二类：分析与数据用作行为画像"></a>第二类：分析与数据用作行为画像</h1><p>常见误区：这不影响功能，但会用你的数据做行为样本，需要关闭：</p>
+<ol>
+<li>共享iPhone分析</li>
+<li>共享iCloud分析</li>
+<li>改进Siri与停歇</li>
+</ol>
+<h1 id="第三类：App跟踪透明度，防止被跨App拼凑画像"><a href="#第三类：App跟踪透明度，防止被跨App拼凑画像" class="headerlink" title="第三类：App跟踪透明度，防止被跨App拼凑画像"></a>第三类：App跟踪透明度，防止被跨App拼凑画像</h1><p>重点：这是“去电子裸奔”的地基<br>需要关闭：</p>
+<ol>
+<li>关闭“允许App请求跟踪“</li>
+<li>对已经出现的App：一律不允许该权限</li>
+</ol>
+<h1 id="第四类：本地网络权限"><a href="#第四类：本地网络权限" class="headerlink" title="第四类：本地网络权限"></a>第四类：本地网络权限</h1><p>作用：</p>
+<ul>
+<li>扫描你同一Wi-Fi下的设备</li>
+<li>判断你在什么环境<br>建议除了智能家居&#x2F;打印&#x2F;必须设备，其他一律关闭</li>
+</ul>
+<h1 id="第五类：关闭Safari和系统默认选项"><a href="#第五类：关闭Safari和系统默认选项" class="headerlink" title="第五类：关闭Safari和系统默认选项"></a>第五类：关闭Safari和系统默认选项</h1><h2 id="Safari建议关闭："><a href="#Safari建议关闭：" class="headerlink" title="Safari建议关闭："></a>Safari建议关闭：</h2><ul>
+<li>打开防止跨网站跟踪</li>
+<li>隐藏IP地址（对跟踪器）</li>
+<li>搜索引擎隐私报告（可以打开）</li>
+</ul>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%90%E7%A7%81/" rel="tag"># 隐私</a>
+              <a href="/tags/%E8%AE%BE%E5%A4%87/" rel="tag"># 设备</a>
+              <a href="/tags/iPhone/" rel="tag"># iPhone</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/01/%E6%94%AF%E4%BB%98%E4%B9%A0%E6%83%AF%EF%BD%9C%E6%88%91%E5%85%B3%E9%97%AD%E4%BA%86%E6%89%80%E6%9C%89%E5%B9%B3%E5%8F%B0%E5%86%85%E4%BB%98%E6%AC%BE%EF%BC%8C%E6%94%B9%E7%94%A8Apple-Pay/" rel="prev" title="支付习惯｜我关闭了所有平台内付款，改用Apple Pay">
+                  <i class="fa fa-angle-left"></i> 支付习惯｜我关闭了所有平台内付款，改用Apple Pay
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/" rel="next" title="可承接拒绝的关系，才是安全的关系">
+                  可承接拒绝的关系，才是安全的关系 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

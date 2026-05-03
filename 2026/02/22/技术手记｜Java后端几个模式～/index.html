@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="今天我问ChatGPT，我之前写代码没思路，可能是对模式不了解？GPT回我：要不要我给你几个模型？于是这篇博客就有了。（笑） 今天（2026-02-22），我只记录模式，明天或者后天，我再补上实际的案例。 并发与一致性的常见模式Check-Then-Act（先检查再执行）典型场景： 判断库存&gt;0之后再扣减 判断是否锁定再加锁 判断是否存在再插入  问题： 检查和执行分离，会被并发打穿  解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术手记｜Java后端几个模式～">
+<meta property="og:url" content="https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="今天我问ChatGPT，我之前写代码没思路，可能是对模式不了解？GPT回我：要不要我给你几个模型？于是这篇博客就有了。（笑） 今天（2026-02-22），我只记录模式，明天或者后天，我再补上实际的案例。 并发与一致性的常见模式Check-Then-Act（先检查再执行）典型场景： 判断库存&gt;0之后再扣减 判断是否锁定再加锁 判断是否存在再插入  问题： 检查和执行分离，会被并发打穿  解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-22T11:42:58.000Z">
+<meta property="article:modified_time" content="2026-02-22T13:01:52.272Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="写作中">
+<meta property="article:tag" content="模式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/","path":"2026/02/22/技术手记｜Java后端几个模式～/","title":"技术手记｜Java后端几个模式～"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>技术手记｜Java后端几个模式～ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">并发与一致性的常见模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Check-Then-Act%EF%BC%88%E5%85%88%E6%A3%80%E6%9F%A5%E5%86%8D%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">Check-Then-Act（先检查再执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">典型场景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lost-Update%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%A2%E5%A4%B1%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Lost Update（更新丢失）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">典型场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Double-Submit%EF%BC%88%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">Double Submit（重复提交）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">典型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Breakdown%EF%BC%88%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">Cache Breakdown（缓存击穿）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">典型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Penetration%EF%BC%88%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">Cache Penetration（缓存穿透）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">典型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thundering-Herd%EF%BC%88%E6%83%8A%E7%BE%A4%E6%95%88%E5%BA%94%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">Thundering Herd（惊群效应）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">典型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">架构思维模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fail-Fast%EF%BC%88%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Fail Fast（快速失败）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graceful-Degradation%EF%BC%88%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Graceful Degradation（优雅降级）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idempotency%EF%BC%88%E5%B9%82%E7%AD%89%E6%80%A7%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Idempotency（幂等性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State-Machine%EF%BC%88%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">State Machine（状态机）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">257</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="技术手记｜Java后端几个模式～ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          技术手记｜Java后端几个模式～
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-22 19:42:58 / 修改时间：21:01:52" itemprop="dateCreated datePublished" datetime="2026-02-22T19:42:58+08:00">2026-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天我问ChatGPT，我之前写代码没思路，可能是对模式不了解？<br>GPT回我：要不要我给你几个模型？<br>于是这篇博客就有了。（笑）</p>
+<p>今天（2026-02-22），我只记录模式，明天或者后天，我再补上实际的案例。</p>
+<h1 id="并发与一致性的常见模式"><a href="#并发与一致性的常见模式" class="headerlink" title="并发与一致性的常见模式"></a>并发与一致性的常见模式</h1><h2 id="Check-Then-Act（先检查再执行）"><a href="#Check-Then-Act（先检查再执行）" class="headerlink" title="Check-Then-Act（先检查再执行）"></a>Check-Then-Act（先检查再执行）</h2><h3 id="典型场景："><a href="#典型场景：" class="headerlink" title="典型场景："></a>典型场景：</h3><ul>
+<li>判断库存&gt;0之后再扣减</li>
+<li>判断是否锁定再加锁</li>
+<li>判断是否存在再插入</li>
+</ul>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><ul>
+<li>检查和执行分离，会被并发打穿</li>
+</ul>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><ul>
+<li>原子操作（Lua）</li>
+<li>乐观锁</li>
+<li>CAS</li>
+<li>数据库唯一索引</li>
+</ul>
+<h2 id="Lost-Update（更新丢失）"><a href="#Lost-Update（更新丢失）" class="headerlink" title="Lost Update（更新丢失）"></a>Lost Update（更新丢失）</h2><h3 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h3><ul>
+<li>两个线程读取同一值</li>
+<li>修改后覆盖</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>乐观锁 version</li>
+<li>行锁</li>
+<li>CAS</li>
+</ul>
+<h2 id="Double-Submit（重复提交）"><a href="#Double-Submit（重复提交）" class="headerlink" title="Double Submit（重复提交）"></a>Double Submit（重复提交）</h2><h3 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>用户点两次按钮</li>
+<li>重复下单</li>
+</ul>
+<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>幂等 token</li>
+<li>唯一索引</li>
+<li>状态机控制</li>
+</ul>
+<h2 id="Cache-Breakdown（缓存击穿）"><a href="#Cache-Breakdown（缓存击穿）" class="headerlink" title="Cache Breakdown（缓存击穿）"></a>Cache Breakdown（缓存击穿）</h2><h3 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>热点Key过期</li>
+<li>同时大量请求打DB</li>
+</ul>
+<h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>互斥锁</li>
+<li>预热</li>
+<li>永不过期 + 异步刷新</li>
+</ul>
+<h2 id="Cache-Penetration（缓存穿透）"><a href="#Cache-Penetration（缓存穿透）" class="headerlink" title="Cache Penetration（缓存穿透）"></a>Cache Penetration（缓存穿透）</h2><h3 id="典型-2"><a href="#典型-2" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>查询不存在数据</li>
+<li>每次打DB</li>
+</ul>
+<h3 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>空值缓存</li>
+<li>布隆过滤器</li>
+</ul>
+<h2 id="Thundering-Herd（惊群效应）"><a href="#Thundering-Herd（惊群效应）" class="headerlink" title="Thundering Herd（惊群效应）"></a>Thundering Herd（惊群效应）</h2><h3 id="典型-3"><a href="#典型-3" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>高峰期瞬间请求暴涨</li>
+</ul>
+<h3 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>限流</li>
+<li>排队</li>
+<li>削峰填谷</li>
+</ul>
+<h1 id="架构思维模式"><a href="#架构思维模式" class="headerlink" title="架构思维模式"></a>架构思维模式</h1><h2 id="Fail-Fast（快速失败）"><a href="#Fail-Fast（快速失败）" class="headerlink" title="Fail Fast（快速失败）"></a>Fail Fast（快速失败）</h2><p>与其被慢慢拖死，不如：</p>
+<ul>
+<li>限流</li>
+<li>降级</li>
+<li>熔断</li>
+</ul>
+<h2 id="Graceful-Degradation（优雅降级）"><a href="#Graceful-Degradation（优雅降级）" class="headerlink" title="Graceful Degradation（优雅降级）"></a>Graceful Degradation（优雅降级）</h2><p>比如：</p>
+<ul>
+<li>评论系统挂了不影响主流程</li>
+<li>风控策略收紧</li>
+</ul>
+<h2 id="Idempotency（幂等性）"><a href="#Idempotency（幂等性）" class="headerlink" title="Idempotency（幂等性）"></a>Idempotency（幂等性）</h2><p>重复请求不影响结果</p>
+<h2 id="State-Machine（状态机）"><a href="#State-Machine（状态机）" class="headerlink" title="State Machine（状态机）"></a>State Machine（状态机）</h2><p>登录，订单，风控其实都可以用状态流控制</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E5%86%99%E4%BD%9C%E4%B8%AD/" rel="tag"># 写作中</a>
+              <a href="/tags/%E6%A8%A1%E5%BC%8F/" rel="tag"># 模式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/02/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0OpenAI%E5%A5%B3%E9%AB%98%E7%AE%A1%E5%8F%8D%E5%AF%B9%E6%88%90%E4%BA%BA%E6%A8%A1%E5%BC%8F%E8%A2%AB%E5%BC%80%EF%BC%8C%E6%88%91%E6%9C%89%E7%82%B9%E7%BA%A0%E7%BB%93%EF%BC%8C%E8%A6%81%E7%BB%A7%E7%BB%AD%E7%94%A8GPT%E5%98%9B%EF%BC%9F/" rel="prev" title="日常记录｜看到OpenAI女高管反对成人模式被开，我有点纠结，要继续用GPT嘛？">
+                  <i class="fa fa-angle-left"></i> 日常记录｜看到OpenAI女高管反对成人模式被开，我有点纠结，要继续用GPT嘛？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/" rel="next" title="技术手记｜写写Spring MVC的流程，Filter拦截了啥？Interceptor拦截了啥？">
+                  技术手记｜写写Spring MVC的流程，Filter拦截了啥？Interceptor拦截了啥？ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
