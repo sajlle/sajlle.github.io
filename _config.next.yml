@@ -1,0 +1,30 @@
+lazyload: true
+
+comments:
+  lazyload: true
+
+motion:
+  enable: false
+
+custom_file_path:
+  style: source/_data/styles.styl
+  variable: source/_data/variables.styl
+
+# Local Search
+local_search:
+  enable: true
+  top_n_per_article: 1 # 控制每篇文章最多显示1条结果
+  unescape: false
+  preload: false # 页面加载时不预加载搜索数据
+
+# Dark Mode
+darkmode: true
+
+theme_color:
+  light: "#ffffff"
+  dark: "#222222"
+
+codeblock:
+  theme:
+    light: default
+    dark: stackoverflow-dark

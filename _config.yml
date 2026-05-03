@@ -14,6 +14,7 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://sajlle.github.io
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -89,9 +90,12 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include: 
-exclude: 
-ignore: 
+# include:
+exclude:
+  - uploads/raw/**
+  - videos/**
+  - scripts/**
+# ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
@@ -105,3 +109,10 @@ deploy:
   type: git
   repo: https://github.com/sajlle/sajlle.github.io.git
   branch: gh-pages
+
+# Local Search
+search:
+  path: search.json
+  field: post # 只搜索文章
+  content: true # 把正文也编进搜索索引
+  format: striptags # 用文章HTML给内容建索引
