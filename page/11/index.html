@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,161 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">一次把缓存当锁用的事故：Shop 查询接口击穿/误删/假404复盘</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-01-09 18:46:02 / 修改时间：18:48:42" itemprop="dateCreated datePublished" datetime="2026-01-09T18:46:02+08:00">2026-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一次把缓存当锁用的事故：Shop-查询接口击穿-误删-假404复盘"><a href="#一次把缓存当锁用的事故：Shop-查询接口击穿-误删-假404复盘" class="headerlink" title="一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘"></a>一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘</h1><p>我在 Shop 查询接口里实现了缓存击穿保护，结果把缓存当锁用了：解锁时顺手把缓存删了。压测一跑，DB 像被踹了一脚，抖得很有节奏。</p>
+<h2 id="0-背景：Day2-验收目标是什么？"><a href="#0-背景：Day2-验收目标是什么？" class="headerlink" title="0. 背景：Day2 验收目标是什么？"></a>0. 背景：Day2 验收目标是什么？</h2><ul>
+<li>目标接口：GET &#x2F;shops&#x2F;{shopId}</li>
+<li>验收：<ol>
+<li>店铺不存在：返回错误码，且不打爆 DB（空值缓存）</li>
+<li>热点店铺：并发下不打爆 DB（互斥&#x2F;逻辑过期）</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-现象：问题怎么暴露的？"><a href="#1-现象：问题怎么暴露的？" class="headerlink" title="1. 现象：问题怎么暴露的？"></a>1. 现象：问题怎么暴露的？</h2><ul>
+<li>并发压测时 DB 回源次数异常</li>
+</ul>
+<h2 id="2-根因：到底哪里写错了？（按严重级别）"><a href="#2-根因：到底哪里写错了？（按严重级别）" class="headerlink" title="2. 根因：到底哪里写错了？（按严重级别）"></a>2. 根因：到底哪里写错了？（按严重级别）</h2><h3 id="2-1-Critical：锁-key-与缓存-key-混用"><a href="#2-1-Critical：锁-key-与缓存-key-混用" class="headerlink" title="2.1 Critical：锁 key 与缓存 key 混用"></a>2.1 Critical：锁 key 与缓存 key 混用</h3><ul>
+<li>现象：unlock 可能误删缓存，导致缓存抖动</li>
+<li>后果：热点击穿 → DB 抖动</li>
+<li>修复：lockKey 与 cacheKey 分前缀</li>
+</ul>
+<h3 id="2-2-Critical：并发-miss-抢不到锁却写空值缓存（假404）"><a href="#2-2-Critical：并发-miss-抢不到锁却写空值缓存（假404）" class="headerlink" title="2.2 Critical：并发 miss 抢不到锁却写空值缓存（假404）"></a>2.2 Critical：并发 miss 抢不到锁却写空值缓存（假404）</h3><ul>
+<li>现象：真实有数据却被缓存为空</li>
+<li>后果：长时间错误 404</li>
+<li>修复：拿不到锁就 sleep + 重读缓存，不写任何缓存</li>
+</ul>
+<h3 id="2-3-Medium：lon-lat-未判空导致-NPE"><a href="#2-3-Medium：lon-lat-未判空导致-NPE" class="headerlink" title="2.3 Medium：lon&#x2F;lat 未判空导致 NPE"></a>2.3 Medium：lon&#x2F;lat 未判空导致 NPE</h3><ul>
+<li>现象：不传定位参数直接 500</li>
+<li>修复：lon&#x2F;lat 与 shop 坐标双向判空</li>
+</ul>
+<h3 id="2-4-Low：type-判空缺失导致-NPE-错误码不清晰"><a href="#2-4-Low：type-判空缺失导致-NPE-错误码不清晰" class="headerlink" title="2.4 Low：type 判空缺失导致 NPE &#x2F; 错误码不清晰"></a>2.4 Low：type 判空缺失导致 NPE &#x2F; 错误码不清晰</h3><ul>
+<li>修复：type 为空返回明确错误码</li>
+</ul>
+<blockquote>
+<p>注：如果你的入口实际是 ShopServiceImpl#getById，还需要补齐 shopId&#x2F;status&#x2F;typeName&#x2F;空值缓存等校验。</p>
+</blockquote>
+<h2 id="3-最小补丁：改动点（只贴关键-diff）"><a href="#3-最小补丁：改动点（只贴关键-diff）" class="headerlink" title="3. 最小补丁：改动点（只贴关键 diff）"></a>3. 最小补丁：改动点（只贴关键 diff）</h2><ul>
+<li><ol>
+<li>lockKey 前缀修正</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>tryLock 失败的处理：sleep + 重读缓存</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>miss 回源后写入逻辑过期缓存 &#x2F; 空值缓存</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>lon&#x2F;lat 判空</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-回归测试：怎么证明真的修好了？"><a href="#4-回归测试：怎么证明真的修好了？" class="headerlink" title="4. 回归测试：怎么证明真的修好了？"></a>4. 回归测试：怎么证明真的修好了？</h2><h3 id="4-1-不存在店铺：防穿透"><a href="#4-1-不存在店铺：防穿透" class="headerlink" title="4.1 不存在店铺：防穿透"></a>4.1 不存在店铺：防穿透</h3><ul>
+<li>删除缓存 key</li>
+<li>并发请求不存在 shopId</li>
+<li>预期：DB 只回源一次（或极少），后续命中空值缓存</li>
+</ul>
+<h3 id="4-2-热点店铺：防击穿"><a href="#4-2-热点店铺：防击穿" class="headerlink" title="4.2 热点店铺：防击穿"></a>4.2 热点店铺：防击穿</h3><ul>
+<li>删除缓存 key</li>
+<li>“瞬间并发”请求同一 shopId（不要慢爬升）</li>
+<li>预期：DB 回源次数≈1，其余等待锁或读缓存</li>
+</ul>
+<h3 id="4-3-lon-lat-缺省"><a href="#4-3-lon-lat-缺省" class="headerlink" title="4.3 lon&#x2F;lat 缺省"></a>4.3 lon&#x2F;lat 缺省</h3><ul>
+<li>只传 shopId</li>
+<li>预期：200，distance 为空</li>
+</ul>
+<h2 id="5-沉淀：Shop-查询接口容错点清单（可复用）"><a href="#5-沉淀：Shop-查询接口容错点清单（可复用）" class="headerlink" title="5. 沉淀：Shop 查询接口容错点清单（可复用）"></a>5. 沉淀：Shop 查询接口容错点清单（可复用）</h2><ul>
+<li>容错点01：锁 key 与缓存 key 必须隔离</li>
+<li>容错点02：抢不到锁禁止写空值缓存</li>
+<li>容错点03：逻辑过期必须保证首次建缓存</li>
+<li>容错点04：经纬度可选参数要双向判空</li>
+<li>容错点05：type 可能脏数据要判空</li>
+<li>容错点06：status 校验必须在缓存层&#x2F;业务层明确</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1395,111 +1550,6 @@
 <li>知乎（不刷）换成看书（微信读书&#x2F;苹果阅读）</li>
 </ol>
 <h1 id="整理清楚之后，该干什么很清楚了"><a href="#整理清楚之后，该干什么很清楚了" class="headerlink" title="整理清楚之后，该干什么很清楚了"></a>整理清楚之后，该干什么很清楚了</h1><p>所以……享受一个充实的晚上吧（笑）</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/%E4%BB%8A%E5%B9%B4%E6%88%91%E7%9A%84%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B%EF%BD%9C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%B0%91%E5%85%B3%E6%B3%A8%E5%88%AB%E4%BA%BA%EF%BC%8C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E8%81%9A%E7%84%A6%E8%87%AA%E5%B7%B1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/%E4%BB%8A%E5%B9%B4%E6%88%91%E7%9A%84%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B%EF%BD%9C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%B0%91%E5%85%B3%E6%B3%A8%E5%88%AB%E4%BA%BA%EF%BC%8C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E8%81%9A%E7%84%A6%E8%87%AA%E5%B7%B1/" class="post-title-link" itemprop="url">今年我的新年愿望｜越来越少关注别人，越来越多聚焦自己</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2026-01-01 22:00:30 / 修改时间：22:12:01" itemprop="dateCreated datePublished" datetime="2026-01-01T22:00:30+08:00">2026-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/" itemprop="url" rel="index"><span itemprop="name">新年愿望</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今年我跟ChatGPT发了1200万字消息，它回我6200万字消息。</p>
-<p>我发现一个问题：我跟AI聊了很多和我无关的人。比如，波姐&#x2F;三姥姥&#x2F;阿姨&#x2F;于浩&#x2F;怡红&#x2F;朱玉茹等等。</p>
-<p>虽然她们每个人，我都有给抽出了一个系列，比如：</p>
-<p>波姐属于和我同龄的社交温柔社交猎人。</p>
-<p>三姥姥是乡村玄学记，被我抽出非正式权力如何生发，又如何灭亡。</p>
-<p>阿姨是面子燃烧者如何深陷传销且变恋爱脑，这里抽出了人为了自我叙事能付出多大的代价。</p>
-<p>于浩在一个重面子轻里子的家里，被给予厚望但又没有承担责任的能力的男孩，会如何扭曲变形，维持存在感。</p>
-<p>怡红是为了钱和体面嫁入一个看起来不错的家庭，又如何在这个家庭里被耗干的。</p>
-<p>朱玉茹是一个人以为改名就是改命，但不管改了什么名字，她在一个不接受她的体系里，始终只有一个名字——招娣。</p>
-<p>大姑的被我抽出功能性长女的表面体面，背地里抑郁的故事。</p>
-<p>这些故事不是不好看，而是我太熟悉其中的味道了。我聊故事，只是在重复。而且这些重复，没有让我更专注于我的主要任务——写代码。</p>
-<p>所以2026年，我真正要改正的是，把这一块讲故事的能力，放到我自己的生活里。不过那些已经讲过的故事，就整理完毕，归档得了。</p>
-<p>2026年，我要</p>
-<ul>
-<li>只看我自己</li>
-<li>只盯我的项目</li>
-<li>空余时间只做我Some Day点子合集里的某一项</li>
-</ul>
 
       
 
