@@ -27,7 +27,7 @@
 <meta property="og:description" content="如题。（笑）。 昨儿我测试发现，cachedTokenId跟前端传的tokenId一样，为啥还是校验失败？难道是pepper每次都随机生成一个新的，不是固定常量？（因为之前出现过类似错误，但我检查了一下pepper，没错哎）。 tokenId对得上，那传递没问题，问题就出在加密上了。后续排查，发现，创建token存redis的时候，token &#x3D; sha256(sha256(tokenI">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-11T02:53:04.000Z">
-<meta property="article:modified_time" content="2026-02-11T03:03:09.904Z">
+<meta property="article:modified_time" content="2026-02-11T02:53:04.000Z">
 <meta property="article:author" content="之瑞">
 <meta property="article:tag" content="BugFix">
 <meta property="article:tag" content="SHA256">
@@ -246,9 +246,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2026-02-11 10:53:04 / 修改时间：11:03:09" itemprop="dateCreated datePublished" datetime="2026-02-11T10:53:04+08:00">2026-02-11</time>
+      <time title="创建时间：2026-02-11 10:53:04" itemprop="dateCreated datePublished" datetime="2026-02-11T10:53:04+08:00">2026-02-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
