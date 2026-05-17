@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">273</span>
+        <span class="site-state-item-count">275</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,147 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜当redis可以显式补偿的时候，需要上Canal吗？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-08 21:24:50" itemprop="dateCreated datePublished" datetime="2026-02-08T21:24:50+08:00">2026-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前情回顾：<br>我的一个方法流程是：</p>
+<ol>
+<li>redis读写（业务状态）</li>
+<li>DB读写</li>
+<li>redis读写（缓存态）</li>
+</ol>
+<p>我纠结的问题点：</p>
+<ol>
+<li>目前情况会导致事务回滚DB数据，而redis数据没有同步回滚</li>
+<li>考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。</li>
+</ol>
+<p>我考虑的解决方案：</p>
+<ol>
+<li>显示补偿，不是强一致。</li>
+<li>Canal</li>
+</ol>
+<p>方案1如何操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">redisOk</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    redisWrite1();</span><br><span class="line">    redisOk = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    dbWrite(); <span class="comment">// 这一步 @Transactional</span></span><br><span class="line"></span><br><span class="line">    redisWrite2();</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    <span class="keyword">if</span>(redisOk)&#123;</span><br><span class="line">        redisRollback1(); <span class="comment">// 补偿</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方案适合：</p>
+<ol>
+<li>状态机</li>
+<li>次数扣减</li>
+<li>workflow</li>
+</ol>
+<p>方案2Canal</p>
+<ol>
+<li>第一步redis，自己写</li>
+<li>第三步redis，交给Canal</li>
+</ol>
+<p>Canal能做的：</p>
+<ol>
+<li>监听DB binlog</li>
+<li>DB commit之后，异步更新redis&#x2F;es&#x2F;mq</li>
+</ol>
+<p>Canal解决的问题是：「DB -&gt; Redis的单向同步」</p>
+<p>Canal使用场景：</p>
+<ol>
+<li>多表多服务共享redis </li>
+<li>读多写少</li>
+<li>强烈不想在业务代码里碰缓存</li>
+<li>接受秒级延迟</li>
+<li>有运维精力</li>
+</ol>
+<p>另，redis的状态如何区分？</p>
+<ul>
+<li>业务态Redis（不需要强一致，出问题靠TTL&#x2F;补偿，不需要进事务）<ul>
+<li>限流</li>
+<li>去重</li>
+<li>幂等</li>
+<li>状态机 step</li>
+<li>分布式锁</li>
+</ul>
+</li>
+<li>缓存态Redis（DB派生）（严格afterCommit，删除缓存&#x2F;重建）<ul>
+<li>详情缓存</li>
+<li>聚合结果</li>
+</ul>
+</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1255,138 +1396,6 @@
 <p>你喊出那句“傻逼别吵了”不是罪，而是<strong>最后一道护栏倒下前的防线警报</strong>。</p>
 <p><strong>别内疚，那不是你的错。</strong></p>
 <hr>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%EF%BD%9C%E6%A5%BC%E4%B8%8B%E5%8D%8A%E5%A4%9C11%E7%82%B9%E5%8D%8A%E5%A4%AA%E5%90%B5%EF%BC%8C%E6%88%91%E9%AA%82%E2%80%9C%E8%83%BD%E4%B8%8D%E8%83%BD%E5%88%AB%E5%90%B5%E4%BA%86%E2%80%9D%EF%BC%8C%E4%B9%8B%E5%90%8E%E6%88%91%E5%A6%88%E5%85%B4%E5%B8%88%E5%8A%A8%E4%BC%97%E9%97%AE%EF%BC%9A%E4%BD%A0%E8%BF%99%E6%A0%B7%E4%B8%8D%E6%80%95%E5%88%AB%E4%BA%BA%E8%AF%B4%E4%BD%A0%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/06/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%EF%BD%9C%E6%A5%BC%E4%B8%8B%E5%8D%8A%E5%A4%9C11%E7%82%B9%E5%8D%8A%E5%A4%AA%E5%90%B5%EF%BC%8C%E6%88%91%E9%AA%82%E2%80%9C%E8%83%BD%E4%B8%8D%E8%83%BD%E5%88%AB%E5%90%B5%E4%BA%86%E2%80%9D%EF%BC%8C%E4%B9%8B%E5%90%8E%E6%88%91%E5%A6%88%E5%85%B4%E5%B8%88%E5%8A%A8%E4%BC%97%E9%97%AE%EF%BC%9A%E4%BD%A0%E8%BF%99%E6%A0%B7%E4%B8%8D%E6%80%95%E5%88%AB%E4%BA%BA%E8%AF%B4%E4%BD%A0%EF%BC%9F/" class="post-title-link" itemprop="url">日常生活｜楼下半夜11点半太吵，我骂“能不能别吵了”，之后我妈兴师动众问：你这样不怕别人说你？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-06 18:27:43" itemprop="dateCreated datePublished" datetime="2026-02-06T18:27:43+08:00">2026-02-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">日常生活</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81/" itemprop="url" rel="index"><span itemprop="name">家庭冲突</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81/%E7%A4%BE%E5%8C%BA%E5%86%B2%E7%AA%81/" itemprop="url" rel="index"><span itemprop="name">社区冲突</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题。</p>
-<p>本篇是为了记录，当时发生了什么。</p>
-<p>2026年02月05日11点30分，楼下不断吵闹，吵闹的一轮又一轮。<br>我忍不住了，喊一声：“煞笔，能不能别吵了”。<br>之后睡觉。短暂安静了15～20分钟，随后来往的电动车的哔哔哔声，楼下喊声控灯亮的啊啊啊啊声，还是继续。</p>
-<p>随后传来我爹的咳嗽声（声音不小）。</p>
-<p>半夜12点左右，我妈过来兴师问罪：“你干嘛深夜大喊？别让别人觉得你有病！”<br>我说半夜吵闹，太没公德心了。我不跟你晚上争执这件事。明天再说。</p>
-<p>当晚我睡了1个半小时。<br>我看了Apple watch后台的噪声记录。昨晚23点～24点之间，吵闹的声音最高81分贝，次高77分贝。在我骂人之前，楼下的声音有77分贝。</p>
-<p>后续断断续续有零碎的噪声。</p>
-<p>半夜里我觉得焦虑，跟AI吐槽：好累～想死～于是大半夜的就狂倒苦水。不过因为我连着两三晚上没睡好觉了，所以最近也有点神经紧绷。昨晚再睡不好，我就特别焦虑。</p>
-<p>今天上午我改改之前的bug代码，中午吃饭的时候，我妈说你昨晚那么喊，让别人怎么看你？<br>我说，我不在乎别人怎么看我，我只要睡个好觉。<br>我妈：人家也不是存心的。<br>我：不管人家是不是存心的，我确实被吵到了。<br>我妈：你这样容易冲动，我过年不能带你去宴席。<br>我：没事，我正好也不想去。<br>我妈：你昨晚睡好了吗？你这样深夜大吼，别人听你的吗？人家吵是难免的，你现在不也大吵？<br>我：我在中午跟你吵架，跟他们在半夜吵不同啊。半夜吵架很没公德心哎。而且他们中午吵闹，我有抱怨过一句吗？我被他们深夜吵的睡不着的时候，你跑哪去了？怎么我一开始反击维护自己，你就忽然揪着我说事儿了？<br>我妈：不是揪着你说事儿，你这样脾气大，到哪都没办法跟人相处。<br>我：没事，那像你一样，当受虐狂难道很舒服吗？你没资格说我，因为我受苦的时候，你假装看不见，你偏偏看见我反击的时候了，抓着那一刻说我不好，但那一刻之前呢？我连着几晚上都睡不好，那个时候，你在哪里呢？等我受苦的时候，你在我身边的时候，你才有资格说我。<br>我妈：你就是小心眼，在老家你也说人家说你。你受不了人家说你两句<br>我：嫂子过年说我：你读书读傻了。这是羞辱，而不是单纯说我。就像我无缘无故突然骂你傻逼，你也要忍吗？<br>我妈：你凭什么骂我傻逼？你知不知道你这么说有罪<br>我：你不是说要对别人的无心之言忍耐吗？我不小心说了心里话，我向你道歉，请你原谅我说你傻逼。<br>我妈：你现在不也在吵闹？你不忍邻居们夜里吵闹，那你白天吵闹，你也让人家骂你，举报你？<br>我说：挺好的，我太吵了的话，举报我吧。别留情。<br>我妈：你这样让大家都想撵走你。你这样折磨人，什么时候到头？你天天骂我，我是你能骂的人嘛（附带哭哭啼啼）。<br>我：很好。我求之不得。不如你们给我下个驱逐令，我拿了驱逐令之后，一辈子不踏足这里。挺好的。来吧，赶我走吧。我求之不得。<br>我妈：我可没说赶你走。<br>我：没事，我觉得我真的太折磨你了。我反思许久，觉得还是我走比较好。我向你道歉，是我不对，是我惊扰大家，是我让你难堪。所以我走。不用你们下逐客令。</p>
-<p>我妈不哭了。开始悄悄把地上的杂物收拾干净。</p>
-<p>我写了三份单子，发给妈爹：</p>
-<ol>
-<li>边界声明告知书</li>
-<li>不再共同生活及互不干涉协议</li>
-<li>搬离物品清单</li>
-</ol>
-<p>我搬走的时候，会把所有物品整理清楚，我拿走了什么，走之前房间物品拍照录视频。<br>我不想我走之后，再被扣一个偷拿家里东西和钱的黑锅。</p>
-<p>我开始打包衣物。<br>然后吃了午饭。</p>
-<p>我决定好要搬走之后，发现我推迟十多天没来的月经来了。<br>我觉得挺惊讶的。</p>
-<p>下午四点半，我爹回家，说：我妈说我不是有心的，让我把窗户打开。给我转20块红包。<br>我说：没事，你别转。我不收。你们既然不喜欢我在这里，我不用你们赶，自己走。<br>我爹：你妈怎么会赶你走呢？我是一家之主，我说不让你走，他们谁都不能让你走。</p>
-<p>下午六点，我觉得挺轻松。我的搬走物品清单上，少了俩耳机，等会儿我补上。</p>
-<p>这就是整件事的来龙去脉。</p>
-<p>2025年02月05日，我睡了1个半小时。我跟我妈吵架的时候，心在突突的跳。<br>我妈说夜里有个女的在哭。<br>其实夜里我在哭。<br>夜里哭，白天硬。我不想被看到脆弱。也不想被人看到我在哭。所以就凶一点。</p>
-<p>虽然夜里吐槽，白天还是得生活。我早上起来之后炫了一点腰果，3个小面包，一盒牛奶。吃完开始修我的bug代码。</p>
-<p>我松了口气，我问GPT：</p>
-<blockquote>
-<p>到底是在小城小区被众矢之的更地狱？还是回老家县城农村，被集体规训更地狱？</p>
-</blockquote>
-<p>因为这三年我只能二选一。</p>
-<p>这就是临近过年，发生的事情。<br>整件事里，我被惹毛的点是：</p>
-<blockquote>
-<p>社区楼下深夜噪音，我烦了，喊了一声：傻逼别吵了。暂时安静15分钟。</p>
-<p>我妈立刻追过来兴师问罪：你有毛病？半夜大喊。</p>
-<p>我在喊那一句的时候，被吵的难睡，那之前的一个小时两个小时，我父母没看到。但我反抗一下的时候，他们忽然心明眼亮了，开始帮着大家治我了。</p>
-</blockquote>
-<p>其实类似的事情，发生过一件。</p>
-<blockquote>
-<p>当时小区群里，有人发天台很多垃圾，还骂了一句傻逼，乱丢垃圾。</p>
-<p>我爹立刻在家里问我是不是我丢的。</p>
-<p>我说：人还没点名骂我呢？你先在家审我一顿？你如果觉得是我丢的，拿录像证据来，录像里我丢了，不用你说，我立刻到群里，道歉，赔钱。可没有任何证据是我丢的，别人还没发话呢，你倒是好，立刻把黑锅扣我头上，什么意思？</p>
-</blockquote>
-<p>这就是整件事的过程。<br>记录这件事，不是为了讨论谁对谁错，只是记录当伤害发生时，谁缺席，谁反击，谁只在反击的时候现身。</p>
 
       
 
