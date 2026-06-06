@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">284</span>
+        <span class="site-state-item-count">288</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,142 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/" class="post-title-link" itemprop="url">空值缓存可以防止缓存穿透，但……什么时候要用它呢？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 15:41:52" itemprop="dateCreated datePublished" datetime="2026-01-05T15:41:52+08:00">2026-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h1><p>我写店铺列表接口，要不要上空值缓存呢？<br>key是固定的<code>cache:shop:types</code></p>
+<h1 id="列表接口缓存空值，到底在防啥？"><a href="#列表接口缓存空值，到底在防啥？" class="headerlink" title="列表接口缓存空值，到底在防啥？"></a>列表接口缓存空值，到底在防啥？</h1><p>因为我们这边的key是固定的，所以不大可能会出现“不同id被人恶意传参穿透“的情况。</p>
+<p>但它会遇到两种现实的问题：</p>
+<h2 id="场景1：数据真的为空（初始化-测试库-被误删-迁移期间）"><a href="#场景1：数据真的为空（初始化-测试库-被误删-迁移期间）" class="headerlink" title="场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）"></a>场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）</h2><p>比如：</p>
+<ul>
+<li>新环境刚起，<code>shop_type</code>表还没有导入</li>
+<li>测试库就是空的</li>
+<li>生产迁移时短暂空窗</li>
+<li>有人误删了类型表数据</li>
+</ul>
+<p>这时候你如果不缓存空列表，会发生什么？</p>
+<ul>
+<li>每一个请求都会miss（因为你不写缓存）</li>
+<li>每一个请求都会去查DB</li>
+<li>DB这条SQL会被持续刷屏<br>这叫“空结果击穿&#x2F;持续回源”（不算经典穿透，但效果类似：一直打库）</li>
+</ul>
+<p>缓存空值，就能让系统在“确定为空”期间：</p>
+<ul>
+<li>只打库一次</li>
+<li>后续请求都直接返回空列表</li>
+<li>等数据补上之后（或者删除缓存），再恢复正常<blockquote>
+<p>这在“配置&#x2F;字典类数据”上很常见，你要允许系统在异常数据态下仍然稳定。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）"><a href="#场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）" class="headerlink" title="场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）"></a>场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）</h2><p>有些情况会被认为「查不到就是空」，但可能是：</p>
+<ul>
+<li>读库刚切换，延迟，短暂不可用</li>
+<li>超时会被熔断&#x2F;降级处理成空集合</li>
+<li>SQL会被限流，返回空（取决于代理&#x2F;中间件）</li>
+<li>catch了异常，错误地返回<code>Collections.emptyList()</code></li>
+</ul>
+<p>如果这类偶发空，经常发生，而空值缓存TTL设置的很长，就会把偶发故障固化。</p>
+<p>所以正确的姿势是：</p>
+<ul>
+<li>空值缓存也可以做，但TTL要够短（分钟级）</li>
+<li>让它只是短暂回血，而不是长期误导</li>
+</ul>
+<h1 id="那店铺列表真的需要空值缓存吗？"><a href="#那店铺列表真的需要空值缓存吗？" class="headerlink" title="那店铺列表真的需要空值缓存吗？"></a>那店铺列表真的需要空值缓存吗？</h1><p>看业务约束。</p>
+<p>如果你认为“店铺列表类型不可能为空，空就是故障”，那你可以：</p>
+<ul>
+<li>不缓存空值</li>
+<li>直接抛异常&#x2F;返回错误码</li>
+<li>同时报警</li>
+</ul>
+<p>如果你希望“就算为空也别把DB打爆，系统先稳住“，那就：</p>
+<ul>
+<li>缓存空列表，TTL分钟级（2～10分钟）</li>
+<li>并且在后台日志里标记，店铺列表为空，供后续排查</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>查询详情：防 穿透（不存在的id反复被查询）</li>
+<li>查询列表：防 空结果持续回源（确实为空的时候反复被查）+ 防止故障抖动导致反复重建&#x2F;打库</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1304,215 +1440,6 @@
 <li>隐藏IP地址（对跟踪器）</li>
 <li>搜索引擎隐私报告（可以打开）</li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/%E6%94%AF%E4%BB%98%E4%B9%A0%E6%83%AF%EF%BD%9C%E6%88%91%E5%85%B3%E9%97%AD%E4%BA%86%E6%89%80%E6%9C%89%E5%B9%B3%E5%8F%B0%E5%86%85%E4%BB%98%E6%AC%BE%EF%BC%8C%E6%94%B9%E7%94%A8Apple-Pay/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/%E6%94%AF%E4%BB%98%E4%B9%A0%E6%83%AF%EF%BD%9C%E6%88%91%E5%85%B3%E9%97%AD%E4%BA%86%E6%89%80%E6%9C%89%E5%B9%B3%E5%8F%B0%E5%86%85%E4%BB%98%E6%AC%BE%EF%BC%8C%E6%94%B9%E7%94%A8Apple-Pay/" class="post-title-link" itemprop="url">支付习惯｜我关闭了所有平台内付款，改用Apple Pay</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-01 14:45:14" itemprop="dateCreated datePublished" datetime="2026-01-01T14:45:14+08:00">2026-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>最近，视频软件给我推送贷款广告。我反思，到底哪一步，让算法给我画像成信用付用户？</p>
-<p>我检查了多个购物软件，发现之前拼多多用过先用后付。可能是这一步导致了贷款广告推送来源。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>于是我关闭了所有软件的信用付款，顺带，调整了支付方式。</p>
-<ul>
-<li>把所有购物平台的app，绑定的银行卡解绑，然后改用Apple Pay付款。</li>
-<li>尽量不碰平台付款（比如支付宝&#x2F;微信），除非不支持Apple Pay。</li>
-<li>绝对不可以碰的：信用付款，有很多形式<ul>
-<li>先用后付</li>
-<li>小额免密支付（不是信用付款，但是算法试探你对付款动作是否敏感，平台可能画像你“接受弱确认”，“允许钱自动走”，“对金额的心理摩擦阈值较低”）</li>
-<li>花呗&#x2F;白条这类平台贷款（即使一开始可能0利率）</li>
-</ul>
-</li>
-<li>整体支付顺序从高到低：Apple Pay -&gt; 云闪付 -&gt; 支付宝 -&gt; 微信</li>
-</ul>
-<h1 id="解决方案的原理"><a href="#解决方案的原理" class="headerlink" title="解决方案的原理"></a>解决方案的原理</h1><p>这一套设计的核心原则：</p>
-<blockquote>
-<p>把钱相关的操作，留给银行卡&#x2F;银行app处理，非银行平台，只做支付动作。</p>
-</blockquote>
-<p>为啥不把非银行平台作为放钱的地方？不是因为它们不安全，而是因为：</p>
-<blockquote>
-<p>非银行平台，比如支付宝&#x2F;微信，它的主业不是在管钱，而是为了</p>
-<ul>
-<li>留住你</li>
-<li>理解你</li>
-<li>推进你下一步的行为</li>
-</ul>
-</blockquote>
-<p>所以，让它们帮你付款可以，但让他们帮你看“你有多少钱，怎么用钱”——没必要。</p>
-<p>而银行App则不然，它的结构是</p>
-<ul>
-<li>账户</li>
-<li>余额</li>
-<li>明细</li>
-<li>风控</li>
-<li>合规</li>
-</ul>
-<p>它们不能靠猜你赚钱，只能靠你明确的金融行为。</p>
-<p>所以：</p>
-<ul>
-<li>查余额</li>
-<li>看流水</li>
-<li>改限额</li>
-<li>大额转账<br>只在银行App做，是最干净的路径。</li>
-</ul>
-<p>举例子来说，今天你在超市Apple Pay 花了38元，下午在淘宝花了15元支付宝支付，晚上在京东买了50元用微信支付。</p>
-<ul>
-<li>这三笔交易，只有银行同时知道三笔交易的信息</li>
-<li>支付宝：只知道第二笔</li>
-<li>微信：只知道第三笔</li>
-<li>微信&#x2F;支付宝：不知道你今天早上去过超市</li>
-</ul>
-<p>那银行呢？会把这三笔交易的数据转给平台吗？</p>
-<ul>
-<li>不会。</li>
-</ul>
-<p>因为: </p>
-<ul>
-<li>银行是金融机构</li>
-<li>支付宝&#x2F;微信是第三方支付平台</li>
-<li>第三方支付平台，没有全量共享你银行卡流水的合法渠道</li>
-</ul>
-<p>微信&#x2F;支付宝这类平台，只能看到</p>
-<ul>
-<li>你自己参与过的交易</li>
-</ul>
-<p>构建好这个路径之后：</p>
-<ul>
-<li>Apple Pay（日常交易） -&gt; 平台完全失明</li>
-<li>微信&#x2F;支付宝（少量交易） -&gt; 平台只能看到自己那点</li>
-</ul>
-<h1 id="为啥选Apple-Pay作为主要支付渠道？"><a href="#为啥选Apple-Pay作为主要支付渠道？" class="headerlink" title="为啥选Apple Pay作为主要支付渠道？"></a>为啥选Apple Pay作为主要支付渠道？</h1><p>另，为啥选Apple Pay作为主要支付渠道？</p>
-<ul>
-<li>商家拿不到你真实卡号<ul>
-<li>Apple Pay用的是设备专属的虚拟卡号</li>
-<li>商家看到的不是你的银行卡号</li>
-<li>就算商家系统被黑<ul>
-<li>也拿不到你的真实信息</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Apple Pay自己也不知道你买了什么<ul>
-<li>Apple Pay的设计是<ul>
-<li>Apple 不存储交易内容</li>
-<li>不追踪你买了什么</li>
-<li>不用交易数据做广告画像</li>
-</ul>
-</li>
-<li>Apple 是卖设备和系统的，不是靠卖你的行为数据赚钱</li>
-</ul>
-</li>
-<li>生物识别是本地完成的，不上传云端<ul>
-<li>Face ID &#x2F; Touch ID<ul>
-<li>在你手机本地完成</li>
-<li>数据不上传，不出设备</li>
-</ul>
-</li>
-<li>就算有人拿到你的手机<ul>
-<li>没有你的脸&#x2F;指纹</li>
-<li>刷不了钱</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="哪些支付手段，更像电子裸奔？"><a href="#哪些支付手段，更像电子裸奔？" class="headerlink" title="哪些支付手段，更像电子裸奔？"></a>哪些支付手段，更像电子裸奔？</h1><p>最后直观对比一下，哪些支付手段，更像是电子裸奔？我来给几个支付方式排序，隐私从好到差依次如下：</p>
-<ol>
-<li>Apple Pay（实体店）</li>
-<li>银行卡插卡&#x2F;闪付</li>
-<li>普通二维码支付</li>
-<li>平台内钱包 + 强画像</li>
-<li>先用后付&#x2F;借贷联动支付（最危险）</li>
-</ol>
-<h1 id="国内哪些地方可以用Apple-Pay？"><a href="#国内哪些地方可以用Apple-Pay？" class="headerlink" title="国内哪些地方可以用Apple Pay？"></a>国内哪些地方可以用Apple Pay？</h1><h2 id="线上"><a href="#线上" class="headerlink" title="线上"></a>线上</h2><p>国内支持Apple Pay的常见App列表</p>
-<ul>
-<li>京东</li>
-<li>拼多多</li>
-<li>美团</li>
-<li>中国联通</li>
-</ul>
-<p>注意：阿里系的App，比如淘宝&#x2F;天猫，只支持微信&#x2F;支付宝&#x2F;云闪付，不支持Apple Pay</p>
-<h2 id="线下"><a href="#线下" class="headerlink" title="线下"></a>线下</h2><ol>
-<li>大城市的公交卡（比如上海这类，支持Apple Pay）</li>
-<li>大型连锁超市&#x2F;便利店，支持Apple Pay</li>
-<li>某些支持银联闪付的超市&#x2F;便利店（只要支持银联闪付，就支持Apple Pay)</li>
-</ol>
-<p>注意；Apple Pay&#x2F;银联闪付，跟支付宝闪付不同。支持支付宝闪付的，不一定支持Apple Pay</p>
 
       
 
