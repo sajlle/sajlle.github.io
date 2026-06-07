@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">290</span>
+        <span class="site-state-item-count">292</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,185 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜写写Spring MVC的流程，Filter拦截了啥？Interceptor拦截了啥？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-23 15:07:41" itemprop="dateCreated datePublished" datetime="2026-02-23T15:07:41+08:00">2026-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>来，先上一个一次HTTP请求在Spring Boot里走过的路径（单请求路径的横切面）</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Client </span><br><span class="line">-&gt; Tomcat</span><br><span class="line">  -&gt; Filter（按顺序）</span><br><span class="line">    -&gt; DispatcherServlet</span><br><span class="line">      -&gt; HandlerMapping（找Controller方法）</span><br><span class="line">      -&gt; Interceptor.preHandle（按顺序）</span><br><span class="line">      -&gt; Controller（方法执行）</span><br><span class="line">      -&gt; Interceptor.postHandle（逆序）</span><br><span class="line">      -&gt; View（渲染）/ MessageConverter（写Json）</span><br><span class="line">      &lt;- Interceptor.afterCompletion（逆序，即使异常也会）</span><br><span class="line">    &lt;- DispatcherServlet</span><br><span class="line">  &lt;- Filter（返回方向，逆序）</span><br><span class="line">&lt;- Client</span><br></pre></td></tr></table></figure>
+<p>Filter：拦截的是进入和离开DispatcherServlet之前的所有请求，面向servlet层。</p>
+<ul>
+<li><code>Client -&gt; Filter -&gt; DispatcherServlet -&gt; Filter -&gt; Client</code></li>
+</ul>
+<p>Interceptor： 拦截的是进入Controller前后的所有请求，面向Spring MVC层</p>
+<ul>
+<li><code>DispatcherServlet -&gt; handlerMapping -&gt; Interceptor.preHandle -&gt; controller -&gt; Interceptor.postHandle -&gt; View/ MessageConverter -&gt; Interceptor.afterCompletion -&gt; DispatcherServlet</code></li>
+</ul>
+<p>视觉化的总结：</p>
+<ul>
+<li>Filter包住了dispatcherServlet</li>
+<li>Interceptor包住了<code>controller -&gt; view/ messageConverter</code>，controller执行之前塞preHandle，controller执行之后塞postHandle，视图渲染之前，塞afterCompletion</li>
+</ul>
+<h3 id="Spring-MVC里的DispatcherServlet到底干啥了？"><a href="#Spring-MVC里的DispatcherServlet到底干啥了？" class="headerlink" title="Spring MVC里的DispatcherServlet到底干啥了？"></a>Spring MVC里的DispatcherServlet到底干啥了？</h3><ol>
+<li>找到执行哪个handler<ul>
+<li>HandlerMapping 根据URL，HTTP Method，参数等，找到匹配的Handler<ul>
+<li>通常是<code>@RequestMapping</code>&#x2F;<code>@GetMapping</code>里的某个Controller方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>决定怎么执行这个handler<ul>
+<li>HandlerAdapter 把找到的handler用正确的方式调用起来<ul>
+<li>对 <code>@Controller</code>的方法，走<code>RequestMappingHandlerAdapter</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参数绑定 + 调用Controller<ul>
+<li>把JSON body&#x2F; query&#x2F; path解析成DTO</li>
+<li>做参数校验（比如 <code>@Valid</code>）</li>
+<li>调用 Controller 方法，拿到返回值</li>
+</ul>
+</li>
+<li>处理返回值<ul>
+<li>返回JSON <code>@RequestBody</code>或者<code>@RestController</code><ul>
+<li>走HttpMessageConverter （比如Jackson），把对象写到response body</li>
+</ul>
+</li>
+<li>返回页面（View）： ModelAndView</li>
+</ul>
+</li>
+<li>走异常处理<ul>
+<li>抛出异常的时候，会走HandlerExceptionResolver<ul>
+<li><code>@ControllerAdvice</code> &#x2F; <code>@ExceptionHandler</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>人话版本：找到方法，执行方法，解析结果，异常处理</p>
+<ul>
+<li>找到controller里的方法（HandlerMapping&#x2F;@RequestMapping等等）</li>
+<li>调用方法（handlerAdapter&#x2F;RequestMappingHandlerAdapter）</li>
+<li>解析参数（嗯，这时候接触到方法了，才解析参数）。（参数变DTO，校验参数，调用方法，拿到返回值）</li>
+<li>把返回值塞给responseBody(如果返回json),MessageConverter，或者返回view（如果是jsp前后端耦合）</li>
+<li>抛出异常（HandlerExceptionResolver, @ExceptionHandler&#x2F;@ControllerAdvice)</li>
+</ul>
+<h3 id="Interceptor拦截了啥？"><a href="#Interceptor拦截了啥？" class="headerlink" title="Interceptor拦截了啥？"></a>Interceptor拦截了啥？</h3><ol>
+<li>preHandle(request, response, handler)<ul>
+<li>发生在拿到handler之后，执行handler之前，拿到的是哪个controller的哪个方法</li>
+<li>可以返回false终止请求</li>
+<li>用途：需要知道这是哪个业务接口&#x2F;哪个注解的策略</li>
+</ul>
+</li>
+<li>postHandle(reques, response, handler)<ul>
+<li>发生在Controller执行之后，渲染之前</li>
+<li>请求走到Controller，且没有异常</li>
+<li>可以改 ModelAndView，纯JSON场景用处少</li>
+</ul>
+</li>
+<li>afterCompletion(request, respons, handler, ex)<ul>
+<li>请求整个完成之后，包括异常&#x2F;视图渲染&#x2F;JSON写出之后</li>
+<li>最适合做：资源清理，耗时统计收尾，MDC清理</li>
+<li>即使异常也会被调用，这也是它比postHandle更可靠的地方</li>
+</ul>
+</li>
+</ol>
+<p>人话版本总结：</p>
+<ul>
+<li>preHandle：适合需要知道哪个业务接口</li>
+<li>postHandle：请求走到这里且无异常，有异常可能不走这里</li>
+<li>afterCompletion：即使异常也被调用，适合请求执行完之后的资源清理等收尾工作</li>
+</ul>
+<h3 id="Filter到底拦截了啥？"><a href="#Filter到底拦截了啥？" class="headerlink" title="Filter到底拦截了啥？"></a>Filter到底拦截了啥？</h3><p>Filter（javax.servlet.Filter&#x2F; jakarta.servlet.Filter）只有一个核心<code>doFilter(request, response,chain)  </code>，作用是：</p>
+<ul>
+<li>是否继续chain.doFilter()，让请求往后走</li>
+<li>在chain.doFilter前后做什么</li>
+</ul>
+<p>Filter能力比较底层：</p>
+<ul>
+<li>Filter能在Spring没找Controller之前拦截</li>
+<li>对所有路径都可能生效（包括静态资源，非MVC servlet等）</li>
+<li>包裹request&#x2F;response(wrapper)，做I&#x2F;O处理，比如缓存body，加解密，统一压缩等</li>
+</ul>
+<h3 id="Spring-Security的链路在哪？"><a href="#Spring-Security的链路在哪？" class="headerlink" title="Spring Security的链路在哪？"></a>Spring Security的链路在哪？</h3>
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1139,89 +1318,6 @@
 <p>说回到我家的事儿。<br>我爹背地里跟我妈吐槽我：难道我要养她一辈子？<br>我心说，你别跟我妈吐槽，你跟我扯呀～（笑）。别在我面前装好人，背地里跟我妈扯赖话。</p>
 <p>这次不生气挑战，周口版，3天失败（笑）。</p>
 <p>另，我们本地更好笑的一个传闻是，某家男家长，说，她姑娘结婚之前的钱，居然没给他一毛钱。我发现，有的人觉得，女儿没出嫁的钱也得归他们所有，我挺好奇的，你既然不想养女儿，你送福利院去呀，几十岁的人了，老惦记一个刚毕业的小女孩的工资是干嘛（笑）。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%AF%9B%E7%97%85%E5%87%BA%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%AF%9B%E7%97%85%E5%87%BA%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8A/" class="post-title-link" itemprop="url">技术手记｜启动项目失败，毛病出在目录上</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-11 11:06:55" itemprop="dateCreated datePublished" datetime="2026-02-11T11:06:55+08:00">2026-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>另，今儿我重测的时候，发现项目启动失败了，错误原因是找不到mapper目录。<br>我仔细一看目录，哎，不知道项目目录里啥时候混进了<code>.idea</code>目录了，删了这个目录，重新编译一下，就可以正常跑了。</p>
 
       
 
