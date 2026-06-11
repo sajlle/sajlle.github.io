@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">298</span>
+        <span class="site-state-item-count">300</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,108 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/" class="post-title-link" itemprop="url">技术手记｜redis和事务的雷我又踩上了（笑）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-05 19:43:51" itemprop="dateCreated datePublished" datetime="2026-02-05T19:43:51+08:00">2026-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。<br>我代码的逻辑是：</p>
+<ol>
+<li>redis（读写）</li>
+<li>DB读写（封装了private方法）</li>
+<li>redis（读写）</li>
+</ol>
+<p>这涉及两个问题：</p>
+<ol>
+<li>private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。</li>
+<li>redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。</li>
+</ol>
+<p>问题一改法：</p>
+<ol>
+<li>把事务加到调用private方法的public方法</li>
+<li>使用AspectJ，绕过Spring AOP的public限制</li>
+</ol>
+<p>问题二改法：</p>
+<ol>
+<li>使用afterCommit，在提交事务之后再更新redis的值</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2140,134 +2242,6 @@
 </ul>
 </li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/" class="post-title-link" itemprop="url">try catch为啥要写到锁外面？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:58:45" itemprop="dateCreated datePublished" datetime="2026-01-05T15:58:45+08:00">2026-01-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>简略答案：</p>
-<blockquote>
-<p>try&#x2F;catch准确来说是try&#x2F;finally要把可能提前return&#x2F;抛异常的整段流程罩住，才能保证只要拿到锁，就一定会释放锁。</p>
-</blockquote>
-<h1 id="锁的场景里，真正需要的是try-finally"><a href="#锁的场景里，真正需要的是try-finally" class="headerlink" title="锁的场景里，真正需要的是try&#x2F;finally"></a>锁的场景里，真正需要的是try&#x2F;finally</h1><p>锁的场景里，最关键的是：</p>
-<ul>
-<li>代码途中return </li>
-<li>JSON解析&#x2F;查库&#x2F;Redis任何一步抛异常</li>
-<li>甚至自己写错导致NPE</li>
-</ul>
-<p>都不能让人把锁带走，否则就死锁（分布式锁就是锁key一直挂着直到过期）</p>
-<p>所以标准结构是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock();</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// 不管里面怎么 return / throw</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>finally是兜底：return 也会执行finally</p>
-<h1 id="为什么try要写在锁外面那层，而不是塞进locked分支？"><a href="#为什么try要写在锁外面那层，而不是塞进locked分支？" class="headerlink" title="为什么try要写在锁外面那层，而不是塞进locked分支？"></a>为什么try要写在锁外面那层，而不是塞进locked分支？</h1><p>如果把try写进<code>if(locked){...}</code>里，会发生什么？</p>
-<h2 id="问题A：你会很难保证所有路径都释放锁"><a href="#问题A：你会很难保证所有路径都释放锁" class="headerlink" title="问题A：你会很难保证所有路径都释放锁"></a>问题A：你会很难保证所有路径都释放锁</h2><p>代码很多return</p>
-<ul>
-<li>命中缓存return</li>
-<li>double-check 命中 return</li>
-<li>查库后 return</li>
-</ul>
-<p>如果try&#x2F;finally只包住locked分支内部，一旦在外面某条路径return，就得自己记得释放锁。但人很容易忘记。</p>
-<p>把try&#x2F;finally放到外层：怎么return都跑不掉finally</p>
-<h2 id="问题B：你会被迫写多份儿try结构（长-乱-易错）"><a href="#问题B：你会被迫写多份儿try结构（长-乱-易错）" class="headerlink" title="问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）"></a>问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）</h2><p>锁逻辑一般是：</p>
-<ul>
-<li>没拿到锁：sleep + retry</li>
-<li>拿到锁：double-check + rebuild<br>这两段都可能抛异常，都可能return</li>
-</ul>
-<p>如果try只写在locked分支里，那没拿到锁的分支要不要try？也要。</p>
-<p>结果：要复制一堆try&#x2F;catch&#x2F;finally，代码更长，bug概率更高。</p>
-<p>外层一个try&#x2F;finally，把所有分支统一罩住最省心。</p>
-<h2 id="问题C：异常不只会发生在锁内部"><a href="#问题C：异常不只会发生在锁内部" class="headerlink" title="问题C：异常不只会发生在锁内部"></a>问题C：异常不只会发生在锁内部</h2><p>很多异常点其实发生在locked之外，比如：</p>
-<ul>
-<li><code>Thread.sleep(...)</code>抛<code>InterruptedException</code>（通常在没有拿到锁那条分支）</li>
-<li>在else分支里重试读缓存，解析JSON</li>
-<li>甚至unlock本身，也可能出问题（例如 Redis 短暂不可用）</li>
-</ul>
-<p>所以try放外面是为了：所有路径异常都能被统一处理</p>
-<h1 id="锁代码骨架模板"><a href="#锁代码骨架模板" class="headerlink" title="锁代码骨架模板"></a>锁代码骨架模板</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!locked)&#123;</span><br><span class="line">        <span class="comment">// 退避重试读缓存（可能sleep，可能解析）</span></span><br><span class="line">        <span class="comment">// 这里也可能return</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// locked == true : double check + rebuild（可能查库/写缓存）</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">catch</span>(InterrruptedException e)&#123;</span><br><span class="line">    Thread.currentThread().interrupt();</span><br><span class="line">    <span class="comment">// 降级策略</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) &#123;</span><br><span class="line">        unlock(lockKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
-<li>try&#x2F;finally一定包住所有return的地方</li>
-<li>unlock只放finally</li>
-<li>只有locked &#x3D;&#x3D; true才unlock</li>
-</ol>
 
       
 
