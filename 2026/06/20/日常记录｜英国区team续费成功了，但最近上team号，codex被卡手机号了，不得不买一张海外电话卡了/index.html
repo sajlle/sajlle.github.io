@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="很多论坛说的Codex会卡手机号验证。因为我之前是Plus，而且老账户，没被卡手机号。切了team号之后，被卡手机号，于是不得不升级一下基础设施了。等卡到了，我去过一下验证。目前细节先不写，因为我也不确定这是不是能行。目前codex是手机号，WhatsApp都能过手机号验证。 其实也可以提取gpt的会话session里的access token，但我仔细看了，觉得还是算了，不值得为了过手机号验证做">
+    <meta name="description" content="很多论坛说的Codex会卡登陆。因为我之前是Plus，而且老账户，没被卡。切了team号之后，被卡，于是不得不升级一下基础设施了。其实也可以提取gpt的会话session里的token，但我仔细看了，觉得还是算了，为了过验证不值得。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了">
+<meta property="og:title" content="日常记录｜最近上team号，codex登陆被卡，哎，躲得过初一躲不过十五呀（笑）">
 <meta property="og:url" content="https://sajlle.github.io/2026/06/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%8B%B1%E5%9B%BD%E5%8C%BAteam%E7%BB%AD%E8%B4%B9%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E4%BD%86%E6%9C%80%E8%BF%91%E4%B8%8Ateam%E5%8F%B7%EF%BC%8Ccodex%E8%A2%AB%E5%8D%A1%E6%89%8B%E6%9C%BA%E5%8F%B7%E4%BA%86%EF%BC%8C%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%B9%B0%E4%B8%80%E5%BC%A0%E6%B5%B7%E5%A4%96%E7%94%B5%E8%AF%9D%E5%8D%A1%E4%BA%86/index.html">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="很多论坛说的Codex会卡手机号验证。因为我之前是Plus，而且老账户，没被卡手机号。切了team号之后，被卡手机号，于是不得不升级一下基础设施了。等卡到了，我去过一下验证。目前细节先不写，因为我也不确定这是不是能行。目前codex是手机号，WhatsApp都能过手机号验证。 其实也可以提取gpt的会话session里的access token，但我仔细看了，觉得还是算了，不值得为了过手机号验证做">
+<meta property="og:description" content="很多论坛说的Codex会卡登陆。因为我之前是Plus，而且老账户，没被卡。切了team号之后，被卡，于是不得不升级一下基础设施了。其实也可以提取gpt的会话session里的token，但我仔细看了，觉得还是算了，为了过验证不值得。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-20T02:29:36.000Z">
-<meta property="article:modified_time" content="2026-06-20T02:50:47.157Z">
+<meta property="article:modified_time" content="2026-06-22T10:06:26.991Z">
 <meta property="article:author" content="之瑞">
 <meta property="article:tag" content="Codex">
 <meta name="twitter:card" content="summary">
@@ -36,10 +36,10 @@
 <link rel="canonical" href="https://sajlle.github.io/2026/06/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%8B%B1%E5%9B%BD%E5%8C%BAteam%E7%BB%AD%E8%B4%B9%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E4%BD%86%E6%9C%80%E8%BF%91%E4%B8%8Ateam%E5%8F%B7%EF%BC%8Ccodex%E8%A2%AB%E5%8D%A1%E6%89%8B%E6%9C%BA%E5%8F%B7%E4%BA%86%EF%BC%8C%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%B9%B0%E4%B8%80%E5%BC%A0%E6%B5%B7%E5%A4%96%E7%94%B5%E8%AF%9D%E5%8D%A1%E4%BA%86/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/06/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%8B%B1%E5%9B%BD%E5%8C%BAteam%E7%BB%AD%E8%B4%B9%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E4%BD%86%E6%9C%80%E8%BF%91%E4%B8%8Ateam%E5%8F%B7%EF%BC%8Ccodex%E8%A2%AB%E5%8D%A1%E6%89%8B%E6%9C%BA%E5%8F%B7%E4%BA%86%EF%BC%8C%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%B9%B0%E4%B8%80%E5%BC%A0%E6%B5%B7%E5%A4%96%E7%94%B5%E8%AF%9D%E5%8D%A1%E4%BA%86/","path":"2026/06/20/日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了/","title":"日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/06/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%8B%B1%E5%9B%BD%E5%8C%BAteam%E7%BB%AD%E8%B4%B9%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E4%BD%86%E6%9C%80%E8%BF%91%E4%B8%8Ateam%E5%8F%B7%EF%BC%8Ccodex%E8%A2%AB%E5%8D%A1%E6%89%8B%E6%9C%BA%E5%8F%B7%E4%BA%86%EF%BC%8C%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%B9%B0%E4%B8%80%E5%BC%A0%E6%B5%B7%E5%A4%96%E7%94%B5%E8%AF%9D%E5%8D%A1%E4%BA%86/","path":"2026/06/20/日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了/","title":"日常记录｜最近上team号，codex登陆被卡，哎，躲得过初一躲不过十五呀（笑）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了 | 节点人生</title>
+<title>日常记录｜最近上team号，codex登陆被卡，哎，躲得过初一躲不过十五呀（笑） | 节点人生</title>
   
 
 
@@ -177,7 +177,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,12 +229,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了 | 节点人生">
+      <meta itemprop="name" content="日常记录｜最近上team号，codex登陆被卡，哎，躲得过初一躲不过十五呀（笑） | 节点人生">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          日常记录｜英国区team续费成功了，但最近上team号，codex被卡手机号了，不得不买一张海外电话卡了
+          日常记录｜最近上team号，codex登陆被卡，哎，躲得过初一躲不过十五呀（笑）
         </h1>
 
         <div class="post-meta-container">
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-20 10:50:47" itemprop="dateModified" datetime="2026-06-20T10:50:47+08:00">2026-06-20 10:50:47</time>
+      <time title="修改时间：2026-06-22 18:06:26" itemprop="dateModified" datetime="2026-06-22T18:06:26+08:00">2026-06-22 18:06:26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,8 +273,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>很多论坛说的Codex会卡手机号验证。因为我之前是Plus，而且老账户，没被卡手机号。<br>切了team号之后，被卡手机号，于是不得不升级一下基础设施了。<br>等卡到了，我去过一下验证。目前细节先不写，因为我也不确定这是不是能行。<br>目前codex是手机号，WhatsApp都能过手机号验证。</p>
-<p>其实也可以提取gpt的会话session里的access token，但我仔细看了，觉得还是算了，不值得为了过手机号验证做这个。这号我还想长期用呢。而且目前看，整个手机号，好处总是大于坏处的了。<br>另，也有网站提供gpt的会话session转codex的session，我只能说，用这个的，记得小心（笑），别自己的订阅信息被服务提供方记录了。</p>
+    <div class="post-body" itemprop="articleBody"><p>很多论坛说的Codex会卡登陆。因为我之前是Plus，而且老账户，没被卡。<br>切了team号之后，被卡，于是不得不升级一下基础设施了。<br>其实也可以提取gpt的会话session里的token，但我仔细看了，觉得还是算了，为了过验证不值得。</p>
 
 
 
@@ -301,9 +300,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/06/21/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%A6%88%EF%BC%88%E8%80%81%E8%A2%81%EF%BC%89%E7%9C%BC%E7%9D%9B%E5%87%BA%E8%A1%80%E8%BF%98%E4%B8%8D%E5%BF%98%E8%AE%B0%E7%BB%99%E6%88%91%E7%88%B9%E5%91%8A%E7%8A%B6%E6%88%91%E4%B8%8D%E5%AD%9D/" rel="next" title="日常记录｜我妈（老袁）眼睛出血还不忘记给我爹告状我不孝">
-                  日常记录｜我妈（老袁）眼睛出血还不忘记给我爹告状我不孝 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
