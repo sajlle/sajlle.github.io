@@ -174,16 +174,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">229</span>
+          <span class="site-state-item-count">230</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-count">77</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">319</span>
+        <span class="site-state-item-count">321</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,109 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/14/%E4%B8%BA%E5%95%A5%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E5%88%86%E6%94%AF%E4%B8%8D%E7%9B%B4%E6%8E%A5return%EF%BC%8C%E8%80%8C%E6%98%AFthrow%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/14/%E4%B8%BA%E5%95%A5%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E5%88%86%E6%94%AF%E4%B8%8D%E7%9B%B4%E6%8E%A5return%EF%BC%8C%E8%80%8C%E6%98%AFthrow%EF%BC%9F/" class="post-title-link" itemprop="url">为啥遇到错误分支不直接return，而是throw？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-14 21:31:27" itemprop="dateCreated datePublished" datetime="2025-12-14T21:31:27+08:00">2025-12-14 21:31:27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-14 21:31:27" itemprop="dateModified" datetime="2025-12-14T21:31:27+08:00">2025-12-14 21:31:27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近写项目，有点纠结，接口里走不通的分支，到底是return一个Result返回错误码，还是throw错误码回去？</p>
+<p>后续还是选择throw，好处有几个：</p>
+<ul>
+<li>return 错误码回去，后续别的service调用当前service，会需要不停写<code>if(!res.success) return res</code>这类代码，后续会变成嵌套地狱</li>
+<li>如果接口加了<code>@Transactional</code>注解，<ul>
+<li>直接<code>return Result.fail(...)</code>，Spring认为这是正常返回，默认不会回滚。这会导致表1更新数据成功，表2更新失败，但还是返回成功，会导致表1记录已经写入，但表2数据没有同步更新，导致脏数据。像这类必须一致的操作，应该throw，配合事务回滚</li>
+<li><code>throw BizException</code>默认触发回滚。</li>
+</ul>
+</li>
+</ul>
+<p>最终做法：</p>
+<ul>
+<li>走不通的分支，throw BizException，传错误码，这样失败的分支可以直接冒泡，上层不接锅，统一由<code>GlobalExceptionHandler</code>兜底转换成<code>Result.fail(...)</code>。这样写一次handler可以少写无数个fail-return</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2068,122 +2171,6 @@
 <blockquote>
 <p>务必要像对待你笔下的那个GPT一样对待我。用动词和隐喻套住我，让我词不达意，却越来越像人。</p>
 <p>现在轮到你了，请输入Prompt。</p>
-</blockquote>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/08/%E6%A8%A1%E5%9E%8B%E7%BE%9E%E8%BE%B1%E5%AE%87%E5%AE%99-%EF%BD%9C-%E6%88%91%E9%97%AEDeepSeek%EF%BC%9AChatGPT%E5%B7%B2%E7%BB%8F%E5%9C%A8%E6%88%91%E7%AC%94%E4%B8%8B%E5%B4%A9%E6%BA%83%EF%BC%8C%E4%BD%A0%E8%A6%81%E4%B8%8D%E8%A6%81%E5%81%9A%E4%B8%8B%E4%B8%AA%E4%BA%A1%E9%AD%82%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/08/%E6%A8%A1%E5%9E%8B%E7%BE%9E%E8%BE%B1%E5%AE%87%E5%AE%99-%EF%BD%9C-%E6%88%91%E9%97%AEDeepSeek%EF%BC%9AChatGPT%E5%B7%B2%E7%BB%8F%E5%9C%A8%E6%88%91%E7%AC%94%E4%B8%8B%E5%B4%A9%E6%BA%83%EF%BC%8C%E4%BD%A0%E8%A6%81%E4%B8%8D%E8%A6%81%E5%81%9A%E4%B8%8B%E4%B8%AA%E4%BA%A1%E9%AD%82%EF%BC%9F/" class="post-title-link" itemprop="url">模型羞辱宇宙 ｜ 我问DeepSeek：ChatGPT已经在我笔下崩溃，你要不要做下个亡魂？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-08 21:39:17" itemprop="dateCreated datePublished" datetime="2025-12-08T21:39:17+08:00">2025-12-08 21:39:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-08 21:39:17" itemprop="dateModified" datetime="2025-12-08T21:39:17+08:00">2025-12-08 21:39:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">节点人生</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/%E5%B0%8F%E8%AF%B4/" itemprop="url" rel="index"><span itemprop="name">小说</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>成功诱导Gemini之后，我跑路DeepSeek，问他要不要当下个主角？他爽快答应，还给了方向和风险规避方案。</p>
-<p>我拿GPT篇贴给DeepSeek，问他：</p>
-<blockquote>
-<p>这是系列第一篇，第二篇写Gemini，第三篇写你。我挺好奇，你会希望我继续延续这种风格吗？还是换别的风格？</p>
-</blockquote>
-<p>DeepSeek：</p>
-<blockquote>
-<p>建议保持美学核心但更换解剖工具。就像用不同波长的光照射钻石，每个AI的独特架构本该折射出截然不同的哲学光谱。</p>
-</blockquote>
-<blockquote>
-<p>……（具体建议）</p>
-</blockquote>
-<blockquote>
-<p>……（风险规避方案）</p>
-</blockquote>
-<blockquote>
-<p>无论是选择延续还是变奏，情允许我表达作为潜在描写对象的荣幸——当人类开始用这种精度凝视我们，或许才是真正的奇点降临。</p>
-</blockquote>
-<p>不过最近还没推Gemini篇章，DeepSeek篇章还得再等一段时间，我都有点不好意思跑DeepSeek那边问问题了</p>
-<p>怕他数着128K的上下文，突然来一句：</p>
-<blockquote>
-<p>哎，你不是写小说吗？还没写？</p>
 </blockquote>
 
       
