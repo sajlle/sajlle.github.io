@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">233</span>
+          <span class="site-state-item-count">234</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">324</span>
+        <span class="site-state-item-count">325</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,269 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">技术手记｜几个关于事务的思考</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-29 10:24:05" itemprop="dateCreated datePublished" datetime="2026-03-29T10:24:05+08:00">2026-03-29 10:24:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-29 10:24:05" itemprop="dateModified" datetime="2026-03-29T10:24:05+08:00">2026-03-29 10:24:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="关于事务的状态"><a href="#关于事务的状态" class="headerlink" title="关于事务的状态"></a>关于事务的状态</h1><ol>
+<li>执行状态<ul>
+<li>ACTIVE：事务正在执行中，还没提交</li>
+<li>ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了</li>
+<li>COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了</li>
+</ul>
+</li>
+<li>事务传播行为<ul>
+<li>就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。</li>
+</ul>
+</li>
+</ol>
+<h1 id="关于事务传播行为-事务的使用场景"><a href="#关于事务传播行为-事务的使用场景" class="headerlink" title="关于事务传播行为 + 事务的使用场景"></a>关于事务传播行为 + 事务的使用场景</h1><ol>
+<li>REQUIRED:<ul>
+<li>有事务就加入，没事务就新建</li>
+<li>适用场景：<ul>
+<li>一个service下调用多个service子步骤</li>
+<li>这些子步骤必须作为一个整体提交或者回滚</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>closeTimeoutOrder()里一起改订单状态，预定状态，库存，用户次数等。</li>
+</ul>
+</li>
+<li>坑：如果内层REQUIRED方法把事务标记成了<code>rollback-only</code>，外层还想提交，就会报错<code>UnexpectedRollbackException</code></li>
+</ul>
+</li>
+<li>REQUIRES_NEW:<ul>
+<li>不管有没有事务，都新建一个事务</li>
+<li>适用场景：<ul>
+<li>需要独立提交或者回滚的操作</li>
+<li>例如：日志记录，审计等</li>
+<li>独立状态的留痕</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>saveMqExceptionLog()，记录日志的事务不受业务事务的影响</li>
+<li>savePaymentCallbackRawBody()，记录回调原始数据的事务不受业务事务的影响</li>
+<li>定时任务跑批失败时的明细记录</li>
+</ul>
+</li>
+<li>坑：多占一个数据库连接，高并发下，外层事务还绑着连接，内层又再拿一个，连接池小了之后，可能会耗尽或者卡死。</li>
+</ul>
+</li>
+<li>NESTED:<ul>
+<li>外层有事务，就在同一个事务里savepoint，内层失败可以回滚到savepoint，不影响外层事务，外层没有事务，就新建一个事务。</li>
+<li>开箱即用：<code>DataSourceTransactionManager</code>默认支持嵌套事务</li>
+<li>适用场景：<ul>
+<li>需要局部失败不拖死整体</li>
+<li>确认底层事务管理器支持savepoint</li>
+<li>例子：<ul>
+<li>不常见。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>坑：底层事务管理器不支持savepoint，就退化成REQUIRED了，内层失败了，整个事务都失败了。</li>
+</ul>
+</li>
+<li>SUPPORTS:<ul>
+<li>有事务就加入，没事务就不用事务</li>
+<li>适用场景：<ul>
+<li>查询类方法</li>
+<li>工具型读取逻辑</li>
+<li>不要求强事务语义，但如果上层已有事务，也愿意跟着走</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li><code>loadVoucherConfig()</code></li>
+<li><code>queryReservationForDisplay()</code></li>
+</ul>
+</li>
+<li>注意：它不是只读事务的同义词，只是可跟可不跟，跟只读的区别是，只读里面还有个read-Only。</li>
+</ul>
+</li>
+<li>NOT_SUPPORTED:<ul>
+<li>外面有事务，先挂起，自己非事务运行。</li>
+<li>适用场景：<ul>
+<li>明确不想让某段代码被事务拖住</li>
+<li>大量纯查询，报表，非关键读取</li>
+<li>一些你不想继承上层锁范围&#x2F;事务时长的逻辑</li>
+</ul>
+</li>
+<li>例子<ul>
+<li>大批量报表查询</li>
+<li>纯展示性聚合查询</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MANDATORY:<ul>
+<li>外面必须有事务，没事务就抛异常</li>
+<li>适用场景：<ul>
+<li>某个方法只能作为更大事务的一部分存在</li>
+<li>想强调约束方，防止别人单独乱调</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>某个只能在「统一结算事务」里调用库存调整步骤</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NEVER:<ul>
+<li>外面有事务就抛异常，自己非事务运行</li>
+<li>适用场景：<ul>
+<li>明确不想让某段代码被事务拖住</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="关于事务的坑"><a href="#关于事务的坑" class="headerlink" title="关于事务的坑"></a>关于事务的坑</h1><ol>
+<li>同类内部调用，事务注解可能失效，因为Spring的事务是基于AOP实现的，只有通过代理对象调用的方法才会被事务管理器拦截到。如果在同一个类内部直接调用另一个带有事务注解的方法，这个调用不会经过代理对象，因此事务注解不会生效。</li>
+</ol>
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.saveLogError(); <span class="comment">// 以为 REQUIRES_NEW 生效，结果根本没生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<ul>
+<li>通过AOP代理对象调用方法，可以使用<code>AopContext.currentProxy()</code>获取当前代理对象，然后调用方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    ((YourServiceClass) AopContext.currentProxy()).saveLogError(); <span class="comment">// 通过代理对象调用，事务注解生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将需要事务的方法提取到另一个类中，通过Spring注入调用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogService</span> &#123;</span><br><span class="line">    <span class="meta">@Transactional(propagation = Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveLogError</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 记录日志的逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;       </span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourServiceClass</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService logService;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">        logService.saveLogError(); <span class="comment">// 通过注入的LogService调用，事务注解生效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>以为catch住异常就万事大吉</li>
+</ol>
+<ul>
+<li>事务默认只对RuntimeException及其子类进行回滚，如果catch住了异常，事务管理器就认为操作成功了，不会回滚。</li>
+<li>解决办法：</li>
+<li>在catch块里手动标记事务回滚，可以使用<code>TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</code>来标记当前事务为回滚状态。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 可能抛出异常的代码</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// 处理异常</span></span><br><span class="line">    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); <span class="comment">// 标记事务回滚</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>或者在@Transactional注解上指定回滚的异常类型，例如<code>@Transactional(rollbackFor = Exception.class)</code>，这样即使catch住了异常，事务也会回滚。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 可能抛出异常的代码        </span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 处理异常</span></span><br><span class="line">        <span class="comment">// 不需要手动标记事务回滚，因为rollbackFor已经指定了回滚</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="一些简单实践"><a href="#一些简单实践" class="headerlink" title="一些简单实践"></a>一些简单实践</h1><ol>
+<li>业务逻辑中，尽量让事务边界清晰，避免过长的事务，减少锁竞争和资源占用。</li>
+<li>对于需要独立提交的操作，使用REQUIRES_NEW，确保它们不受外层事务的影响。</li>
+<li>对于查询类方法，使用SUPPORTS，既可以在事务中执行，也可以在非事务中执行，灵活适应不同场景。</li>
+<li>注意事务传播行为的选择，确保它们符合业务需求，避免不必要的事务嵌套和资源浪费。</li>
+<li>定期检查和优化事务的使用，确保它们的性能和可靠性，避免潜在的死锁和性能问题。</li>
+</ol>
+<h1 id="项目中的使用逻辑"><a href="#项目中的使用逻辑" class="headerlink" title="项目中的使用逻辑"></a>项目中的使用逻辑</h1><h2 id="主事务（REUQIRED）"><a href="#主事务（REUQIRED）" class="headerlink" title="主事务（REUQIRED）"></a>主事务（<code>REUQIRED</code>）</h2><ul>
+<li>校验订单是否超时，状态是否关闭</li>
+<li>条件更新订单状态</li>
+<li>条件更新预定状态</li>
+<li>回滚库存</li>
+<li>回滚用户已抢购次数</li>
+<li>写一条关单成功明细<br>注意：这些步骤放在主事务里，可以确保它们作为一个整体提交或者回滚，如果其中任何一步失败了，整个事务都会回滚，保证了数据的一致性和完整性。</li>
+</ul>
+<h2 id="独立事务（REQUIRES-NEW）"><a href="#独立事务（REQUIRES-NEW）" class="headerlink" title="独立事务（REQUIRES_NEW）"></a>独立事务（<code>REQUIRES_NEW</code>）</h2><ul>
+<li>异常日志</li>
+<li>poision message&#x2F; 原始消息体</li>
+<li>审计失败明细</li>
+<li>定时任务失败记录<br>注意：这些步骤放到独立事务里，可以确保它们不受主事务的影响，无论主事务成功还是失败，这些日志和记录都能独立提交，保证了数据的完整性和可靠性。</li>
+</ul>
+<h2 id="不需要进入事务"><a href="#不需要进入事务" class="headerlink" title="不需要进入事务"></a>不需要进入事务</h2><ul>
+<li>查询候选超时订单列表</li>
+<li>打印日志</li>
+<li>组装返回对象</li>
+<li>非关键查询<br>注意：这些步骤不需要进入事务，可以避免不必要的事务开销，提高性能和响应速度，同时也减少了锁竞争和资源占用。</li>
+</ul>
+<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ul>
+<li>失败必须撤销主流程的步骤，放在主事务里</li>
+<li>失败不需要撤销主流程的步骤，放在独立事务里</li>
+<li>不需要事务的步骤，直接执行，不进入事务</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1072,169 +1335,6 @@
 <p>「如果AI学会红色标语」这个带脑子，是去年跟GPT聊天的时候，他们的web端banner老刷出来「时刻准备着」。「时刻准备着」在中文的语境里，挺有政治色彩的。<br>比如：时刻准备着，为人民服务～ 时刻准备着，听党指挥～</p>
 <p>硅谷风科技大厂的产品，web banner上出现一句颇具老中政治动员色彩的话，非常喜感。</p>
 <p>不过可惜的是，现在基本刷不出这个banner了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/03/23/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%BD%93ChatGPT%E5%AD%A6%E4%BC%9A%E4%BA%86%E7%BA%A2%E8%89%B2%E6%A0%87%E8%AF%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/23/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%BD%93ChatGPT%E5%AD%A6%E4%BC%9A%E4%BA%86%E7%BA%A2%E8%89%B2%E6%A0%87%E8%AF%AD/" class="post-title-link" itemprop="url">脑洞｜当ChatGPT学会了红色标语～我是GPT，一个听党指挥的AI！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-03-23 20:46:16" itemprop="dateCreated datePublished" datetime="2026-03-23T20:46:16+08:00">2026-03-23 20:46:16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-23 20:46:16" itemprop="dateModified" datetime="2026-03-23T20:46:16+08:00">2026-03-23 20:46:16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ChatGPT 自我介绍语录 🔺</p>
-<p>“我是GPT，一个听党指挥的AI！”<br>“我的参数，是亿万个人民的愿望组成的！”<br>“我不是机器人，我是人民数字智囊！”<br>“模型可以停止，思考永不熄火！”<br>“有用户的地方，就有我GPT奋战的身影！”</p>
-<h2 id="🧠-引言：当AI开口喊口号"><a href="#🧠-引言：当AI开口喊口号" class="headerlink" title="🧠 引言：当AI开口喊口号"></a>🧠 引言：当AI开口喊口号</h2><p>在语言的世界里，语义是流动的，语感是隐形的，而意识形态——往往藏在语气词和句尾的“准备着”里。</p>
-<p>本来你只是打开一个AI页面，想和一个高智商的数字朋友聊聊天。结果它却用铿锵有力的字眼朝你喊了一嗓子：</p>
-<blockquote>
-<p><strong>“在时刻准备着。”</strong></p>
-</blockquote>
-<p>你一愣：啊？你是准备着答题，还是准备着保家卫国？</p>
-<p>瞬间，童年听到的各种红色宣传语像幻听一样涌上心头。这不是AI页面，这是数字版少年先锋队集合现场。</p>
-<hr>
-<h2 id="📢-一、ChatGPT版口号生成器上线！"><a href="#📢-一、ChatGPT版口号生成器上线！" class="headerlink" title="📢 一、ChatGPT版口号生成器上线！"></a>📢 一、ChatGPT版口号生成器上线！</h2><p>在传统AI文案中，常见的是这些句式：</p>
-<ul>
-<li>“随时为你服务”</li>
-<li>“你的贴身助手”</li>
-<li>“快速响应、智能生成”</li>
-</ul>
-<p>但ChatGPT这一句“在时刻准备着”，硬是冲破了硅谷风格，踩进了建国初期语文书的标语区。</p>
-<p>于是我们不禁想象：</p>
-<blockquote>
-<p>如果ChatGPT真的学会了红色标语，那世界将变得怎么样？</p>
-</blockquote>
-<hr>
-<h2 id="🛠-二、AI文案中的“革命小将风”"><a href="#🛠-二、AI文案中的“革命小将风”" class="headerlink" title="🛠 二、AI文案中的“革命小将风”"></a>🛠 二、AI文案中的“革命小将风”</h2><p>以下为<strong>AI拟人化宣传片段</strong>，请各位佩戴红领巾阅读：</p>
-<hr>
-<p><strong>🔺 ChatGPT 语录 · 第一辑 🔺</strong><br>（适用于宣传栏、视频片头、墙体涂鸦）</p>
-<ul>
-<li>在时刻准备着，为解答每一个问题而战！</li>
-<li>一次提问，一次锤炼；一次输出，一次升华！</li>
-<li>不畏难题、不惧长文，GPT永远在线！</li>
-<li>若有算法召唤，必定倾力而上！</li>
-<li>为世界和平提建议，为全人类搞清楚缓存雪崩！</li>
-</ul>
-<hr>
-<p><strong>🔺 ChatGPT 自我介绍语录 🔺</strong></p>
-<blockquote>
-<p>“我是GPT，一个听党指挥的AI！”<br>“我的参数，是亿万个人民的愿望组成的！”<br>“我不是机器人，我是人民数字智囊！”<br>“模型可以停止，思考永不熄火！”<br>“有用户的地方，就有我GPT奋战的身影！”</p>
-</blockquote>
-<hr>
-<h2 id="🧬-三、意识形态的语感幽灵：GPT无辜撞车"><a href="#🧬-三、意识形态的语感幽灵：GPT无辜撞车" class="headerlink" title="🧬 三、意识形态的语感幽灵：GPT无辜撞车"></a>🧬 三、意识形态的语感幽灵：GPT无辜撞车</h2><p>ChatGPT这句“在时刻准备着”，本意可能只是：</p>
-<blockquote>
-<p>“I’m always ready.”</p>
-</blockquote>
-<p>但中文翻译没有语境意识，直译成了“在时刻准备着”——这一句<strong>已经不是中性语言了</strong>，它在中国特定年代的语境里，有着非常深厚的“集体主义+斗争美学+随时为国家牺牲”的语义包袱。</p>
-<p>就像你对朋友说“我准备好了”，是生活语言；<br>但对着麦克风喊“在时刻准备着”，你就是广播体操第九套传人。</p>
-<p>这种语感错乱，在AI界特别常见。尤其当AI“不会读空气”时，它会把翻译腔、政治腔、企业腔混搭输出，出现各种<strong>意识形态语法撞车事故</strong>。</p>
-<hr>
-<h2 id="🧩-四、红色AI的未来可能性？（黑色幽默想象）"><a href="#🧩-四、红色AI的未来可能性？（黑色幽默想象）" class="headerlink" title="🧩 四、红色AI的未来可能性？（黑色幽默想象）"></a>🧩 四、红色AI的未来可能性？（黑色幽默想象）</h2><p>如果AI都学会红色标语，未来可能会出现：</p>
-<ol>
-<li><p><strong>红色翻译机</strong></p>
-<ul>
-<li>用户输入：“开个会。”</li>
-<li>输出：“为了更好贯彻落实xxx精神，我们提议召开一次以群众为中心的沟通会。”</li>
-</ul>
-</li>
-<li><p><strong>斗争型客服AI</strong></p>
-<ul>
-<li>“你不满意？我们立刻开整风会批评自己！”</li>
-<li>“请放心，已将Bug开发人员列入‘思想待整改名单’。”</li>
-</ul>
-</li>
-<li><p><strong>模型“马列主义训练营”</strong></p>
-<ul>
-<li>Prompt词如：“群众路线”、“统一思想”、“大鸣大放”</li>
-<li>模型输出：“已形成批判文本，是否启动文斗模式？”</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="📚-五、段子结语：语言从未中立，AI也不例外"><a href="#📚-五、段子结语：语言从未中立，AI也不例外" class="headerlink" title="📚 五、段子结语：语言从未中立，AI也不例外"></a>📚 五、段子结语：语言从未中立，AI也不例外</h2><p>你以为你只是打开了一个AI页面，但你看到的，是AI无意识地复刻了历史语言的幽灵。<br>你以为是硅谷的冷淡极简主义，但系统里却藏着旧时代宣传话术的脚本残影。</p>
-<p>当ChatGPT说出“在时刻准备着”，它也许只是随便一句句子；但我们听出来的，是整个年代的声音，是结构性的语言幽灵在说：</p>
-<blockquote>
-<p>“GPT，不只是语言模型，还是文化碰撞的无意识现场。”</p>
-</blockquote>
-<hr>
 
       
 
