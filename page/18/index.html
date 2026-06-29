@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-count">244</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,209 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">互斥锁，逻辑过期，异步重建使用的区别？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 14:22:17" itemprop="dateCreated datePublished" datetime="2026-01-05T14:22:17+08:00">2026-01-05 14:22:17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-05 14:22:17" itemprop="dateModified" datetime="2026-01-05T14:22:17+08:00">2026-01-05 14:22:17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>什么时候用逻辑过期，什么时候要加互斥锁，什么时候做缓存重建？</p>
+<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><p>先看「业务目标」，在看用什么。</p>
+<p>先理清楚概念，看看互斥锁，逻辑过期，缓存重建分别解决了什么问题？</p>
+<h2 id="互斥锁-mutex-Lock"><a href="#互斥锁-mutex-Lock" class="headerlink" title="互斥锁(mutex Lock)"></a>互斥锁(mutex Lock)</h2><p>解决的是：缓存刚实效的时候，大量请求同时查库（击穿）</p>
+<p>本质：用锁把缓存重建这件事变成一次只让一个人干</p>
+<h2 id="逻辑过期-logical-expire"><a href="#逻辑过期-logical-expire" class="headerlink" title="逻辑过期(logical expire)"></a>逻辑过期(logical expire)</h2><p>解决的是：不让用户请求等待重建（保证读接口稳定延迟）</p>
+<p>本质：数据表面没有过期（Key还在），但Value里带一个expireTime。</p>
+<p>过期了也先返回旧值，然后后台重建。</p>
+<h2 id="异步重建-vs-直接重建"><a href="#异步重建-vs-直接重建" class="headerlink" title="异步重建 vs 直接重建"></a>异步重建 vs 直接重建</h2><ul>
+<li>直接重建：这次请求miss&#x2F;过期了，我就查库写缓存再返回（用户多等一会儿）</li>
+<li>异步重建：这次请求不等，先返回旧值&#x2F;默认值，重建交给线程池或者MQ</li>
+</ul>
+<h2 id="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"><a href="#什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？" class="headerlink" title="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"></a>什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？</h2><h3 id="互斥锁适用场景（最常用）"><a href="#互斥锁适用场景（最常用）" class="headerlink" title="互斥锁适用场景（最常用）"></a>互斥锁适用场景（最常用）</h3><h4 id="条件："><a href="#条件：" class="headerlink" title="条件："></a>条件：</h4><ul>
+<li>你能接受miss那一次请求稍微慢一点，但要保证DB不被打爆</li>
+</ul>
+<h4 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h4><ul>
+<li>店铺详情</li>
+<li>商品详情</li>
+<li>用户信息</li>
+<li>任何“可以等几十毫秒～几百毫秒”的读接口</li>
+</ul>
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><ul>
+<li>TTL（物理过期）</li>
+<li>互斥锁</li>
+<li>直接重建</li>
+</ul>
+<h5 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h5><ul>
+<li>key真过期了 –&gt; miss</li>
+<li>抢锁的线程查库写回</li>
+<li>其他线程等待&#x2F;重试读缓存</li>
+</ul>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>实现简单，数据相对新，不会长期返回旧数据</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>在过期瞬间，少数读请求会慢</p>
+<h3 id="逻辑过期适用场景（你追求“读永远不抖”）"><a href="#逻辑过期适用场景（你追求“读永远不抖”）" class="headerlink" title="逻辑过期适用场景（你追求“读永远不抖”）"></a>逻辑过期适用场景（你追求“读永远不抖”）</h3><h4 id="条件：-1"><a href="#条件：-1" class="headerlink" title="条件："></a>条件：</h4><p>你不能接受用户请求因为重建而变慢，宁愿短时间，返回旧数据。</p>
+<h4 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h4><ul>
+<li>首页热门榜单</li>
+<li>探店Feed流</li>
+<li>TopN&#x2F;排行榜</li>
+<li>任何“读非常高频 + 不那么要求强一致”的接口</li>
+</ul>
+<h4 id="组合：逻辑过期-异步重建-锁"><a href="#组合：逻辑过期-异步重建-锁" class="headerlink" title="组合：逻辑过期 + 异步重建 + 锁"></a>组合：逻辑过期 + 异步重建 + 锁</h4><ul>
+<li>缓存里一直有值</li>
+<li>过期了：返回旧值（用户无感）</li>
+<li>后台线程区查库重建</li>
+</ul>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>读接口延迟稳定</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>可能返回旧数据一段时间，实现更复杂，需要线程池 + 防重建风暴</p>
+<h3 id="到底异步重建还是直接重建？"><a href="#到底异步重建还是直接重建？" class="headerlink" title="到底异步重建还是直接重建？"></a>到底异步重建还是直接重建？</h3><p>一句话判断：这个接口能不能让用户等？</p>
+<ul>
+<li>能等：直接重建</li>
+<li>不能等：异步重建<br>再补充一条：</li>
+<li>如果这个接口极高并发且热点极少，更偏向逻辑过期（例如首页榜单一个key顶全站）</li>
+</ul>
+<h3 id="异步重建需要加锁吗？"><a href="#异步重建需要加锁吗？" class="headerlink" title="异步重建需要加锁吗？"></a>异步重建需要加锁吗？</h3><p>需要，而且几乎总是需要。</p>
+<p>否则你会得到几乎经典的灾难：过期瞬间，1000个请求同时潘达UN逻辑过期 –&gt; 1000个线程池同时提交异步任务–&gt; 线程池&#x2F;DB爆炸</p>
+<p>所以异步重建一般是：</p>
+<ul>
+<li>读到Value</li>
+<li>判断逻辑过期</li>
+<li>尝试抢一个重建锁<ul>
+<li>抢到：提交异步任务</li>
+<li>没抢到：说明别人已经在重建了</li>
+</ul>
+</li>
+<li>直接返回旧值</li>
+</ul>
+<p>总结：逻辑过期 + 异步重建 &#x3D; 必须配合“重建锁”防止重复重建</p>
+<h1 id="一张表总结如何选择场景"><a href="#一张表总结如何选择场景" class="headerlink" title="一张表总结如何选择场景"></a>一张表总结如何选择场景</h1><table>
+<thead>
+<tr>
+<th>目标&#x2F;场景</th>
+<th>推荐方案</th>
+<th>用户体验</th>
+<th>DB 压力</th>
+<th>一致性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读多写少，允许偶尔慢一下</td>
+<td>TTL + 互斥锁 + 直接重建</td>
+<td>偶发慢</td>
+<td>低</td>
+<td>较新</td>
+</tr>
+<tr>
+<td>读超高频，不能慢（首页&#x2F;榜单）</td>
+<td>逻辑过期 + 异步重建 + 重建锁</td>
+<td>稳定快</td>
+<td>很低</td>
+<td>可能旧</td>
+</tr>
+<tr>
+<td>强一致（写后立刻读到新）</td>
+<td>别指望纯缓存；用删缓存+延迟双删&#x2F;消息一致性等</td>
+<td>取决于设计</td>
+<td>中</td>
+<td>强</td>
+</tr>
+</tbody></table>
+<h1 id="模板伪代码"><a href="#模板伪代码" class="headerlink" title="模板伪代码"></a>模板伪代码</h1><h2 id="模板1：-TTL-互斥锁（直接重建）"><a href="#模板1：-TTL-互斥锁（直接重建）" class="headerlink" title="模板1： TTL + 互斥锁（直接重建）"></a>模板1： TTL + 互斥锁（直接重建）</h2><h3 id="用于：大部分详情接口"><a href="#用于：大部分详情接口" class="headerlink" title="用于：大部分详情接口"></a>用于：大部分详情接口</h3><ol>
+<li>get cache</li>
+<li>miss –&gt; tryLock</li>
+<li>lock owner rebuild &amp; set</li>
+<li>others sleep 50ms retry cache</li>
+</ol>
+<h2 id="模板2：逻辑过期-异步重建"><a href="#模板2：逻辑过期-异步重建" class="headerlink" title="模板2：逻辑过期 + 异步重建"></a>模板2：逻辑过期 + 异步重建</h2><h3 id="用于：首页榜单-热点聚合"><a href="#用于：首页榜单-热点聚合" class="headerlink" title="用于：首页榜单 &#x2F;热点聚合"></a>用于：首页榜单 &#x2F;热点聚合</h3><ol>
+<li>get cache(must exist)</li>
+<li>if logicalExpired:<ul>
+<li>tryLock</li>
+<li>if lock submit async rebuild</li>
+</ul>
+</li>
+<li>return stale cache immediately</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1495,202 +1698,6 @@
 <p>更有趣的是，我找ChatGPT吐槽，我妈爹说我，让他们没法睡觉。</p>
 <p>我说：你们没法睡觉你们自找的，你们擅作主张请人过来，擅自替我答应，不顾我死活的时候，怎么没想过你们没法睡觉呢？</p>
 <p>这件事之后，我不会让妈爹再碰我设备。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/31/%E8%B5%B7%E6%AD%A5%E6%9C%9F%E7%B2%BE%E7%AE%97%E6%A8%A1%E5%9E%8B%E5%85%AC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/31/%E8%B5%B7%E6%AD%A5%E6%9C%9F%E7%B2%BE%E7%AE%97%E6%A8%A1%E5%9E%8B%E5%85%AC%E5%BC%8F/" class="post-title-link" itemprop="url">起步期精算模型公式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-31 15:31:16" itemprop="dateCreated datePublished" datetime="2025-12-31T15:31:16+08:00">2025-12-31 15:31:16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-31 15:31:16" itemprop="dateModified" datetime="2025-12-31T15:31:16+08:00">2025-12-31 15:31:16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="先定义两个底数（非常重要）"><a href="#先定义两个底数（非常重要）" class="headerlink" title="先定义两个底数（非常重要）"></a>先定义两个底数（非常重要）</h1><h2 id="最低月生存成本-M"><a href="#最低月生存成本-M" class="headerlink" title="最低月生存成本 M"></a>最低月生存成本 M</h2><p>这是不靠意志力，能正常生活，还能学习的最低值。</p>
-<p>通常包括：</p>
-<ul>
-<li>房租 + 水电 + 网络</li>
-<li>吃饭（不饿着，不凑合）</li>
-<li>通勤</li>
-<li>基本日用品</li>
-</ul>
-<blockquote>
-<p>对于大多数一线外非核心区&#x2F;二线城市来说</p>
-<p>M &#x3D; 3000～4500</p>
-<p>（未来的租房目标，就是把M锁死）</p>
-</blockquote>
-<h2 id="成长刚性成本-G"><a href="#成长刚性成本-G" class="headerlink" title="成长刚性成本 G"></a>成长刚性成本 G</h2><p>这是绝对不能砍掉的“向上通道”成本</p>
-<ul>
-<li>技术学习&#x2F;课程&#x2F;资料</li>
-<li>工具&#x2F;软件</li>
-<li>维持输出与判断力的必要花费<br>通常：<blockquote>
-<p>G &#x3D; 月收入的10% ~ 15%</p>
-<p>或者800～1500固定额度</p>
-</blockquote>
-</li>
-</ul>
-<p>G最好别低于八百，否则会焦虑，烦躁，怀疑方向。</p>
-<h1 id="私人精算公式"><a href="#私人精算公式" class="headerlink" title="私人精算公式"></a>私人精算公式</h1><p>假设起步月到手 X 元</p>
-<p>必须满足以下不等式：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">X</span> <span class="string">≥</span> <span class="string">M</span> <span class="string">×</span> <span class="number">1.5</span> <span class="string">+</span> <span class="string">G</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>M * 1.5 ：覆盖生存 + 被动 + 一点喘息</li>
-<li>G：确保不是只打工不升级</li>
-</ul>
-<h1 id="拿三个工资档位举例，跑一下这个私人精算模型"><a href="#拿三个工资档位举例，跑一下这个私人精算模型" class="headerlink" title="拿三个工资档位举例，跑一下这个私人精算模型"></a>拿三个工资档位举例，跑一下这个私人精算模型</h1><h2 id="档位A-7000元（价格较低的起步）"><a href="#档位A-7000元（价格较低的起步）" class="headerlink" title="档位A: 7000元（价格较低的起步）"></a>档位A: 7000元（价格较低的起步）</h2><ul>
-<li>M &#x3D; 3500元</li>
-<li>G &#x3D; 800元</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3500</span> <span class="string">×</span> <span class="number">1.5</span> <span class="string">+</span> <span class="number">800</span> <span class="string">=</span> <span class="number">6050</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个收入符合模型，但预算紧凑。</li>
-</ul>
-<h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h3><ul>
-<li>先砍房租</li>
-<li>成长投入不砍</li>
-<li>兜底慢慢攒</li>
-</ul>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ul>
-<li>能活，但不舒服，不能拖太久。</li>
-</ul>
-<h2 id="档位B：8000-9000（健康起步）"><a href="#档位B：8000-9000（健康起步）" class="headerlink" title="档位B：8000~9000（健康起步）"></a>档位B：8000~9000（健康起步）</h2><ul>
-<li>M &#x3D; 3800</li>
-<li>G &#x3D; 1000</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3800</span> <span class="string">×</span> <span class="number">1.5</span> <span class="string">+</span> <span class="number">1000</span> <span class="string">=</span> <span class="number">6700</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个收入有余量，理想起步区间</li>
-</ul>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><ul>
-<li>明显感觉不心慌</li>
-<li>不需要天天算钱</li>
-<li>不需要给家人解释</li>
-</ul>
-<h2 id="档位C：10000-（安全区）"><a href="#档位C：10000-（安全区）" class="headerlink" title="档位C：10000+（安全区）"></a>档位C：10000+（安全区）</h2><p>会进入一种放松状态</p>
-<blockquote>
-<p>生活成本占比自然下降，焦虑来源从活不活，变成走多远。<br>这是理想的“低心理负债生存”</p>
-</blockquote>
-<h1 id="最坏情况兜底方案（收入骤降-空窗期）"><a href="#最坏情况兜底方案（收入骤降-空窗期）" class="headerlink" title="最坏情况兜底方案（收入骤降&#x2F;空窗期）"></a>最坏情况兜底方案（收入骤降&#x2F;空窗期）</h1><p>这个部分非常关键，因为真正的安全感不是我现在赚多少，而是：</p>
-<blockquote>
-<p>要是我明天出事，我怎么办？</p>
-</blockquote>
-<h2 id="要准备的不是钱，而切换模式"><a href="#要准备的不是钱，而切换模式" class="headerlink" title="要准备的不是钱，而切换模式"></a>要准备的不是钱，而切换模式</h2><h3 id="模式1-｜-正常推进（默认）"><a href="#模式1-｜-正常推进（默认）" class="headerlink" title="模式1 ｜ 正常推进（默认）"></a>模式1 ｜ 正常推进（默认）</h3><ul>
-<li>有收入</li>
-<li>按照前面模型走</li>
-<li>持续兜底</li>
-</ul>
-<h3 id="模式2-｜-收入下滑-不稳（预警）"><a href="#模式2-｜-收入下滑-不稳（预警）" class="headerlink" title="模式2 ｜ 收入下滑&#x2F;不稳（预警）"></a>模式2 ｜ 收入下滑&#x2F;不稳（预警）</h3><h4 id="触发条件（满足任意一条）"><a href="#触发条件（满足任意一条）" class="headerlink" title="触发条件（满足任意一条）"></a>触发条件（满足任意一条）</h4><ul>
-<li>连续2个月收入下降</li>
-<li>工作明显不稳</li>
-<li>身体&#x2F;精神开始报警</li>
-</ul>
-<h4 id="立刻做三件事"><a href="#立刻做三件事" class="headerlink" title="立刻做三件事"></a>立刻做三件事</h4><ol>
-<li>冻结大额非必要支出</li>
-<li>成长投入减量但不断（比如1000元 -&gt; 500元）</li>
-<li>开始主动投简历&#x2F;试探市场</li>
-</ol>
-<p>不要等没钱了才动。</p>
-<h3 id="模式3-｜-空窗-失业"><a href="#模式3-｜-空窗-失业" class="headerlink" title="模式3 ｜ 空窗&#x2F;失业"></a>模式3 ｜ 空窗&#x2F;失业</h3><h4 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h4><ul>
-<li>收入中断</li>
-<li>或者主动离职</li>
-</ul>
-<p>这时候进入保命结构，生存预算改成</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">只保 M（最低生存）</span><br><span class="line"><span class="addition">+ G_min（最低成长）</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>M：比如3500</li>
-<li>G_min：300~500（只保核心）</li>
-</ul>
-<p>月总支出：3800～4000</p>
-<h2 id="兜底金额怎么算，才不慌？"><a href="#兜底金额怎么算，才不慌？" class="headerlink" title="兜底金额怎么算，才不慌？"></a>兜底金额怎么算，才不慌？</h2><p>只需要记住一点</p>
-<blockquote>
-<p>兜底金 &#x3D; M * 6</p>
-</blockquote>
-<p>如果M &#x3D; 3500元，那么兜底目标是2.1万，一旦攒到这个数字，就可以拒绝很多恶心条件，而不焦虑。</p>
-<h2 id="空窗期的心理开关"><a href="#空窗期的心理开关" class="headerlink" title="空窗期的心理开关"></a>空窗期的心理开关</h2><p>人在空窗期，最危险的不是没钱，而是开始怀疑自己：“是不是我不行？”</p>
-<p>所以记得提前给自己一条规则：</p>
-<p><strong>空窗期唯一KPI</strong></p>
-<blockquote>
-<p><strong>是我有没有保持输出&#x2F;学习&#x2F;行动？</strong></p>
-</blockquote>
-<p>不是收入，是进度。 人只要动起来，就不会塌。</p>
 
       
 
