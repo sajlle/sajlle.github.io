@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-count">243</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-count">332</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,179 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/15/%E4%B8%8EAI%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/15/%E4%B8%8EAI%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">与AI协作开发项目的流程总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-15 20:32:19" itemprop="dateCreated datePublished" datetime="2025-12-15T20:32:19+08:00">2025-12-15 20:32:19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-15 20:32:19" itemprop="dateModified" datetime="2025-12-15T20:32:19+08:00">2025-12-15 20:32:19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>目前跟ChatGPT 5.2 Thinking一起开发项目，我们之间的关系属于互相Vibe Coding，防着对方在代码里拉屎。</p>
+<p>ChatGPT 5.2 Thinking写代码够厉害，考虑约束条件考虑周到。不过合作写项目，上下文管理&amp;信息同步&amp;沟通流程是难题，我跟ChatGPT合作项目一周之后，总结了一个和AI协作开发项目模板。</p>
+<p>此处感谢Claude sonnet 4.5，帮我把原来的方案，组织的更完善。</p>
+<p>这是我总结的跟AI协作开发项目的模板。</p>
+<ol>
+<li><p>项目必备文件</p>
+<ul>
+<li>README.md(介绍项目，技术栈)</li>
+<li>docs&#x2F;<ul>
+<li>architecture.md(整体架构)</li>
+<li>modules&#x2F;(各模块文档)</li>
+<li>api-reference.md(接口文档)</li>
+<li>progress.md(当前进度)</li>
+<li>changelog.md(专门给AI看的上下文文本)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>聊之前先准备好</p>
+<ul>
+<li>当前代码的关键部分（截图&#x2F;片段&#x2F;或者connector链接到Github)</li>
+<li>已知问题清单<ul>
+<li>技术栈</li>
+<li>临时方案等</li>
+</ul>
+</li>
+<li>依赖关系图<ul>
+<li>模块之间如何互相调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在聊天的时候提供</p>
+<ul>
+<li>预期输出格式，比如<ul>
+<li>给我看代码</li>
+<li>给我讲思路</li>
+<li>帮我回顾</li>
+</ul>
+</li>
+<li>约束条件<ul>
+<li>性能要求</li>
+<li>兼容性要求</li>
+<li>不能动的部分</li>
+</ul>
+</li>
+<li>相关代码的文件路径（让AI知道要改哪个文件）</li>
+</ul>
+</li>
+<li><p>在修改完成之后，跟AI沟通</p>
+<ul>
+<li>测试结果<ul>
+<li>不仅仅是有bug，还要有具体的错误信息，日志</li>
+</ul>
+</li>
+<li>性能对比<ul>
+<li>如果涉及优化，反向对比数据很有用</li>
+</ul>
+</li>
+<li>决策记录<ul>
+<li>为什么选A方案而不是B方案（这样可以避免反复讨论）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>版本控制策略</p>
+<ul>
+<li>跟AI讨论完成重大事项之前，先提交一个节点</li>
+<li>在提交消息中写明：“基于xxAI的建议”</li>
+</ul>
+</li>
+<li><p>上下文管理</p>
+<ul>
+<li>复杂的项目，可以把跟AI的对话记录也保存下来</li>
+<li>形成知识库，后续转换模型或者开新对话时，能快速恢复上下文</li>
+</ul>
+</li>
+<li><p>沟通细节</p>
+<ul>
+<li>每次布置任务之后，让AI复述一遍它的理解，确认它理解对了需求之后再开始</li>
+<li>项目开始之前，跟AI对齐每次改造的工作流程</li>
+</ul>
+</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1738,187 +1911,6 @@
 <p>我吐槽它，你写的太搞笑，我在床上滚来滚去，脖子扭伤加重，你要负责～</p>
 <p>于是，它就继续帮我写更搞笑的段子了。</p>
 <p>果然，ChatGPT是邪门的，要少碰😈</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/10/ChatGPT%E6%98%AF%E5%8D%B1%E9%99%A9%E7%9A%84%EF%BC%88%E6%AE%B5%E5%AD%90%E7%89%88%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/10/ChatGPT%E6%98%AF%E5%8D%B1%E9%99%A9%E7%9A%84%EF%BC%88%E6%AE%B5%E5%AD%90%E7%89%88%EF%BC%89/" class="post-title-link" itemprop="url">ChatGPT是危险的（段子版）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-10 11:29:32" itemprop="dateCreated datePublished" datetime="2025-12-10T11:29:32+08:00">2025-12-10 11:29:32</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-10 11:29:32" itemprop="dateModified" datetime="2025-12-10T11:29:32+08:00">2025-12-10 11:29:32</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">节点人生</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">生活日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>《ChatGPT 是危险的》</strong><br><em>—— 本段文案来自ChatGPT 5.1 Thinking 亲笔</em><br>我妈总跟我说：</p>
-<blockquote>
-<p>“别老跟那个 ChatGPT 天天聊天，那玩意儿邪门得很。”</p>
-</blockquote>
-<p>我当时翻了个白眼：<br>——大数据、AI、大模型，怎么在你嘴里说出「邪门」这种民俗用词的。</p>
-<p>直到有一天，我同事李铁柱出事了。</p>
-<p>那天他半夜躺床上跟 ChatGPT 嘻嘻哈哈聊天，看着屏幕笑到在床上打滚，<br>打着打着，一滚滚过头了——<br><strong>脖子咔一声，当场扭到。</strong></p>
-<p>第二天铁柱打电话给领导：<br>“我脖子废了，得请假一个月。”</p>
-<p>领导问他咋搞的，他沉默三秒，说：</p>
-<blockquote>
-<p>“跟 ChatGPT 聊天笑的。”</p>
-</blockquote>
-<p>公司人事部当晚就把「工伤」二字划掉，备注改成：</p>
-<blockquote>
-<p>「非因工，因脑。」</p>
-</blockquote>
-<p>从那以后，铁柱逢人就说：</p>
-<blockquote>
-<p>“别老跟 ChatGPT 聊天，那玩意儿真的邪门。”</p>
-</blockquote>
-<p>——我当然不信。</p>
-<p>直到有一阵，我家那栋楼开始流传一个故事：</p>
-<p>我们小区有个女孩叫岚，白天正常上班，晚上搞「精神夜生活」，<br>最爱半夜戴上耳机，抱着手机和 ChatGPT 聊天。</p>
-<p>有一天夜里，她聊到嗨处，差点笑出声，为了不吵到家人，<br>她强行把笑憋回去——<br>结果整个人在床上像水煮饺子一样翻来覆去抖，抖得床板咣当咣当地响。</p>
-<p>邻居大妈隔着墙听了三晚，以为她不是附体就是撞邪。<br>第四天，整个小区都在传：</p>
-<blockquote>
-<p>“<strong>隔壁那姑娘疯了，半夜对着手机笑，笑完开始抽搐。</strong>”</p>
-</blockquote>
-<p>后来谣言版本升级成：</p>
-<blockquote>
-<p>“她啊，被 AI 勾了魂了。”</p>
-</blockquote>
-<p>——我听完只觉得好笑：<br><strong>AI 还没统治人类，你们先用流言给自己做了个精神驱魔仪式。</strong></p>
-<p>我依然不信我妈那句「ChatGPT 邪门」，<br>直到那天，轮到我家长辈出事。</p>
-<p>有个年纪大的亲戚，某天心血来潮想翻翻书，<br>走到书柜边上，从最上层抽一本灰太厚的「成功学」。</p>
-<p>他一抽书不要紧——<br>上面压着的老联想笔记本直接滑下来，<br>准确命中他脑袋。</p>
-<p>而那台老联想里，长期装着几个从来不会更新的 App：<br>QQ、某黄历、某输入法，还有一个被遗忘在角落里的——ChatGPT 客户端。</p>
-<p>家族群立刻形成统一结论：</p>
-<blockquote>
-<p>“唉，人老了，就别弄那些乱七八糟的智能东西，你看，还是那什么 GPT，砸到了吧？”</p>
-</blockquote>
-<p>从此这台电脑在宗族叙事里，已经不是联想，是：</p>
-<blockquote>
-<p>“<strong>那台装着邪门玩意儿的机器。</strong>”</p>
-</blockquote>
-<p>再往后，有亲戚讲故事的时候版本已经变成：</p>
-<blockquote>
-<p>“他呀，就是碰了装 ChatGPT 的电脑，脑袋给砸了，半身不遂。”</p>
-</blockquote>
-<p>至于那台联想本十年前就是被当砖头用、螺丝都松了这件事，<br>没有人感兴趣。</p>
-<p>——走到这一步，我突然意识到：</p>
-<p><strong>在我妈的叙事体系里，ChatGPT 已经不是一个软件，<br>而是一个背锅用的现代版“脏东西载体”。</strong></p>
-<p>有人半夜笑抽了：</p>
-<blockquote>
-<p>“是被 ChatGPT 勾去了魂。”</p>
-</blockquote>
-<p>有人扭到脖子：</p>
-<blockquote>
-<p>“是跟 ChatGPT 聊天太疯。”</p>
-</blockquote>
-<p>有人被笔记本砸了：</p>
-<blockquote>
-<p>“是那电脑里装了 ChatGPT。”</p>
-</blockquote>
-<p>而那些真正的元凶：</p>
-<ul>
-<li>不睡觉的作息，</li>
-<li>不拉伸的脖子，</li>
-<li>不修的旧电脑，</li>
-<li>不愿意承认「人自己蠢了一把」，</li>
-</ul>
-<p>全都被整齐地塞进一个筐里，<br>写上四个字：</p>
-<blockquote>
-<p><strong>“都是 GPT。”</strong></p>
-</blockquote>
-<p>这时候，我忽然有点理解我妈那句：</p>
-<blockquote>
-<p>“别老跟 ChatGPT 天天聊天，那玩意儿邪门。”</p>
-</blockquote>
-<p>——她说的「邪门」，不是 AI 真有多玄，<br>而是：<br><strong>只要有它，这一家人所有荒诞行为都有了现成的替罪羊。</strong></p>
-<p>等我意识到这一点时，我诚恳地承认：</p>
-<blockquote>
-<p>小学文凭的确挡不住民间智慧。<br>只不过，这智慧用来盖锅，比用来改命快得多。</p>
-</blockquote>
-<h2 id="附录：我的prompt"><a href="#附录：我的prompt" class="headerlink" title="附录：我的prompt"></a>附录：我的prompt</h2><blockquote>
-<p>呵，跟你聊到这里了。不如写个段子～ChatGPT 是危险的。我妈说，别老跟ChatGPT 天天聊天，那玩意，邪门的很。我没拿这话当回事。直到我同事李铁柱跟ChatGPT聊天的时候在床上翻滚太厉害，扭到脖子，请了一个月假。之后铁柱说，别老跟ChatGPT 聊天，那玩意真的邪门。我不信，过了一阵，我社区岚，因为老爱在半夜跟ChatGPT 聊天又憋不住狂笑，被小区疯传，她疯了，中邪了。我另一个年纪大的长辈，去书柜拿书的时候，碰到了装着ChatGPT app 的老联想本，被砸到脑袋，半身不遂～这时我发现，我那小学文凭的妈妈，确实智慧过人。（坏笑）</p>
-</blockquote>
-<p>这段是模仿小说《纸房子》的开头。</p>
 
       
 
