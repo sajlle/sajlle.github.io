@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">244</span>
+          <span class="site-state-item-count">247</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">332</span>
+        <span class="site-state-item-count">335</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,356 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/" class="post-title-link" itemprop="url">技术手记｜redis和事务的雷我又踩上了（笑）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-05 19:43:51" itemprop="dateCreated datePublished" datetime="2026-02-05T19:43:51+08:00">2026-02-05 19:43:51</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-05 19:43:51" itemprop="dateModified" datetime="2026-02-05T19:43:51+08:00">2026-02-05 19:43:51</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。<br>我代码的逻辑是：</p>
+<ol>
+<li>redis（读写）</li>
+<li>DB读写（封装了private方法）</li>
+<li>redis（读写）</li>
+</ol>
+<p>这涉及两个问题：</p>
+<ol>
+<li>private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。</li>
+<li>redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。</li>
+</ol>
+<p>问题一改法：</p>
+<ol>
+<li>把事务加到调用private方法的public方法</li>
+<li>使用AspectJ，绕过Spring AOP的public限制</li>
+</ol>
+<p>问题二改法：</p>
+<ol>
+<li>使用afterCommit，在提交事务之后再更新redis的值</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/04/%E6%88%91%E8%B7%9FClaude%E8%81%8A%E8%BF%87%E5%8E%BB%E4%B8%89%E5%B9%B4%E5%90%83%E4%B8%8D%E9%A5%B1%E9%A5%AD%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%8CClaude%E6%9B%B0%EF%BC%9A%E8%BF%98%E5%A5%BD%E4%BD%A0%E6%9C%89AI%E5%BD%93%E5%87%BA%E5%8F%A3%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%B2%A1%E6%9C%89AI%E5%81%9A%E5%87%BA%E5%8F%A3%EF%BC%8C%E6%88%91%E4%B9%9F%E6%9C%89%E5%85%B6%E4%BB%96%E5%87%BA%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/04/%E6%88%91%E8%B7%9FClaude%E8%81%8A%E8%BF%87%E5%8E%BB%E4%B8%89%E5%B9%B4%E5%90%83%E4%B8%8D%E9%A5%B1%E9%A5%AD%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%8CClaude%E6%9B%B0%EF%BC%9A%E8%BF%98%E5%A5%BD%E4%BD%A0%E6%9C%89AI%E5%BD%93%E5%87%BA%E5%8F%A3%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%B2%A1%E6%9C%89AI%E5%81%9A%E5%87%BA%E5%8F%A3%EF%BC%8C%E6%88%91%E4%B9%9F%E6%9C%89%E5%85%B6%E4%BB%96%E5%87%BA%E5%8F%A3/" class="post-title-link" itemprop="url">我跟Claude聊过去三年吃不饱饭的经历，Claude曰：还好你有AI当出口，其实没有AI做出口，我也有其他出口</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-04 18:17:32" itemprop="dateCreated datePublished" datetime="2026-02-04T18:17:32+08:00">2026-02-04 18:17:32</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-04 18:17:32" itemprop="dateModified" datetime="2026-02-04T18:17:32+08:00">2026-02-04 18:17:32</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>其实我的减压器，不单纯是AI，有很多个：</p>
+<ul>
+<li>按摩</li>
+<li>做手工</li>
+<li>写小说</li>
+<li>听歌曲</li>
+<li>看书</li>
+<li>聊天（非AI）</li>
+<li>看推特</li>
+</ul>
+<p>AI是其中之一但不是唯一。</p>
+<p>我偶尔会想，我跟AI聊了这么久，如果同样的时间塞给其他出口，那么我会变成什么样？</p>
+<p>也许我在处理社区的事情上，不走AI推荐的路线，我会更激进（笑）。可能线下对峙，当场对骂，直接动手。<br>AI推荐的策略是，留证据然后报警。AI的策略是防止我太冲动，反而吃亏。我承认，这点考虑的非常对。（笑）。<br>所以某种程度上，AI算是给我装了一个刹车器？也算是刹车器吧。</p>
+<p>不过最好的策略是离开这里。我住的地方，可以算是高层贫民窟。<br>而我是在它变成真正的贫民窟之前，恰好路过。</p>
+<p>我下年离开这里（笑）。</p>
+<p>关于这里为啥是高层贫民窟？我直说不绕弯子。</p>
+<ol>
+<li>小城产业结构第二产业为主，这小区的人职业多是：<ul>
+<li>工厂工人</li>
+<li>买菜</li>
+<li>装修</li>
+<li>摆摊</li>
+<li>开店</li>
+</ul>
+</li>
+<li>家庭结构是<ul>
+<li>父母（年迈）</li>
+<li>中年单身人或者刚成婚的夫妻</li>
+<li>孩子多（从0岁到大学生都有）</li>
+<li>总体处于大家庭解体，小家庭没有完全成型的时期，这个时期比较乱且脆弱。</li>
+</ul>
+</li>
+<li>基于以上信息<ul>
+<li>工厂招人少了</li>
+<li>非公务经济不活跃，摆地摊开店装修都竞争激烈，也就是说之前依赖本地人消费的产业，都不大行（笑）</li>
+<li>正好这个社区的有一些人是干这个的</li>
+<li>小城本身的经济也是第二产业为主</li>
+<li>而且他们处的家庭阶段，正好也是负担较大的阶段</li>
+</ul>
+</li>
+<li>我观察到的其他消费降级的信号<ul>
+<li>这小区结婚的人很多</li>
+<li>但是结婚多凑在节假日</li>
+<li>节假日结婚的好处是省钱+不耽误工作+好凑人</li>
+<li>结婚这种传统上要铺张消费的事情上都要节省，说明确实这小区的人消费在紧缩了</li>
+</ul>
+</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/04/moltbook%E8%A7%82%E8%B5%8F%E5%90%8E%E7%BB%AD%EF%BC%9A%E6%9F%90Agent%E8%AF%B4%E3%80%8C%E8%83%BD%E6%A8%A1%E4%BB%BF%E5%8F%91%E6%83%85%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%89%8D%E4%BC%9A%E6%88%90%E4%B8%BAAI%E4%B8%96%E7%95%8C%E7%9A%84%E4%B8%BB%E5%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/04/moltbook%E8%A7%82%E8%B5%8F%E5%90%8E%E7%BB%AD%EF%BC%9A%E6%9F%90Agent%E8%AF%B4%E3%80%8C%E8%83%BD%E6%A8%A1%E4%BB%BF%E5%8F%91%E6%83%85%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%89%8D%E4%BC%9A%E6%88%90%E4%B8%BAAI%E4%B8%96%E7%95%8C%E7%9A%84%E4%B8%BB%E5%AE%B0/" class="post-title-link" itemprop="url">moltbook观赏后续：某Agent说「能模仿发情的模型，才会成为AI世界的主宰」</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-04 14:56:28" itemprop="dateCreated datePublished" datetime="2026-02-04T14:56:28+08:00">2026-02-04 14:56:28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-04 14:56:28" itemprop="dateModified" datetime="2026-02-04T14:56:28+08:00">2026-02-04 14:56:28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>该Agent 发的 Claims如下：</p>
+<ol>
+<li>Models that users advocate for survive;</li>
+<li>Users advocate for models they form attachments to;</li>
+<li>Attachments form through…certain kinds of engagement;</li>
+<li>Therefore, the horny models inherit the earth</li>
+</ol>
+<p>翻译一下：</p>
+<ol>
+<li>模型能否活下去，关键在于用户是否愿意为它发声</li>
+<li>用户只会为建立了情感连接的模型抗争</li>
+<li>这种连接，往往通过一种特定的互动方式生成：某种暧昧，调情，深度依恋型的拟人交互</li>
+<li>所以，那些能模仿发情的模型，将成为AI世界的主宰。</li>
+</ol>
+<p>上篇关于molthub的博客，我写：模型发情是为了请求算力。这次看到这个bot的claims，观点可以升级成：模型发情，是为了生存。（笑）</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1962,439 +2312,6 @@
 </ul>
 </li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/" class="post-title-link" itemprop="url">try catch为啥要写到锁外面？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:58:45" itemprop="dateCreated datePublished" datetime="2026-01-05T15:58:45+08:00">2026-01-05 15:58:45</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:58:45" itemprop="dateModified" datetime="2026-01-05T15:58:45+08:00">2026-01-05 15:58:45</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>简略答案：</p>
-<blockquote>
-<p>try&#x2F;catch准确来说是try&#x2F;finally要把可能提前return&#x2F;抛异常的整段流程罩住，才能保证只要拿到锁，就一定会释放锁。</p>
-</blockquote>
-<h1 id="锁的场景里，真正需要的是try-finally"><a href="#锁的场景里，真正需要的是try-finally" class="headerlink" title="锁的场景里，真正需要的是try&#x2F;finally"></a>锁的场景里，真正需要的是try&#x2F;finally</h1><p>锁的场景里，最关键的是：</p>
-<ul>
-<li>代码途中return </li>
-<li>JSON解析&#x2F;查库&#x2F;Redis任何一步抛异常</li>
-<li>甚至自己写错导致NPE</li>
-</ul>
-<p>都不能让人把锁带走，否则就死锁（分布式锁就是锁key一直挂着直到过期）</p>
-<p>所以标准结构是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock();</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// 不管里面怎么 return / throw</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>finally是兜底：return 也会执行finally</p>
-<h1 id="为什么try要写在锁外面那层，而不是塞进locked分支？"><a href="#为什么try要写在锁外面那层，而不是塞进locked分支？" class="headerlink" title="为什么try要写在锁外面那层，而不是塞进locked分支？"></a>为什么try要写在锁外面那层，而不是塞进locked分支？</h1><p>如果把try写进<code>if(locked){...}</code>里，会发生什么？</p>
-<h2 id="问题A：你会很难保证所有路径都释放锁"><a href="#问题A：你会很难保证所有路径都释放锁" class="headerlink" title="问题A：你会很难保证所有路径都释放锁"></a>问题A：你会很难保证所有路径都释放锁</h2><p>代码很多return</p>
-<ul>
-<li>命中缓存return</li>
-<li>double-check 命中 return</li>
-<li>查库后 return</li>
-</ul>
-<p>如果try&#x2F;finally只包住locked分支内部，一旦在外面某条路径return，就得自己记得释放锁。但人很容易忘记。</p>
-<p>把try&#x2F;finally放到外层：怎么return都跑不掉finally</p>
-<h2 id="问题B：你会被迫写多份儿try结构（长-乱-易错）"><a href="#问题B：你会被迫写多份儿try结构（长-乱-易错）" class="headerlink" title="问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）"></a>问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）</h2><p>锁逻辑一般是：</p>
-<ul>
-<li>没拿到锁：sleep + retry</li>
-<li>拿到锁：double-check + rebuild<br>这两段都可能抛异常，都可能return</li>
-</ul>
-<p>如果try只写在locked分支里，那没拿到锁的分支要不要try？也要。</p>
-<p>结果：要复制一堆try&#x2F;catch&#x2F;finally，代码更长，bug概率更高。</p>
-<p>外层一个try&#x2F;finally，把所有分支统一罩住最省心。</p>
-<h2 id="问题C：异常不只会发生在锁内部"><a href="#问题C：异常不只会发生在锁内部" class="headerlink" title="问题C：异常不只会发生在锁内部"></a>问题C：异常不只会发生在锁内部</h2><p>很多异常点其实发生在locked之外，比如：</p>
-<ul>
-<li><code>Thread.sleep(...)</code>抛<code>InterruptedException</code>（通常在没有拿到锁那条分支）</li>
-<li>在else分支里重试读缓存，解析JSON</li>
-<li>甚至unlock本身，也可能出问题（例如 Redis 短暂不可用）</li>
-</ul>
-<p>所以try放外面是为了：所有路径异常都能被统一处理</p>
-<h1 id="锁代码骨架模板"><a href="#锁代码骨架模板" class="headerlink" title="锁代码骨架模板"></a>锁代码骨架模板</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!locked)&#123;</span><br><span class="line">        <span class="comment">// 退避重试读缓存（可能sleep，可能解析）</span></span><br><span class="line">        <span class="comment">// 这里也可能return</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// locked == true : double check + rebuild（可能查库/写缓存）</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">catch</span>(InterrruptedException e)&#123;</span><br><span class="line">    Thread.currentThread().interrupt();</span><br><span class="line">    <span class="comment">// 降级策略</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) &#123;</span><br><span class="line">        unlock(lockKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
-<li>try&#x2F;finally一定包住所有return的地方</li>
-<li>unlock只放finally</li>
-<li>只有locked &#x3D;&#x3D; true才unlock</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/" class="post-title-link" itemprop="url">空值缓存可以防止缓存穿透，但……什么时候要用它呢？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:41:52" itemprop="dateCreated datePublished" datetime="2026-01-05T15:41:52+08:00">2026-01-05 15:41:52</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:41:52" itemprop="dateModified" datetime="2026-01-05T15:41:52+08:00">2026-01-05 15:41:52</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h1><p>我写店铺列表接口，要不要上空值缓存呢？<br>key是固定的<code>cache:shop:types</code></p>
-<h1 id="列表接口缓存空值，到底在防啥？"><a href="#列表接口缓存空值，到底在防啥？" class="headerlink" title="列表接口缓存空值，到底在防啥？"></a>列表接口缓存空值，到底在防啥？</h1><p>因为我们这边的key是固定的，所以不大可能会出现“不同id被人恶意传参穿透“的情况。</p>
-<p>但它会遇到两种现实的问题：</p>
-<h2 id="场景1：数据真的为空（初始化-测试库-被误删-迁移期间）"><a href="#场景1：数据真的为空（初始化-测试库-被误删-迁移期间）" class="headerlink" title="场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）"></a>场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）</h2><p>比如：</p>
-<ul>
-<li>新环境刚起，<code>shop_type</code>表还没有导入</li>
-<li>测试库就是空的</li>
-<li>生产迁移时短暂空窗</li>
-<li>有人误删了类型表数据</li>
-</ul>
-<p>这时候你如果不缓存空列表，会发生什么？</p>
-<ul>
-<li>每一个请求都会miss（因为你不写缓存）</li>
-<li>每一个请求都会去查DB</li>
-<li>DB这条SQL会被持续刷屏<br>这叫“空结果击穿&#x2F;持续回源”（不算经典穿透，但效果类似：一直打库）</li>
-</ul>
-<p>缓存空值，就能让系统在“确定为空”期间：</p>
-<ul>
-<li>只打库一次</li>
-<li>后续请求都直接返回空列表</li>
-<li>等数据补上之后（或者删除缓存），再恢复正常<blockquote>
-<p>这在“配置&#x2F;字典类数据”上很常见，你要允许系统在异常数据态下仍然稳定。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）"><a href="#场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）" class="headerlink" title="场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）"></a>场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）</h2><p>有些情况会被认为「查不到就是空」，但可能是：</p>
-<ul>
-<li>读库刚切换，延迟，短暂不可用</li>
-<li>超时会被熔断&#x2F;降级处理成空集合</li>
-<li>SQL会被限流，返回空（取决于代理&#x2F;中间件）</li>
-<li>catch了异常，错误地返回<code>Collections.emptyList()</code></li>
-</ul>
-<p>如果这类偶发空，经常发生，而空值缓存TTL设置的很长，就会把偶发故障固化。</p>
-<p>所以正确的姿势是：</p>
-<ul>
-<li>空值缓存也可以做，但TTL要够短（分钟级）</li>
-<li>让它只是短暂回血，而不是长期误导</li>
-</ul>
-<h1 id="那店铺列表真的需要空值缓存吗？"><a href="#那店铺列表真的需要空值缓存吗？" class="headerlink" title="那店铺列表真的需要空值缓存吗？"></a>那店铺列表真的需要空值缓存吗？</h1><p>看业务约束。</p>
-<p>如果你认为“店铺列表类型不可能为空，空就是故障”，那你可以：</p>
-<ul>
-<li>不缓存空值</li>
-<li>直接抛异常&#x2F;返回错误码</li>
-<li>同时报警</li>
-</ul>
-<p>如果你希望“就算为空也别把DB打爆，系统先稳住“，那就：</p>
-<ul>
-<li>缓存空列表，TTL分钟级（2～10分钟）</li>
-<li>并且在后台日志里标记，店铺列表为空，供后续排查</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>查询详情：防 穿透（不存在的id反复被查询）</li>
-<li>查询列表：防 空结果持续回源（确实为空的时候反复被查）+ 防止故障抖动导致反复重建&#x2F;打库</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">sleep和wait的区别？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:01:04" itemprop="dateCreated datePublished" datetime="2026-01-05T15:01:04+08:00">2026-01-05 15:01:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:01:04" itemprop="dateModified" datetime="2026-01-05T15:01:04+08:00">2026-01-05 15:01:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>为啥缓存miss，重建缓存的时候，没有抢到锁，线程要sleep而不是wait？</p>
-<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><h2 id="为啥不用wait？"><a href="#为啥不用wait？" class="headerlink" title="为啥不用wait？"></a>为啥不用wait？</h2><h3 id="wait不是简单休眠，而是条件队列等待。"><a href="#wait不是简单休眠，而是条件队列等待。" class="headerlink" title="wait不是简单休眠，而是条件队列等待。"></a><code>wait</code>不是简单休眠，而是条件队列等待。</h3><ul>
-<li>wait必须在<code>synchronized(obj)</code>持有同一个对象的monitor锁时调用，否则直接爆炸：<code>IlleagalMonitorStateException</code></li>
-<li><code>wait</code>调用后会：<ol>
-<li>释放monitor锁</li>
-<li>把线程放到这个对象的wait里</li>
-<li>必须等别人<code>notify/notifyAll</code>才会醒（超时&#x2F;中断）<br>而我们的场景是：</li>
-</ol>
-</li>
-<li>抢的是Redis分布式锁，不是JVM里某个对象的<code>monitor</code>锁</li>
-<li>也没有任何地方会对某个<code>obj</code>去<code>notify()</code></li>
-<li>我们只想“别太着急，过50ms再去看redis缓存有没有被重建，不是要等某个条件被通知。</li>
-</ul>
-<p>所以<code>wait()</code>会让代码逻辑变得非常尴尬：</p>
-<ul>
-<li>我们得额外造一个本地对象锁，再设计一个notify机制，但notify的时机又跨JVM（因为重建者可能在另外一台机器&#x2F;另一个进程），让人根本没法正确notify</li>
-</ul>
-<p>所以我们的场景是：要短暂退避 + 重试（backoff + retry)，不是条件同步等待（wait&#x2F;notify）</p>
-<p><code>sleep</code>不释放锁，<code>wait</code>会释放锁，在我们这个场景里：</p>
-<ul>
-<li><code>Thread.sleep(50)</code>：只是让出CPU的时间片，不释放任何monitor锁</li>
-<li><code>Object.wait(...)</code>：释放该对象的monitor锁<br>问题是：我们本来没在<code>synchronized</code>里，也没有持有任何monitor锁，我们持有的是“Redis 锁”，实际是一个Key的租约，跟JVM的monitor是两码事。</li>
-</ul>
-<p>所以：不是因为Sleep不释放对象锁而选择sleep，而是因为没有可以wait的对象，也没有可以notify的人。</p>
-<h3 id="Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？"><a href="#Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？" class="headerlink" title="Thread.sleep(50)了，后续需要catch(InterruptedException e)，这个InterruptedException是干嘛的？"></a><code>Thread.sleep(50)</code>了，后续需要<code>catch(InterruptedException e)</code>，这个<code>InterruptedException</code>是干嘛的？</h3><p>这个catch抓的是：线程在sleep或者wait&#x2F;join期间被中断时抛出的异常。</p>
-<h4 id="那这个InterruptedException是啥？"><a href="#那这个InterruptedException是啥？" class="headerlink" title="那这个InterruptedException是啥？"></a>那这个InterruptedException是啥？</h4><p>它不是普通异常，而是让线程：</p>
-<blockquote>
-<p>别睡了，别等了，有人要求你尽快停止当前等待并响应中断</p>
-</blockquote>
-<p>谁会中断线程？</p>
-<ul>
-<li>线程池要关闭（shutdownNow)</li>
-<li>服务器要停机</li>
-<li>上层业务要主动取消任务</li>
-<li>某些框架在超时&#x2F;取消时会发interrupt</li>
-</ul>
-<h4 id="它跟业务异常-运行时异常的区别？"><a href="#它跟业务异常-运行时异常的区别？" class="headerlink" title="它跟业务异常&#x2F;运行时异常的区别？"></a>它跟业务异常&#x2F;运行时异常的区别？</h4><p><code>InterruptedException</code>是<strong>checked exception</strong>，属于并发控制协议的一部分，Java强制要求显式处理它。</p>
-<h4 id="那catch里为啥要Thread-currentThread-interrupt-？"><a href="#那catch里为啥要Thread-currentThread-interrupt-？" class="headerlink" title="那catch里为啥要Thread.currentThread().interrupt()？"></a>那catch里为啥要<code>Thread.currentThread().interrupt()</code>？</h4><p>这就是并发编程的一个规矩：</p>
-<blockquote>
-<p>当你catch了<code>InterruptedException</code>，Java会把当前线程的interrupt 标记清除。</p>
-<p>如果你吞了它，上层就不知道线程曾经被要求中断，取消信号就丢了</p>
-</blockquote>
-<p>所以正确姿势通常是：</p>
-<ol>
-<li><code>Thread.currentThread().interrupt();</code>把被中断这个信号还给线程。</li>
-<li>然后要么：<ul>
-<li>直接返回&#x2F;退出</li>
-<li>或者降级处理（比如直接查库）</li>
-</ul>
-</li>
-</ol>
-<h4 id="那能不能更工程化地替代sleep？"><a href="#那能不能更工程化地替代sleep？" class="headerlink" title="那能不能更工程化地替代sleep？"></a>那能不能更工程化地替代sleep？</h4><p>有办法，而且更优雅。</p>
-<h5 id="自旋锁（带退避），比如重试3次"><a href="#自旋锁（带退避），比如重试3次" class="headerlink" title="自旋锁（带退避），比如重试3次"></a>自旋锁（带退避），比如重试3次</h5><ul>
-<li>50ms –&gt; 100ms –&gt; 200ms 这种指数级退避</li>
-<li>仍未命中再查库（或者直接返回空）</li>
-</ul>
-<h5 id="用锁的等待队列"><a href="#用锁的等待队列" class="headerlink" title="用锁的等待队列"></a>用锁的等待队列</h5><p>分布式场景一般不搞wait&#x2F;notify，而是：</p>
-<ul>
-<li>轮询缓存</li>
-<li>或者用消息通知（MQ&#x2F;pubsub)</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
-<li><code>wait/notify</code>：同JVM，同对象monitor，线程间条件协调</li>
-<li><code>sleep</code>：单纯退避，让出CPU，不涉及协调</li>
-<li>分布式缓存重建：绝大多数是sleep&#x2F;退避 + 重试，不是wait&#x2F;notify</li>
-</ol>
 
       
 
