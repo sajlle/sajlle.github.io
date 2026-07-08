@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-07-08 19:19:28" itemprop="dateModified" datetime="2026-07-08T19:19:28+08:00">2026-07-08 19:19:28</time>
+      <time title="修改时间：2026-07-08 19:22:25" itemprop="dateModified" datetime="2026-07-08T19:22:25+08:00">2026-07-08 19:22:25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,14 +270,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>问题是这样的，退款场景的bug：</p>
-<ol>
+          <h2 id="问题是这样的，退款场景的bug："><a href="#问题是这样的，退款场景的bug：" class="headerlink" title="问题是这样的，退款场景的bug："></a>问题是这样的，退款场景的bug：</h2><ol>
 <li>为了兼容乱序通知，打开closed -&gt; success</li>
 <li>为了恢复用户权益，closed的时候立刻active</li>
 <li>最后两个规则单独看起来合理，一组合就是资损窗口</li>
 </ol>
-<p>DeepSeek方案如下：</p>
-<ul>
+<h2 id="DeepSeek方案如下："><a href="#DeepSeek方案如下：" class="headerlink" title="DeepSeek方案如下："></a>DeepSeek方案如下：</h2><ul>
 <li><p>方案A（事后追溯）：</p>
 <blockquote>
 <p>在执行 Closed -&gt; Success 时，去检查那笔被恢复的优惠券的最新状态。如果发现它已被再次使用，则： 取消这笔支付，发起退款（但这笔退款又可能因乱序而失败，陷入循环）。 记录一笔清晰的挂账，并立即触发人工审核，让运营去判断是补收钱、召回订单还是认栽。这是兜底方案。</p>
@@ -299,20 +297,17 @@
 </blockquote>
 </li>
 </ul>
-<p>GPT 5.5 Thinking的方案如下：</p>
-<blockquote>
+<h2 id="GPT-5-5-Thinking的方案如下："><a href="#GPT-5-5-Thinking的方案如下：" class="headerlink" title="GPT 5.5 Thinking的方案如下："></a>GPT 5.5 Thinking的方案如下：</h2><blockquote>
 <p>引入 CLOSED_PENDING_CONFIRM。 收到 CLOSED 不立即恢复权益。 二次查单确认 CLOSED 后再恢复。 确认期内 SUCCESS 可以正常覆盖 CLOSED_PENDING_CONFIRM。</p>
 </blockquote>
-<p>Fable 5 High 的方案如下：</p>
-<ul>
+<h2 id="Fable-5-High-的方案如下："><a href="#Fable-5-High-的方案如下：" class="headerlink" title="Fable 5 High 的方案如下："></a>Fable 5 High 的方案如下：</h2><ul>
 <li>让 closed → success 这条迁移带补偿动作:<blockquote>
 <p>既然允许翻案,翻案时就必须回收之前基于 closed 发放的权益。状态迁移不只是改字段,是”离开旧状态执行 undo,进入新状态执行 do”</p>
 </blockquote>
 </li>
 <li>把”权益已恢复 且 退款已成功”定义为不变量违例,让对账去扫,扫到就走冲正。</li>
 </ul>
-<p>三模型的方案我的评价：</p>
-<ol>
+<h2 id="三模型的方案我的评价："><a href="#三模型的方案我的评价：" class="headerlink" title="三模型的方案我的评价："></a>三模型的方案我的评价：</h2><ol>
 <li>fable方案最好理解&amp;最完善，因为没有强行要消除这个窗口期，而是让状态流转带副作用。后续对账部分定义不变量违例，哪怕前期状态流转没做好undo和do，也不是静默资损，后续对账能查到。所以这个是没有强行平掉窗口，而是把窗口变的可补偿可观测。</li>
 <li>其次是GPT给我的方案，这个方案牺牲了用户体验，但消除了资损窗口。</li>
 <li>最后是DeepSeek的方案，B&#x2F;D其实跟GPT的方案类似，但表述比较冗长（笑）切的不够准，把核心点绕着说了很多圈，其实说白了就是closed之后不要立刻真正释放权益。B把这个说成是犹豫期，D把这个说成是独立Saga编排器。它没有像Fable一样直接抓住状态迁移的副作用。也没有像GPT一样直接切一个明确状态。A&#x2F;C方案里，C方案把复杂度入侵到下游链路，A方案则会导致连环退款。</li>
