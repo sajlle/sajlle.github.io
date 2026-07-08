@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">335</span>
+        <span class="site-state-item-count">336</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-07-08 19:37:13" itemprop="dateModified" datetime="2026-07-08T19:37:13+08:00">2026-07-08 19:37:13</time>
+      <time title="修改时间：2026-07-08 20:30:48" itemprop="dateModified" datetime="2026-07-08T20:30:48+08:00">2026-07-08 20:30:48</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -312,6 +312,7 @@
 <li>GPT的 CLOSED_PENDING_CONFIRM 是让100%的closed订单都延迟恢复权益，来防御那不到1%的乱序case——用普遍的UX代价买确定性。这个方案牺牲了用户体验，但消除了资损窗口。</li>
 <li>最后是DeepSeek的方案，B&#x2F;D其实跟GPT的方案类似，但表述比较冗长（笑）切的不够准，把核心点绕着说了很多圈，其实说白了就是closed之后不要立刻真正释放权益。B把这个说成是犹豫期，D把这个说成是独立Saga编排器。它没有像Fable一样直接抓住状态迁移的副作用。也没有像GPT一样直接切一个明确状态。A&#x2F;C方案里，C方案把复杂度入侵到下游链路，A方案则会导致连环退款。</li>
 </ol>
+<p>面对同一个资损Bug，DeepSeek选择穷举，GPT选择消除，Fable选择补偿。这背后体现了不同工程哲学分野。<br>GPT 的方案偏向金融系统里的保守确定性，Fable 的方案偏向产品系统里的补偿弹性。前者尽量不让坏事发生，后者承认坏事会发生，但要求系统必须能看见、能追回、能冲正。而DeepSeek的方案则倾向于把复杂度分散到各个环节，试图通过事前事后各种手段来防御，但没有一个明确的核心原则。优点是覆盖面看起来很全，缺点是容易把问题拆散，变成一堆局部补丁。</p>
 
       
 
