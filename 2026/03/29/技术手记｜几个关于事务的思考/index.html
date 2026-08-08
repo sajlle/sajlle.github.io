@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="关于事务的状态 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景： 一个se">
+    <meta name="description" content="事务生命周期的简单理解 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技术手记｜几个关于事务的思考">
 <meta property="og:url" content="https://sajlle.github.io/2026/03/29/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%87%A0%E4%B8%AA%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="关于事务的状态 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景： 一个se">
+<meta property="og:description" content="事务生命周期的简单理解 执行状态 ACTIVE：事务正在执行中，还没提交 ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了 COMITTED&#x2F;ROLLED BACK：事务已经提交或者回滚了   事务传播行为 就是一个带事务的方法，调用另一个带事务的方法时，怎么相处。    关于事务传播行为 + 事务的使用场景 REQUIRED: 有事务就加入，没事务就新建 适用场景：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-29T02:24:05.000Z">
-<meta property="article:modified_time" content="2026-03-29T02:24:05.000Z">
+<meta property="article:modified_time" content="2026-08-08T03:06:57.464Z">
 <meta property="article:author" content="之瑞">
 <meta property="article:tag" content="ACID">
 <meta property="article:tag" content="事务">
@@ -165,7 +165,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">关于事务的状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA-%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">关于事务传播行为 + 事务的使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">关于事务的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.</span> <span class="nav-text">一些简单实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E9%80%BB%E8%BE%91"><span class="nav-number">5.</span> <span class="nav-text">项目中的使用逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BA%8B%E5%8A%A1%EF%BC%88REUQIRED%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">主事务（REUQIRED）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E4%BA%8B%E5%8A%A1%EF%BC%88REQUIRES-NEW%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">独立事务（REQUIRES_NEW）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E8%BF%9B%E5%85%A5%E4%BA%8B%E5%8A%A1"><span class="nav-number">5.3.</span> <span class="nav-text">不需要进入事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="nav-number">5.4.</span> <span class="nav-text">简单总结</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">事务生命周期的简单理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA-%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">关于事务传播行为 + 事务的使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">关于事务的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.</span> <span class="nav-text">一些简单实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E9%80%BB%E8%BE%91"><span class="nav-number">5.</span> <span class="nav-text">项目中的使用逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BA%8B%E5%8A%A1%EF%BC%88REUQIRED%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">主事务（REUQIRED）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E4%BA%8B%E5%8A%A1%EF%BC%88REQUIRES-NEW%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">独立事务（REQUIRES_NEW）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E8%BF%9B%E5%85%A5%E4%BA%8B%E5%8A%A1"><span class="nav-number">5.3.</span> <span class="nav-text">不需要进入事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="nav-number">5.4.</span> <span class="nav-text">简单总结</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +180,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">269</span>
+          <span class="site-state-item-count">271</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -189,7 +189,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">356</span>
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-29 10:24:05" itemprop="dateModified" datetime="2026-03-29T10:24:05+08:00">2026-03-29 10:24:05</time>
+      <time title="修改时间：2026-08-08 11:06:57" itemprop="dateModified" datetime="2026-08-08T11:06:57+08:00">2026-08-08 11:06:57</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -276,7 +276,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="关于事务的状态"><a href="#关于事务的状态" class="headerlink" title="关于事务的状态"></a>关于事务的状态</h1><ol>
+    <div class="post-body" itemprop="articleBody"><h1 id="事务生命周期的简单理解"><a href="#事务生命周期的简单理解" class="headerlink" title="事务生命周期的简单理解"></a>事务生命周期的简单理解</h1><ol>
 <li>执行状态<ul>
 <li>ACTIVE：事务正在执行中，还没提交</li>
 <li>ROLLBACK-ONLY：事务正在执行中，但已经标记为只能回滚了</li>
@@ -322,20 +322,16 @@
 </li>
 <li>NESTED:<ul>
 <li>外层有事务，就在同一个事务里savepoint，内层失败可以回滚到savepoint，不影响外层事务，外层没有事务，就新建一个事务。</li>
-<li>开箱即用：<code>DataSourceTransactionManager</code>默认支持嵌套事务</li>
+<li>开箱即用：DataSourceTransactionManager 的 nestedTransactionAllowed 默认是 true，通常通过 JDBC Savepoint 实现 NESTED，前提是 JDBC 驱动&#x2F;数据库支持 Savepoint。</li>
 <li>适用场景：<ul>
 <li>需要局部失败不拖死整体</li>
 <li>确认底层事务管理器支持savepoint</li>
 <li>例子：<ul>
-<li>不常见。</li>
+<li>不常见。<br> 坑：  NESTED 有外层事务时，需要底层事务管理器支持嵌套事务，典型实现是 JDBC Savepoint。如果不支持，并不是自动退化成 REQUIRED，而通常会抛出 NestedTransactionNotSupportedException。4. SUPPORTS:</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>坑：底层事务管理器不支持savepoint，就退化成REQUIRED了，内层失败了，整个事务都失败了。</li>
-</ul>
-</li>
-<li>SUPPORTS:<ul>
 <li>有事务就加入，没事务就不用事务</li>
 <li>适用场景：<ul>
 <li>查询类方法</li>
@@ -397,13 +393,15 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.saveLogError(); <span class="comment">// 以为 REQUIRES_NEW 生效，结果根本没生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>解决办法：</p>
 <ul>
-<li>通过AOP代理对象调用方法，可以使用<code>AopContext.currentProxy()</code>获取当前代理对象，然后调用方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    ((YourServiceClass) AopContext.currentProxy()).saveLogError(); <span class="comment">// 通过代理对象调用，事务注解生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
 <li>将需要事务的方法提取到另一个类中，通过Spring注入调用。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogService</span> &#123;</span><br><span class="line">    <span class="meta">@Transactional(propagation = Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveLogError</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 记录日志的逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;       </span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourServiceClass</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService logService;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">        logService.saveLogError(); <span class="comment">// 通过注入的LogService调用，事务注解生效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另，不大推荐的：</p>
+<ul>
+<li>通过AOP代理对象调用方法，可以使用<code>AopContext.currentProxy()</code>获取当前代理对象，然后调用方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    ((YourServiceClass) AopContext.currentProxy()).saveLogError(); <span class="comment">// 通过代理对象调用，事务注解生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>以为catch住异常就万事大吉</li>
 </ol>
@@ -416,7 +414,7 @@
 <ul>
 <li>或者在@Transactional注解上指定回滚的异常类型，例如<code>@Transactional(rollbackFor = Exception.class)</code>，这样即使catch住了异常，事务也会回滚。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 可能抛出异常的代码        </span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// 处理异常</span></span><br><span class="line">        <span class="comment">// 不需要手动标记事务回滚，因为rollbackFor已经指定了回滚</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="comment">// 不 catch，让异常抛出去</span></span><br><span class="line">   doSomething();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者如果必须catch</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      doSomething();</span><br><span class="line">   &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      <span class="comment">// 记录日志等</span></span><br><span class="line">      TransactionAspectSupport.currentTransactionStatus()</span><br><span class="line">              .setRollbackOnly();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">yourMethod</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      doSomething();</span><br><span class="line">   &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      log.error(<span class="string">&quot;xxx&quot;</span>, e);</span><br><span class="line">      <span class="keyword">throw</span> e;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h1 id="一些简单实践"><a href="#一些简单实践" class="headerlink" title="一些简单实践"></a>一些简单实践</h1><ol>
 <li>业务逻辑中，尽量让事务边界清晰，避免过长的事务，减少锁竞争和资源占用。</li>
