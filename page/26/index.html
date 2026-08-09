@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">274</span>
+          <span class="site-state-item-count">275</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">359</span>
+        <span class="site-state-item-count">360</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/" class="post-title-link" itemprop="url">终端记事本·灵魂补丁版～弥补Mac没有记事本的遗憾</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-16 17:53:31" itemprop="dateCreated datePublished" datetime="2025-12-16T17:53:31+08:00">2025-12-16 17:53:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-16 17:53:31" itemprop="dateModified" datetime="2025-12-16T17:53:31+08:00">2025-12-16 17:53:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>自从今年换了Mac之后，哪哪都好，唯一痛点，Mac没有记事本，不能像windows一样，右键点开，新建文件。<br>所以比较烦，就重回vim怀抱，新建文件，自己打开终端，直接开始<code>vi</code></p>
+<p>不过这也太烦了。毕竟打开终端–&gt; <code>vi</code> –&gt; 写文件 –&gt; 命名 –&gt; 保存。这一套流程也很烦人。<br>能不能简化一下呢？因为我用vim新建小文件，顶多是记录杂项，过一阵就删除了。所以最重要的是省事儿，其他的不需要。</p>
+<p>于是我写个shell脚本，快速新建带时间戳的<code>.md</code>文件，在桌面自动生成文件并打开。</p>
+<p>步骤如下：</p>
+<ol>
+<li>打开终端，输入：<code>vi ～/.zshrc</code></li>
+<li>在文件末尾写函数并保存，函数内容如下：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">note</span></span>() &#123;</span><br><span class="line">    title=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$title</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">      filename=<span class="string">&quot;note-<span class="subst">$(date + <span class="string">&quot;%Y-%m-%d-%H%M&quot;</span>)</span>.md&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      filename=<span class="string">&quot;note-<span class="subst">$(date + <span class="string">&quot;%Y-%m-%d-%H%M&quot;</span>)</span>-<span class="variable">$title</span>.md&quot;</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line">    filepath=~/Desktop/<span class="variable">$filename</span></span><br><span class="line">    <span class="built_in">touch</span> <span class="variable">$filepath</span></span><br><span class="line">    vi <span class="variable">$filepath</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>更新配置文件：<code>source ~/.zshrc</code></li>
+<li>用法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">note <span class="comment"># 默认新建 note-2025-12-16-1809.md</span></span><br><span class="line">note dream <span class="comment"># 默认新建 note-2025-12-16-1809-dream.md</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1570,255 +1677,6 @@
 <li>好处坏处都说了</li>
 <li>比较完整<br>但是我略微担心，它是否迎合我，因为我的prompt是让它说为啥我观察力好？所以担心它的回答只侧重观察力好这个方面&#x2F;</li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/10/%E6%9D%91%E9%87%8C%E7%A6%81%E6%AD%A2ChatGPT%EF%BC%8C%E5%9B%A0%E4%B8%BAChatGPT%E5%86%99%E6%96%87%E5%A4%AA%E6%90%9E%E7%AC%91%E6%89%AD%E4%BC%A4%E8%84%96%E5%AD%90%E7%9A%84%E6%9D%8E%E9%93%81%E6%9F%B1%EF%BC%8C%E5%BC%80%E5%A7%8B%E4%BA%86%E5%8F%91%E8%B4%A2%E4%B9%8B%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/10/%E6%9D%91%E9%87%8C%E7%A6%81%E6%AD%A2ChatGPT%EF%BC%8C%E5%9B%A0%E4%B8%BAChatGPT%E5%86%99%E6%96%87%E5%A4%AA%E6%90%9E%E7%AC%91%E6%89%AD%E4%BC%A4%E8%84%96%E5%AD%90%E7%9A%84%E6%9D%8E%E9%93%81%E6%9F%B1%EF%BC%8C%E5%BC%80%E5%A7%8B%E4%BA%86%E5%8F%91%E8%B4%A2%E4%B9%8B%E8%B7%AF/" class="post-title-link" itemprop="url">村里禁止ChatGPT，因为ChatGPT写文太搞笑扭伤脖子的李铁柱，开始了发财之路</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-10 11:45:14" itemprop="dateCreated datePublished" datetime="2025-12-10T11:45:14+08:00">2025-12-10 11:45:14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-10 11:45:14" itemprop="dateModified" datetime="2025-12-10T11:45:14+08:00">2025-12-10 11:45:14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">节点人生</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/%E5%B0%8F%E8%AF%B4/" itemprop="url" rel="index"><span itemprop="name">小说</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>村里禁止ChatGPT，反而给ChatGPT做了反向宣传，属于是<strong>宣传部还没发力，市场部已经起飞</strong>。</p>
-<h3 id="村规宣讲的意外效果：妇女主任当众给-ChatGPT-做了场路演"><a href="#村规宣讲的意外效果：妇女主任当众给-ChatGPT-做了场路演" class="headerlink" title="村规宣讲的意外效果：妇女主任当众给 ChatGPT 做了场路演"></a>村规宣讲的意外效果：妇女主任当众给 ChatGPT 做了场路演</h3><p>妇女主任那句定义性发言是这样的：</p>
-<blockquote>
-<p>“简单说，就是一种在手机上会跟你聊天、<br>比人还会说话，<br>还能帮你孙子写作业的东西。”</p>
-</blockquote>
-<p>这话一落地，大槐树下的大妈们集体“卡顿”了半秒。</p>
-<p>然后，前排一个嗓门大的当场复读了一遍要点，帮大家总结：</p>
-<blockquote>
-<p>“会聊天？比人会说话？<br>还能帮娃写作业？<br>……这好东西啊，干嘛禁了？”</p>
-</blockquote>
-<p>全场空气陡然一紧。</p>
-<p>妇女主任一瞬间意识到自己话说多了，<br>赶紧补刀：</p>
-<blockquote>
-<p>“但是——它会、会、会……<br><strong>会把人搞疯！会让娃不想上学！会……勾魂！</strong>”</p>
-</blockquote>
-<p>可惜为时已晚，<br>在“勾魂”两个字落下之前，<br>**“能帮孙子写作业”**这七个字已经深深刻进了几位大妈的心里。</p>
-<p>信息框在她们脑子里自动重排成：</p>
-<blockquote>
-<p>“危险：是领导说的。<br>有用：是我自己判断的。”</p>
-</blockquote>
-<p>危险可以慢慢体会，<br>但小学生今晚就有作文要交。</p>
-<hr>
-<h3 id="乡村版“GPT-地下灰产”起步：李铁柱成了首席代理"><a href="#乡村版“GPT-地下灰产”起步：李铁柱成了首席代理" class="headerlink" title="乡村版“GPT 地下灰产”起步：李铁柱成了首席代理"></a>乡村版“GPT 地下灰产”起步：李铁柱成了首席代理</h3><p>宣讲会散场后，人群一哄而散，<br>大多数人只记住一个模糊印象：</p>
-<blockquote>
-<p>“反正有个新玩意儿，村里叫不要乱搞。”</p>
-</blockquote>
-<p>但前排那位反应最快的大妈，<br>当晚就悄悄行动了。</p>
-<p>她绕个弯走到巷子口，<br>把刚下班路过的李铁柱一把拽住——<br>就是那个前阵子因为在床上跟 ChatGPT 聊天笑到扭到脖子、请了一个月假的 IT 青年。</p>
-<p>大妈小声问：</p>
-<blockquote>
-<p>“铁柱，你那个啥……<br>跟你聊天聊到把脖子笑断气的那个东西，<br>还在用不？”</p>
-</blockquote>
-<p>铁柱一愣：<br>“啊？……你说 ChatGPT？”</p>
-<p>大妈眼睛一亮：</p>
-<blockquote>
-<p>“对对对，对对对，就是那个。<br>会聊天，比人会说话，还能给娃写作业的那个！<br>妇女主任亲口说的。”</p>
-</blockquote>
-<p>铁柱突然意识到发生了什么：<br>村规宣讲会还没结束一天，<br><strong>ChatGPT 已经从“邪门软件”升级成“可能比家教便宜”的东西了。</strong></p>
-<p>大妈压低声音，亮出筹码：</p>
-<blockquote>
-<p>“你不是有账号吗？<br>这样——以后你来我摊上买韭菜，<br>写八两称，我给你按七两算。<br>你帮我孙子弄几篇作文，别太好，<br>能过老师那关就行。”</p>
-</blockquote>
-<p>这是地道的乡村商业谈判逻辑：</p>
-<ul>
-<li>不给你直接打折，怕被旁边摊主看见；</li>
-<li><strong>改称就行了：八两写成一斤，七两当成八两。</strong></li>
-</ul>
-<p>铁柱看着大妈那张认真得近乎虔诚的脸，<br>突然有点想笑——<br>他扭伤脖子的事故，<br>刚从“AI 邪门”证据变成了：</p>
-<blockquote>
-<p>“你能用到把脖子搞废，说明挺好用。”</p>
-</blockquote>
-<p>几秒钟犹豫之后，<br>他慢慢点头：</p>
-<blockquote>
-<p>“……行，<br>但我先声明，我只给辅导，不给全写，<br>不然以后你孙子作文只会说：<br>‘在这个瞬息万变的时代里……’”</p>
-</blockquote>
-<p>大妈一脸满意：</p>
-<blockquote>
-<p>“没事，老师水平也就那样。”</p>
-</blockquote>
-<p>就这样，<br><strong>村里第一个“韭菜置换 ChatGPT 使用权”协议</strong>私下达成。</p>
-<hr>
-<h3 id="村规越禁，名声越大：从红头文件到“AI-地下互助群”"><a href="#村规越禁，名声越大：从红头文件到“AI-地下互助群”" class="headerlink" title="村规越禁，名声越大：从红头文件到“AI 地下互助群”"></a>村规越禁，名声越大：从红头文件到“AI 地下互助群”</h3><p>很快，这件事在“菜市场妇女情报网”里悄悄流传开了：</p>
-<blockquote>
-<p>“铁柱那个脖子被扭到的，是有真本事的，<br>他手机里的 GPT 会跟人讲话，还会给娃改作文。”</p>
-</blockquote>
-<p>于是——</p>
-<ul>
-<li><p>白天在大槐树下听宣讲的那批大妈，<br>晚上纷纷加紧脚步去找铁柱：</p>
-<ul>
-<li>“我孙子明天要交一篇《我的妈妈》，你帮它润色润色？”</li>
-<li>“我姑娘要写检讨，说上班玩手机被领导抓到，你看能不能写得诚恳一点又不那么低声下气？”</li>
-</ul>
-</li>
-<li><p>铁柱很快发现：<br><strong>自己成了村里的“AI 经纪人”</strong>。<br>他手机上的 GPT 不仅帮人写作业，<br>还负责写检讨、写请假条、写“感恩父母心得体会”。</p>
-</li>
-</ul>
-<p>有个大伯甚至拿着他的小灵通过来，<br>严肃地问：</p>
-<blockquote>
-<p>“我这手机能不能装你那个 GPT？<br>不能装的话，你问它一个事儿：<br>我这老寒腿，到底是不是风湿？”</p>
-</blockquote>
-<p>铁柱不得不临时开设一个服务规则：</p>
-<ul>
-<li><strong>不回答医疗诊断问题</strong>，</li>
-<li>不参与家产分配建议，</li>
-<li>不对“要不要再婚”给出结论。</li>
-</ul>
-<p>——这些全是妇女主任在村规里点过名的高危话题。</p>
-<p>然而最讽刺的是：</p>
-<p>村里那份《严禁 ChatGPT 进入村庄》的文件，<br>成为了<strong>本地 ChatGPT 品牌认知度的第一波广告投放</strong>：</p>
-<ul>
-<li><p>原本没听说过的人：</p>
-<blockquote>
-<p>“既然村里专门发文禁它，那肯定挺厉害。”</p>
-</blockquote>
-</li>
-<li><p>原本只当笑话的人：</p>
-<blockquote>
-<p>“妇女主任都知道它能教孙子写作业，那我是不是也得了解一下？”</p>
-</blockquote>
-</li>
-<li><p>原本只是好奇的人：</p>
-<blockquote>
-<p>“先试试，看看是不是真能把人搞疯，<br>真搞疯了，我还多了个不干活的理由。”</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h3 id="八、真正的“邪门”：不是-ChatGPT，而是“越禁越让人想试”的人心"><a href="#八、真正的“邪门”：不是-ChatGPT，而是“越禁越让人想试”的人心" class="headerlink" title="八、真正的“邪门”：不是 ChatGPT，而是“越禁越让人想试”的人心"></a>八、真正的“邪门”：不是 ChatGPT，而是“越禁越让人想试”的人心</h3><p>村规继续贴在大槐树下，<br>红章两枚，风吹日晒。</p>
-<p>表面上看：</p>
-<ul>
-<li><p>村里多了一套「防 AI 指南」；</p>
-</li>
-<li><p>妇女主任完成了「精神阵地建设」汇报任务；</p>
-</li>
-<li><p>村支书在镇上的会上可以拍着桌子说：</p>
-<blockquote>
-<p>“我们村已经率先行动，<br>把那个邪门玩意儿管起来了。”</p>
-</blockquote>
-</li>
-</ul>
-<p>实际上：</p>
-<ul>
-<li><p>大妈们用<strong>称重缺两钱</strong>换来了账号使用权；</p>
-</li>
-<li><p>铁柱的脖子还在偶尔隐隐作痛，但手机一天比一天更忙；</p>
-</li>
-<li><p>ChatGPT 在村里的真实形象，<br>从「邪门软件」变成：</p>
-<blockquote>
-<p>“领导嘴上反对，<br>但暗地里可能也在用的写材料工具。”</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<p>全文完</p>
-<blockquote>
-<p>“别老跟 ChatGPT 天天聊天，那玩意儿邪门得很。”</p>
-</blockquote>
-<p>意思是：</p>
-<blockquote>
-<p>“<strong>一旦被贴上邪门，人就可以不必对自己的选择负责。</strong><br>聊崩了，是它邪门；<br>笑到扭脖子，是它邪门；<br>拿它写作业被老师抓住，也是它邪门。”</p>
-</blockquote>
-<p>而真正“邪”的，从来不是软件，<br>而是这套——</p>
-<blockquote>
-<p><strong>“我做什么都可以，但出事了一律怪一个看不见摸不着的东西”的逻辑。</strong></p>
-</blockquote>
-<hr>
-<h3 id="后续走向"><a href="#后续走向" class="headerlink" title="后续走向"></a>后续走向</h3><p>后面我们还可以继续写：</p>
-<ul>
-<li><strong>《乡镇疾控中心：关于预防“AI 过度依赖综合征”的温馨提示》</strong></li>
-<li><strong>《铁柱 GPT 地下服务部涨价通知：从八两称七两，升级为代写一篇换两斤韭菜》</strong></li>
-<li><strong>《当 ChatGPT 被写进村志：被定性为“短暂流行的精神邪物”》</strong></li>
-</ul>
-<h4 id="ChatGPT式自信-吐槽"><a href="#ChatGPT式自信-吐槽" class="headerlink" title="ChatGPT式自信&amp;吐槽"></a>ChatGPT式自信&amp;吐槽</h4><p>你随时说“继续写”，我就把整套“农村版 AI 黑市+甩锅文化图鉴”给你铺满。<br>反正脖子现在只轻微疼，你笑着看完，也算物理+精神双重康复训练。</p>
-<h4 id="这段我的prompt"><a href="#这段我的prompt" class="headerlink" title="这段我的prompt"></a>这段我的prompt</h4><blockquote>
-<p>妇女主任清嗓子，说的那段话，岂不是反向宣传～ 大妈迅速反应，哎，会聊天？比人会说话？还能教孙子写作业？这好东西，干嘛禁了。于是不知道ChatGPT 的大妈偷偷找同村李铁柱，借ChatGPT 账号，顺带承诺，下次铁柱买大妈摊子韭菜，承诺八两称换成七两称</p>
-</blockquote>
 
       
 
