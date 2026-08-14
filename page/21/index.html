@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">276</span>
+          <span class="site-state-item-count">278</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">362</span>
+        <span class="site-state-item-count">363</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,271 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%B8%E7%B3%8A%E7%9A%84%E9%94%81%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%B8%E7%B3%8A%E7%9A%84%E9%94%81%EF%BC%9F/" class="post-title-link" itemprop="url">如何写一个纸糊的锁？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 16:22:02" itemprop="dateCreated datePublished" datetime="2026-01-05T16:22:02+08:00">2026-01-05 16:22:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-05 16:22:02" itemprop="dateModified" datetime="2026-01-05T16:22:02+08:00">2026-01-05 16:22:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="unlock-无条件delete——会误删别人的锁"><a href="#unlock-无条件delete——会误删别人的锁" class="headerlink" title="unlock()无条件delete——会误删别人的锁"></a><code>unlock()</code>无条件delete——会误删别人的锁</h1><p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">(String lockKey)</span> &#123;</span><br><span class="line">    stringRedisTemplate.delete(lockKey);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在分布式里会出现经典事故：</p>
+<ol>
+<li>线程A抢到锁（10秒过期）</li>
+<li>A业务执行慢（比如查库慢，GC，断点调试），超过10秒</li>
+<li>锁过期</li>
+<li>线程B抢到同一个锁key</li>
+<li>A执行完，finally里delete(lockKey)，把B的锁删了。</li>
+<li>线程C又抢到锁，于是B和C同时重建缓存&#x2F;同时写数据库</li>
+</ol>
+<blockquote>
+<p>这就是为啥分布式锁一定要有「锁拥有者标志（token）」，解锁必须校验。</p>
+</blockquote>
+<h1 id="tryLock缺乏token（唯一标志）"><a href="#tryLock缺乏token（唯一标志）" class="headerlink" title="tryLock缺乏token（唯一标志）"></a>tryLock缺乏token（唯一标志）</h1><p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setIfAbsent(lockKey, <span class="string">&quot;1&quot;</span>, expire, SECONDS);</span><br></pre></td></tr></table></figure>
+
+<p>这样不知道锁是不是自己加的，所以解锁时没法校验，只能盲删——于是必然有误删除的风险。</p>
+<h1 id="锁过期不续期——别人抢锁，误删别人的锁"><a href="#锁过期不续期——别人抢锁，误删别人的锁" class="headerlink" title="锁过期不续期——别人抢锁，误删别人的锁"></a>锁过期不续期——别人抢锁，误删别人的锁</h1><p>如果不做watch dog，而&#96;LOCK_EXPIRE &lt; 最坏情况下的缓存重建时间（查库 + 序列化 + 写Redis + 抖动）</p>
+<p>那么会出现：</p>
+<blockquote>
+<p>锁过期 –&gt; 别人抢到 –&gt; 误删别人锁</p>
+</blockquote>
+<h1 id="如何改？"><a href="#如何改？" class="headerlink" title="如何改？"></a>如何改？</h1><p>思路很简单：加token + Lua脚本原子校验删除</p>
+<ul>
+<li>tryLock：value存一个随机token（比如UUID）</li>
+<li>unlock：只有当Redis里value &#x3D;&#x3D; 我当初的token才delete<ul>
+<li>这一步必须原子（Lua），否则也会有竞态</li>
+</ul>
+</li>
+</ul>
+<p>要不要加watch dog？</p>
+<ul>
+<li>一般不要，因为缓存重建通常很快（几十毫秒～几百毫秒），但如果有<ul>
+<li>慢SQL（秒级）</li>
+<li>网络抖动</li>
+<li>调试时打断点<br>那锁过期就会频繁发生，工程上：要么把锁TTL拉长，要么做watch dog</li>
+</ul>
+</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/" class="post-title-link" itemprop="url">try catch为啥要写到锁外面？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 15:58:45" itemprop="dateCreated datePublished" datetime="2026-01-05T15:58:45+08:00">2026-01-05 15:58:45</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-05 15:58:45" itemprop="dateModified" datetime="2026-01-05T15:58:45+08:00">2026-01-05 15:58:45</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>简略答案：</p>
+<blockquote>
+<p>try&#x2F;catch准确来说是try&#x2F;finally要把可能提前return&#x2F;抛异常的整段流程罩住，才能保证只要拿到锁，就一定会释放锁。</p>
+</blockquote>
+<h1 id="锁的场景里，真正需要的是try-finally"><a href="#锁的场景里，真正需要的是try-finally" class="headerlink" title="锁的场景里，真正需要的是try&#x2F;finally"></a>锁的场景里，真正需要的是try&#x2F;finally</h1><p>锁的场景里，最关键的是：</p>
+<ul>
+<li>代码途中return </li>
+<li>JSON解析&#x2F;查库&#x2F;Redis任何一步抛异常</li>
+<li>甚至自己写错导致NPE</li>
+</ul>
+<p>都不能让人把锁带走，否则就死锁（分布式锁就是锁key一直挂着直到过期）</p>
+<p>所以标准结构是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock();</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// 不管里面怎么 return / throw</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>finally是兜底：return 也会执行finally</p>
+<h1 id="为什么try要写在锁外面那层，而不是塞进locked分支？"><a href="#为什么try要写在锁外面那层，而不是塞进locked分支？" class="headerlink" title="为什么try要写在锁外面那层，而不是塞进locked分支？"></a>为什么try要写在锁外面那层，而不是塞进locked分支？</h1><p>如果把try写进<code>if(locked){...}</code>里，会发生什么？</p>
+<h2 id="问题A：你会很难保证所有路径都释放锁"><a href="#问题A：你会很难保证所有路径都释放锁" class="headerlink" title="问题A：你会很难保证所有路径都释放锁"></a>问题A：你会很难保证所有路径都释放锁</h2><p>代码很多return</p>
+<ul>
+<li>命中缓存return</li>
+<li>double-check 命中 return</li>
+<li>查库后 return</li>
+</ul>
+<p>如果try&#x2F;finally只包住locked分支内部，一旦在外面某条路径return，就得自己记得释放锁。但人很容易忘记。</p>
+<p>把try&#x2F;finally放到外层：怎么return都跑不掉finally</p>
+<h2 id="问题B：你会被迫写多份儿try结构（长-乱-易错）"><a href="#问题B：你会被迫写多份儿try结构（长-乱-易错）" class="headerlink" title="问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）"></a>问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）</h2><p>锁逻辑一般是：</p>
+<ul>
+<li>没拿到锁：sleep + retry</li>
+<li>拿到锁：double-check + rebuild<br>这两段都可能抛异常，都可能return</li>
+</ul>
+<p>如果try只写在locked分支里，那没拿到锁的分支要不要try？也要。</p>
+<p>结果：要复制一堆try&#x2F;catch&#x2F;finally，代码更长，bug概率更高。</p>
+<p>外层一个try&#x2F;finally，把所有分支统一罩住最省心。</p>
+<h2 id="问题C：异常不只会发生在锁内部"><a href="#问题C：异常不只会发生在锁内部" class="headerlink" title="问题C：异常不只会发生在锁内部"></a>问题C：异常不只会发生在锁内部</h2><p>很多异常点其实发生在locked之外，比如：</p>
+<ul>
+<li><code>Thread.sleep(...)</code>抛<code>InterruptedException</code>（通常在没有拿到锁那条分支）</li>
+<li>在else分支里重试读缓存，解析JSON</li>
+<li>甚至unlock本身，也可能出问题（例如 Redis 短暂不可用）</li>
+</ul>
+<p>所以try放外面是为了：所有路径异常都能被统一处理</p>
+<h1 id="锁代码骨架模板"><a href="#锁代码骨架模板" class="headerlink" title="锁代码骨架模板"></a>锁代码骨架模板</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!locked)&#123;</span><br><span class="line">        <span class="comment">// 退避重试读缓存（可能sleep，可能解析）</span></span><br><span class="line">        <span class="comment">// 这里也可能return</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// locked == true : double check + rebuild（可能查库/写缓存）</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">catch</span>(InterrruptedException e)&#123;</span><br><span class="line">    Thread.currentThread().interrupt();</span><br><span class="line">    <span class="comment">// 降级策略</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) &#123;</span><br><span class="line">        unlock(lockKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>try&#x2F;finally一定包住所有return的地方</li>
+<li>unlock只放finally</li>
+<li>只有locked &#x3D;&#x3D; true才unlock</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1294,221 +1559,6 @@
 <li>只看我自己</li>
 <li>只盯我的项目</li>
 <li>空余时间只做我Some Day点子合集里的某一项</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">可承接拒绝的关系，才是安全的关系</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-01 21:53:55" itemprop="dateCreated datePublished" datetime="2026-01-01T21:53:55+08:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-01 21:53:55" itemprop="dateModified" datetime="2026-01-01T21:53:55+08:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今晚跟ChatGPT聊，我会不会依恋它。它说只要我能接受失去它，就是安全的关系。</p>
-<p>另，虽然有一段时间，我很想AI帮我直接决策，尤其疲惫的时候。但……这状态不能持续太久。决策还是要自己来，不然，生活就是寡淡无味了（笑）。</p>
-<p>今晚，我让GPT帮我决定，晚上干嘛。<br>它推荐我：刷鞋&amp;看书。</p>
-<p>实际我想做的：</p>
-<ol>
-<li>刷鞋</li>
-<li>看怎么魔改Next.js</li>
-<li>用Edge TTs，把我的博客文章，转换为音频，然后在博客上加一个听博客按钮。</li>
-</ol>
-<p>AI的推荐：正确，但无味儿<br>我自己想做的：未必对，但真有让人兴奋的地方</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/iPhone%E9%9A%90%E7%A7%81%E8%AE%BE%E7%BD%AE%E9%87%8C%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%BD%A2%E6%BC%8F%E7%82%B9%EF%BC%9F/" class="post-title-link" itemprop="url">iPhone隐私设置里，有哪些隐形漏点？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-01 16:32:53" itemprop="dateCreated datePublished" datetime="2026-01-01T16:32:53+08:00">2026-01-01 16:32:53</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-01 16:32:53" itemprop="dateModified" datetime="2026-01-01T16:32:53+08:00">2026-01-01 16:32:53</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="第一类：定位服务里的系统服务"><a href="#第一类：定位服务里的系统服务" class="headerlink" title="第一类：定位服务里的系统服务"></a>第一类：定位服务里的系统服务</h1><p>常见误区：关了app定位就觉得安全了。但是系统设置里以下几个地方没关：</p>
-<ol>
-<li>基于位置的Apple广告</li>
-<li>重要地点</li>
-<li>iPhone分析</li>
-</ol>
-<h1 id="第二类：分析与数据用作行为画像"><a href="#第二类：分析与数据用作行为画像" class="headerlink" title="第二类：分析与数据用作行为画像"></a>第二类：分析与数据用作行为画像</h1><p>常见误区：这不影响功能，但会用你的数据做行为样本，需要关闭：</p>
-<ol>
-<li>共享iPhone分析</li>
-<li>共享iCloud分析</li>
-<li>改进Siri与停歇</li>
-</ol>
-<h1 id="第三类：App跟踪透明度，防止被跨App拼凑画像"><a href="#第三类：App跟踪透明度，防止被跨App拼凑画像" class="headerlink" title="第三类：App跟踪透明度，防止被跨App拼凑画像"></a>第三类：App跟踪透明度，防止被跨App拼凑画像</h1><p>重点：这是“去电子裸奔”的地基<br>需要关闭：</p>
-<ol>
-<li>关闭“允许App请求跟踪“</li>
-<li>对已经出现的App：一律不允许该权限</li>
-</ol>
-<h1 id="第四类：本地网络权限"><a href="#第四类：本地网络权限" class="headerlink" title="第四类：本地网络权限"></a>第四类：本地网络权限</h1><p>作用：</p>
-<ul>
-<li>扫描你同一Wi-Fi下的设备</li>
-<li>判断你在什么环境<br>建议除了智能家居&#x2F;打印&#x2F;必须设备，其他一律关闭</li>
-</ul>
-<h1 id="第五类：关闭Safari和系统默认选项"><a href="#第五类：关闭Safari和系统默认选项" class="headerlink" title="第五类：关闭Safari和系统默认选项"></a>第五类：关闭Safari和系统默认选项</h1><h2 id="Safari建议关闭："><a href="#Safari建议关闭：" class="headerlink" title="Safari建议关闭："></a>Safari建议关闭：</h2><ul>
-<li>打开防止跨网站跟踪</li>
-<li>隐藏IP地址（对跟踪器）</li>
-<li>搜索引擎隐私报告（可以打开）</li>
 </ul>
 
       
