@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="嗯，又是做噩梦睡醒，那股吓唬人的劲儿现在还没消除，我就随便写写日常好了。 最近看到社保实缴的新闻，我体感是工资越高越不吃亏。所以，还是找个工资高的工作吧。再，三年多前，我吐槽月薪只有4千左右的白领工作，会让人陷入长期的焦虑，因为工资低，导致日常都要紧巴巴的缩减开支。所以没多久，我就辞了这工作，开始一门心思搞技术。当时很不被理解，因为技术的收入虚无缥缈，哪怕理论上高。但低门槛白领的工作，立刻能见钱。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常记录｜聊聊关于社保实缴，AI冲击下的低门槛低薪水白领岗位以及我转技术的时候被质疑的点">
+<meta property="og:url" content="https://sajlle.github.io/2026/08/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E4%BA%8B%E5%84%BF/index.html">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="嗯，又是做噩梦睡醒，那股吓唬人的劲儿现在还没消除，我就随便写写日常好了。 最近看到社保实缴的新闻，我体感是工资越高越不吃亏。所以，还是找个工资高的工作吧。再，三年多前，我吐槽月薪只有4千左右的白领工作，会让人陷入长期的焦虑，因为工资低，导致日常都要紧巴巴的缩减开支。所以没多久，我就辞了这工作，开始一门心思搞技术。当时很不被理解，因为技术的收入虚无缥缈，哪怕理论上高。但低门槛白领的工作，立刻能见钱。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-17T01:35:30.000Z">
+<meta property="article:modified_time" content="2026-08-17T02:26:09.011Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="杂事儿">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/08/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E4%BA%8B%E5%84%BF/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/08/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E4%BA%8B%E5%84%BF/","path":"2026/08/17/日常记录｜写写最近的一点小事儿/","title":"日常记录｜聊聊关于社保实缴，AI冲击下的低门槛低薪水白领岗位以及我转技术的时候被质疑的点"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>日常记录｜聊聊关于社保实缴，AI冲击下的低门槛低薪水白领岗位以及我转技术的时候被质疑的点 | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">279</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">363</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/08/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E4%BA%8B%E5%84%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="日常记录｜聊聊关于社保实缴，AI冲击下的低门槛低薪水白领岗位以及我转技术的时候被质疑的点 | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日常记录｜聊聊关于社保实缴，AI冲击下的低门槛低薪水白领岗位以及我转技术的时候被质疑的点
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-08-17 09:35:30" itemprop="dateCreated datePublished" datetime="2026-08-17T09:35:30+08:00">2026-08-17 09:35:30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-08-17 10:26:09" itemprop="dateModified" datetime="2026-08-17T10:26:09+08:00">2026-08-17 10:26:09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>嗯，又是做噩梦睡醒，那股吓唬人的劲儿现在还没消除，我就随便写写日常好了。</p>
+<p>最近看到社保实缴的新闻，我体感是工资越高越不吃亏。所以，还是找个工资高的工作吧。<br>再，三年多前，我吐槽月薪只有4千左右的白领工作，会让人陷入长期的焦虑，因为工资低，导致日常都要紧巴巴的缩减开支。所以没多久，我就辞了这工作，开始一门心思搞技术。<br>当时很不被理解，因为技术的收入虚无缥缈，哪怕理论上高。但低门槛白领的工作，立刻能见钱。而当时我妈爹和亲戚们对我的要求就是：「别想工资高不高，先拿到钱再说」。<br>我的想法是：「为了现在能到手的钱，长期维持在一个紧巴巴的开支里，会慢慢套牢的」。</p>
+<p>今年很有趣，AI冲击 + 社保实缴，这类低门槛 &amp;&amp; 低薪水的白领工作，已经开始被两头挤压了。<br>AI冲击导致日常工作量增加 &amp;&amp; 门槛更降低 &amp;&amp; 竞争的人更多 &amp;&amp; 老板想裁员降本增效。AI冲击的是低门槛 + 日常任务量。<br>社保实缴，冲击的是老板那边的用人成本，举个例子，之前一个员工5千工资，企业用工成本可能只有6千，但社保新规出来之后，同样一个人，发到手5千，但企业付出的成本可能是7千，如果你是老板，你怎么办？两条路：1. 降薪。 2. 裁员。<br>两箱叠加，员工那边的体感是：1. 任务越来越多 &amp;&amp; 要求越来越高。 2. 竞争越来越激烈。3. 担心被裁员&#x2F;降薪。</p>
+<p>而低门槛白领工作的特殊点在于，因为工资足够的低，降薪&amp;&amp;增任务之前已经很卷了，算是在生存线上，今年两头挤压之后，这类工作提供的缓冲空间会越来越小。</p>
+<p>但，公平的说一句，其实哪怕没有AI冲击 + 社保实缴这两个变数，低门槛白领工作也很难长期干。这两个变数只是提前把之前能用来遮屁帘的东西撕下来了，仅此而已。<br>没有被两头挤压的时候，父母亲戚能夸一句：「我女儿&#x2F;儿子在xxx城市干xxx工作」「哎，啥都别说了，有工作总比坐家里强，好歹孩子们不跟我们伸手要钱了」，屁帘被揭下来之后，其实很难再这么说了。</p>
+<p>嗯，万事万物皆有代价。不规划，是有代价的。只是这个代价延迟结算。</p>
+<p>至于说那三年多之前我被怀疑「好高骛远」「心比天高」，我觉得是挺委屈的，我又没有要求很过分，也没有要别人替我承担试错成本，技术是我自己学的，学技术期间被骂不工作，啃老，也是我挨的骂，到底成不成？失败了怎么办的风险也是算我自己头上的，我只是想主动选一条相对来说更「安全」的路子，仅此而已。<br>所以我回忆起来，会有一丝丝的好奇，是我要求太高？还是我身边的人根本不考虑未来？</p>
+<p>我有一个浅薄的推测，我想不是他们不考虑未来，而是他们觉得「大家都这么做，就是安全的」。<br>所以毕业之后立刻随便找个工作，能有现钱就行。为什么不怀疑这个思路可能危险？因为过去十多年，周围人都这么做，也没见出过什么岔子。但……环境会变，技术会变，产业会变，政策也会变。以前看起来没有出大岔子的路，未必是真的安全，可能只是环境比较好，掩盖了其中可能出岔子的地方。</p>
+<p>而「大家都这么做」，在这些人那里，是一个「模板」，「模板」是安全的，因为模板之后，藏着「大家」。<br>但，「大家」本身，就一定是抗风险的吗？我觉得得分一下，如果模板背后的「大家」是被动承受的&amp;&amp;没有议价权的「大家」，所谓的「大家都这样」，只是一种安全幻觉。</p>
+<p>如果继续往下推，模板除了毕业要立刻工作，别长远规划，只要先拿到现金就好，还有一整套地域运行脚本，比如：</p>
+<ul>
+<li>找工作之后快速成家</li>
+<li>成家之后快速生孩子</li>
+<li>生孩子之后养孩子</li>
+<li>养完孩子给孩子带孩子</li>
+<li>女孩要像个女孩样，不许愤怒&amp;生气</li>
+<li>男孩要像个男孩养，不许「不像个男人」<br>……</li>
+</ul>
+<p>凡此种种，非常之多之细，符合这套模板的人，更容易在某个地方混的更好，有更低的解释成本，而这样的人，我想称之为「地域模板人」。<br>反之，如果你不是「地域模板人」，不按照地域的「模板生活样本」走，你会付出不少额外的成本来证明自己「不是异常」。</p>
+<p>昨儿我刷视频看到某地地铁某女子夏日穿着棉衣坐地铁，被人拍下来发网络上，说是精神病。<br>我挺震惊的，震惊的点在于：「谁规定夏天地铁不能穿棉衣的？穿棉衣就是精神病？」那偷拍别人然后放到网络上蛐蛐，就不是精神病了吗？这就很正常？<br>而且第一时间用精神病解释这女的，挺有意思的，我想想，其实如果认真想的话，可能是地铁空调大，比较冷，有些人怕冷，穿棉衣。或者是刚从冷气比较大的地方出来穿棉衣坐地铁懒得换衣服了。或者是生病，怕冷，或者是月子期间出门，等等。没有所有的前置考虑，直接给这人贴精神病标签，然后拍下来，发网上，一群人一起八卦。<br>我还是挺震惊的。</p>
+<p>这件事跟「模板人」有啥关系呢？<br>我想的是，评论区以及偷拍这女的放网络上的人，其实也是模板人，他们的模板就是「夏天坐地铁必须得穿夏天的衣服」。不符合模板的那个女的，穿了个棉衣，于是触发了集体识别，被怀疑「精神病」「受刺激了」「脑子有问题」，但这么快下结论的时候，他们并没有给对方留一个解释空间。<br>这件事让我震惊而且警惕的地方就在于此，不是他们集体猜测这女的精神病，而是他们把一个素不相识的，只是因为没有符合穿衣模板的人，快速定义成精神病，这中间甚至没有一点留给对方的解释空间。</p>
+<p>这件事其实也跟我当初学技术被指责是同构的，我本地的模板是毕业就找工作，哪怕工资很低，如果不符合模板，立刻被识别为异常，中间甚至没有一个余地让你解释。</p>
+<p>于是地铁女子被说是「精神病」，我被迫不停解释自己不是好高骛远，这就是「证明自己不是异常的额外成本」。<br>但我们该付这种成本吗？仅仅因为不走本地模板而已。又没有真的损害到谁的利益。</p>
+<p>再扯回到模板本身的安全幻觉（笑）。<br>模板本身降低的是「解释成本」「不需要额外证明自己不是异常」，但它未必真的安全。<br>而且模板本身形成了一种特别有趣的状态，自动规训（怀疑）不符合模板的人，从而让整个地方的秩序整齐划一。如果功能上说，它有秩序的功能。<br>但……有趣的来了，这种秩序不服务模板人，而是服务要用模板人的人。</p>
+<p>嗯，所以很有意思的，自豪自己是「模板人」的人，未必在职业上&amp;&amp;生活上有多大的竞争力。<br>因为你模板，他模板，我模板，你我他水平都那样，想的都差不多，能力&#x2F;习惯都标准化，那太好了，很适合整齐划一被管理，被替换，被当标准件使用。</p>
+<p>说来说去，又拐回去到了一切都有代价这个点上了。<br>嗯，不当模板人，会付出额外的解释成本，忍受被蛐蛐，被当精神病，当了模板人，不需要付额外的解释成本，但……要付出另一种成本，也就是缺乏外部迁移能力，被模板套牢的成本。<br>两相比较，我还是觉得后一种成本更高。</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E4%BA%8B%E5%84%BF/" rel="tag"># 杂事儿</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%80%E7%82%B9%E6%83%B3%E6%B3%95/" rel="prev" title="日常记录｜终于把Surface改造成远程开发机了，有点开心">
+                  <i class="fa fa-angle-left"></i> 日常记录｜终于把Surface改造成远程开发机了，有点开心
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
