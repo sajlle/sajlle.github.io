@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">287</span>
+          <span class="site-state-item-count">288</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">368</span>
+        <span class="site-state-item-count">369</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/" class="post-title-link" itemprop="url">技术手记｜今日新bug：token校验失误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-11 10:53:04" itemprop="dateCreated datePublished" datetime="2026-02-11T10:53:04+08:00">2026-02-11 10:53:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-11 10:53:04" itemprop="dateModified" datetime="2026-02-11T10:53:04+08:00">2026-02-11 10:53:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。（笑）。</p>
+<p>昨儿我测试发现，cachedTokenId跟前端传的tokenId一样，为啥还是校验失败？<br>难道是pepper每次都随机生成一个新的，不是固定常量？（因为之前出现过类似错误，但我检查了一下pepper，没错哎）。</p>
+<p>tokenId对得上，那传递没问题，问题就出在加密上了。<br>后续排查，发现，创建token存redis的时候，token &#x3D; sha256(sha256(tokenId))，校验的时候，用的是token &#x3D; sha256(tokenId)，我说怎么tokenId对了，但校验老失败。</p>
+<p>另，出现这次问题，是因为写saveRefreshToken的时候，没有在文档里写清楚，存token还是存tokenId作校验。所以，写清楚文档，真的很必要啊（笑）</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1388,154 +1481,6 @@
 </ol>
 <p>半夜3点睡醒，我跟GPT吐槽，哎，早上效率又会降低，觉得很不高兴，老是被打断节律。今天起来，果不其然，又是顶着黑眼圈。<br>3点半被吵醒，5点我才重新睡回去。梦里还在用codex写代码。</p>
 <p>今儿我跟妈爹吐槽这件事，妈爹说，没事，马上走了，再忍两天就过去了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜当redis可以显式补偿的时候，需要上Canal吗？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-08 21:24:50" itemprop="dateCreated datePublished" datetime="2026-02-08T21:24:50+08:00">2026-02-08 21:24:50</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-08 21:24:50" itemprop="dateModified" datetime="2026-02-08T21:24:50+08:00">2026-02-08 21:24:50</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前情回顾：<br>我的一个方法流程是：</p>
-<ol>
-<li>redis读写（业务状态）</li>
-<li>DB读写</li>
-<li>redis读写（缓存态）</li>
-</ol>
-<p>我纠结的问题点：</p>
-<ol>
-<li>目前情况会导致事务回滚DB数据，而redis数据没有同步回滚</li>
-<li>考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。</li>
-</ol>
-<p>我考虑的解决方案：</p>
-<ol>
-<li>显示补偿，不是强一致。</li>
-<li>Canal</li>
-</ol>
-<p>方案1如何操作：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">redisOk</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    redisWrite1();</span><br><span class="line">    redisOk = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    dbWrite(); <span class="comment">// 这一步 @Transactional</span></span><br><span class="line"></span><br><span class="line">    redisWrite2();</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    <span class="keyword">if</span>(redisOk)&#123;</span><br><span class="line">        redisRollback1(); <span class="comment">// 补偿</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该方案适合：</p>
-<ol>
-<li>状态机</li>
-<li>次数扣减</li>
-<li>workflow</li>
-</ol>
-<p>方案2Canal</p>
-<ol>
-<li>第一步redis，自己写</li>
-<li>第三步redis，交给Canal</li>
-</ol>
-<p>Canal能做的：</p>
-<ol>
-<li>监听DB binlog</li>
-<li>DB commit之后，异步更新redis&#x2F;es&#x2F;mq</li>
-</ol>
-<p>Canal解决的问题是：「DB -&gt; Redis的单向同步」</p>
-<p>Canal使用场景：</p>
-<ol>
-<li>多表多服务共享redis </li>
-<li>读多写少</li>
-<li>强烈不想在业务代码里碰缓存</li>
-<li>接受秒级延迟</li>
-<li>有运维精力</li>
-</ol>
-<p>另，redis的状态如何区分？</p>
-<ul>
-<li>业务态Redis（不需要强一致，出问题靠TTL&#x2F;补偿，不需要进事务）<ul>
-<li>限流</li>
-<li>去重</li>
-<li>幂等</li>
-<li>状态机 step</li>
-<li>分布式锁</li>
-</ul>
-</li>
-<li>缓存态Redis（DB派生）（严格afterCommit，删除缓存&#x2F;重建）<ul>
-<li>详情缓存</li>
-<li>聚合结果</li>
-</ul>
-</li>
-</ul>
 
       
 
