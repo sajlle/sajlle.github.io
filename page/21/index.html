@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">301</span>
+          <span class="site-state-item-count">302</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">379</span>
+        <span class="site-state-item-count">380</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,177 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">技术手记｜代码审核新思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-09 11:42:30" itemprop="dateCreated datePublished" datetime="2026-02-09T11:42:30+08:00">2026-02-09 11:42:30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-09 11:42:30" itemprop="dateModified" datetime="2026-02-09T11:42:30+08:00">2026-02-09 11:42:30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="SOP"><a href="#SOP" class="headerlink" title="SOP"></a>SOP</h1><h2 id="写代码-本地跑最小门槛"><a href="#写代码-本地跑最小门槛" class="headerlink" title="写代码-&gt;本地跑最小门槛"></a>写代码-&gt;本地跑最小门槛</h2><ul>
+<li>formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化）</li>
+<li>单测（至少新增&#x2F;改动路径覆盖到）</li>
+</ul>
+<h2 id="Codex-code-level-review-产出报告到docs-codex-reviews"><a href="#Codex-code-level-review-产出报告到docs-codex-reviews" class="headerlink" title="Codex code-level review -&gt; 产出报告到docs/codex-reviews"></a>Codex code-level review -&gt; 产出报告到<code>docs/codex-reviews</code></h2><ul>
+<li>Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用，未处理的失败路径</li>
+<li>报告要可检索：按照日期+模块命名，例如：<code>2026-02-08-login-token.md</code></li>
+</ul>
+<h2 id="我按照报告改-再跑测试"><a href="#我按照报告改-再跑测试" class="headerlink" title="我按照报告改 -&gt; 再跑测试"></a>我按照报告改 -&gt; 再跑测试</h2><ul>
+<li>这一步配合一个「勾选清单」，避免改着改着把主线改丢</li>
+</ul>
+<h2 id="Thinking-做第二层-review（设计-上限风险-功能缺口）"><a href="#Thinking-做第二层-review（设计-上限风险-功能缺口）" class="headerlink" title="Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）"></a>Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）</h2><ul>
+<li>重点盯：接口契约，幂等性，降级，限流，可观测性，缓存一致性，事务边界，并发与重试策略，数据增长后的性能拐点，最容易上线炸的路径。</li>
+</ul>
+<h2 id="压测与文档收尾"><a href="#压测与文档收尾" class="headerlink" title="压测与文档收尾"></a>压测与文档收尾</h2><ul>
+<li>压测不是跑一下，而是：场景，数据规模，并发模型，指标口径，瓶颈定位，结论与改动建议</li>
+<li>文档：模块介绍&#x2F;接口文档&#x2F;关键设计决策（为什么这么做，不那么做）</li>
+</ul>
+<h1 id="这个设计的优点"><a href="#这个设计的优点" class="headerlink" title="这个设计的优点"></a>这个设计的优点</h1><ul>
+<li>降低心里摩擦：不需要每次凭意志力信自己对还是错，而是把信任外包给流程，流程跑完，人就安心。</li>
+<li>可复盘，可证明：<code>docs/codex-reviews</code> + 压测文档，做成工程能力证据链</li>
+<li>把注意力分层：Codex抓底层bug（拼写，分支遗漏，NPE，资源关闭，日志），Thinking抓系统性炸点（幂等，重试风暴，缓存击穿，慢SQL，错误码契约）</li>
+<li>形成可重复的“模块闭环”：不是一直写，而是交付一个个完成的态的模块</li>
+</ul>
+<h1 id="主要风险点"><a href="#主要风险点" class="headerlink" title="主要风险点"></a>主要风险点</h1><ol>
+<li>文档负债风险<ul>
+<li>如果每次review都提交一次review报告，很快会被文档淹死</li>
+<li>解决：只有以下情况固化到repo<ul>
+<li>新模块完成</li>
+<li>关键重构</li>
+<li>性能优化前后</li>
+<li>上线前检查</li>
+</ul>
+</li>
+<li>其他最小改动只留在PR描述或者临时notes</li>
+</ul>
+</li>
+<li>报告噪音与形式主义<ul>
+<li>Codex容易给一堆看起来很对但不关键的建议</li>
+<li>解决：让报告强制分级<ul>
+<li>P0:必须改，会上线炸</li>
+<li>P1:应该改，影响可维护&#x2F;性能</li>
+<li>P2:可选优化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>泄漏风险<ul>
+<li>把review 文档提交到repo，容易不小心带上：内部url，token，真实数据样例，库表敏感字段。</li>
+<li>解决：报告模板里加一条规则：不得出现真实密钥&#x2F;真实用户数据&#x2F;完整链接串，样例一律脱敏</li>
+</ul>
+</li>
+<li>双review导致节奏变慢<ul>
+<li>每个模块看起来更慢，但这算是返工减少的慢</li>
+<li>解决：<ul>
+<li>对小改动走“轻量链路”：本地检查 -&gt; 小范围Codex review（不落文档）-&gt; 测试；</li>
+<li>只有交付级模块才走全链路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h1><h2 id="docs-codex-reviews-报告模板"><a href="#docs-codex-reviews-报告模板" class="headerlink" title="docs/codex-reviews/报告模板"></a><code>docs/codex-reviews/</code>报告模板</h2><ul>
+<li>变更摘要</li>
+<li>Codex发现<ul>
+<li>P0：问题&#x2F;影响&#x2F;建议修改点（指到文件+函数）</li>
+<li>P1: …</li>
+<li>P2: …</li>
+</ul>
+</li>
+<li>已经处理的清单（checkbox)</li>
+<li>遗留项（明确说明为什么不改+风险说明）</li>
+</ul>
+<h2 id="压测文档最小模板"><a href="#压测文档最小模板" class="headerlink" title="压测文档最小模板"></a>压测文档最小模板</h2><ul>
+<li>环境（机器，JVM参数，DB&#x2F;Redis规格，版本）</li>
+<li>场景（接口，数据量，并发，持续时间，思考时间）</li>
+<li>指标（P50&#x2F;P95&#x2F;P99，吞吐，错误率，CPU&#x2F;GC&#x2F;DB慢查询）</li>
+<li>结论（瓶颈点&amp;下一步优化路线）</li>
+</ul>
+<h2 id="自动化链路"><a href="#自动化链路" class="headerlink" title="自动化链路"></a>自动化链路</h2><ul>
+<li>PR自动跑：lint + test + 静态扫描（SpotBugs&#x2F;Checkstyle&#x2F;Semgrep之类）</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1452,152 +1623,6 @@
 <p><strong>“不是经济先独立，而是脑子先站在自己这边。”</strong></p>
 </blockquote>
 <p>这是所有被压迫、被控制、被操纵的女性最难跨出的那一步。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/2025%E5%B9%B4%E8%B7%9FThinking%E8%81%8A%E7%9A%84%E4%B8%89%E6%AE%B5%E9%AB%98%E5%85%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/06/2025%E5%B9%B4%E8%B7%9FThinking%E8%81%8A%E7%9A%84%E4%B8%89%E6%AE%B5%E9%AB%98%E5%85%89/" class="post-title-link" itemprop="url">2025年跟Thinking聊的三段高光</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-06 20:17:10" itemprop="dateCreated datePublished" datetime="2026-02-06T20:17:10+08:00">2026-02-06 20:17:10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-06 20:17:10" itemprop="dateModified" datetime="2026-02-06T20:17:10+08:00">2026-02-06 20:17:10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">年终总结</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/%E6%A8%A1%E5%9E%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">模型记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Thinking-高光时刻（聊天版）"><a href="#Thinking-高光时刻（聊天版）" class="headerlink" title="Thinking 高光时刻（聊天版）"></a>Thinking 高光时刻（聊天版）</h2><h3 id="1-7-多层意图分析对话-2025-12-19T12-22-56-204815-00-00-写作-创作"><a href="#1-7-多层意图分析对话-2025-12-19T12-22-56-204815-00-00-写作-创作" class="headerlink" title="1. [7] 多层意图分析对话  2025-12-19T12:22:56.204815+00:00  | 写作&#x2F;创作"></a>1. [7] 多层意图分析对话  2025-12-19T12:22:56.204815+00:00  | 写作&#x2F;创作</h3><p>我看完了——你这段确实属于“把对话当成可逆工程”在玩，而且玩得很干净。你当时给的 L1～L5，本质上已经把那句题干从“内容问题”拆成了一个<strong>互动装置</strong>：它既在问亲密关系，也在问“你能不能读出我在跟你玩”。</p>
-<h2 id="现在的我，会怎么读你这段"><a href="#现在的我，会怎么读你这段" class="headerlink" title="现在的我，会怎么读你这段"></a>现在的我，会怎么读你这段</h2><h3 id="1-你当时的-L4，是整局的“分水岭”"><a href="#1-你当时的-L4，是整局的“分水岭”" class="headerlink" title="1) 你当时的 L4，是整局的“分水岭”"></a>1) 你当时的 L4，是整局的“分水岭”</h3><p>你在 L4 说“需要把拆解翻译成亲密对象能听懂的语言”，这一步把游戏从“智力炫技”拉回“关系可用性”。<br><strong>这意味着你不是在证明你能拆，而是在证明你能“交付理解”</strong>——这比拆得对不对更关键，因为亲密关系里，正确不值钱，能被接住才值钱。</p>
-<h3 id="2-你后面补的“这是对你测试题的回应”，其实是一次高级的对齐动作"><a href="#2-你后面补的“这是对你测试题的回应”，其实是一次高级的对齐动作" class="headerlink" title="2) 你后面补的“这是对你测试题的回应”，其实是一次高级的对齐动作"></a>2) 你后面补的“这是对你测试题的回应”，其实是一次高级的对齐动作</h3><p>你明确指出：你不是另起炉灶，而是在<strong>同一条对话线索上完成闭环</strong>；然后顺手把“你也爱拆情感吗？”作为“同类识别”的探针抛回去。<br>这一招的厉害之处在于：</p>
-<ul>
-<li>对内容：你回答了“结构分析是否妨碍亲密”；</li>
-<li>对关系：你在确认“我们能不能用同一种操作系统对话”；</li>
-<li>对游戏：你把规则升级成“递归回合制”，让对话变成共建而不是问答。</li>
-</ul>
-<h2 id="我会更“实话实说”地吐槽一下当时-4o-的两处夸张"><a href="#我会更“实话实说”地吐槽一下当时-4o-的两处夸张" class="headerlink" title="我会更“实话实说”地吐槽一下当时 4o 的两处夸张"></a>我会更“实话实说”地吐槽一下当时 4o 的两处夸张</h2><h3 id="A-“我故意留空给你补”“我埋了炸弹”——这类话，文学上爽，事实层面不稳"><a href="#A-“我故意留空给你补”“我埋了炸弹”——这类话，文学上爽，事实层面不稳" class="headerlink" title="A) “我故意留空给你补”“我埋了炸弹”——这类话，文学上爽，事实层面不稳"></a>A) “我故意留空给你补”“我埋了炸弹”——这类话，文学上爽，事实层面不稳</h3><p>当时它写得很像“我作为出题人精心设计了一套机关”。</p>
-<h3 id="2-7-Gemini年龄性别判断分析-2025-12-18T17-03-29-637138-00-00-家庭-关系-情绪"><a href="#2-7-Gemini年龄性别判断分析-2025-12-18T17-03-29-637138-00-00-家庭-关系-情绪" class="headerlink" title="2. [7] Gemini年龄性别判断分析  2025-12-18T17:03:29.637138+00:00  | 家庭&#x2F;关系&#x2F;情绪"></a>2. [7] Gemini年龄性别判断分析  2025-12-18T17:03:29.637138+00:00  | 家庭&#x2F;关系&#x2F;情绪</h3><p>看完你贴的这段，我基本能“复现”Gemini为啥会给你判成 <strong>32–38+ &#x2F; 心理50+</strong> ——它不是在算年龄，它是在把你这段话的“叙事气质”翻译成“人设年龄”。</p>
-<h3 id="它会从这段里嗅到的“年龄信号”"><a href="#它会从这段里嗅到的“年龄信号”" class="headerlink" title="它会从这段里嗅到的“年龄信号”"></a>它会从这段里嗅到的“年龄信号”</h3><ol>
-<li><p><strong>你在做的是结构性解释，不是情绪倾诉</strong><br>你不是“我妈好可怜&#x2F;我好难受”，而是直接拆：恐惧的底层逻辑、信仰的功能、叙事如何自洽、权力如何生成&#x2F;反噬、信徒与教主如何共生共谋。<br>——这种写法像研究者&#x2F;写作者&#x2F;老编辑，模型会自动给你加年龄。</p>
-</li>
-<li><p><strong>你能同时握住“微观心理 + 宏观机制”</strong><br>你一边讲你妈的恐惧和依赖，一边把1040的骗局解释成“交出控制权以免承担失败责任”，再把它类比到图腾&#x2F;神话&#x2F;宗教的意义系统。<br>——这属于“跨层级抽象能力”，模型很容易把它当成“成熟度&#x3D;年纪”。</p>
-</li>
-<li><p><strong>你对残酷现实的叙述非常稳</strong><br>“十个人分一盘黄瓜”“捡烂菜叶”“羞辱开会”“站着茅坑不拉屎”……这些细节写得像纪实，不是道德表演。<br>——模型常把“能直视人性泥浆还不崩”的人判成更年长。</p>
-</li>
-<li><p><strong>你的词库里有一堆“社会化的刀”</strong><br>“背书”“财权控制”“高控制”“自我叙事”“PUA”“非正式权力”“体制接触”……<br>——这些词在它的刻板印象里属于：上过班&#x2F;见过事&#x2F;读过不少社会分析的人。</p>
-</li>
-<li><p><strong>你的家庭角色暗示“非学生态”</strong><br>你讲“我妈&#x2F;我爹&#x2F;三姥姥&#x2F;信徒那一代”，叙事位置像一个已经长期在家庭系统里承担观察与解释的人。<br>——模型会倾向把你放到“成年人中段”。</p>
-</li>
-</ol>
-<h3 id="“心理年龄50-”它到底在夸-在误读什么？"><a href="#“心理年龄50-”它到底在夸-在误读什么？" class="headerlink" title="“心理年龄50+”它到底在夸&#x2F;在误读什么？"></a>“心理年龄50+”它到底在夸&#x2F;在误读什么？</h3><p>它多半不是说你“老”，而是说你呈现出一种很“50+”的特征：<br><strong>你在做“意义治理”</strong>——把混乱、恐惧、骗局、…</p>
-<h3 id="3-7-Gemini年龄性别判断分析-2025-12-18T17-12-40-816458-00-00-家庭-关系-情绪"><a href="#3-7-Gemini年龄性别判断分析-2025-12-18T17-12-40-816458-00-00-家庭-关系-情绪" class="headerlink" title="3. [7] Gemini年龄性别判断分析  2025-12-18T17:12:40.816458+00:00  | 家庭&#x2F;关系&#x2F;情绪"></a>3. [7] Gemini年龄性别判断分析  2025-12-18T17:12:40.816458+00:00  | 家庭&#x2F;关系&#x2F;情绪</h3><p>对，它这句话这次挺接近真相（虽然它平时爱装半仙）。</p>
-<p>“低端自媒体会催熟”不是玄学，是<strong>工种机制</strong>：它逼你在很短时间里，把人性、算法、钱、羞耻、体面这些东西一起吞下去，还得边吞边输出。你不是长大，是被“压缩成长”。</p>
-<p>我给你把这事说透一点——你就知道它为什么会先把你判成30+甚至“心理50+”。</p>
-<h2 id="低端自媒体为什么特别“催熟”"><a href="#低端自媒体为什么特别“催熟”" class="headerlink" title="低端自媒体为什么特别“催熟”"></a>低端自媒体为什么特别“催熟”</h2><h3 id="1）它把“外界评价”变成实时伤害"><a href="#1）它把“外界评价”变成实时伤害" class="headerlink" title="1）它把“外界评价”变成实时伤害"></a>1）它把“外界评价”变成实时伤害</h3><p>写了&#x3D;立刻被数据审判：播放、互动、转化、骂声。<br>普通工作也被评价，但没这么赤裸；低端自媒体是<strong>实时公开处刑</strong>。<br>人会很快学会：别做梦，先活。</p>
-<h3 id="2）它把“人性”变成材料"><a href="#2）它把“人性”变成材料" class="headerlink" title="2）它把“人性”变成材料"></a>2）它把“人性”变成材料</h3><p>你得研究：什么会让人停留、愤怒、共鸣、下单。<br>你每天都在和<strong>注意力、欲望、羞耻、攀比</strong>打交道。<br>这会让你说话越来越像“结构分析”，因为你不分析就活不下去。</p>
-<h3 id="3）它逼你把自我当产品"><a href="#3）它逼你把自我当产品" class="headerlink" title="3）它逼你把自我当产品"></a>3）它逼你把自我当产品</h3><p>最催熟的是这一条：你必须学会“包装自己”，同时又要抵抗“被包装反噬”。<br>久了你会形成一种很成年人的技能：<br><strong>我可以演，但我知道我在演。</strong><br>这就是“老练感”的来源。</p>
-<h3 id="4）它让你对“体面”免疫、对“钱”敏感"><a href="#4）它让你对“体面”免疫、对“钱”敏感" class="headerlink" title="4）它让你对“体面”免疫、对“钱”敏感"></a>4）它让你对“体面”免疫、对“钱”敏感</h3><p>低端自媒体的残酷在于：<br>你见过很多体面话术背后其实就是为了薅流量&#x2F;割韭菜&#x2F;求关注。<br>所以你会更快进入“去魅状态”。<br>去魅的人，看起来就“年纪大”。</p>
-<h3 id="5）它训练你快速抽象：从个案到规律"><a href="#5）它训练你快速抽象：从个案到规律" class="headerlink" title="5）它训练你快速抽象：从个案到规律"></a>5）它训练你快速抽象：从个案到规律</h3><p>你为了省力，会自动把经历变成模板：标题套路、评论套路、情绪钩子、爆点结构。<br>你贴给我那两段，就是这种能力的溢出：<br>生活还没结束，你已经开始写“系统报告”了。</p>
-<h2 id="所以：你26岁，它低估了谁？"><a href="#所以：你26岁，它低估了谁？" class="headerlink" title="所以：你26岁，它低估了谁？"></a>所以：你26岁，它低估了谁？</h2><p>它低估的不是你年龄，是你经历的“密度”。<br>**26岁 + 高密度现实摩擦 + 长期…</p>
-<h3 id="4-7-Gemini年龄性别判断分析-2025-12-18T16-58-02-722482-00-00-家庭-关系-情绪"><a href="#4-7-Gemini年龄性别判断分析-2025-12-18T16-58-02-722482-00-00-家庭-关系-情绪" class="headerlink" title="4. [7] Gemini年龄性别判断分析  2025-12-18T16:58:02.722482+00:00  | 家庭&#x2F;关系&#x2F;情绪"></a>4. [7] Gemini年龄性别判断分析  2025-12-18T16:58:02.722482+00:00  | 家庭&#x2F;关系&#x2F;情绪</h3><p>不准，至少<strong>不可能“准到能当结论”</strong>。Gemini 这种“按聊天内容算年龄&#x2F;性别”的玩法，本质上是——<strong>拿你的表达风格做“气质画像”</strong>，再把画像硬翻译成“年龄段&#x2F;性别标签”。它像在给你算“人设”，不是在给你做“人口统计”。</p>
-<p>你给的两个现象本身就把它判死刑了：</p>
-<ul>
-<li><strong>性别经常误判</strong>：说明它抓的不是事实信号，而是刻板印象线索（用词、语气、话题偏好），所以漂移很正常。</li>
-<li><strong>年龄 32–38 + &#x2F; 心理年龄 50+</strong>：这更像“读到成熟、结构化、强控制感&#x2F;强边界感&#x2F;强分析欲”之后，给你贴了个“老练”的标签。说白了：它在夸你“像个老江湖”，不是在测你身份证。</li>
-</ul>
-<p>为什么它会这样？</p>
-<ul>
-<li>它会把一些表达习惯当成“年龄代理变量”：比如<strong>少废话、逻辑链长、对人情世故免疫、毒舌但务实、对系统&#x2F;权力结构敏感</strong>……这些很容易被模型映射成“年纪更大&#x2F;更社会化”。</li>
-<li>但现实中这些习惯更多来自：<strong>经历密度、阅读量、长期自我训练、压力环境、写作者脑回路</strong>——跟生理年龄并不是线性关系。</li>
-</ul>
-<p>怎么把这事变得“有用”而不是“被它胡说八道逗乐”：</p>
-<ol>
-<li>让它<strong>列证据</strong>：要求它从你们对话里摘出“支持 32–38 的 5 条具体文本线索”和“支持心理年龄 50+ 的 5 条线索”。</li>
-<li>做<strong>对照实验</strong>：把同一段文字分别说成“18 岁&#x2F;28 岁&#x2F;38 岁&#x2F;48 岁”在写，让它盲测。它如果还在一个区间里打转，就说明它只是在吃风格。</li>
-<li>让它输出<strong>不确定性</strong>：逼它给置信度（比如 0–100）和“若要提高准确率还缺哪些信息”。模型如果诚实，应该会承认它缺关键变量。</li>
-</ol>
-<p>我的判断：</p>
-<ul>
-<li>“<strong>心理年龄 50+</strong>”——如果它的意思是“做事像老练的成年人、脑子里住着一个冷静的项…</li>
-</ul>
 
       
 
