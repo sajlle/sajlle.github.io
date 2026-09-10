@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">310</span>
+          <span class="site-state-item-count">311</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">388</span>
+        <span class="site-state-item-count">390</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%97%A8%E7%A6%81%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%8C%E5%8E%9F%E5%9B%A0%E6%98%AF%E5%95%A5%E5%91%A2%EF%BC%9F%E6%98%AFiCloud%E5%90%8C%E6%AD%A5%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%87%B4%E5%87%BA%E7%8E%B0%E9%9A%8F%E6%9C%BA%E7%9A%84NoClassDefFoundError/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%97%A8%E7%A6%81%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%8C%E5%8E%9F%E5%9B%A0%E6%98%AF%E5%95%A5%E5%91%A2%EF%BC%9F%E6%98%AFiCloud%E5%90%8C%E6%AD%A5%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%87%B4%E5%87%BA%E7%8E%B0%E9%9A%8F%E6%9C%BA%E7%9A%84NoClassDefFoundError/" class="post-title-link" itemprop="url">日常记录｜项目的门禁测试失败了，原因是啥呢？是iCloud同步工作目录，导致出现随机的NoClassDefFoundError</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-10 11:46:35" itemprop="dateCreated datePublished" datetime="2026-09-10T11:46:35+08:00">2026-09-10 11:46:35</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-10 12:18:19" itemprop="dateModified" datetime="2026-09-10T12:18:19+08:00">2026-09-10 12:18:19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题～<br>执行集成测试的时候，出现了5个Errors。几个类找不到。</p>
+<p>直接原因是Failsafe JVM 类加载异常。后续排查的时候，没有发现ExceptionInInitializerError，或者Could not initialize class，所以不是静态初始化失败。<br>然后检查Failsafe effective configuration，同样的配置再隔离目录运行稳定。所以不大像是配置问题。<br>再检查仓库有无自删 build output，没有发现脚本或者测试启动了子maven，或者清理了target&#x2F;classes或者target&#x2F;test-classes。或者修改了全局的classpath，或者动态删除编译产物，或者操纵URLClassLoader。<br>再检查 Suspect.class的完整性。后续四个找不到的文件mtime都是10:37:19，但是ctime分散在10:39～10:40，隔离副本重新编译出来的size，SHA-256与原目录相同，说明源码和编译结果本身正常。<br>然后检查数字后缀&#x2F;冲突生成物。没有发现数字后缀或者生成物冲突。而且target&#x2F;classes和target&#x2F;test-classes目录中的没有symlink，不可读文件，dataless文件。<br>后续检查到项目目录，在 ~&#x2F;Documents下，它底层不是symlink，而是本地APFS，file-provider-domain-id解码成iCloudDriverFileProvider&#x2F;…，而且bird，cloudd，fileproviderd都在运行。<br>然后检查到，失败构建的窗口之内，iCloud日志记录如下：</p>
+<ul>
+<li>10:37:10 开始上传200个文档</li>
+<li>10:37:12 收到20个远端变更并且大量apply-changes</li>
+<li>原来的target在10:37:14创建</li>
+<li>10:37:25出现 upload progress…not tracked和 UNREACHABLE…should be needs-upload</li>
+<li>10:41:56又收到12个编辑和15个删除文件并执行apply-changes<br>然后原来的Failsafe报告从正常应有的17个文件减少到3个，恰好消失了14个，target&#x2F;failsafe-reports mtime&#x2F;ctime也在构建结束之后继续变化。</li>
+</ul>
+<p>然后检查了&#x2F;private&#x2F;tmp，同一份源代码，相同的Maven&#x2F;Failsafe配置，相同的test order，连续3次 clean verify，三次都build success，而且源码哈希三轮都不变，所以排除Java&#x2F;Spring&#x2F;Failsafe&#x2F;OpenAI SDK的嫌疑。</p>
+<p>最后，这问题确认是iCloud同步工作目录干扰。修复就是原项目目录搬出iCloud Drive File Provider domain。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -587,7 +687,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:16:05" itemprop="dateModified" datetime="2026-09-10T11:16:05+08:00">2026-09-10 11:16:05</time>
+      <time title="修改时间：2026-09-10 11:44:59" itemprop="dateModified" datetime="2026-09-10T11:44:59+08:00">2026-09-10 11:44:59</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -626,7 +726,7 @@
 <p>第二天早上。 有人敲门。<br>“请出来一下。”</p>
 <p>某人一边穿衣服一边笑：<br>“看吧。”<br>“我就说他很欣赏我。”</p>
 <p>被带出去以后，他还回头冲旁边人说：<br>“估计要给我安排重要工作了。”</p>
-<p>半小时后。他被枪毙了。</p>
+<p>半小时后。<br>他被枪毙了。</p>
 
       
 
@@ -1170,105 +1270,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/07/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%BC%80%E5%A7%8BAgent%E5%A5%97%E5%A3%B3%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%89%8D%E5%8F%91%E7%8E%B0%E8%BF%99%E9%A1%B9%E7%9B%AE%E5%BE%88%E9%80%82%E5%90%88%E5%A5%97%E5%A3%B3Agent%E4%B8%8D%E6%98%AF%E7%9E%8E%E8%AF%B4%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/07/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%BC%80%E5%A7%8BAgent%E5%A5%97%E5%A3%B3%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%89%8D%E5%8F%91%E7%8E%B0%E8%BF%99%E9%A1%B9%E7%9B%AE%E5%BE%88%E9%80%82%E5%90%88%E5%A5%97%E5%A3%B3Agent%E4%B8%8D%E6%98%AF%E7%9E%8E%E8%AF%B4%E7%9A%84/" class="post-title-link" itemprop="url">日常记录｜今天开始Agent套壳之后，才发现这项目很适合套壳Agent不是瞎说的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-07 15:21:28" itemprop="dateCreated datePublished" datetime="2026-09-07T15:21:28+08:00">2026-09-07 15:21:28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-07 15:29:32" itemprop="dateModified" datetime="2026-09-07T15:29:32+08:00">2026-09-07 15:29:32</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～<br>很多东西Agent套壳的时候拿来就能用。</p>
-<p>举个例子：</p>
-<ol>
-<li>不变量已经是显式的。不需要花很多功夫提炼不变量。</li>
-<li>渠道有mock版本，可控。Mock版本的notifyController接受任意的objectStatus，通知去重复靠着channel&amp;notify_id，agent换notify_id就是重新投递，不换就是重复通知，乱序，终态冲突全都能注入。不需要真实第三方渠道</li>
-<li>证据面完整，riskEvent里，stateSnapshot&#x2F;payloadSnapshot&#x2F;stackTrace&#x2F;traceId&#x2F;dedupKey之类的字段齐全。做incident-to-regression和侦探agent拿来就能用</li>
-<li>测试不光依赖Mockito单测，还有Testcontainers，后续做其他方案，产物需要起MySQL+Redis的集成测试，现有地基很方便。</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
