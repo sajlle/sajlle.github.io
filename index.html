@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">314</span>
+          <span class="site-state-item-count">315</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,137 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E7%9C%9F%E5%AE%9E%E8%81%94%E8%B0%83%E9%80%9A%E8%BF%87%EF%BC%8C%E6%9C%89%E5%87%A0%E4%B8%AA%E9%9C%80%E8%A6%81%E6%89%93%E7%A3%A8%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E7%9C%9F%E5%AE%9E%E8%81%94%E8%B0%83%E9%80%9A%E8%BF%87%EF%BC%8C%E6%9C%89%E5%87%A0%E4%B8%AA%E9%9C%80%E8%A6%81%E6%89%93%E7%A3%A8%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜Agent VO联调的事故复盘～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-11 15:50:58" itemprop="dateCreated datePublished" datetime="2026-09-11T15:50:58+08:00">2026-09-11 15:50:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-11 16:07:53" itemprop="dateModified" datetime="2026-09-11T16:07:53+08:00">2026-09-11 16:07:53</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>昨儿联调测试了两个case，一个正常case，一个异常case。<br>联调的结果还不错，模型没有为了显得有用，硬编一个调查步骤，最后明确说no action is authorized。<br>异常case里，deterministic core给的是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">REFUND_STATE_NOT_CONVERGED</span><br><span class="line"></span><br><span class="line">REFUND_ORDER_STATE_CONVERGED</span><br><span class="line">expected 4 / actual 3</span><br><span class="line"></span><br><span class="line">REFUND_VOUCHER_INSTANCE_STATE_CONVERGED</span><br><span class="line">expected [6] / actual [5]</span><br></pre></td></tr></table></figure>
+<p>模型没有重新分类，没有说「我觉得支付异常」，也没有扩大权限，最后只保留了系统已经授权的「QUERY_REFUND_CHANNEL」和「REQUEST_HUMAN_REVIEW」，并且引用已有的「PB_REFUND_DOWNSTREAM_CONVERGENCE」。<br>这部分测试还不错，几个点都过了：</p>
+<ol>
+<li>模型可以正常返回 strict structured output</li>
+<li>Normal case不发明问题</li>
+<li>异常case不重新分类</li>
+<li>不修改 deterministic violations</li>
+<li>不扩大allowedActions</li>
+<li>不发明compensation&#x2F;UPDATE&#x2F;SQL</li>
+<li>能识别 evidence_only timeline的局限</li>
+<li>能把 approximate timestamp和明确时间线分开</li>
+<li>nextStep被限制在系统授权范围内</li>
+</ol>
+<p>不过还有几个需要polish的地方。<br>模型输出的时候，在normal case里写，「numeric status codes 没有 semantic labels」，异常case里又写「timeline中没有显式记录order 到 4&#x2F;voucher 到6的transition event」。 而且补充「这些不是deterministic missing evidence」<br>逻辑没错，模型没有伪造missing evidence，但是字段名字叫evidenceGaps，读者容易把「aiExplaination.evidenceGaps」当成是「diagnosis.missingEvidence」。但实际上它表达的是更宽的「deterministic missing evidence」+ 「interpretation limitations」 + 「timeline limitations」</p>
+<p>后续的修法：</p>
+<ol>
+<li>不改DTO，prompt再卡严：evidenceGaps只允许：<ul>
+<li>paraphrase deterministic missingEvidence</li>
+<li>明确陈述timelineCompleteness带来的限制</li>
+<li>不得自行提出新的证据缺失</li>
+</ul>
+</li>
+<li>或者把名字改成更准确的evidenceAndInterpretationLimit</li>
+</ol>
+<p>再，因为context minimization太严格，模型只看到orderStatus&#x3D;4，voucherStatus&#x3D;6，但不知道4&#x3D;Refunded，6&#x3D;Refunded，所以它在normal case里很老实的说「我不知道这些数字状态码具体是什么意思」。</p>
+<p>后续的修法：</p>
+<ol>
+<li>用projector确定性的附上一个normalized semantic label，比如：<ul>
+<li>orderStatus<ul>
+<li>code : 4</li>
+<li>semantic: refunded</li>
+</ul>
+</li>
+<li>voucherStatus<ul>
+<li>code : 6</li>
+<li>semantic: refunded</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1160,105 +1291,6 @@
 <p>“出发前：我要投身历史。”<br>“抵达后：我护照呢？”<br>“上前线前：兄弟们帮我看看合同。”<br>“阵亡后：家属问抚恤金。”<br>“网友最后还在争论他到底偷没偷内裤。”</p>
 <p>下面一条回复：<br>“这就是理想主义的完整生命周期。”</p>
 <p>另一条：<br>“不。”<br>“这是没有做尽调的跨国投资。”</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%A8%E5%84%BF%E6%88%91%E7%94%A8%E5%85%AD%E7%88%BB%E7%AE%97%E5%8D%A6%EF%BC%8C%E6%AD%A3%E7%AE%97%E7%9D%80%E5%91%A2%EF%BC%8C%E7%BB%93%E6%9E%9C%E5%9C%B0%E9%9C%87%E4%BA%86%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%A8%E5%84%BF%E6%88%91%E7%94%A8%E5%85%AD%E7%88%BB%E7%AE%97%E5%8D%A6%EF%BC%8C%E6%AD%A3%E7%AE%97%E7%9D%80%E5%91%A2%EF%BC%8C%E7%BB%93%E6%9E%9C%E5%9C%B0%E9%9C%87%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜昨儿我用六爻算卦，正算着呢，结果地震了～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 10:34:06" itemprop="dateCreated datePublished" datetime="2026-09-10T10:34:06+08:00">2026-09-10 10:34:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 10:52:25" itemprop="dateModified" datetime="2026-09-10T10:52:25+08:00">2026-09-10 10:52:25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>卦是本卦风地观，上九和初六爻变，变卦是水雷屯。<br>然后我正准备解卦呢，椅子晃了几下，大概当时18:50分吧，我猜了几个可能：</p>
-<ol>
-<li>椅子的气压阀不牢固了。但过了那一阵又还是很牢固。不晃。</li>
-<li>于是我猜测，是地震。查了中国地震台网，没有信息。</li>
-</ol>
-<p>然后晚上正吃饭呢，小区群里大家纷纷分享地震了，再查，查到了，本地发生了3.6级的地震。</p>
-<p>（笑）。太巧了。不得不记录一下。</p>
-<p>再，扯回去六爻，风地观的下卦坤（地），变水雷屯的下卦震，然后又很巧的赶上了地震，这算外应吗？（笑）</p>
-<p>不过第一次经历地震，虽然只有3.6级，但体感还是很微妙的，晃动很明显。后续没有明显余震。<br>当时我妈在厨房做饭，没感觉到。我爹在卧室睡觉。</p>
-<p>偶尔想，如果是比较大的地震，我们三楼还是很容易跑路的。<br>再，偶尔想，我们这边不在典型的地震带上，居然也有地震，而且我来济源住大概二十年了，这是第一次遇到地震。</p>
 
       
 
