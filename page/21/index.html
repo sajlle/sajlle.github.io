@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">317</span>
+          <span class="site-state-item-count">318</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">394</span>
+        <span class="site-state-item-count">395</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,167 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/" class="post-title-link" itemprop="url">技术手记｜Java后端几个模式～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-22 19:42:58" itemprop="dateCreated datePublished" datetime="2026-02-22T19:42:58+08:00">2026-02-22 19:42:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-22 19:42:58" itemprop="dateModified" datetime="2026-02-22T19:42:58+08:00">2026-02-22 19:42:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天我问ChatGPT，我之前写代码没思路，可能是对模式不了解？<br>GPT回我：要不要我给你几个模型？<br>于是这篇博客就有了。（笑）</p>
+<p>今天（2026-02-22），我只记录模式，明天或者后天，我再补上实际的案例。</p>
+<h1 id="并发与一致性的常见模式"><a href="#并发与一致性的常见模式" class="headerlink" title="并发与一致性的常见模式"></a>并发与一致性的常见模式</h1><h2 id="Check-Then-Act（先检查再执行）"><a href="#Check-Then-Act（先检查再执行）" class="headerlink" title="Check-Then-Act（先检查再执行）"></a>Check-Then-Act（先检查再执行）</h2><h3 id="典型场景："><a href="#典型场景：" class="headerlink" title="典型场景："></a>典型场景：</h3><ul>
+<li>判断库存&gt;0之后再扣减</li>
+<li>判断是否锁定再加锁</li>
+<li>判断是否存在再插入</li>
+</ul>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><ul>
+<li>检查和执行分离，会被并发打穿</li>
+</ul>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><ul>
+<li>原子操作（Lua）</li>
+<li>乐观锁</li>
+<li>CAS</li>
+<li>数据库唯一索引</li>
+</ul>
+<h2 id="Lost-Update（更新丢失）"><a href="#Lost-Update（更新丢失）" class="headerlink" title="Lost Update（更新丢失）"></a>Lost Update（更新丢失）</h2><h3 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h3><ul>
+<li>两个线程读取同一值</li>
+<li>修改后覆盖</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>乐观锁 version</li>
+<li>行锁</li>
+<li>CAS</li>
+</ul>
+<h2 id="Double-Submit（重复提交）"><a href="#Double-Submit（重复提交）" class="headerlink" title="Double Submit（重复提交）"></a>Double Submit（重复提交）</h2><h3 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>用户点两次按钮</li>
+<li>重复下单</li>
+</ul>
+<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>幂等 token</li>
+<li>唯一索引</li>
+<li>状态机控制</li>
+</ul>
+<h2 id="Cache-Breakdown（缓存击穿）"><a href="#Cache-Breakdown（缓存击穿）" class="headerlink" title="Cache Breakdown（缓存击穿）"></a>Cache Breakdown（缓存击穿）</h2><h3 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>热点Key过期</li>
+<li>同时大量请求打DB</li>
+</ul>
+<h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>互斥锁</li>
+<li>预热</li>
+<li>永不过期 + 异步刷新</li>
+</ul>
+<h2 id="Cache-Penetration（缓存穿透）"><a href="#Cache-Penetration（缓存穿透）" class="headerlink" title="Cache Penetration（缓存穿透）"></a>Cache Penetration（缓存穿透）</h2><h3 id="典型-2"><a href="#典型-2" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>查询不存在数据</li>
+<li>每次打DB</li>
+</ul>
+<h3 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>空值缓存</li>
+<li>布隆过滤器</li>
+</ul>
+<h2 id="Thundering-Herd（惊群效应）"><a href="#Thundering-Herd（惊群效应）" class="headerlink" title="Thundering Herd（惊群效应）"></a>Thundering Herd（惊群效应）</h2><h3 id="典型-3"><a href="#典型-3" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>高峰期瞬间请求暴涨</li>
+</ul>
+<h3 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>限流</li>
+<li>排队</li>
+<li>削峰填谷</li>
+</ul>
+<h1 id="架构思维模式"><a href="#架构思维模式" class="headerlink" title="架构思维模式"></a>架构思维模式</h1><h2 id="Fail-Fast（快速失败）"><a href="#Fail-Fast（快速失败）" class="headerlink" title="Fail Fast（快速失败）"></a>Fail Fast（快速失败）</h2><p>与其被慢慢拖死，不如：</p>
+<ul>
+<li>限流</li>
+<li>降级</li>
+<li>熔断</li>
+</ul>
+<h2 id="Graceful-Degradation（优雅降级）"><a href="#Graceful-Degradation（优雅降级）" class="headerlink" title="Graceful Degradation（优雅降级）"></a>Graceful Degradation（优雅降级）</h2><p>比如：</p>
+<ul>
+<li>评论系统挂了不影响主流程</li>
+<li>风控策略收紧</li>
+</ul>
+<h2 id="Idempotency（幂等性）"><a href="#Idempotency（幂等性）" class="headerlink" title="Idempotency（幂等性）"></a>Idempotency（幂等性）</h2><p>重复请求不影响结果</p>
+<h2 id="State-Machine（状态机）"><a href="#State-Machine（状态机）" class="headerlink" title="State Machine（状态机）"></a>State Machine（状态机）</h2><p>登录，订单，风控其实都可以用状态流控制</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1131,99 +1292,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>另，今儿我重测的时候，发现项目启动失败了，错误原因是找不到mapper目录。<br>我仔细一看目录，哎，不知道项目目录里啥时候混进了<code>.idea</code>目录了，删了这个目录，重新编译一下，就可以正常跑了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/" class="post-title-link" itemprop="url">技术手记｜今日新bug：token校验失误</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-11 10:53:04" itemprop="dateCreated datePublished" datetime="2026-02-11T10:53:04+08:00">2026-02-11 10:53:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-11 10:53:04" itemprop="dateModified" datetime="2026-02-11T10:53:04+08:00">2026-02-11 10:53:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题。（笑）。</p>
-<p>昨儿我测试发现，cachedTokenId跟前端传的tokenId一样，为啥还是校验失败？<br>难道是pepper每次都随机生成一个新的，不是固定常量？（因为之前出现过类似错误，但我检查了一下pepper，没错哎）。</p>
-<p>tokenId对得上，那传递没问题，问题就出在加密上了。<br>后续排查，发现，创建token存redis的时候，token &#x3D; sha256(sha256(tokenId))，校验的时候，用的是token &#x3D; sha256(tokenId)，我说怎么tokenId对了，但校验老失败。</p>
-<p>另，出现这次问题，是因为写saveRefreshToken的时候，没有在文档里写清楚，存token还是存tokenId作校验。所以，写清楚文档，真的很必要啊（笑）</p>
 
       
 
