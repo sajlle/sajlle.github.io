@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-13 17:57:21" itemprop="dateModified" datetime="2026-09-13T17:57:21+08:00">2026-09-13 17:57:21</time>
+      <time title="修改时间：2026-09-13 17:58:18" itemprop="dateModified" datetime="2026-09-13T17:58:18+08:00">2026-09-13 17:58:18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,6 +283,7 @@
 <p>最后把完成条件改成：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">commitCount == 1</span><br><span class="line">afterCommitExecutions == 1</span><br></pre></td></tr></table></figure>
 <p>而且计数是在callback真正执行完成以后才增加。</p>
+<p>也就是：异步系统里，消息不在队列里，不等于业务事务已经完成。</p>
 <p>总结一下就是：</p>
 <blockquote>
 <p>一条 RabbitMQ集成测试偶发失败，最开始看起来像是消费事务问题，但后来发现测试把broker queue empty当成业务完成，但listener transaction commit和afterCommit可能还没结束，后续我把测试完成条件改成显式观察commit和afterCommit completion，而不是固定sleep或者仅看队列状态，之后连续跑就稳定通过了。</p>
