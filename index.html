@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">330</span>
+          <span class="site-state-item-count">331</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -203,6 +203,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：兼容层的“本地强校验”实际上不是严格 Schema 校验</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-14 15:59:54" itemprop="dateCreated datePublished" datetime="2026-09-14T15:59:54+08:00">2026-09-14 15:59:54</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-14 16:07:17" itemprop="dateModified" datetime="2026-09-14T16:07:17+08:00">2026-09-14 16:07:17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题～<br>供应商的Gateway采用的是共享生产全局ObjectMapper反序列化。如果发送了如下错误响应，则会被接受：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;summer&quot;</span><span class="punctuation">:</span> <span class="number">123</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;findings&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;evidenceGaps&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;nextStep&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;unauthorizedAction&quot;</span><span class="punctuation">:</span> <span class="string">&quot;REFUND&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>最终会得到<code>summery=123</code>,<code>nextStep=true</code>，额外字段被静默丢弃。</p>
+<p>因此如果供应商即使在解释对象里额外返回<code>diagonis</code>或者<code>action</code>，也可能会呗静默丢弃后当成合法结果。<br>这会破坏Agent V0的边界：「LLM只负责解释确定性结果，不能偷偷生成诊断或者动作」。<br>后续修法：我给gateway创建了私有严格ObjectReader，只在这里启动FAIL_ON_UNKNOWN_PROPERTIES，既拒绝Schema外字段，又不改变支付，MQ等其他JSON的全链路行为。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1104,108 +1197,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-13 17:31:21" itemprop="dateCreated datePublished" datetime="2026-09-13T17:31:21+08:00">2026-09-13 17:31:21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-13 17:40:27" itemprop="dateModified" datetime="2026-09-13T17:40:27+08:00">2026-09-13 17:40:27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。<br>但旧实现会告诉Agent，voucherInstance&#x3D;A。</p>
-<p>这导致的问题是「事实层偷偷替诊断层做了选择」。</p>
-<p>后续修成了FactLookup&lt;List<VoucherInstanceFact>&gt;，把DB里所有记录完整保留。于是分层变成了</p>
-<ul>
-<li>Facts: 我查到了2条数据</li>
-<li>Diagnosis：一订单两条instance为范 cardinality invariant</li>
-</ul>
-<p>概括一下就是：</p>
-<blockquote>
-<p>做Agent事实投影的时候发现业务Mapper默认LIMIT 1，但DB没有唯一约束。如果直接复用，会让Agent在脏数据场景下丢失证据。后续没有改生产Mapper，而是诊断为read-side，增加全量查询，让Facts保留全部记录，再由deterministic invariant判断cardinality violation</p>
-</blockquote>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
