@@ -174,7 +174,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">323</span>
+          <span class="site-state-item-count">324</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +183,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">399</span>
+        <span class="site-state-item-count">401</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -203,6 +203,114 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AiCloud%E6%8A%8Amaven-target-classes%E6%90%9E%E5%9D%8F%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AiCloud%E6%8A%8Amaven-target-classes%E6%90%9E%E5%9D%8F%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：iCloud把maven target/classes搞坏了（笑）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 17:59:32" itemprop="dateCreated datePublished" datetime="2026-09-13T17:59:32+08:00">2026-09-13 17:59:32</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-14 15:21:24" itemprop="dateModified" datetime="2026-09-14T15:21:24+08:00">2026-09-14 15:21:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这个可以说是目前遇到的最难定位的问题No.1～</p>
+<p>症状比较离谱～</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RefundMapper</span><br><span class="line">VoucherKeyBuilder</span><br><span class="line">SeckillReservationOutboxPersistenceService</span><br><span class="line">ReservationExceptionRecordDTO</span><br></pre></td></tr></table></figure>
+<p>几个毫无关系的老类，在第二轮<code>mvn clean verify</code>里随机出现<code>ClassNotFoundException</code> <code>NoClassDefFoundError</code><br>但是<code>.class</code>明明存在。而且更诡异的是<code>failsafe-reports</code> 构建结束之后还在消失。</p>
+<p>最后做forensic：</p>
+<ul>
+<li>查Failsafe effective config</li>
+<li>查有没有测试删target</li>
+<li>hash <code>.class</code></li>
+<li>查<code>ctime</code> <code>mtime</code></li>
+<li>查File Provider</li>
+<li>发现项目在iCloud Drive File Provider domain</li>
+<li>失败窗口iCloud正在大量<code>apply-changes</code></li>
+<li>把同一<code>working tree</code>复制到<code>/private/tmp</code><br>一通操作之后，连续 332&#x2F;332，三次测试全绿。</li>
+</ul>
+<p>总结一下就是：</p>
+<blockquote>
+<p>V0 release gate曾经随机出现多个互不关联旧类的ClassNotFoundException。我排除了Failsafe，源码，和class hash之后，发现项目目录属于iCloud File Provider，构建期间同步进程还在修改target和failsafe reports。把同一working tree目录复制到非同步 <code>/private/tmp/</code>之后连续三次测试全绿，最后定位为构建目录环境干扰，而不是业务代码或者maven配置问题～</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -248,7 +356,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-13 17:58:18" itemprop="dateModified" datetime="2026-09-13T17:58:18+08:00">2026-09-13 17:58:18</time>
+      <time title="修改时间：2026-09-13 18:00:04" itemprop="dateModified" datetime="2026-09-13T18:00:04+08:00">2026-09-13 18:00:04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1112,102 +1220,6 @@
 </ul>
 </li>
 </ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜今天给Agent接了真实API做测试，冒烟测试写完了～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-11 15:36:22" itemprop="dateCreated datePublished" datetime="2026-09-11T15:36:22+08:00">2026-09-11 15:36:22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-11 15:49:42" itemprop="dateModified" datetime="2026-09-11T15:49:42+08:00">2026-09-11 15:49:42</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～</p>
-<p>昨儿审了几千行代码 + 写了6篇博客，后续大半夜的让WorkBuddy给我把博客markdown排版一下。晚上11点才睡。<br>生产队的驴也不能这么用呀。</p>
-<p>于是今天继续降速。今儿就接API做测试，写文档。<br>边做测试，边想，DeepSeek真有价格优势呀～（笑）</p>
-<p>然后打算再接一个谷歌的API，毕竟每天有免费的额度。<br>目前我这边项目还不需要很聪明的模型。</p>
-<p>另，目前项目接入的是OpenAI的SDK，再接上Anthropic的SDK，差不多就能兼容市面上主流模型的API接入格式了。</p>
-<p>再，因为订阅稳定了，好几个月没折腾海外支付卡了，还不确定我现在这张能不能买API。<br>最近懒得折腾，所以测试用的DeepSeek，好买，价格便宜，还不需要立刻折腾付款设施。</p>
-<p>再，昨儿让workBuddy给我博客文章排版的时候，有点感叹，之前我一直烦的就是，一篇文章发不同平台，得改不同标题，排版，现在我只需要写文章，平台适配，配图&#x2F;改标题之类的，完全可以交给AI。<br>对本人这种重内容，轻格式的人来说，是个好消息～</p>
 
       
 
