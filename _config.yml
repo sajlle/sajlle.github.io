@@ -4,9 +4,16 @@
 
 # Site
 title: 节点人生
-subtitle: '之瑞的节点人生与技术存档'
-description: '人生不是一条平滑直线，而是一串离散的节点。'
+subtitle: '之瑞的技术复盘、AI Agent 实践与生活观察'
+description: '之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。'
 keywords:
+  - Java
+  - Spring Boot
+  - Redis
+  - RabbitMQ
+  - AI Agent
+  - 技术复盘
+  - 个人成长
 author: 之瑞
 language: zh-CN
 timezone: ''
@@ -18,7 +25,7 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_index: false # Keep sitemap/internal links aligned with canonical directory URLs
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 # Directory
@@ -81,7 +88,9 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+# 未显式填写 updated 时沿用发布日期，避免每次构建都把文件 mtime
+# 误报成内容更新时间；真正修改过的文章可在 front-matter 中填写 updated。
+updated_option: 'date'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -116,3 +125,22 @@ search:
   field: post # 只搜索文章
   content: true # 把正文也编进搜索索引
   format: striptags # 用文章HTML给内容建索引
+
+# Search engine discovery
+sitemap:
+  path: sitemap.xml
+  rel: false
+  # 标签和分类聚合页仍可被站内链接发现；站点地图优先提交正文与独立页面。
+  tags: false
+  categories: false
+
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 30
+  content: false
+  content_limit: 200
+  order_by: -date
+  icon: /images/avatar.jpg
+  autodiscovery: true

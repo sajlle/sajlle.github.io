@@ -10,6 +10,9 @@ custom_file_path:
   style: source/_data/styles.styl
   variable: source/_data/variables.styl
 
+# 让首页标题同时包含站点定位，而不只是通用的“节点人生”。
+index_with_subtitle: true
+
 # Local Search
 local_search:
   enable: true
@@ -36,3 +39,6 @@ post_meta:
     enable: true
     another_day: false
   categories: true
+
+follow_me:
+  RSS: /atom.xml || fa fa-rss
