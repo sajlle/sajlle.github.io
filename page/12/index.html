@@ -19,14 +19,21 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+    <meta name="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="节点人生">
-<meta property="og:url" content="https://sajlle.github.io/page/12/index.html">
+<meta property="og:url" content="https://sajlle.github.io/page/12/">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="人生不是一条平滑直线，而是一串离散的节点。">
+<meta property="og:description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AI Agent">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="RabbitMQ">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="个人成长">
+<meta property="article:tag" content="技术复盘">
 <meta name="twitter:card" content="summary">
 
 
@@ -36,7 +43,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/12/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>节点人生</title>
+<title>节点人生 - 之瑞的技术复盘、AI Agent 实践与生活观察</title>
   
 
 
@@ -73,6 +80,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -96,7 +104,7 @@
       <h1 class="site-title">节点人生</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -168,23 +176,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -212,6 +222,100 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%94%A8GG%E5%8D%A1%E8%BF%87%E4%BA%86Codex%E9%AA%8C%E8%AF%81%EF%BC%8C%E7%BB%88%E4%BA%8E%E5%8F%AF%E4%BB%A5%E5%86%8D%E8%A7%81%E5%88%B0Codex%E4%BA%86%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%94%A8GG%E5%8D%A1%E8%BF%87%E4%BA%86Codex%E9%AA%8C%E8%AF%81%EF%BC%8C%E7%BB%88%E4%BA%8E%E5%8F%AF%E4%BB%A5%E5%86%8D%E8%A7%81%E5%88%B0Codex%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜用GiffGaff卡过了Codex验证，终于可以再见到Codex了～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-24 09:26:22" itemprop="dateCreated datePublished" datetime="2026-06-24T09:26:22+08:00">2026-06-24 09:26:22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-24 09:26:22" itemprop="dateModified" datetime="2026-06-24T09:26:22+08:00">2026-06-24 09:26:22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题～</p>
+<p>上周Codex需要验证，我端午下单了GiffGaff卡，昨儿到货之后，又折腾好一阵，今早能过Codex验证了。<br>另，上月这卡付邮送，平时大概二三十块一张，这月从45涨价到80块90块，主要原因是电商平台下架了这类卡，同时海外AI又要验证手机号，两相叠加，价格涨了。</p>
+<p>嗯，不过我好奇下月会继续涨价嘛。也好奇，这个涨价幅度，能不能推出国内到底多少人用Codex？毕竟这数据真找不到官方的。<br>嗯，这次主要是Codex强制校验&amp;二次校验手机号推高了这类卡的需求。导致之前用接码平台一次性接验证码的方法不管用了，必须弄个稳定的手机号过校验。</p>
+<p>另，激活voucher找第三方，普遍需要120块左右，贵的有140块，实际自己付的话，90块。<br>当然商户那边是用户激活充值，商户获得5磅，所以商户定价70块，刨掉成本，大概能挣50rmb + 5磅，也就是一单净赚100rmb。如果用户再找商户充值，价格120块的话，商户能再赚30块一单，价格140块的话，商户这一单能赚150块。<br>而且因为用户买卡之后，激活，充值不是很容易，所以商户可以拉用户到私域群，嗯，除了赚钱，还能拉出流量沉淀到私域，怎么说都是不赔本的生意。</p>
+<p>之前我还看ultra mobile的卡，国内第三方电商平台几乎找不到未激活的。已激活的卡是200块左右。<br>海外的话，买一张实体卡，转运回来，需要140块左右。<br>国内代充值的话，3美元要付40块左右，如果自己付的话，20块左右。这种卡商户一张大概赚60块（如果用户不充值的话），如果用户充值，商户赚80块。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/23/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A6%82%E6%9E%9C%E9%9D%A2%E5%AF%B9%E4%B8%80%E4%B8%AA%E4%BB%BB%E5%8A%A1%E8%84%91%E8%A2%8B%E5%AE%8C%E5%85%A8%E7%A9%BA%E7%99%BD%EF%BC%8C%E6%9C%80%E8%AF%A5%E9%97%AEAI%E7%9A%84%E4%B8%8D%E6%98%AF%E7%BB%99%E6%88%91%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E7%AD%94%E6%A1%88%EF%BC%8C%E8%80%8C%E6%98%AF%E5%91%8A%E8%AF%89%E6%88%91%E8%BF%99%E4%B8%AA%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -221,7 +325,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -248,7 +352,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-23 18:05:21" itemprop="dateModified" datetime="2026-06-23T18:05:21+08:00">2026-06-23 18:05:21</time>
+      <time title="修改时间：2026-06-23 17:57:22" itemprop="dateModified" datetime="2026-06-23T17:57:22+08:00">2026-06-23 17:57:22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -314,7 +418,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -341,7 +445,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-23 17:07:31" itemprop="dateModified" datetime="2026-06-23T17:07:31+08:00">2026-06-23 17:07:31</time>
+      <time title="修改时间：2026-06-23 16:56:28" itemprop="dateModified" datetime="2026-06-23T16:56:28+08:00">2026-06-23 16:56:28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -408,7 +512,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -435,7 +539,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-22 18:06:26" itemprop="dateModified" datetime="2026-06-22T18:06:26+08:00">2026-06-22 18:06:26</time>
+      <time title="修改时间：2026-06-20 10:29:36" itemprop="dateModified" datetime="2026-06-20T10:29:36+08:00">2026-06-20 10:29:36</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,7 +602,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -525,7 +629,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 22:40:10" itemprop="dateModified" datetime="2026-06-15T22:40:10+08:00">2026-06-15 22:40:10</time>
+      <time title="修改时间：2026-06-15 22:22:28" itemprop="dateModified" datetime="2026-06-15T22:22:28+08:00">2026-06-15 22:22:28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -599,7 +703,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -626,7 +730,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 20:11:48" itemprop="dateModified" datetime="2026-06-15T20:11:48+08:00">2026-06-15 20:11:48</time>
+      <time title="修改时间：2026-06-15 20:10:24" itemprop="dateModified" datetime="2026-06-15T20:10:24+08:00">2026-06-15 20:10:24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -689,7 +793,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -716,7 +820,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 17:20:39" itemprop="dateModified" datetime="2026-06-15T17:20:39+08:00">2026-06-15 17:20:39</time>
+      <time title="修改时间：2026-06-15 17:13:22" itemprop="dateModified" datetime="2026-06-15T17:13:22+08:00">2026-06-15 17:13:22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -794,7 +898,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -821,7 +925,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 09:10:34" itemprop="dateModified" datetime="2026-06-15T09:10:34+08:00">2026-06-15 09:10:34</time>
+      <time title="修改时间：2026-06-15 09:00:07" itemprop="dateModified" datetime="2026-06-15T09:00:07+08:00">2026-06-15 09:00:07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -888,7 +992,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -915,7 +1019,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-15 08:53:08" itemprop="dateModified" datetime="2026-06-15T08:53:08+08:00">2026-06-15 08:53:08</time>
+      <time title="修改时间：2026-06-15 08:14:01" itemprop="dateModified" datetime="2026-06-15T08:14:01+08:00">2026-06-15 08:14:01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -992,7 +1096,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -1019,7 +1123,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-14 11:37:00" itemprop="dateModified" datetime="2026-06-14T11:37:00+08:00">2026-06-14 11:37:00</time>
+      <time title="修改时间：2026-06-14 11:21:12" itemprop="dateModified" datetime="2026-06-14T11:21:12+08:00">2026-06-14 11:21:12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1042,96 +1146,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>这周是比较轻度的在用codex，所以用1亿，其实不算多。<br>昨儿看了用了7500万，估计加上今儿上午的用量，有1亿了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9Cgit%E8%AF%AF%E5%9B%9E%E6%BB%9A%E6%95%B0%E6%8D%AE%E6%89%BE%E5%9B%9E%E6%9D%A5%E4%BA%86%EF%BC%8C%E5%97%AF%EF%BC%8CIDEA%E7%9A%84%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95revert%E5%88%B0%E5%9B%9E%E6%BB%9A%E4%B9%8B%E5%89%8D%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9Cgit%E8%AF%AF%E5%9B%9E%E6%BB%9A%E6%95%B0%E6%8D%AE%E6%89%BE%E5%9B%9E%E6%9D%A5%E4%BA%86%EF%BC%8C%E5%97%AF%EF%BC%8CIDEA%E7%9A%84%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95revert%E5%88%B0%E5%9B%9E%E6%BB%9A%E4%B9%8B%E5%89%8D%E4%BA%86/" class="post-title-link" itemprop="url">日常记录｜git误回滚数据找回来了，嗯，IDEA的历史记录revert到回滚之前了</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-06-14 10:44:44" itemprop="dateCreated datePublished" datetime="2026-06-14T10:44:44+08:00">2026-06-14 10:44:44</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-14 10:44:44" itemprop="dateModified" datetime="2026-06-14T10:44:44+08:00">2026-06-14 10:44:44</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>嗯，多亏IDEA的历史记录，revert回去了。</p>
 
       
 

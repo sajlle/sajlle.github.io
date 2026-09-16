@@ -22,7 +22,7 @@
     <meta name="description" content="自从今年换了Mac之后，哪哪都好，唯一痛点，Mac没有记事本，不能像windows一样，右键点开，新建文件。所以比较烦，就重回vim怀抱，新建文件，自己打开终端，直接开始vi 不过这也太烦了。毕竟打开终端–&gt; vi –&gt; 写文件 –&gt; 命名 –&gt; 保存。这一套流程也很烦人。能不能简化一下呢？因为我用vim新建小文件，顶多是记录杂项，过一阵就删除了。所以最重要的是省事儿，其他">
 <meta property="og:type" content="article">
 <meta property="og:title" content="终端记事本·灵魂补丁版～弥补Mac没有记事本的遗憾">
-<meta property="og:url" content="https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/index.html">
+<meta property="og:url" content="https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="自从今年换了Mac之后，哪哪都好，唯一痛点，Mac没有记事本，不能像windows一样，右键点开，新建文件。所以比较烦，就重回vim怀抱，新建文件，自己打开终端，直接开始vi 不过这也太烦了。毕竟打开终端–&gt; vi –&gt; 写文件 –&gt; 命名 –&gt; 保存。这一套流程也很烦人。能不能简化一下呢？因为我用vim新建小文件，顶多是记录杂项，过一阵就删除了。所以最重要的是省事儿，其他">
 <meta property="og:locale" content="zh_CN">
@@ -76,10 +76,11 @@
 
 
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/"},"headline":"终端记事本·灵魂补丁版～弥补Mac没有记事本的遗憾","description":"自从今年换了Mac之后，哪哪都好，唯一痛点，Mac没有记事本，不能像windows一样，右键点开，新建文件。所以比较烦，就重回vim怀抱，新建文件，自己打开终端，直接开始vi 不过这也太烦了。毕竟打开终端–&gt; vi –&gt; 写文件 –&gt; 命名 –&gt; 保存。这一套流程也很烦人。能不能简化一下呢？因为我用vim新建小文件，顶多是记录杂项，过一阵就删除了。所以最重要的是省事儿，其…","datePublished":"2025-12-16T09:53:31.000Z","dateModified":"2025-12-16T09:53:31.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Mac","vim","记事本","给设备打补丁","修理工"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -103,7 +104,7 @@
       <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -175,23 +176,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -229,7 +232,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -308,6 +311,23 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/Mac/" rel="tag"># Mac</a>
               <a href="/tags/vim/" rel="tag"># vim</a>

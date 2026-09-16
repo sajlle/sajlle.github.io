@@ -22,7 +22,7 @@
     <meta name="description" content="如题。这是3月的事儿了，正好济源下雨，氛围很适合写博客。就写写3月来不及写的事儿。 3月的时候，让codex帮我改一段MQ异步建单的代码，codex改了之后，我检查的时候，发现有一个名叫result的变量被错误的赋值了。看到这个bug，我又觉得惊讶，又觉得释然。因为那几天我一直被网络上AI代替程序员的帖子搞的很焦虑。但我真的发现codex的错误之后，我释然了。不是因为我不想AI帮我做正确的事儿，而">
 <meta property="og:type" content="article">
 <meta property="og:title" content="日常记录｜当我发现codex改代码搞错变量名之后，我忽然有点安慰，AI并非万能">
-<meta property="og:url" content="https://sajlle.github.io/2026/04/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E5%8F%91%E7%8E%B0codex%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E6%90%9E%E9%94%99%E4%BA%86%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BF%BD%E7%84%B6%E6%9C%89%E7%82%B9%E5%AE%89%E6%85%B0%EF%BC%8CAI%E5%B9%B6%E9%9D%9E%E4%B8%87%E8%83%BD/index.html">
+<meta property="og:url" content="https://sajlle.github.io/2026/04/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E5%8F%91%E7%8E%B0codex%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E6%90%9E%E9%94%99%E4%BA%86%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BF%BD%E7%84%B6%E6%9C%89%E7%82%B9%E5%AE%89%E6%85%B0%EF%BC%8CAI%E5%B9%B6%E9%9D%9E%E4%B8%87%E8%83%BD/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="如题。这是3月的事儿了，正好济源下雨，氛围很适合写博客。就写写3月来不及写的事儿。 3月的时候，让codex帮我改一段MQ异步建单的代码，codex改了之后，我检查的时候，发现有一个名叫result的变量被错误的赋值了。看到这个bug，我又觉得惊讶，又觉得释然。因为那几天我一直被网络上AI代替程序员的帖子搞的很焦虑。但我真的发现codex的错误之后，我释然了。不是因为我不想AI帮我做正确的事儿，而">
 <meta property="og:locale" content="zh_CN">
@@ -73,10 +73,11 @@
 
 
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/04/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E5%8F%91%E7%8E%B0codex%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E6%90%9E%E9%94%99%E4%BA%86%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BF%BD%E7%84%B6%E6%9C%89%E7%82%B9%E5%AE%89%E6%85%B0%EF%BC%8CAI%E5%B9%B6%E9%9D%9E%E4%B8%87%E8%83%BD/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/04/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E5%8F%91%E7%8E%B0codex%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E6%90%9E%E9%94%99%E4%BA%86%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BF%BD%E7%84%B6%E6%9C%89%E7%82%B9%E5%AE%89%E6%85%B0%EF%BC%8CAI%E5%B9%B6%E9%9D%9E%E4%B8%87%E8%83%BD/"},"headline":"日常记录｜当我发现codex改代码搞错变量名之后，我忽然有点安慰，AI并非万能","description":"如题。这是3月的事儿了，正好济源下雨，氛围很适合写博客。就写写3月来不及写的事儿。 3月的时候，让codex帮我改一段MQ异步建单的代码，codex改了之后，我检查的时候，发现有一个名叫result的变量被错误的赋值了。看到这个bug，我又觉得惊讶，又觉得释然。因为那几天我一直被网络上AI代替程序员的帖子搞的很焦虑。但我真的发现codex的错误之后，我释然了。不是因为我不想AI帮我做正确的事儿，…","datePublished":"2026-04-08T04:21:09.000Z","dateModified":"2026-04-08T04:21:09.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["AI","codex"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -100,7 +101,7 @@
       <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -172,23 +173,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -226,7 +229,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -289,6 +292,23 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/AI/" rel="tag"># AI</a>
               <a href="/tags/codex/" rel="tag"># codex</a>

@@ -22,7 +22,7 @@
     <meta name="description" content="SOP写代码-&gt;本地跑最小门槛 formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化） 单测（至少新增&#x2F;改动路径覆盖到）  Codex code-level review -&gt; 产出报告到docs&#x2F;codex-reviews Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技术手记｜代码审核新思路">
-<meta property="og:url" content="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/index.html">
+<meta property="og:url" content="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="SOP写代码-&gt;本地跑最小门槛 formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化） 单测（至少新增&#x2F;改动路径覆盖到）  Codex code-level review -&gt; 产出报告到docs&#x2F;codex-reviews Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用">
 <meta property="og:locale" content="zh_CN">
@@ -73,10 +73,11 @@
 
 
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/"},"headline":"技术手记｜代码审核新思路","description":"SOP写代码-&gt;本地跑最小门槛 formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化） 单测（至少新增&#x2F;改动路径覆盖到） Codex code-level review -&gt; 产出报告到docs/codex-reviews Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用…","datePublished":"2026-02-09T03:42:30.000Z","dateModified":"2026-02-09T03:42:30.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Codex","代码审核"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -100,7 +101,7 @@
       <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -173,23 +174,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -227,7 +230,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -370,6 +373,23 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/Codex/" rel="tag"># Codex</a>
               <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8/" rel="tag"># 代码审核</a>

@@ -22,7 +22,7 @@
     <meta name="description" content="如题。我代码的逻辑是：  redis（读写） DB读写（封装了private方法） redis（读写）  这涉及两个问题：  private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。 redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。  问题一改法：  把事务加到调用priva">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技术手记｜redis和事务的雷我又踩上了（笑）">
-<meta property="og:url" content="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/index.html">
+<meta property="og:url" content="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="如题。我代码的逻辑是：  redis（读写） DB读写（封装了private方法） redis（读写）  这涉及两个问题：  private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。 redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。  问题一改法：  把事务加到调用priva">
 <meta property="og:locale" content="zh_CN">
@@ -74,10 +74,11 @@
 
 
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/"},"headline":"技术手记｜redis和事务的雷我又踩上了（笑）","description":"如题。我代码的逻辑是： redis（读写） DB读写（封装了private方法） redis（读写） 这涉及两个问题： private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。 redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。 问题一改法： 把事务加到调用private方法…","datePublished":"2026-02-05T11:43:51.000Z","dateModified":"2026-02-05T11:43:51.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Spring","缓存","事务"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -101,7 +102,7 @@
       <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -173,23 +174,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -227,7 +230,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -308,10 +311,27 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
               <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
               <a href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag"># 事务</a>
-              <a href="/tags/Spring/" rel="tag"># Spring</a>
           </div>
 
         

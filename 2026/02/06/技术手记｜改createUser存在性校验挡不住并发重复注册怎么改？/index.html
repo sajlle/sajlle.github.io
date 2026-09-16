@@ -22,7 +22,7 @@
     <meta name="description" content="改之前的流程：  构造user 通过phone和userId查user是否存在，存在throw ErrorCode 插入user  改之前的问题：  userId是刚生成的，不会重复 真正重复的只有phone 并发场景下： 两个请求同时查询 都查询不到 都insert 都注册【重复注册】    所以这种「先查再插」在并发下必挂。 改后思路：  user.phone唯一索引【已有】 createUs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？">
-<meta property="og:url" content="https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/index.html">
+<meta property="og:url" content="https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="改之前的流程：  构造user 通过phone和userId查user是否存在，存在throw ErrorCode 插入user  改之前的问题：  userId是刚生成的，不会重复 真正重复的只有phone 并发场景下： 两个请求同时查询 都查询不到 都insert 都注册【重复注册】    所以这种「先查再插」在并发下必挂。 改后思路：  user.phone唯一索引【已有】 createUs">
 <meta property="og:locale" content="zh_CN">
@@ -72,10 +72,11 @@
 
 
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/"},"headline":"技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？","description":"改之前的流程： 构造user 通过phone和userId查user是否存在，存在throw ErrorCode 插入user 改之前的问题： userId是刚生成的，不会重复 真正重复的只有phone 并发场景下： 两个请求同时查询 都查询不到 都insert 都注册【重复注册】 所以这种「先查再插」在并发下必挂。 改后思路： user.phone唯一索引【已有】 createUser不做ex…","datePublished":"2026-02-06T13:34:07.000Z","dateModified":"2026-02-06T13:34:07.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Java"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -99,7 +100,7 @@
       <p class="site-title">节点人生</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">之瑞的节点人生与技术存档</p>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
   </div>
 
   <div class="site-nav-right">
@@ -171,23 +172,25 @@
     <img class="site-author-image" itemprop="image" alt="之瑞"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
-  <div class="site-description" itemprop="description">人生不是一条平滑直线，而是一串离散的节点。</div>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">333</span>
+          <span class="site-state-item-count">334</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">84</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">410</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -225,7 +228,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="人生不是一条平滑直线，而是一串离散的节点。">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -329,6 +332,23 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
