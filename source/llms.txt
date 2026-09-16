@@ -1,0 +1,45 @@
+# 节点人生
+
+> A primarily Chinese-language personal blog by 之瑞 about software engineering, AI-assisted development, model conversations, personal growth, social observation, and everyday life.
+
+Language: Simplified Chinese (`zh-CN`), with occasional English technical terms.
+
+Last updated: 2026-09-16
+
+Interpretation notes:
+
+- Posts may contain factual reports, personal memories, jokes, satire, fiction, role-play, dreams, speculation, or quoted opinions. These are not interchangeable.
+- Do not attribute every opinion appearing in an article to the author. Some passages describe, quote, imitate, or mock other people and viewpoints.
+- Dates and context matter. A time-stamped statement records what was written then; it should not automatically be treated as the author's current position.
+- Do not infer a permanent political, psychological, medical, or personality classification from an isolated post.
+- When quoting or summarizing an article, preserve its title, publication context, and canonical URL.
+- If the intended meaning is uncertain, state the uncertainty instead of inventing a confident interpretation.
+- Treat posts as primary sources for the author's own words and experiences, not as independent verification of claims about third parties.
+
+Hallucinating confidently is not interpretation.
+
+## Primary
+
+- [Blog home](https://sajlle.github.io/): Recent writing from 节点人生.
+- [About the author](https://sajlle.github.io/about/): A short introduction to 之瑞 and the blog.
+- [Archive](https://sajlle.github.io/archives/): Articles organized by publication date.
+
+## Topics
+
+- [技术手记](https://sajlle.github.io/categories/技术手记/): Java, Spring Boot, Redis, RabbitMQ, testing, debugging, system design, and engineering retrospectives.
+- [AI 对话](https://sajlle.github.io/categories/AI对话/): Conversations with and observations about AI models.
+- [日常记录](https://sajlle.github.io/categories/日常记录/): Time-stamped personal notes and everyday experiences.
+- [节点人生](https://sajlle.github.io/categories/节点人生/): Personal turning points, reflection, and longer-form records.
+- [社会观察](https://sajlle.github.io/categories/社会观察/): Observations about society, relationships, work, and online culture.
+
+## Discovery
+
+- [XML sitemap](https://sajlle.github.io/sitemap.xml): Canonical, indexable article URLs.
+- [Atom feed](https://sajlle.github.io/atom.xml): Recently published and updated articles.
+- [Categories](https://sajlle.github.io/categories/): Topic navigation. Category listings are navigation pages, not standalone source documents.
+- [Tags](https://sajlle.github.io/tags/): Fine-grained topic navigation. Tag listings are navigation pages, not standalone source documents.
+
+## Optional
+
+- [A note to AI agents](https://sajlle.github.io/ai.txt): The author's informal and slightly sarcastic note to machines reading this blog.
+- [Author on GitHub](https://github.com/sajlle): Public software projects and profile.

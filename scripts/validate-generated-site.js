@@ -37,7 +37,9 @@ hexo.extend.filter.register('after_generate', async function validateGeneratedSi
   const requiredRoutes = {
     'sitemap.xml': '<urlset',
     'robots.txt': 'Sitemap: https://sajlle.github.io/sitemap.xml',
-    'atom.xml': '<feed'
+    'atom.xml': '<feed',
+    'ai.txt': 'Hallucinating confidently is not interpretation.',
+    'llms.txt': 'A note to AI agents'
   };
 
   for (const [route, expectedText] of Object.entries(requiredRoutes)) {
@@ -57,8 +59,25 @@ hexo.extend.filter.register('after_generate', async function validateGeneratedSi
     throw new Error('Generated sitemap should prioritize posts and standalone pages, not taxonomy listings.');
   }
 
-  const tagsIndex = (await readRoute(this.route.get('tags/index.html'))).toString('utf8');
-  if (!tagsIndex.includes('<meta name="robots" content="noindex">')) {
-    throw new Error('Generated tag listing is missing its noindex directive.');
+  const taxonomyRoutes = {
+    'tags/index.html': ['tag-cloud', 'href="/tags/'],
+    'categories/index.html': ['category-list', 'href="/categories/']
+  };
+
+  for (const [route, expectedMarkers] of Object.entries(taxonomyRoutes)) {
+    const stream = this.route.get(route);
+    if (!stream) {
+      throw new Error(`Generated ${route} route is missing.`);
+    }
+
+    const contents = (await readRoute(stream)).toString('utf8');
+    if (!contents.includes('<meta name="robots" content="noindex">')) {
+      throw new Error(`Generated ${route} is missing its noindex directive.`);
+    }
+    for (const marker of expectedMarkers) {
+      if (!contents.includes(marker)) {
+        throw new Error(`Generated ${route} is missing its automatic taxonomy marker: ${marker}.`);
+      }
+    }
   }
 });
