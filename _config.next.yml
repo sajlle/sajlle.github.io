@@ -1,5 +1,10 @@
 lazyload: true
 
+avatar:
+  url: /images/avatar-headphones-2026.jpg
+  rounded: true
+  rotated: true
+
 comments:
   lazyload: true
 

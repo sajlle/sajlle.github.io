@@ -142,5 +142,5 @@ feed:
   content: false
   content_limit: 200
   order_by: -date
-  icon: /images/avatar.jpg
+  icon: /images/avatar-headphones-2026.jpg
   autodiscovery: true
