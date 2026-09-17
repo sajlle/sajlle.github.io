@@ -75,7 +75,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/"},"headline":"技术手记｜写写Spring MVC的流程，Filter拦截了啥？Interceptor拦截了啥？","description":"来，先上一个一次HTTP请求在Spring Boot里走过的路径（单请求路径的横切面） 12345678910111213Client -&gt; Tomcat -&gt; Filter（按顺序） -&gt; DispatcherServlet -&gt; HandlerMapping（找Controller方法） -&gt; Interceptor.preHandle（按顺序） -&gt; C…","datePublished":"2026-02-23T07:07:41.000Z","dateModified":"2026-02-23T07:07:41.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Spring MVC","Filter","Interceptor","八股"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/"},"headline":"技术手记｜写写Spring MVC的流程，Filter拦截了啥？Interceptor拦截了啥？","description":"来，先上一个一次HTTP请求在Spring Boot里走过的路径（单请求路径的横切面） 12345678910111213Client -&gt; Tomcat -&gt; Filter（按顺序） -&gt; DispatcherServlet -&gt; HandlerMapping（找Controller方法） -&gt; Interceptor.preHandle（按顺序） -&gt; C…","datePublished":"2026-02-23T07:07:41.000Z","dateModified":"2026-02-23T07:07:41.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Spring MVC","Filter","Interceptor","八股"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -174,7 +174,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -226,7 +226,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/23/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%86%99%E5%86%99Spring-MVC%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8CFilter%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9FInterceptor%E6%8B%A6%E6%88%AA%E4%BA%86%E5%95%A5%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

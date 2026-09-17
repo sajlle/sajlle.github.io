@@ -74,7 +74,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T09:50:11.000Z","dateModified":"2026-09-13T09:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["RabbitMQ","集成测试","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T09:50:11.000Z","dateModified":"2026-09-13T09:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["RabbitMQ","集成测试","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -172,7 +172,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -224,7 +224,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

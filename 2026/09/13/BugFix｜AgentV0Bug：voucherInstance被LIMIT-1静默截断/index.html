@@ -73,7 +73,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/"},"headline":"BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断","description":"项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。但旧实现会告诉Agent，voucherInstance&#x3D;A。 这导致的问题是「事实层偷偷替诊断层做了选择」。 后续修成了FactLookup&lt;List&gt;，把…","datePublished":"2026-09-13T09:31:21.000Z","dateModified":"2026-09-13T09:31:21.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Agent","DB"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/"},"headline":"BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断","description":"项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。但旧实现会告诉Agent，voucherInstance&#x3D;A。 这导致的问题是「事实层偷偷替诊断层做了选择」。 后续修成了FactLookup&lt;List&gt;，把…","datePublished":"2026-09-13T09:31:21.000Z","dateModified":"2026-09-13T09:31:21.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Agent","DB"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -171,7 +171,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -223,7 +223,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

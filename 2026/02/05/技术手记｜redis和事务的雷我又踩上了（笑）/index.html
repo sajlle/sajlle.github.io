@@ -74,7 +74,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/"},"headline":"技术手记｜redis和事务的雷我又踩上了（笑）","description":"如题。我代码的逻辑是： redis（读写） DB读写（封装了private方法） redis（读写） 这涉及两个问题： private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。 redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。 问题一改法： 把事务加到调用private方法…","datePublished":"2026-02-05T11:43:51.000Z","dateModified":"2026-02-05T11:43:51.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Spring","缓存","事务"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/"},"headline":"技术手记｜redis和事务的雷我又踩上了（笑）","description":"如题。我代码的逻辑是： redis（读写） DB读写（封装了private方法） redis（读写） 这涉及两个问题： private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。 redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。 问题一改法： 把事务加到调用private方法…","datePublished":"2026-02-05T11:43:51.000Z","dateModified":"2026-02-05T11:43:51.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Spring","缓存","事务"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -172,7 +172,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -224,7 +224,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

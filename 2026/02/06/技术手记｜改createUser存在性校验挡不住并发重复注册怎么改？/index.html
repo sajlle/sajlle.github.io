@@ -72,7 +72,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/"},"headline":"技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？","description":"改之前的流程： 构造user 通过phone和userId查user是否存在，存在throw ErrorCode 插入user 改之前的问题： userId是刚生成的，不会重复 真正重复的只有phone 并发场景下： 两个请求同时查询 都查询不到 都insert 都注册【重复注册】 所以这种「先查再插」在并发下必挂。 改后思路： user.phone唯一索引【已有】 createUser不做ex…","datePublished":"2026-02-06T13:34:07.000Z","dateModified":"2026-02-06T13:34:07.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Java"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/"},"headline":"技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？","description":"改之前的流程： 构造user 通过phone和userId查user是否存在，存在throw ErrorCode 插入user 改之前的问题： userId是刚生成的，不会重复 真正重复的只有phone 并发场景下： 两个请求同时查询 都查询不到 都insert 都注册【重复注册】 所以这种「先查再插」在并发下必挂。 改后思路： user.phone唯一索引【已有】 createUser不做ex…","datePublished":"2026-02-06T13:34:07.000Z","dateModified":"2026-02-06T13:34:07.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Java"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -170,7 +170,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -222,7 +222,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

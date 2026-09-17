@@ -74,7 +74,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/"},"headline":"互斥锁，逻辑过期，异步重建使用的区别？","description":"问什么时候用逻辑过期，什么时候要加互斥锁，什么时候做缓存重建？ 答先看「业务目标」，在看用什么。 先理清楚概念，看看互斥锁，逻辑过期，缓存重建分别解决了什么问题？ 互斥锁(mutex Lock)解决的是：缓存刚实效的时候，大量请求同时查库（击穿） 本质：用锁把缓存重建这件事变成一次只让一个人干 逻辑过期(logical expire)解决的是：不让用户请求等待重建（保证读接口稳定延迟） 本质：数…","datePublished":"2026-01-05T06:22:17.000Z","dateModified":"2026-01-05T06:22:17.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["互斥锁","逻辑过期","缓存重建"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/"},"headline":"互斥锁，逻辑过期，异步重建使用的区别？","description":"问什么时候用逻辑过期，什么时候要加互斥锁，什么时候做缓存重建？ 答先看「业务目标」，在看用什么。 先理清楚概念，看看互斥锁，逻辑过期，缓存重建分别解决了什么问题？ 互斥锁(mutex Lock)解决的是：缓存刚实效的时候，大量请求同时查库（击穿） 本质：用锁把缓存重建这件事变成一次只让一个人干 逻辑过期(logical expire)解决的是：不让用户请求等待重建（保证读接口稳定延迟） 本质：数…","datePublished":"2026-01-05T06:22:17.000Z","dateModified":"2026-01-05T06:22:17.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["互斥锁","逻辑过期","缓存重建"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -173,7 +173,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -225,7 +225,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 

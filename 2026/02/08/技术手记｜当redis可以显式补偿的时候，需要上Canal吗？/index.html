@@ -76,7 +76,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T13:24:50.000Z","dateModified":"2026-02-08T13:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar.jpg"],"keywords":["Redis","DB","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T13:24:50.000Z","dateModified":"2026-02-08T13:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Redis","DB","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -174,7 +174,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="之瑞"
-      src="/images/avatar.jpg">
+      src="/images/avatar-headphones-2026.jpg">
   <p class="site-author-name" itemprop="name">之瑞</p>
   <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
 </div>
@@ -226,7 +226,7 @@
     <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
       <meta itemprop="name" content="之瑞">
     </span>
 
