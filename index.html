@@ -498,7 +498,7 @@
           <h1 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h1><p>为啥单测全绿，集成测试还是挂了？ 因为单测验证的是对象行为，这次坏的是Spring application wiring。<br>最后查出来是多Provider重构之后，IT手写的@Import漏了provider-neutral公共配置；生产wiring完好。<br>修复方式：只给IT补import LlmCommonConfiguration，生产代码0改动。<br>总结：测试上下文和生产上下文并不天然等价。</p>
 <h1 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h1><ul>
 <li>IT稳定5&#x2F;5失败，单独跑也挂，所以不是flaky；</li>
-<li>报错是UnsatisifiedDependencyException包了NoSuchBeanDefinitionException</li>
+<li>报错是UnsatisfiedDependencyException包了NoSuchBeanDefinitionException</li>
 <li>此时单测全绿，mvn test全绿</li>
 </ul>
 <h1 id="是production-wiring还是test-wiring？"><a href="#是production-wiring还是test-wiring？" class="headerlink" title="是production wiring还是test wiring？"></a>是production wiring还是test wiring？</h1><p>一开始先不预设是测试的问题，先追完整的依赖链条，看是production wiring 还是 test wiring？</p>
@@ -558,6 +558,7 @@
 <li>回归测试的时候：wiring regression test，覆盖AI disabled context能起，以及explanation context下PromptFactory有且只有一个。</li>
 <li>集成测试不要复制production dependency graph，让production自己构造dependency graph，测试只替换side-effect boundary。</li>
 <li>mvn test不跑IT，确实是流程漏洞。</li>
+<li>IT红了多久？最早是从多 SDK 重构、公共配置抽离后开始失效；真正首次被完整 verify 捕获是在后续 strict-schema 修复阶段。也就是从37caac9持续到4e3aca8，最后用两行测试 wiring 修复结束。</li>
 <li>日常和CI到底应该跑什么？日常：<code>targeted tests/ mvn test</code>，pre-merge CI: <code>mvn clean verify</code>，可选nightly：<code>clean verify + repeated flaky-sensitive IT</code></li>
 </ol>
 <h1 id="收束"><a href="#收束" class="headerlink" title="收束"></a>收束</h1><p>这个bug反映了三层问题。表层是import配置问题-&gt; 中层是拓扑漂移-&gt; 深层是模块化边界。</p>
