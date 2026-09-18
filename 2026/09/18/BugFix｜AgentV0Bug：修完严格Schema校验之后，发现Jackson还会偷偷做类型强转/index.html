@@ -21,7 +21,7 @@
 
     <meta name="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转">
+<meta property="og:title" content="BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转">
 <meta property="og:url" content="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
@@ -37,10 +37,10 @@
 <link rel="canonical" href="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/","path":"2026/09/18/BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转/","title":"BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/","path":"2026/09/18/BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转/","title":"BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转 | 节点人生</title>
+<title>BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转 | 节点人生</title>
   
 
 
@@ -73,7 +73,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/"},"headline":"BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转","description":"之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。","datePublished":"2026-09-18T12:17:19.000Z","dateModified":"2026-09-18T12:17:19.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["AgentV0","Jackson"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/"},"headline":"BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转","description":"之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。","datePublished":"2026-09-18T12:17:19.000Z","dateModified":"2026-09-18T12:17:19.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["AgentV0","Jackson"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -233,12 +233,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转 | 节点人生">
+      <meta itemprop="name" content="BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转 | 节点人生">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BugFix｜AgentV0Bug：修完严格Schema校验之后，发现Jackson还会偷偷做类型强转
+          BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转
         </h1>
 
         <div class="post-meta-container">
