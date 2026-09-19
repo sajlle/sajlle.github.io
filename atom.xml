@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-19T20:40:06.000Z</updated>
+  <updated>2026-09-19T21:05:36.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="家庭尸检" scheme="https://sajlle.github.io/categories/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80/"/>
+    <category term="社区冲突" scheme="https://sajlle.github.io/categories/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80/%E7%A4%BE%E5%8C%BA%E5%86%B2%E7%AA%81/"/>
+    <category term="窗户" scheme="https://sajlle.github.io/tags/%E7%AA%97%E6%88%B7/"/>
+    <id>https://sajlle.github.io/2026/09/20/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%80%E6%89%87%E7%AA%97%E6%88%B7%EF%BC%8C%E6%80%8E%E4%B9%88%E6%88%90%E4%B8%BA%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E5%A4%96%E6%BA%A2%E5%88%B0%E7%A4%BE%E5%8C%BA%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/20/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%80%E6%89%87%E7%AA%97%E6%88%B7%EF%BC%8C%E6%80%8E%E4%B9%88%E6%88%90%E4%B8%BA%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E5%A4%96%E6%BA%A2%E5%88%B0%E7%A4%BE%E5%8C%BA%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%9F/"/>
+    <published>2026-09-19T21:05:36.000Z</published>
+    <summary>
+      <![CDATA[<p>声明：本文提到的社区指的是河南省济源市龙潭花园。</p>
+<p>我跟社区的冲突由来已久，主要是噪音问题。但有一个神奇的地方：我妈爹禁止我关卧室窗户。理由是：关窗也隔绝不了噪音；房间有甲醛，关窗对健康不利。</p>
+<p>前几天我买了甲醛试剂盒，测试结果显示正常。我拿给妈爹看：这可以关窗了吧？<br>他们没接茬，继续复读之前的几句话：不许关窗，为了你的健康，关窗对健康不利。</p>
+<p>刮风]]>
+    </summary>
+    <title>家庭尸检｜写写一扇窗户，怎么成为家庭冲突外溢到社区的东西？</title>
+    <updated>2026-09-19T21:05:36.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -525,22 +544,5 @@
     </summary>
     <title>日常记录｜发完博客之后，楼下女八卦我：「神经病～」</title>
     <updated>2026-09-10T09:20:11.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="iCloud" scheme="https://sajlle.github.io/tags/iCloud/"/>
-    <category term="Bug记录" scheme="https://sajlle.github.io/tags/Bug%E8%AE%B0%E5%BD%95/"/>
-    <id>https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%97%A8%E7%A6%81%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%8C%E5%8E%9F%E5%9B%A0%E6%98%AF%E5%95%A5%E5%91%A2%EF%BC%9F%E6%98%AFiCloud%E5%90%8C%E6%AD%A5%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%87%B4%E5%87%BA%E7%8E%B0%E9%9A%8F%E6%9C%BA%E7%9A%84NoClassDefFoundError/</id>
-    <link href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%97%A8%E7%A6%81%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%8C%E5%8E%9F%E5%9B%A0%E6%98%AF%E5%95%A5%E5%91%A2%EF%BC%9F%E6%98%AFiCloud%E5%90%8C%E6%AD%A5%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%87%B4%E5%87%BA%E7%8E%B0%E9%9A%8F%E6%9C%BA%E7%9A%84NoClassDefFoundError/"/>
-    <published>2026-09-10T03:46:35.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～<br>执行集成测试的时候，出现了5个Errors。几个类找不到。</p>
-<p>直接原因是Failsafe JVM 类加载异常。后续排查的时候，没有发现ExceptionInInitializerError，或者Could not initialize class，所以不是静态初始化失败。<br>然后检查Failsafe effective configuration，同样的配置再隔]]>
-    </summary>
-    <title>日常记录｜项目的门禁测试失败了，原因是啥呢？是iCloud同步工作目录，导致出现随机的NoClassDefFoundError</title>
-    <updated>2026-09-10T03:46:35.000Z</updated>
   </entry>
 </feed>
