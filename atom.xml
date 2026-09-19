@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-19T20:09:38.000Z</updated>
+  <updated>2026-09-19T20:40:06.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <id>https://sajlle.github.io/2026/09/20/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E5%82%BB%E5%AD%90/</id>
+    <link href="https://sajlle.github.io/2026/09/20/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E5%82%BB%E5%AD%90/"/>
+    <published>2026-09-19T20:40:06.000Z</published>
+    <summary>
+      <![CDATA[<p>声明：本社区指的是中国河南省济源市济渎大街和太行北路交叉口的小区龙潭花园。</p>
+<p>来写写为啥持续一年我被围猎，一点机制猜想。</p>
+<p>不是我多么越界，而是这个社区需要一个人当「坏人」，被捉弄取乐。从而持续的自发奖励这些行为。</p>
+<p>生活里本来就有怨气、无聊、挫败和互相监视 → 某个人因为显眼、不同、已有冲突或反应可见，被证明“拿她开涮成本不高” → 起哄能获得同伴反馈]]>
+    </summary>
+    <title>社区观察｜不是这个地方碰巧坏人多，而是一个靠共同嘲弄来维持秩序的群体，总得不断制造新的坏人</title>
+    <updated>2026-09-19T20:40:06.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -24,10 +40,10 @@
     <link href="https://sajlle.github.io/2026/09/20/%E6%A2%A6%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A4%9C%E9%86%92%E7%9D%A1%E4%B8%8D%E5%9B%9E%E5%8E%BB%E4%BA%86%EF%BC%8C%E6%88%91%E5%8E%BB%E5%86%99%E5%86%99%E6%A2%A6%E7%9B%B8%E5%85%B3/"/>
     <published>2026-09-19T20:09:38.000Z</published>
     <summary>
-      <![CDATA[<p>本来夜里3点起夜。<br>醒来之后还没开灯，楼下一声电驴响起。滴滴滴。我起来了，妈爹也已经起来准备摆摊。<br>二位没多久就回去了。</p>
+      <![CDATA[<p>声明：本社区指的是中国河南省济源市济渎大街和太行北路交叉口的小区龙潭花园。</p>
+<p>本来夜里3点起夜。<br>醒来之后还没开灯，楼下一声电驴响起。滴滴滴。我起来了，妈爹也已经起来准备摆摊。<br>二位没多久就回去了。</p>
 <p>我躺回床上。凌晨四点左右，又被楼下的汽车喇叭吵醒。<br>不得不再度起来，写博客。</p>
-<p>虽然我觉得写博客写社区噪音是件极其愚蠢的事情（笑）。但你看，夜里总有几个人喜欢摁喇叭，于是凌晨我就醒了，睡不回去，闲着也是闲着。</p>
-<p>我现]]>
+<p>虽然我觉得写博客写社区噪音是件极其愚蠢的事情（笑）。但你看]]>
     </summary>
     <title>社区噪音｜夜醒睡不回去了，我去写写博客，于是就有了本篇～</title>
     <updated>2026-09-19T20:09:38.000Z</updated>
@@ -524,25 +540,5 @@
     </summary>
     <title>日常记录｜项目的门禁测试失败了，原因是啥呢？是iCloud同步工作目录，导致出现随机的NoClassDefFoundError</title>
     <updated>2026-09-10T03:46:35.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="段子" scheme="https://sajlle.github.io/tags/%E6%AE%B5%E5%AD%90/"/>
-    <id>https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%80%BB%E7%AE%97%E6%8A%8A%E6%98%A8%E5%84%BF%E5%86%99%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%E8%B4%B4%E5%AE%8C%E4%BA%86/</id>
-    <link href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%80%BB%E7%AE%97%E6%8A%8A%E6%98%A8%E5%84%BF%E5%86%99%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%E8%B4%B4%E5%AE%8C%E4%BA%86/"/>
-    <published>2026-09-10T03:29:15.000Z</published>
-    <summary>
-      <![CDATA[<p>不确定写的咋样？</p>
-<p>我来解析一下四个段子。</p>
-<ol>
-<li>国际主义内裤悬案段子，写的是「精神股东真正拿到股票之后，会咋样？」人的认知盲区会引导人犯错</li>
-<li>波尔布特段子，写的是「幻想自己被欣赏，实际现实可能完全不是那样」，人的自恋导致的灾难</li>
-<li>ubi段子，写的是「人在不知道自己骂什么的时候，先把安全网骂没，再发现自己正好掉下去了」，人自己的]]>
-    </summary>
-    <title>日常记录｜总算把昨儿写的四个段子贴完了</title>
-    <updated>2026-09-10T03:29:15.000Z</updated>
   </entry>
 </feed>
