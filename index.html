@@ -611,6 +611,52 @@
 
 <p>全部被绕过去。这属于是把报警器拆了，不是修路子。</p>
 <h3 id="把-Optional-当兜底"><a href="#把-Optional-当兜底" class="headerlink" title="把 Optional 当兜底"></a>把 Optional 当兜底</h3><p>上面已经说过了，这会把「配置错误」伪装成「功能关闭」，隐藏部署错误。</p>
+<h2 id="为什么当初会手写-Import"><a href="#为什么当初会手写-Import" class="headerlink" title="为什么当初会手写 @Import"></a>为什么当初会手写 @Import</h2><p>回头看这个 bug，容易得出”手写 @Import 是坏习惯”的结论。但当初写成那样，动机是完全正当的：这个 IT 要验证 explanation pipeline，就必须指定用哪个 provider、必须不打付费 API、还得让上下文起得快一点。</p>
+<p>目标没错，错的是实现方式。为了隔离外部依赖，我把整个 dependency graph 重建了一遍，而不是在边界上替换。</p>
+<p><strong>隔离外部依赖，和重建依赖图，是两件事。前者只需要换掉边界，后者会复制一份必然过期的生产拓扑。</strong></p>
+<p>这里其实有三种做法，不是两种。之所以要把第二种也摆出来，是因为正是它的缺点，逼着大家去选第一种：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A. 手写窄 @Import</th>
+<th>B. 完整生产 context + 真外部依赖</th>
+<th>C. 生产装配入口 + 只 fake 边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>真实性</td>
+<td>低。装的是测试自己裁剪的拓扑，不是生产拓扑</td>
+<td>高，但代价是真连供应商</td>
+<td>高。拓扑与生产同源，只有边界被替换</td>
+</tr>
+<tr>
+<td>外部依赖</td>
+<td>已隔离</td>
+<td>需要真实 API key，会产生费用</td>
+<td>已隔离，fake server 在本机</td>
+</tr>
+<tr>
+<td>漂移风险</td>
+<td>高。生产重构后测试不会自动跟进</td>
+<td>无。生产变了测试自动跟着变</td>
+<td>无。同一个装配入口，改一处两边都变</td>
+</tr>
+<tr>
+<td>架构重构时要改几处</td>
+<td>每个手写 IT 各改一处</td>
+<td>0</td>
+<td>1 处（装配入口）</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>待测</td>
+<td>待测</td>
+<td>待测</td>
+</tr>
+</tbody></table>
+<p>本次踩的就是 A 的漂移风险那一格，而且证据是现成的：同一个 37caac9 revision 上，production 扫描根能把 LLM 子图完整装起来，手写窄上下文却缺 Bean——这就是 A 和 C 的差距被量出来的样子。</p>
+<p>B 在现实里基本不可用，所以真正的选择从来不是「隔离」还是「真实」，而是「在哪一层做隔离」。A 在配置层做，于是复制了拓扑；C 在边界层做，拓扑留给生产自己算。</p>
 <h2 id="防止复发"><a href="#防止复发" class="headerlink" title="防止复发"></a>防止复发</h2><p>第一条是原则：集成测试不要复制 production dependency graph。让 production 自己构造 dependency graph，测试只替换 side-effect boundary。</p>
 <p>具体做法：测试不再手挑 configuration 类，改 import 一个生产测试共用的 LLM 装配入口，只在 provider&#x2F;网络边界做替换。</p>
 <p>回归测试：加 wiring regression test，覆盖 AI disabled context 能起，以及 explanation context 下 PromptFactory 有且只有一个。</p>

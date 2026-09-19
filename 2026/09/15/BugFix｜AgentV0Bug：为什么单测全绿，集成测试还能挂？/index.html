@@ -170,7 +170,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">2.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AF-production-wiring-%E8%BF%98%E6%98%AF-test-wiring%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">是 production wiring 还是 test wiring？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text">根因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-%E4%B8%BA%E5%95%A5%E6%B2%A1%E6%9C%89%E5%85%9C%E5%BA%95%E5%91%A2%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">Optional 为啥没有兜底呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5-Gateway-%E5%8D%95%E6%B5%8B%E3%80%81Provider-selection-test%E3%80%81mvn-test-%E5%85%A8%E7%BB%BF%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">为啥 Gateway 单测、Provider selection test、mvn test 全绿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%B3%95%E5%92%8C%E9%94%99%E8%AF%AF%E4%BF%AE%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">修法和错误修法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired-required-false"><span class="nav-number">7.1.</span> <span class="nav-text">@Autowired(required&#x3D;false)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99-PromptFactory-%E9%9A%8F%E4%BE%BF%E5%86%8D%E5%8A%A0%E4%B8%80%E4%B8%AA-Component"><span class="nav-number">7.2.</span> <span class="nav-text">给 PromptFactory 随便再加一个 @Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-%E6%95%B4%E4%B8%AA-RefundCaseExplanationService"><span class="nav-number">7.3.</span> <span class="nav-text">Mock 整个 RefundCaseExplanationService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A-Optional-%E5%BD%93%E5%85%9C%E5%BA%95"><span class="nav-number">7.4.</span> <span class="nav-text">把 Optional 当兜底</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E5%A4%8D%E5%8F%91"><span class="nav-number">8.</span> <span class="nav-text">防止复发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E6%9D%9F"><span class="nav-number">9.</span> <span class="nav-text">收束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="nav-number">9.1.</span> <span class="nav-text">import 配置问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8B%93%E6%89%91%E5%92%8C%E7%94%9F%E4%BA%A7%E6%8B%93%E6%89%91%E6%BC%82%E7%A7%BB"><span class="nav-number">9.2.</span> <span class="nav-text">测试拓扑和生产拓扑漂移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-Provider-%E9%87%8D%E6%9E%84%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%85%AC%E5%85%B1-%E7%A7%81%E6%9C%89%E9%85%8D%E7%BD%AE%E8%BE%B9%E7%95%8C"><span class="nav-number">9.3.</span> <span class="nav-text">多 Provider 重构带来的公共&#x2F;私有配置边界</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">2.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AF-production-wiring-%E8%BF%98%E6%98%AF-test-wiring%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">是 production wiring 还是 test wiring？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text">根因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-%E4%B8%BA%E5%95%A5%E6%B2%A1%E6%9C%89%E5%85%9C%E5%BA%95%E5%91%A2%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">Optional 为啥没有兜底呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5-Gateway-%E5%8D%95%E6%B5%8B%E3%80%81Provider-selection-test%E3%80%81mvn-test-%E5%85%A8%E7%BB%BF%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">为啥 Gateway 单测、Provider selection test、mvn test 全绿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%B3%95%E5%92%8C%E9%94%99%E8%AF%AF%E4%BF%AE%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">修法和错误修法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired-required-false"><span class="nav-number">7.1.</span> <span class="nav-text">@Autowired(required&#x3D;false)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99-PromptFactory-%E9%9A%8F%E4%BE%BF%E5%86%8D%E5%8A%A0%E4%B8%80%E4%B8%AA-Component"><span class="nav-number">7.2.</span> <span class="nav-text">给 PromptFactory 随便再加一个 @Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-%E6%95%B4%E4%B8%AA-RefundCaseExplanationService"><span class="nav-number">7.3.</span> <span class="nav-text">Mock 整个 RefundCaseExplanationService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A-Optional-%E5%BD%93%E5%85%9C%E5%BA%95"><span class="nav-number">7.4.</span> <span class="nav-text">把 Optional 当兜底</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BD%93%E5%88%9D%E4%BC%9A%E6%89%8B%E5%86%99-Import"><span class="nav-number">8.</span> <span class="nav-text">为什么当初会手写 @Import</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E5%A4%8D%E5%8F%91"><span class="nav-number">9.</span> <span class="nav-text">防止复发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E6%9D%9F"><span class="nav-number">10.</span> <span class="nav-text">收束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="nav-number">10.1.</span> <span class="nav-text">import 配置问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8B%93%E6%89%91%E5%92%8C%E7%94%9F%E4%BA%A7%E6%8B%93%E6%89%91%E6%BC%82%E7%A7%BB"><span class="nav-number">10.2.</span> <span class="nav-text">测试拓扑和生产拓扑漂移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-Provider-%E9%87%8D%E6%9E%84%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%85%AC%E5%85%B1-%E7%A7%81%E6%9C%89%E9%85%8D%E7%BD%AE%E8%BE%B9%E7%95%8C"><span class="nav-number">10.3.</span> <span class="nav-text">多 Provider 重构带来的公共&#x2F;私有配置边界</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -399,6 +399,52 @@
 
 <p>全部被绕过去。这属于是把报警器拆了，不是修路子。</p>
 <h3 id="把-Optional-当兜底"><a href="#把-Optional-当兜底" class="headerlink" title="把 Optional 当兜底"></a>把 Optional 当兜底</h3><p>上面已经说过了，这会把「配置错误」伪装成「功能关闭」，隐藏部署错误。</p>
+<h2 id="为什么当初会手写-Import"><a href="#为什么当初会手写-Import" class="headerlink" title="为什么当初会手写 @Import"></a>为什么当初会手写 @Import</h2><p>回头看这个 bug，容易得出”手写 @Import 是坏习惯”的结论。但当初写成那样，动机是完全正当的：这个 IT 要验证 explanation pipeline，就必须指定用哪个 provider、必须不打付费 API、还得让上下文起得快一点。</p>
+<p>目标没错，错的是实现方式。为了隔离外部依赖，我把整个 dependency graph 重建了一遍，而不是在边界上替换。</p>
+<p><strong>隔离外部依赖，和重建依赖图，是两件事。前者只需要换掉边界，后者会复制一份必然过期的生产拓扑。</strong></p>
+<p>这里其实有三种做法，不是两种。之所以要把第二种也摆出来，是因为正是它的缺点，逼着大家去选第一种：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A. 手写窄 @Import</th>
+<th>B. 完整生产 context + 真外部依赖</th>
+<th>C. 生产装配入口 + 只 fake 边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>真实性</td>
+<td>低。装的是测试自己裁剪的拓扑，不是生产拓扑</td>
+<td>高，但代价是真连供应商</td>
+<td>高。拓扑与生产同源，只有边界被替换</td>
+</tr>
+<tr>
+<td>外部依赖</td>
+<td>已隔离</td>
+<td>需要真实 API key，会产生费用</td>
+<td>已隔离，fake server 在本机</td>
+</tr>
+<tr>
+<td>漂移风险</td>
+<td>高。生产重构后测试不会自动跟进</td>
+<td>无。生产变了测试自动跟着变</td>
+<td>无。同一个装配入口，改一处两边都变</td>
+</tr>
+<tr>
+<td>架构重构时要改几处</td>
+<td>每个手写 IT 各改一处</td>
+<td>0</td>
+<td>1 处（装配入口）</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>待测</td>
+<td>待测</td>
+<td>待测</td>
+</tr>
+</tbody></table>
+<p>本次踩的就是 A 的漂移风险那一格，而且证据是现成的：同一个 37caac9 revision 上，production 扫描根能把 LLM 子图完整装起来，手写窄上下文却缺 Bean——这就是 A 和 C 的差距被量出来的样子。</p>
+<p>B 在现实里基本不可用，所以真正的选择从来不是「隔离」还是「真实」，而是「在哪一层做隔离」。A 在配置层做，于是复制了拓扑；C 在边界层做，拓扑留给生产自己算。</p>
 <h2 id="防止复发"><a href="#防止复发" class="headerlink" title="防止复发"></a>防止复发</h2><p>第一条是原则：集成测试不要复制 production dependency graph。让 production 自己构造 dependency graph，测试只替换 side-effect boundary。</p>
 <p>具体做法：测试不再手挑 configuration 类，改 import 一个生产测试共用的 LLM 装配入口，只在 provider&#x2F;网络边界做替换。</p>
 <p>回归测试：加 wiring regression test，覆盖 AI disabled context 能起，以及 explanation context 下 PromptFactory 有且只有一个。</p>
