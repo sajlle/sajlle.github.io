@@ -19,33 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ 发表于 2026-09-15 18:57:26更新于 2026-09-15 18:57:26分类于 BugFix TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 p">
+    <meta name="description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="节点人生">
+<meta property="og:title" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？">
 <meta property="og:url" content="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ 发表于 2026-09-15 18:57:26更新于 2026-09-15 18:57:26分类于 BugFix TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 p">
+<meta property="og:description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-09-15T10:57:26.946Z">
-<meta property="article:modified_time" content="2026-09-15T10:57:26.946Z">
+<meta property="article:published_time" content="2026-09-15T10:57:26.000Z">
+<meta property="article:modified_time" content="2026-09-15T10:57:26.000Z">
 <meta property="article:author" content="之瑞">
-<meta property="article:tag" content="AI Agent">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="RabbitMQ">
-<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="AgentV0">
 <meta property="article:tag" content="Spring Boot">
-<meta property="article:tag" content="个人成长">
-<meta property="article:tag" content="技术复盘">
 <meta name="twitter:card" content="summary">
 
 
 <link rel="canonical" href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/","path":"2026/09/15/BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？/","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/","path":"2026/09/15/BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？/","title":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title> | 节点人生</title>
+<title>｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生</title>
   
 
 
@@ -78,7 +73,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"},"headline":"","description":"BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ 发表于 2026-09-15 18:57:26更新于 2026-09-15 18:57:26分类于 BugFix TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 …","datePublished":"2026-09-15T10:57:26.946Z","dateModified":"2026-09-15T10:57:26.946Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"},"headline":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？","description":"TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结…","datePublished":"2026-09-15T10:57:26.000Z","dateModified":"2026-09-15T10:57:26.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["AgentV0","Spring Boot"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -196,7 +191,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">415</span>
+        <span class="site-state-item-count">416</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -239,12 +234,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="name" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          ｜AgentV0Bug：为什么单测全绿，集成测试还能挂？
         </h1>
 
         <div class="post-meta-container">
@@ -264,6 +259,15 @@
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2026-09-15 18:57:26" itemprop="dateModified" datetime="2026-09-15T18:57:26+08:00">2026-09-15 18:57:26</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -274,9 +278,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？</p>
-<p>发表于 2026-09-15 18:57:26<br>更新于 2026-09-15 18:57:26<br>分类于 BugFix</p>
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
 <p>最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。</p>
 <p>修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。</p>
 <p>总结：测试上下文和生产上下文并不天然等价。</p>
@@ -489,6 +491,10 @@
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/AgentV0/" rel="tag"># AgentV0</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+          </div>
 
         
 
