@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？ 上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？然后我又问它：那未知区为啥非得是igt，不能是lti？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。于是一路聊下去，就聊出了这篇算法｜今天上午写215题三路QuickSel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？">
+<meta property="og:url" content="https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？ 上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？然后我又问它：那未知区为啥非得是igt，不能是lti？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。于是一路聊下去，就聊出了这篇算法｜今天上午写215题三路QuickSel">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-20T12:25:38.000Z">
+<meta property="article:modified_time" content="2026-09-20T12:25:38.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="抽象层级">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/","path":"2026/09/20/夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？/","title":"夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/"},"headline":"夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？","description":"今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？ 上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？然后我又问它：那未知区为啥非得是igt，不能是lti？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。于是一路聊下去，就聊出了这篇算法｜今天上午写215题三路QuickSe…","datePublished":"2026-09-20T12:25:38.000Z","dateModified":"2026-09-20T12:25:38.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["抽象层级"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-headphones-2026.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">423</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-20 20:25:38" itemprop="dateCreated datePublished" datetime="2026-09-20T20:25:38+08:00">2026-09-20 20:25:38</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-20 20:25:38" itemprop="dateModified" datetime="2026-09-20T20:25:38+08:00">2026-09-20 20:25:38</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%9C%E8%81%8A/" itemprop="url" rel="index"><span itemprop="name">夜聊</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？</p>
+<p>上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？<br>然后我又问它：那未知区为啥非得是i<del>gt，不能是lt</del>i？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。<br>于是一路聊下去，就聊出了这篇<a href="https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/">算法｜今天上午写215题三路QuickSelect，一点总结</a></p>
+<p>这时候我意识到，好问题不一定来自专业模式。如果我当时要问一个「显得专业」「只有专业人士才能问」的问题，我大概不会问这个问题。因为它太像菜鸟抬杠了：书上都这么写了，代码也跑通了，你还问凭什么？反而是我题目做完了，开始跟GPT随口瞎扯，这个时候，我脑子里那个害怕显得不专业的过滤器关掉了。于是……有趣的问题就浮上来了。</p>
+<p>当然，过滤器能关掉，还有一个很现实的前提：我得有一个可以安全胡搅蛮缠的对象。如果我问「未知区凭什么必须是i~gt」，对面板着脸回一句「这都不知道？」，那以后我大概就不问了。很多真正有意思的问题，一开始长得根本不像好问题。它可能只是「凭什么？」「我偏要换呢？」「不能反着来吗？」，聊几轮以后才发现：哦，原来我问到的是循环不变量。</p>
+<p>不过，光放松还不够。能问出这个问题，也不是凭空问的。问之前，我已经给问题做了一层抽象。刚开始看三路partition的时候，脑子里全是<code>i</code>为什么加一、<code>gt</code>为什么减一、为什么swap以后<code>i</code>不动。等我把quick select当成是「把unknown区搬空的分拣游戏」，这些细节就不再占着脑子，我才腾出空间想：「既然是分拣游戏，那unknown放在哪重要吗？」</p>
+<p>这就扣上题了。我问这个问题的时候，没有循环不变量的概念，但还是摸到了这个边，怎么做到的呢？<br>我想，是因为我做了一层足够好的抽象。如果不抽象，我就会陷在代码的各种循环细节里；如果抽象得太空，把quick select讲成是分治，那就又丢失结构了。<br>一个恰到好处的抽象，让我能踩着已有结构，用我自己的直觉，往上再问一层我根本没想过要问的东西。</p>
+<p>这个抽象过程，跟我做社会学分析的时候，也一脉相承。<br>我做分析的时候，不会盯着每一句话分析，我会找资源、角色、规则、成本如何流动。就跟写算法的时候不死盯着<code>i++</code>、<code>gt--</code>这种细节，而是先看区域怎么变化。</p>
+<p>以前总听人说「抽象能力可以迁移」，但我一直不太知道它到底怎么迁移。这次算是看见了一个具体的例子：我不是忽然获得了什么神秘的算法直觉，而是代码终于被我压缩到足够小，于是我原来那套结构判断能力可以进来了。</p>
+<p>那问题来了，什么是足够好的抽象呢？<br>删掉不承重的细节，留下生成机制，这就是好的抽象。</p>
+<p>这话听起来比较抽象，我拿小说来举个例子。写小说跟做抽象不完全是一回事，但道理很像。<br>之前我给GPT炫技，展示我怎么写战争给人带来的伤害。</p>
+<p>我写：</p>
+<blockquote>
+<p>黄昏。脏地。来了一群陌生人。妈妈对孩子说了一句什么话，孩子没听清。再抬头，妈妈就被带走了。孩子老得走不动的时候，还在想，妈妈当初说的那句话，到底是什么？</p>
+</blockquote>
+<p>这里用一句听不清、而且再也无法复原的话，压出来的空，来承载战争带来的情感创伤。<br>如果再加十个细节，风往哪边吹，士兵制服什么颜色，地面什么碎石，只要不改变「失去如何留下空洞」这个结构，就是噪音。</p>
+<p>那坏例子是什么呢？</p>
+<blockquote>
+<p>战争毁了这个孩子的一生，带走了他的妈妈。那可是他唯一的妈妈。</p>
+</blockquote>
+<p>没错，但是没有信息增量。</p>
+<p>再举个例子。昆德拉写《不能承受的生命之轻》，特蕾莎来到托马斯那里，最让我记住的是一个细节：她拎着一只笨重的箱子。<br>只这一个细节，就够了。为什么？因为它是承重细节。一个细节写了很多东西：</p>
+<ul>
+<li>特蕾莎是带着整个人生来的。</li>
+<li>她的到来不是轻盈的偶遇，而是有重量、有依附、有命运感的。</li>
+<li>托马斯面对的也不只是一个女人来了，而是一整个生活世界突然闯入了他的房间。</li>
+</ul>
+<p>所以箱子的花纹、材质、拉链是什么牌子，完全不重要。这些细节没有增加结构，只增加了噪音。</p>
+<p>所以成熟的表达，不是知道该加多少细节，而是知道哪些细节不能删。如何做到这一点？那就是做出足够好的抽象。</p>
+<p>放到算法里，「三路快排采用分治策略」，是空话。「不断把未知区里的东西扔出去，直到未知区被搬空」，这保留了机制，可以让你凭借直觉往上再去跳，也能往下推回来：为什么会有几个区域？为什么unknown会越来越小？为什么有些交换以后，当前位置还不能直接跳过去？</p>
+<p>所以检验一个抽象好不好，可以问一句：删掉细节以后，还能不能重新推出关键细节？<br>能，说明这个抽象还有东西。<br>不能，就只剩一句正确废话。</p>
+<p>之前用豆包的时候，弹出来2个回答让我选哪个最好，我那时候就开始想，什么是好的AI回答？<br>现在我能给出答案了：抽象得足够准，就是好的回答。而足够准的抽象，是删掉细节之后，仍然保留承重结构。</p>
+<p>这也能说明，为啥「元问题问得准」有价值。因为好的元问题其实是：找到更高一层，但没有丢掉生成机制的抽象。它不只是问「为什么这里<code>i</code>不动」，而是往上问一层「这个算法每一轮到底必须维持什么东西」，然后很多细节问题都可以从这里重新生成。</p>
+<p>那如何生产更多好的问题？以及如何检测自己问对了问题？<br>很多人说，要多问AI：我的盲点是什么？</p>
+<p>但每次都这么问，会把聊天聊死。刚冒出一个类比，马上问反例；刚准备胡扯两句，先证明自己有没有资格胡扯。久了你再也不想打开AI问问题了。</p>
+<p>我的体感是：探索问题的时候先瞎扯，等一个判断真的成型，准备拿去相信、使用、写进博客了，再找AI纠偏。比如：哪里可能错？哪些地方不确定？有没有反面案例？</p>
+<p>简单说就是：探索阶段优化生成率，结论阶段优化错误率。</p>
+<p>外面下雨。<br>楼上从窗户往下拉线给电驴充电，充电头掉下来，「咚」地砸了一下我的窗台。<br>我确认不是有人敲窗。破案。<br>又坐回来继续跟 GPT 瞎扯。</p>
+<p>很多东西大概就是这么想出来的。<br>不是「今天我要学习抽象思维」。<br>而是先问一句：</p>
+<p>凭什么未知区非得在这里？</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%BD%E8%B1%A1%E5%B1%82%E7%BA%A7/" rel="tag"># 抽象层级</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/" rel="prev" title="算法｜今天上午写215题三路QuickSelect，一点总结">
+                  <i class="fa fa-angle-left"></i> 算法｜今天上午写215题三路QuickSelect，一点总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
