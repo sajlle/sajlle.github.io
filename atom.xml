@@ -11,7 +11,30 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-20T00:55:38.000Z</updated>
+  <updated>2026-09-20T03:26:07.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="算法" scheme="https://sajlle.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    <category term="Quick Select" scheme="https://sajlle.github.io/tags/Quick-Select/"/>
+    <id>https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/</id>
+    <link href="https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <published>2026-09-20T03:26:07.000Z</published>
+    <summary>
+      <![CDATA[<p>基本思路就是把数组划分为四个区间：</p>
+<ul>
+<li>low ~ lt-1: &lt; pivot</li>
+<li>lt ~ i-1: &#x3D; pivot</li>
+<li>i ~ gt: 未知区</li>
+<li>gt+1 ~ high: &gt; pivot</li>
+</ul>
+<p>然后保证未知区一定缩水：</p>
+<figure class="highlight m]]>
+    </summary>
+    <title>算法｜今天上午写215题三路QuickSelect，一点总结</title>
+    <updated>2026-09-20T03:26:07.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -524,23 +547,5 @@
     </summary>
     <title>日常记录｜Agent V0联调的事故复盘～</title>
     <updated>2026-09-11T07:50:58.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="API测试" scheme="https://sajlle.github.io/tags/API%E6%B5%8B%E8%AF%95/"/>
-    <id>https://sajlle.github.io/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/"/>
-    <published>2026-09-11T07:36:22.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～</p>
-<p>昨儿审了几千行代码 + 写了6篇博客，后续大半夜的让WorkBuddy给我把博客markdown排版一下。晚上11点才睡。<br>生产队的驴也不能这么用呀。</p>
-<p>于是今天继续降速。今儿就接API做测试，写文档。<br>边做测试，边想，DeepSeek真有价格优势呀～（笑）</p>
-<p>然后打算再接一个谷歌的API，毕竟每天有免费的额度。<br>目前我这边项目]]>
-    </summary>
-    <title>日常记录｜今天给Agent接了真实API做测试，冒烟测试写完了～</title>
-    <updated>2026-09-11T07:36:22.000Z</updated>
   </entry>
 </feed>

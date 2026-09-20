@@ -183,18 +183,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">343</span>
+          <span class="site-state-item-count">344</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-count">92</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">421</span>
+        <span class="site-state-item-count">422</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -214,6 +214,278 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/" class="post-title-link" itemprop="url">｜AgentV0Bug：为什么单测全绿，集成测试还能挂？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-15 18:57:26" itemprop="dateCreated datePublished" datetime="2026-09-15T18:57:26+08:00">2026-09-15 18:57:26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-15 18:57:26" itemprop="dateModified" datetime="2026-09-15T18:57:26+08:00">2026-09-15 18:57:26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
+<p>最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。</p>
+<p>修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。</p>
+<p>总结：测试上下文和生产上下文并不天然等价。</p>
+<h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>IT 稳定 5&#x2F;5 失败，单独跑也挂，所以不是 flaky；</p>
+<p>报错是 UnsatisfiedDependencyException 包了 NoSuchBeanDefinitionException。</p>
+<p>此时单测全绿，mvn test 全绿。</p>
+<h2 id="是-production-wiring-还是-test-wiring？"><a href="#是-production-wiring-还是-test-wiring？" class="headerlink" title="是 production wiring 还是 test wiring？"></a>是 production wiring 还是 test wiring？</h2><p>一开始先不预设是测试的问题，先追完整的依赖链条，看是 production wiring 还是 test wiring？</p>
+<p>有 2 个假设：</p>
+<ul>
+<li>假设 1：production-environment context 缺 bean 导致报错。</li>
+<li>假设 2：production context 正常，但集成测试配置缺 bean，导致测试失败。</li>
+</ul>
+<p>于是我设计了两个 case，验证这两个假设：</p>
+<ul>
+<li>caseA 验证应用在没有开启 AI Explanation 的时候，能正常启动。说明 deterministic core 没有被 AI 配置污染。但不能排除 AI-enabled production wiring 有问题。</li>
+<li>caseB 验证开启 AI Explanation 的时候，当前真实调用链能成功装配。如果 production-equivalent context 本身也缺 bean，那这就是 production wiring defect，假设 1 成立。反之则是假设 2 成立。</li>
+</ul>
+<p>于是我给 Codex 下指令，让它执行命令：</p>
+<ol>
+<li>先追踪完整依赖链条，读取完整的 Spring context failure，明确 constructor 依赖哪个 bean，最终要求 explanationPromptFactory，为什么当前的 ApplicationContext 没有注册它。先汇报实际的 dependency chain，不先改代码。</li>
+<li>分别验证 caseA 和 caseB：不用真实 API key，不调用真实互联网，用测试配置或 fake provider。如果 production-equivalent context 本身也缺 bean，那就是 production wiring defect，不许只修测试。</li>
+<li>如果仅 TestConfiguration 缺乏 bean，也就是 production context 正常，但是 RefundCaseExplanationControllerIT 因为自己的 @Import&#x2F;@TestConfiguration 替换 provider 之后漏掉了 deterministic prompt factory，则只修装配测试。优先注册真实的 explanationPromptFactory，因为 prompt factory 是纯确定性组件，没必要 mock。不许为了让 context 绿了就把<ul>
+<li>production dependency 改成 optional</li>
+<li>使用 @Autowired(required&#x3D;false)</li>
+<li>给整个 application 加宽泛的 component scan</li>
+<li>mock 掉 RefundCaseExplanationService</li>
+<li>mock 掉 deterministic diagnosis chain</li>
+</ul>
+</li>
+</ol>
+<h2 id="根因"><a href="#根因" class="headerlink" title="根因"></a>根因</h2><p>真实的调用链是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RefundCaseExplanationController</span><br><span class="line">-&gt; RefundCaseExplanationService</span><br><span class="line">-&gt; Optional&lt;LlmReasoner&gt;</span><br><span class="line">-&gt; OpenAiLlmReasoner</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br></pre></td></tr></table></figure>
+
+<p>重构之前是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OpenAI configuration ≈ 整个AI configuration</span><br></pre></td></tr></table></figure>
+
+<p>后来为了多 SDK&#x2F;多 provider，把公共逻辑抽出去了，Configuration 包含 LlmCommonConfiguration 和 OpenAiLlmConfiguration，也就是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LlmCommonConfiguration</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br><span class="line"></span><br><span class="line">OpenAiLlmConfiguration</span><br><span class="line">-&gt; OpenAiLlmReasoner</span><br><span class="line"></span><br><span class="line">Anthropic...</span><br></pre></td></tr></table></figure>
+
+<p>所以生产环境的 component scan 会把二者都扫描进来。</p>
+<p>但是测试手写的 @Import(OpenAiLlmConfiguration) 只能拿到 OpenAiLlmConfiguration。</p>
+<p>这就 Bug 了。</p>
+<p>关于这点，证据如下。</p>
+<p>caseA 结果：</p>
+<ul>
+<li>OpenAiLlmConfigurationTest：无 AI 配置时 context 正常启动，不创建 provider Bean。</li>
+<li>RefundCaseControllerIT：5&#x2F;5，通过真实 HTTP → controller → deterministic core 链路验证 &#x2F;diagnose 可用。</li>
+</ul>
+<p>这条结果验证了 AI disabled 的时候，deterministic core 独立成立，防止 explanation 配置反向污染 &#x2F;diagnose。</p>
+<p>caseB 结果。这里要先说清楚一件事：修复后的 IT 跑绿，只能证明「测试 wiring 修好后能跑」，不能反推 production 在 37caac9 时原本就是好的。所以我补做了一次历史 revision 验证：</p>
+<ul>
+<li>Revision：37caac9b2121f3c8662bf0272189a204e5c9bf99</li>
+<li>使用 production 的扫描根 com.coupon，扫描真实的 LlmCommonConfiguration 和 OpenAiLlmConfiguration</li>
+<li>AI enabled，使用测试 key 和不可访问的本地 base URL，不调用供应商</li>
+<li>没有导入修复后的 RefundCaseExplanationControllerIT</li>
+<li>明确断言：context 启动成功、ExplanationPromptFactory 恰好一个、LlmReasoner 恰好一个</li>
+</ul>
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HistoricalProductionLlmScanTest</span><br><span class="line">Tests run: 1, Failures: 0, Errors: 0</span><br><span class="line">BUILD SUCCESS</span><br></pre></td></tr></table></figure>
+
+<p>临时验证代码只存在于 37caac9 的隔离快照里，没有修改当前工作树。</p>
+<p>于是在同一个 revision 上形成了真正的 A&#x2F;B 对照：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">production-package-scan context</span><br><span class="line">→ LlmCommonConfiguration 被扫描</span><br><span class="line">→ ExplanationPromptFactory 唯一</span><br><span class="line">→ LlmReasoner 成功创建</span><br><span class="line">→ PASS</span><br><span class="line"></span><br><span class="line">RefundCaseExplanationControllerIT 手写窄上下文</span><br><span class="line">→ 只 @Import OpenAiLlmConfiguration</span><br><span class="line">→ 没有扫描/导入 LlmCommonConfiguration</span><br><span class="line">→ 缺 ExplanationPromptFactory</span><br><span class="line">→ 5/5 context error</span><br></pre></td></tr></table></figure>
+
+<p>证据边界也要说清楚：这证明的是与本问题直接相关的 LLM Bean 装配子图，不等于在该历史 revision 上完整启动了包含 MySQL、Redis、RabbitMQ、调度器的整个 CouponApplication。</p>
+<p>两个 case 合起来，可以确定坏的是 test wiring drift，而不是 production wiring defect。</p>
+<h2 id="Optional-为啥没有兜底呢？"><a href="#Optional-为啥没有兜底呢？" class="headerlink" title="Optional 为啥没有兜底呢？"></a>Optional 为啥没有兜底呢？</h2><p>因为 Optional&lt;T&gt; 能处理的是「0 个 T -&gt; Optional.empty()」，处理不了「有一个 T 是候选，但这个 T 是坏的，创建失败」。</p>
+<p>如果用 Optional 来修，会扭曲架构语义。我这边原本架构是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AI disabled</span><br><span class="line">-&gt; 没有LlmReasoner</span><br><span class="line">-&gt; /diagnose 正常</span><br><span class="line"></span><br><span class="line">AI enabled</span><br><span class="line">-&gt; LlmReasoner 必须完整可创建</span><br><span class="line">-&gt; 配置错误就应该启动失败</span><br></pre></td></tr></table></figure>
+
+<p>而不是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AI enabled但是配置失败</span><br><span class="line">-&gt; 算了，当AI disabled吧</span><br></pre></td></tr></table></figure>
+
+<p>后者会隐藏部署错误。</p>
+<p>所以，Optional 允许缺席，但不允许失败。</p>
+<h2 id="为啥-Gateway-单测、Provider-selection-test、mvn-test-全绿？"><a href="#为啥-Gateway-单测、Provider-selection-test、mvn-test-全绿？" class="headerlink" title="为啥 Gateway 单测、Provider selection test、mvn test 全绿？"></a>为啥 Gateway 单测、Provider selection test、mvn test 全绿？</h2><p>因为测试层级不同。</p>
+<p>Gateway 单测，大概类似 new SdkCompatChatGateway(…)，对象直接 new。它能验证：</p>
+<ul>
+<li>JSON parsing</li>
+<li>strict schema</li>
+<li>finish reason</li>
+<li>coercion</li>
+<li>malformed response</li>
+</ul>
+<p>但它根本没问 Spring：你能不能把整条 &#x2F;explain 依赖装配起来。所以看不到 bean 丢失。</p>
+<p>那为啥 Provider selection test 绿了呢？因为这类测试已经显式地 import 了 LlmCommonConfiguration，所以它也是绿的。</p>
+<p>为啥普通的 mvn test 也绿呢？因为普通的 mvn test 的时候，Failsafe 的 *IT 不执行。所以单元测试全绿，并不代表整个 Spring HTTP integration context 能启动。直到 mvn verify 跑到 RefundCaseExplanationControllerIT，才第一次真正走了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Spring Context</span><br><span class="line">-&gt; Controller</span><br><span class="line">-&gt; Service</span><br><span class="line">-&gt; Provider Bean</span><br><span class="line">-&gt; PromptFactory</span><br></pre></td></tr></table></figure>
+
+<p>所以炸出来了。</p>
+<p>三个测试都绿了，是真的。但没有一个在回答整条 &#x2F;explain 能不能被 Spring 装起来。</p>
+<h2 id="修法和错误修法"><a href="#修法和错误修法" class="headerlink" title="修法和错误修法"></a>修法和错误修法</h2><p>最终改动是两行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;</span></span><br><span class="line"><span class="meta">        LlmCommonConfiguration.class,   // ← 补这一行</span></span><br><span class="line"><span class="meta">        OpenAiLlmConfiguration.class,</span></span><br><span class="line"><span class="meta">        ...</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么只动测试不动生产？因为上面 caseA&#x2F;caseB 已经证明了 production-equivalent context 能完整装配，坏的是测试自己裁剪过的 context。生产 wiring 没坏，就不该为了让测试绿而去改生产。</p>
+<p>验收结果。先是修复后的 IT，<code>RefundCaseExplanationControllerIT#normalCaseShouldFlowFromMysqlThroughRealSdkHttpAdapterToExplanation</code>：</p>
+<ul>
+<li>通过 MockMvc 调用真实 &#x2F;explain Controller。</li>
+<li>真实 RefundCaseExplanationService、真实 deterministic diagnosis 链路、真实 OpenAI SDK adapter 全部参与。</li>
+<li>base-url 被替换成本机 Fake Server，Fake Server 明确监听 &#x2F;v1&#x2F;responses，未调用付费 API。</li>
+</ul>
+<p>这条 IT 本身没有单独写 <code>assertThat(context).hasSingleBean(ExplanationPromptFactory.class);</code>，它对唯一性的证明是间接的：openAiLlmReasoner 的必选参数就是 ExplanationPromptFactory，Bean 为 0 个或多个时 context 都起不来，5&#x2F;5 通过说明解析到了唯一候选。唯一性的直接断言在上面 caseB 的历史验证里。</p>
+<p>然后是两次 mvn clean verify，两次之间不改文件：</p>
+<ul>
+<li>第一次：BUILD SUCCESS，耗时 1:14</li>
+<li>第二次：BUILD SUCCESS，耗时 1:22</li>
+<li>第二次报告汇总：Surefire 341&#x2F;341、Failsafe 41&#x2F;41，0 failures、0 errors、0 skipped</li>
+</ul>
+<p>下面是几个不该用的修法。</p>
+<h3 id="Autowired-required-false"><a href="#Autowired-required-false" class="headerlink" title="@Autowired(required&#x3D;false)"></a>@Autowired(required&#x3D;false)</h3><p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired(required=false)</span></span><br><span class="line"><span class="keyword">private</span> ExplanationPromptFactory promptFactory;</span><br></pre></td></tr></table></figure>
+
+<p>这只是把启动时报错，改成了运行到这一行才 NPE&#x2F;fallback。甚至更糟糕，因为 PromptFactory 明明是依赖必须，就应该在启动 provider 的时候明确存在。</p>
+<h3 id="给-PromptFactory-随便再加一个-Component"><a href="#给-PromptFactory-随便再加一个-Component" class="headerlink" title="给 PromptFactory 随便再加一个 @Component"></a>给 PromptFactory 随便再加一个 @Component</h3><p>生产本来已经是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LlmCommonConfiguration -&gt; Bean</span><br></pre></td></tr></table></figure>
+
+<p>再加 @Component，很可能以后直接得到 NoUniqueBeanDefinitionException，那就从缺一个，变成多两个。</p>
+<h3 id="Mock-整个-RefundCaseExplanationService"><a href="#Mock-整个-RefundCaseExplanationService" class="headerlink" title="Mock 整个 RefundCaseExplanationService"></a>Mock 整个 RefundCaseExplanationService</h3><p>这样 ControllerIT 可绿了：HTTP -&gt; mocked service。但真正想验证的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Controller</span><br><span class="line">-&gt; ExplanationService</span><br><span class="line">-&gt; deterministic diagnosis</span><br><span class="line">-&gt; provider adapter</span><br><span class="line">-&gt; fake network</span><br></pre></td></tr></table></figure>
+
+<p>全部被绕过去。这属于是把报警器拆了，不是修路子。</p>
+<h3 id="把-Optional-当兜底"><a href="#把-Optional-当兜底" class="headerlink" title="把 Optional 当兜底"></a>把 Optional 当兜底</h3><p>上面已经说过了，这会把「配置错误」伪装成「功能关闭」，隐藏部署错误。</p>
+<h2 id="为什么当初会手写-Import"><a href="#为什么当初会手写-Import" class="headerlink" title="为什么当初会手写 @Import"></a>为什么当初会手写 @Import</h2><p>回头看这个 bug，容易得出”手写 @Import 是坏习惯”的结论。但当初写成那样，动机是完全正当的：这个 IT 要验证 explanation pipeline，就必须指定用哪个 provider、必须不打付费 API、还得让上下文起得快一点。</p>
+<p>目标没错，错的是实现方式。为了隔离外部依赖，我把整个 dependency graph 重建了一遍，而不是在边界上替换。</p>
+<p><strong>隔离外部依赖，和重建依赖图，是两件事。前者只需要换掉边界，后者会复制一份必然过期的生产拓扑。</strong></p>
+<p>这里其实有三种做法，不是两种。之所以要把第二种也摆出来，是因为正是它的缺点，逼着大家去选第一种：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A. 手写窄 @Import</th>
+<th>B. 完整生产 context + 真外部依赖</th>
+<th>C. 生产装配入口 + 只 fake 边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>真实性</td>
+<td>低。装的是测试自己裁剪的拓扑，不是生产拓扑</td>
+<td>高，但代价是真连供应商</td>
+<td>高。拓扑与生产同源，只有边界被替换</td>
+</tr>
+<tr>
+<td>外部依赖</td>
+<td>已隔离</td>
+<td>需要真实 API key，会产生费用</td>
+<td>已隔离，fake server 在本机</td>
+</tr>
+<tr>
+<td>漂移风险</td>
+<td>高。生产重构后测试不会自动跟进</td>
+<td>无。生产变了测试自动跟着变</td>
+<td>无。同一个装配入口，改一处两边都变</td>
+</tr>
+<tr>
+<td>架构重构时要改几处</td>
+<td>每个手写 IT 各改一处</td>
+<td>0</td>
+<td>1 处（装配入口）</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>待测</td>
+<td>待测</td>
+<td>待测</td>
+</tr>
+</tbody></table>
+<p>本次踩的就是 A 的漂移风险那一格，而且证据是现成的：同一个 37caac9 revision 上，production 扫描根能把 LLM 子图完整装起来，手写窄上下文却缺 Bean——这就是 A 和 C 的差距被量出来的样子。</p>
+<p>B 在现实里基本不可用，所以真正的选择从来不是「隔离」还是「真实」，而是「在哪一层做隔离」。A 在配置层做，于是复制了拓扑；C 在边界层做，拓扑留给生产自己算。</p>
+<h2 id="防止复发"><a href="#防止复发" class="headerlink" title="防止复发"></a>防止复发</h2><p>第一条是原则：集成测试不要复制 production dependency graph。让 production 自己构造 dependency graph，测试只替换 side-effect boundary。</p>
+<p>具体做法：测试不再手挑 configuration 类，改 import 一个生产测试共用的 LLM 装配入口，只在 provider&#x2F;网络边界做替换。</p>
+<p>回归测试：加 wiring regression test，覆盖 AI disabled context 能起，以及 explanation context 下 PromptFactory 有且只有一个。</p>
+<p>这条其实已经有现成的原型了。上面 caseB 用的 HistoricalProductionLlmScanTest，就是一个以 production 扫描根启动、断言 Bean 唯一的最小上下文测试，只不过它只活在 37caac9 的隔离快照里，删掉就没了。把它固化进仓库（换个名字，比如 ProductionLlmWiringTest），下次再抽公共层，先红的就是它，而不是等 Failsafe 跑到 Controller IT。一个临时的排查脚手架，顺手就能变成常驻的护栏。</p>
+<p>流程上，mvn test 不跑 IT，确实是漏洞。IT 红了多久？最早是从多 SDK 重构、公共配置抽离后开始失效；真正首次被完整 verify 捕获是在后续 strict-schema 修复阶段。也就是从 37caac9 持续到 4e3aca8，最后用两行测试 wiring 修复结束。</p>
+<p>日常和 CI 到底应该跑什么？日常：targeted tests &#x2F; mvn test；pre-merge CI：mvn clean verify；可选 nightly：clean verify + repeated flaky-sensitive IT。</p>
+<h2 id="收束"><a href="#收束" class="headerlink" title="收束"></a>收束</h2><p>这个 bug 反映了三层问题：表层是 import 配置问题 -&gt; 中层是拓扑漂移 -&gt; 深层是模块化边界。</p>
+<h3 id="import-配置问题"><a href="#import-配置问题" class="headerlink" title="import 配置问题"></a>import 配置问题</h3><p>最表层的是：@Import 漏了一个配置类。</p>
+<h3 id="测试拓扑和生产拓扑漂移"><a href="#测试拓扑和生产拓扑漂移" class="headerlink" title="测试拓扑和生产拓扑漂移"></a>测试拓扑和生产拓扑漂移</h3><p>也就是测试为了隔离外部 Provider，构造了一个缩小版的 ApplicationContext，架构重构以后生产依赖拓扑变化了，但测试拓扑没有同步变化。</p>
+<h3 id="多-Provider-重构带来的公共-私有配置边界"><a href="#多-Provider-重构带来的公共-私有配置边界" class="headerlink" title="多 Provider 重构带来的公共&#x2F;私有配置边界"></a>多 Provider 重构带来的公共&#x2F;私有配置边界</h3><p>我这边的配置是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common LLM layer</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br><span class="line">-&gt; shared contracts</span><br><span class="line">-&gt; shared policies</span><br><span class="line"></span><br><span class="line">provider layer</span><br><span class="line">-&gt; OpenAI</span><br><span class="line">-&gt; Anthropic</span><br><span class="line">-&gt; compatible provider</span><br></pre></td></tr></table></figure>
+
+<p>这个分层，意味着测试不能够把 OpenAiLlmConfiguration 继续当整个 LLM 系统。</p>
+<p>拆包之后，原来隐式共存的依赖，变成了显式依赖。a</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1091,114 +1363,6 @@
 <p>这条的核心是：</p>
 <blockquote>
 <p>Agent如何减少幻觉？不靠Prompt，而是靠数据模型把不确定性编码出来</p>
-</blockquote>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AiCloud%E6%8A%8Amaven-target-classes%E6%90%9E%E5%9D%8F%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AiCloud%E6%8A%8Amaven-target-classes%E6%90%9E%E5%9D%8F%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：iCloud把maven target/classes搞坏了（笑）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-13 17:59:32" itemprop="dateCreated datePublished" datetime="2026-09-13T17:59:32+08:00">2026-09-13 17:59:32</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-13 17:59:32" itemprop="dateModified" datetime="2026-09-13T17:59:32+08:00">2026-09-13 17:59:32</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这个可以说是目前遇到的最难定位的问题No.1～</p>
-<p>症状比较离谱～</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RefundMapper</span><br><span class="line">VoucherKeyBuilder</span><br><span class="line">SeckillReservationOutboxPersistenceService</span><br><span class="line">ReservationExceptionRecordDTO</span><br></pre></td></tr></table></figure>
-<p>几个毫无关系的老类，在第二轮<code>mvn clean verify</code>里随机出现<code>ClassNotFoundException</code> <code>NoClassDefFoundError</code><br>但是<code>.class</code>明明存在。而且更诡异的是<code>failsafe-reports</code> 构建结束之后还在消失。</p>
-<p>最后做forensic：</p>
-<ul>
-<li>查Failsafe effective config</li>
-<li>查有没有测试删target</li>
-<li>hash <code>.class</code></li>
-<li>查<code>ctime</code> <code>mtime</code></li>
-<li>查File Provider</li>
-<li>发现项目在iCloud Drive File Provider domain</li>
-<li>失败窗口iCloud正在大量<code>apply-changes</code></li>
-<li>把同一<code>working tree</code>复制到<code>/private/tmp</code><br>一通操作之后，连续 332&#x2F;332，三次测试全绿。</li>
-</ul>
-<p>总结一下就是：</p>
-<blockquote>
-<p>V0 release gate曾经随机出现多个互不关联旧类的ClassNotFoundException。我排除了Failsafe，源码，和class hash之后，发现项目目录属于iCloud File Provider，构建期间同步进程还在修改target和failsafe reports。把同一working tree目录复制到非同步 <code>/private/tmp/</code>之后连续三次测试全绿，最后定位为构建目录环境干扰，而不是业务代码或者maven配置问题～</p>
 </blockquote>
 
       
