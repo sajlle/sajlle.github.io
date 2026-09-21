@@ -23,16 +23,15 @@
     <link href="https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/"/>
     <published>2026-09-21T03:22:54.000Z</published>
     <summary>
-      <![CDATA[<p>简单写一下思路。</p>
+      <![CDATA[<p>我把 Agent V1 的执行文档扔给 Codex，回来一看：好家伙，给我糊了七千行。怎么审核呢？我想想：</p>
 <ol>
 <li>先做施工验收，而不是Code Review</li>
 <li>第一轮审核架构边界，对着总纲看重点</li>
 <li>第二轮审状态机和并发，重点看测试，不要只看实现</li>
 <li>第三轮审核durable recovery</li>
-<li>第四轮审Evidence -&gt; Assessment -&gt; Permission</li>
-<]]>
+<li>第四轮审Evid]]>
     </summary>
-    <title>技术手记｜Codex给我糊了7000行代码，149个文件，怎么审核？</title>
+    <title>技术手记｜Codex 一口气给我改了 7000 行代码、149 个文件，怎么审核？</title>
     <updated>2026-09-21T03:22:54.000Z</updated>
   </entry>
   <entry>
