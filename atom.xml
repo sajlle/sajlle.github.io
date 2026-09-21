@@ -11,7 +11,30 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-20T12:25:38.000Z</updated>
+  <updated>2026-09-21T03:22:54.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
+    <category term="代码审核" scheme="https://sajlle.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8/"/>
+    <id>https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/"/>
+    <published>2026-09-21T03:22:54.000Z</published>
+    <summary>
+      <![CDATA[<p>简单写一下思路。</p>
+<ol>
+<li>先做施工验收，而不是Code Review</li>
+<li>第一轮审核架构边界，对着总纲看重点</li>
+<li>第二轮审状态机和并发，重点看测试，不要只看实现</li>
+<li>第三轮审核durable recovery</li>
+<li>第四轮审Evidence -&gt; Assessment -&gt; Permission</li>
+<]]>
+    </summary>
+    <title>技术手记｜Codex给我糊了7000行代码，149个文件，怎么审核？</title>
+    <updated>2026-09-21T03:22:54.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -527,25 +550,5 @@
     </summary>
     <title>日常记录｜每次用Fable写代码，讨论方案，都会下意识看一下，花了多少钱（笑）～</title>
     <updated>2026-09-12T12:40:35.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <id>https://sajlle.github.io/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/"/>
-    <published>2026-09-12T10:06:50.000Z</published>
-    <summary>
-      <![CDATA[<p>几个感受～<br>LLM放最后一层。不是先想「我接一个GPT」，然后让LLM去抗业务逻辑，最后搞一堆幻觉和不确定性，全都压在最核心的地方。<br>我这边的设计是：</p>
-<ul>
-<li>事实层保证数据不会错</li>
-<li>诊断引擎负责推理</li>
-<li>权限卡住边界</li>
-<li>LLM做翻译官，把结构化的结论说成人话</li>
-</ul>
-<p>这个设计的好处是：</p>]]>
-    </summary>
-    <title>日常记录｜聊一下关于Agent套壳V0感受～</title>
-    <updated>2026-09-12T10:06:50.000Z</updated>
   </entry>
 </feed>

@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-count">346</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,6 +213,107 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜Codex给我糊了7000行代码，149个文件，怎么审核？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-21 11:22:54" itemprop="dateCreated datePublished" datetime="2026-09-21T11:22:54+08:00">2026-09-21 11:22:54</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-21 11:22:54" itemprop="dateModified" datetime="2026-09-21T11:22:54+08:00">2026-09-21 11:22:54</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>简单写一下思路。</p>
+<ol>
+<li>先做施工验收，而不是Code Review</li>
+<li>第一轮审核架构边界，对着总纲看重点</li>
+<li>第二轮审状态机和并发，重点看测试，不要只看实现</li>
+<li>第三轮审核durable recovery</li>
+<li>第四轮审Evidence -&gt; Assessment -&gt; Permission</li>
+<li>第五轮审Agent Loop</li>
+<li>第六轮审 Human Review</li>
+<li>第七轮审核真正的业务执行</li>
+<li>最后审核普通代码质量</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -282,8 +383,7 @@
     <div class="post-body" itemprop="articleBody">
           <p>今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？</p>
 <p>上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？<br>然后我又问它：那未知区为啥非得是[i,gt]，不能是 [lt,i]？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。<br>于是一路聊下去，就聊出了这篇 👉 <a href="https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/">算法｜今天上午写215题三路QuickSelect，一点总结</a></p>
-<p>这时候我意识到，好问题不一定来自专业模式。如果我当时要问一个「显得专业」「只有专业人士才能问」的问题，我大概不会问这个问题。因为它太像菜鸟抬杠了：书上都这么写了，代码也跑通了，你还问凭什么？反而是我题目做完了，开始跟GPT随口瞎扯，这个时候，我脑子里那个害怕显得不专业的过滤器关掉了。于是……有趣的问题就浮上来了。</p>
-<p>当然，过滤器能关掉，还有一个很现实的前提：我得有一个可以安全胡搅蛮缠的对象。如果我问「未知区凭什么必须是i~gt」，对面板着脸回一句「这都不知道？」，那以后我大概就不问了。很多真正有意思的问题，一开始长得根本不像好问题。它可能只是「凭什么？」「我偏要换呢？」「不能反着来吗？」，聊几轮以后才发现：哦，原来我问到的是循环不变量。</p>
+<p>这时候我意识到，好问题不一定来自专业模式。如果我当时要问一个「显得专业」「只有专业人士才能问」的问题，我大概不会问这个问题。因为它太像菜鸟抬杠了：书上都这么写了，代码也跑通了，你还问凭什么？反而是我题目做完了，开始跟GPT随口瞎扯，这个时候，我脑子里那个害怕显得不专业的过滤器关掉了。于是……有趣的问题就浮上来了。<br>当然，过滤器能关掉，还有一个很现实的前提：我得有一个可以安全胡搅蛮缠的对象。如果我问「未知区凭什么必须是i~gt」，对面板着脸回一句「这都不知道？」，那以后我大概就不问了。很多真正有意思的问题，一开始长得根本不像好问题。它可能只是「凭什么？」「我偏要换呢？」「不能反着来吗？」，聊几轮以后才发现：哦，原来我问到的是循环不变量。</p>
 <p>不过，光放松还不够。能问出这个问题，也不是凭空问的。问之前，我已经给问题做了一层抽象。刚开始看三路partition的时候，脑子里全是<code>i</code>为什么加一、<code>gt</code>为什么减一、为什么swap以后<code>i</code>不动。等我把quick select当成是「把unknown区搬空的分拣游戏」，这些细节就不再占着脑子，我才腾出空间想：「既然是分拣游戏，那unknown放在哪重要吗？」</p>
 <p>这就扣上题了。我问这个问题的时候，没有循环不变量的概念，但还是摸到了这个边，怎么做到的呢？<br>我想，是因为我做了一层足够好的抽象。如果不抽象，我就会陷在代码的各种循环细节里；如果抽象得太空，把quick select讲成是分治，那就又丢失结构了。<br>一个恰到好处的抽象，让我能踩着已有结构，用我自己的直觉，往上再问一层我根本没想过要问的东西。</p>
 <p>这个抽象过程，跟我做社会学分析的时候，也一脉相承。<br>我做分析的时候，不会盯着每一句话分析，我会找资源、角色、规则、成本如何流动。就跟写算法的时候不死盯着<code>i++</code>、<code>gt--</code>这种细节，而是先看区域怎么变化。</p>
@@ -1156,95 +1256,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>红与黑 &#x3D; 风流少男上位记<br>拯救大兵瑞恩 &#x3D; 风月撬枷人<br>泰坦尼克号 &#x3D; 海上一夜情<br>水浒传 &#x3D; 105个男人和3个女人的故事<br>肖申克的救赎 &#x3D; 越狱男妻人间醒<br>诺丁山 &#x3D; 小贩怦然恋<br>致命魔术 &#x3D; 双命戏法人<br>请以你的名字呼唤我 &#x3D; 风流鳏夫寂寞男 或者 暑期情人：教授家的秘密&#x2F;租客别撩我儿子<br>傲慢与偏见 &#x3D; 毒舌千金驯服记（又名：乡绅家的五朵金花之二小姐最难嫁）<br>呼啸山庄 &#x3D; 疯批养子黑化实录：全家火葬场<br>了不起的盖茨比 &#x3D; 暴发户痴恋白月光，隔湾豪宅夜夜亮灯为哪般？<br>简爱 &#x3D; 家教小姐姐 vs 阁楼藏妻男：房子烧了我们就公平了<br>老人与海 &#x3D; 硬核钓鱼佬空军84天，第85天惊了<br>百年孤独 &#x3D; 布恩迪亚家族循环取名一百年，人口普查员当场辞职<br>罗密欧与朱丽叶 &#x3D; 早恋的代价：两个家族的血泪教训<br>沉默的羔羊 &#x3D; 高智商狱中男神的心理咨询：这个实习女警我罩了<br>霸王别姬 &#x3D; Farewell My Concubine: A Star Is Torn（反向输出好莱坞风）</p>
 
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-18 20:17:19" itemprop="dateCreated datePublished" datetime="2026-09-18T20:17:19+08:00">2026-09-18 20:17:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-18 20:17:19" itemprop="dateModified" datetime="2026-09-18T20:17:19+08:00">2026-09-18 20:17:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
 
 
