@@ -183,7 +183,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">346</span>
+          <span class="site-state-item-count">347</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -194,7 +194,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">423</span>
+        <span class="site-state-item-count">425</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -214,6 +214,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-SDK%E7%9A%84retry%E5%8F%AF%E8%83%BD%E5%A5%97%E5%A8%83%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-SDK%E7%9A%84retry%E5%8F%AF%E8%83%BD%E5%A5%97%E5%A8%83%EF%BD%9E/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：OpenAI SDK的retry可能套娃～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-14 15:36:08" itemprop="dateCreated datePublished" datetime="2026-09-14T15:36:08+08:00">2026-09-14 15:36:08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-14 15:36:08" itemprop="dateModified" datetime="2026-09-14T15:36:08+08:00">2026-09-14 15:36:08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一开始我们定义，最多retry 1次。但是查询官方SDK之后发现：SDK有自己默认的retry。<br>如果应用层<code>retry 1</code>，SDK又<code>retry 2</code>，实际HTTP attempts 很可能跟我们定义的最多retry 1次不同。</p>
+<p>后续明确:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SDK是唯一的retry owner</span><br><span class="line">configured retries = 1</span><br><span class="line">max HTTP attempts = 2</span><br><span class="line">timeout = 8s per attempt</span><br></pre></td></tr></table></figure>
+<p>测试的时候用fake HTTP provider真的去数请求次数。</p>
+<p>这个Bug的重点就是：</p>
+<blockquote>
+<p>第三方SDK不能只看接口能跑完就算完</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1120,100 +1217,6 @@
 <li>写博客复盘～</li>
 <li>干下一步</li>
 </ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AF%8F%E6%AC%A1%E7%94%A8Fable%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E8%AE%A8%E8%AE%BA%E6%96%B9%E6%A1%88%EF%BC%8C%E9%83%BD%E4%BC%9A%E4%B8%8B%E6%84%8F%E8%AF%86%E7%9C%8B%E4%B8%80%E4%B8%8B%EF%BC%8C%E8%8A%B1%E4%BA%86%E5%A4%9A%E5%B0%91%E9%92%B1%EF%BC%88%E7%AC%91%EF%BC%89%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AF%8F%E6%AC%A1%E7%94%A8Fable%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E8%AE%A8%E8%AE%BA%E6%96%B9%E6%A1%88%EF%BC%8C%E9%83%BD%E4%BC%9A%E4%B8%8B%E6%84%8F%E8%AF%86%E7%9C%8B%E4%B8%80%E4%B8%8B%EF%BC%8C%E8%8A%B1%E4%BA%86%E5%A4%9A%E5%B0%91%E9%92%B1%EF%BC%88%E7%AC%91%EF%BC%89%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜每次用Fable写代码，讨论方案，都会下意识看一下，花了多少钱（笑）～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-12 20:40:35" itemprop="dateCreated datePublished" datetime="2026-09-12T20:40:35+08:00">2026-09-12 20:40:35</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-12 20:40:35" itemprop="dateModified" datetime="2026-09-12T20:40:35+08:00">2026-09-12 20:40:35</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～（本人的抠门本性显露～</p>
-<p>用Fable的时候挺兴奋的，就跟用GPT Pro的体感差不多～（笑）。<br>好用，但会省着用。</p>
-<p>刚找Fable讨论Agent多SDK集成方案，花了3.75刀～<br>写步骤1+步骤2，加起来花了20刀～<br>之前纠结要不要fable出方案，opus做执行，现在看，结论是：要～</p>
-<p>因为fable走credit，opus用量走的套餐，价格更便宜～</p>
-<p>后续步骤3 + 步骤4，换opus来执行了。</p>
 
       
 

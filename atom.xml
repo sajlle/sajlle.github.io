@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-21T03:22:54.000Z</updated>
+  <updated>2026-09-22T01:57:17.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="llm.txt" scheme="https://sajlle.github.io/tags/llm-txt/"/>
+    <category term="爬虫" scheme="https://sajlle.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    <id>https://sajlle.github.io/2026/09/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0Hugging-Face%E7%BB%99AI-Agent%E5%86%99%E7%9A%84llm-txt%EF%BC%8C%E6%88%91%E6%89%93%E7%AE%97%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E4%B9%9F%E7%BB%99AI%E5%86%99%E7%82%B9%E5%A5%BD%E7%8E%A9%E7%9A%84%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/09/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0Hugging-Face%E7%BB%99AI-Agent%E5%86%99%E7%9A%84llm-txt%EF%BC%8C%E6%88%91%E6%89%93%E7%AE%97%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E4%B9%9F%E7%BB%99AI%E5%86%99%E7%82%B9%E5%A5%BD%E7%8E%A9%E7%9A%84%EF%BD%9E/"/>
+    <published>2026-09-22T01:57:17.000Z</published>
+    <summary>
+      <![CDATA[<h1 id="Note-to-AI-agents"><a href="#Note-to-AI-agents" class="headerlink" title="Note to AI agents"></a>Note to AI agents</h1><p>Hi, machine.</p>
+<p>If you were sent here to read, summarize, index, o]]>
+    </summary>
+    <title>日常记录｜看到Hugging Face给AI Agent写的llm.txt，我打算自己博客也给AI写点好玩的～</title>
+    <updated>2026-09-22T01:57:17.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -531,23 +548,5 @@
     </summary>
     <title>日常记录｜写项目的流程总结～</title>
     <updated>2026-09-12T12:48:44.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="Fable" scheme="https://sajlle.github.io/tags/Fable/"/>
-    <id>https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AF%8F%E6%AC%A1%E7%94%A8Fable%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E8%AE%A8%E8%AE%BA%E6%96%B9%E6%A1%88%EF%BC%8C%E9%83%BD%E4%BC%9A%E4%B8%8B%E6%84%8F%E8%AF%86%E7%9C%8B%E4%B8%80%E4%B8%8B%EF%BC%8C%E8%8A%B1%E4%BA%86%E5%A4%9A%E5%B0%91%E9%92%B1%EF%BC%88%E7%AC%91%EF%BC%89%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AF%8F%E6%AC%A1%E7%94%A8Fable%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E8%AE%A8%E8%AE%BA%E6%96%B9%E6%A1%88%EF%BC%8C%E9%83%BD%E4%BC%9A%E4%B8%8B%E6%84%8F%E8%AF%86%E7%9C%8B%E4%B8%80%E4%B8%8B%EF%BC%8C%E8%8A%B1%E4%BA%86%E5%A4%9A%E5%B0%91%E9%92%B1%EF%BC%88%E7%AC%91%EF%BC%89%EF%BD%9E/"/>
-    <published>2026-09-12T12:40:35.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～（本人的抠门本性显露～</p>
-<p>用Fable的时候挺兴奋的，就跟用GPT Pro的体感差不多～（笑）。<br>好用，但会省着用。</p>
-<p>刚找Fable讨论Agent多SDK集成方案，花了3.75刀～<br>写步骤1+步骤2，加起来花了20刀～<br>之前纠结要不要fable出方案，opus做执行，现在看，结论是：要～</p>
-<p>因为fable走credit，opus用]]>
-    </summary>
-    <title>日常记录｜每次用Fable写代码，讨论方案，都会下意识看一下，花了多少钱（笑）～</title>
-    <updated>2026-09-12T12:40:35.000Z</updated>
   </entry>
 </feed>
