@@ -111,6 +111,9 @@ exclude:
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# Seasonal UI: set to false to remove all Mid-Autumn markup and styles.
+midAutumnTheme: true
+
 
 
 # ==== 自动添加的部署配置 ====
