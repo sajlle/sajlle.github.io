@@ -1,0 +1,33 @@
+// Keep the local-search dialog visually separate from page content.
+.search-active .search-pop-overlay {
+  background: rgba(7, 13, 24, .72);
+}
+
+// The seasonal header creates its own stacking context; lift it only while
+// searching so page content cannot paint over the fixed search overlay.
+body.search-active header.header {
+  z-index: 50;
+}
+
+.search-popup {
+  background: var(--content-bg-color);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .42);
+  overflow: hidden;
+}
+
+.search-popup .search-header {
+  border-bottom: 1px solid rgba(127, 127, 127, .22);
+}
+
+.search-popup input.search-input,
+.search-popup .search-result-container {
+  background: var(--content-bg-color);
+  color: var(--text-color);
+}
+
+.search-popup input.search-input {
+  border: 1px solid rgba(127, 127, 127, .24);
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 4px 8px;
+}
