@@ -1389,7 +1389,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ffff45;
+    background: #f2ffff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -3289,4 +3289,194 @@ body.search-active header.header {
   border-radius: 4px;
   box-sizing: border-box;
   padding: 4px 8px;
+}
+.series-catalog {
+  margin-top: 24px;
+}
+.series-catalog__intro {
+  background: var(--card-bg-color);
+  border-left: 3px solid var(--link-color);
+  border-radius: 4px;
+  color: var(--blockquote-color);
+  margin: 0 0 28px;
+  padding: 12px 16px;
+}
+.series-card {
+  background: var(--card-bg-color);
+  border: 1px solid rgba(127,127,127,0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.series-card + .series-card {
+  margin-top: 24px;
+}
+.series-card__header {
+  align-items: flex-start;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 24px 26px 20px;
+}
+.series-card__header > div {
+  flex: 1;
+  min-width: 0;
+}
+.series-card__eyebrow {
+  color: var(--link-color);
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 6px;
+}
+.post-body .series-card__title {
+  border: 0;
+  font-size: 1.35em;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+  padding: 0;
+}
+.series-card__description {
+  color: var(--blockquote-color);
+  line-height: 1.75;
+  margin: 10px 0 0;
+}
+.series-card__count {
+  background: var(--body-bg-color);
+  border-radius: 999px;
+  color: var(--blockquote-color);
+  flex: none;
+  font-size: 0.82em;
+  line-height: 1;
+  padding: 8px 11px;
+  white-space: nowrap;
+}
+.series-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 26px 12px;
+}
+.series-card__item {
+  align-items: baseline;
+  border-top: 1px solid rgba(127,127,127,0.18);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(64px, auto) minmax(0, 1fr);
+  padding: 16px 0;
+}
+.series-card__episode {
+  color: var(--link-color);
+  font-size: 0.86em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.series-card__post {
+  align-items: baseline;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  min-width: 0;
+}
+.post-body .series-card__link {
+  border-bottom: 0;
+  color: var(--text-color);
+  font-weight: 600;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.post-body .series-card__link:hover {
+  color: var(--link-hover-color);
+}
+.series-card__date {
+  color: var(--blockquote-color);
+  flex: none;
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+.series-post-nav {
+  background: var(--card-bg-color);
+  border: 1px solid rgba(127,127,127,0.2);
+  border-radius: 8px;
+  margin: 34px 0 12px;
+  padding: 16px 18px;
+}
+.series-post-nav__context {
+  border-bottom: 0;
+  color: var(--text-color);
+  display: block;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.series-post-nav__context:hover {
+  color: var(--link-hover-color);
+}
+.series-post-nav__label {
+  color: var(--blockquote-color);
+  display: block;
+  font-size: 0.76em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+.series-post-nav__links {
+  border-top: 1px solid rgba(127,127,127,0.18);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin-top: 14px;
+  padding-top: 12px;
+}
+.series-post-nav__link,
+.series-post-nav__directory {
+  border-bottom: 0;
+  font-size: 0.88em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.series-post-nav__directory {
+  text-align: center;
+}
+.series-post-nav__link--next {
+  text-align: right;
+}
+.series-post-nav .is-disabled {
+  color: var(--blockquote-color);
+  opacity: 0.45;
+}
+@media (max-width: 767px) {
+  .series-card__header {
+    display: block;
+    padding: 20px 18px 16px;
+  }
+  .series-card__count {
+    display: inline-block;
+    margin-top: 14px;
+  }
+  .series-card__list {
+    padding: 0 18px 8px;
+  }
+  .series-card__item {
+    align-items: start;
+    gap: 6px;
+    grid-template-columns: 1fr;
+    padding: 14px 0;
+  }
+  .series-card__post {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .series-post-nav {
+    padding: 14px;
+  }
+  .series-post-nav__links {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .series-post-nav__directory {
+    grid-column: 1/-1;
+    grid-row: 1;
+  }
 }

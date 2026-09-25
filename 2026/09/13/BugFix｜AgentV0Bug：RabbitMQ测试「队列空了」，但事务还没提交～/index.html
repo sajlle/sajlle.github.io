@@ -74,7 +74,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T09:50:11.000Z","dateModified":"2026-09-13T09:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["RabbitMQ","集成测试","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T09:50:11.000Z","dateModified":"2026-09-13T09:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["集成测试","RabbitMQ","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -115,7 +115,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -187,7 +187,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">349</span>
+          <span class="site-state-item-count">350</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -198,7 +198,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">428</span>
+        <span class="site-state-item-count">429</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -334,8 +334,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
               <a href="/tags/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/" rel="tag"># 集成测试</a>
+              <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
               <a href="/tags/%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97/" rel="tag"># 异步队列</a>
           </div>
 
