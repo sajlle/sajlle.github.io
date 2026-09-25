@@ -11,7 +11,22 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-24T07:28:15.000Z</updated>
+  <updated>2026-09-25T03:23:23.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="Anthropic" scheme="https://sajlle.github.io/tags/Anthropic/"/>
+    <id>https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/"/>
+    <published>2026-09-25T03:23:23.000Z</published>
+    <summary>
+      <![CDATA[<h1 id="Anthropic-新任营销负责人首秀实录"><a href="#Anthropic-新任营销负责人首秀实录" class="headerlink" title="Anthropic 新任营销负责人首秀实录"></a>Anthropic 新任营销负责人首秀实录</h1><h2 id="开场"><a href="#开场" class="headerlink" title="开场"><]]>
+    </summary>
+    <title>脑洞｜假如 Anthropic 招了一位「遥遥领先」的营销负责人</title>
+    <updated>2026-09-25T03:23:23.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -517,30 +532,5 @@
     </summary>
     <title>日常记录｜记一下到现在活儿干了多少</title>
     <updated>2026-09-13T08:32:07.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="日程" scheme="https://sajlle.github.io/tags/%E6%97%A5%E7%A8%8B/"/>
-    <id>https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%8E%E5%84%BF%E7%9A%84%E4%BA%8B%E5%84%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%8E%E5%84%BF%E7%9A%84%E4%BA%8B%E5%84%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BD%9E/"/>
-    <published>2026-09-12T13:06:43.000Z</published>
-    <summary>
-      <![CDATA[<p>明儿事儿就几件：</p>
-<ul>
-<li>必须做的<ol>
-<li>写博客盘Agent的Bug趣事</li>
-<li>审核Claude的代码</li>
-<li>接真实api做测试</li>
-<li>更新简历版本（毕竟做了Agent，不写上怎么能行）</li>
-</ol>
-</li>
-<li>可以选做的：<ol>
-<li>WorkBuddy登入，挑选一篇博客文章让它改格式，排版，发我订阅号草]]>
-    </summary>
-    <title>日常记录｜明儿的事儿记录一下～</title>
-    <updated>2026-09-12T13:06:43.000Z</updated>
   </entry>
 </feed>
