@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-09-25T10:38:45.000Z</updated>
+  <updated>2026-09-28T02:48:04.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="社区观察" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F/"/>
+    <category term="道德化" scheme="https://sajlle.github.io/tags/%E9%81%93%E5%BE%B7%E5%8C%96/"/>
+    <id>https://sajlle.github.io/2026/09/28/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E3%80%8C%E5%96%84%E8%89%AF%E3%80%8D%E3%80%8C%E4%BB%96%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%BA%BA%E3%80%8D/</id>
+    <link href="https://sajlle.github.io/2026/09/28/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E3%80%8C%E5%96%84%E8%89%AF%E3%80%8D%E3%80%8C%E4%BB%96%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%BA%BA%E3%80%8D/"/>
+    <published>2026-09-28T02:48:04.000Z</published>
+    <summary>
+      <![CDATA[<p>昨天跟我妈吵架。<br>理由很简单。我要关窗户。</p>
+<p>她：不许关窗户。你又找事呢是吧？你妈逼的。你关，我从外面用木棍给你搂开。你把自己闷出病来，我还得给你看病。<br>我：哈？怕把我闷出病？你说的是人话？为了我的健康？我要休息。不关窗户，外面噪音那么大。我怎么睡？<br>她：那是你不够困。人家正常生活，你不许别人生活了？<br>我开始哭起来。大喊：这就是你所谓的「为了我的健康」？我]]>
+    </summary>
+    <title>社区观察｜关于「善良」「他是个好人」</title>
+    <updated>2026-09-28T02:48:04.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -514,23 +530,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：Redis集成测试出现1ms flaky，最后发现是跨域时钟比较</title>
     <updated>2026-09-13T09:41:40.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="Agent" scheme="https://sajlle.github.io/tags/Agent/"/>
-    <category term="DB" scheme="https://sajlle.github.io/tags/DB/"/>
-    <id>https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/</id>
-    <link href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/"/>
-    <published>2026-09-13T09:31:21.000Z</published>
-    <summary>
-      <![CDATA[<p>项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。<br>但旧实现会告诉Agent，voucherInstance&#x3D;A。</p>
-<p>这导致的问题是「事实层偷偷替诊断层做了选择」。</p>
-<p>后续修成了Fact]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断</title>
-    <updated>2026-09-13T09:31:21.000Z</updated>
   </entry>
 </feed>
