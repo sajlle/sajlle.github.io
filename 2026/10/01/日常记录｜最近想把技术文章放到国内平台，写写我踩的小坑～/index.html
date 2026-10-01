@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="最近为了投简历，想把技术文章单独过滤出来。毕竟这个博客涉及太多个人信息，也有不方便给HR和面试官看的地方。于是想了几个方案：  直接做一个技术博客。 文章发到国内平台。  技术博客我做好了。但域名是Vercel，国内不翻墙无法访问。于是转第二个方案，发文章到国内平台。 于是让克和G推荐，发哪个平台？克和G推荐掘金。我就搬运了几篇过去。掘金这边手动搬运有个很麻烦的问题：就是网页端偶发的格式解析失败。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容">
+<meta property="og:url" content="https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="最近为了投简历，想把技术文章单独过滤出来。毕竟这个博客涉及太多个人信息，也有不方便给HR和面试官看的地方。于是想了几个方案：  直接做一个技术博客。 文章发到国内平台。  技术博客我做好了。但域名是Vercel，国内不翻墙无法访问。于是转第二个方案，发文章到国内平台。 于是让克和G推荐，发哪个平台？克和G推荐掘金。我就搬运了几篇过去。掘金这边手动搬运有个很麻烦的问题：就是网页端偶发的格式解析失败。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-01T05:46:05.000Z">
+<meta property="article:modified_time" content="2026-10-01T05:46:05.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="闲扯">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/","path":"2026/10/01/日常记录｜最近想把技术文章放到国内平台，写写我踩的小坑～/","title":"日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容 | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/"},"headline":"日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容","description":"最近为了投简历，想把技术文章单独过滤出来。毕竟这个博客涉及太多个人信息，也有不方便给HR和面试官看的地方。于是想了几个方案： 直接做一个技术博客。 文章发到国内平台。 技术博客我做好了。但域名是Vercel，国内不翻墙无法访问。于是转第二个方案，发文章到国内平台。 于是让克和G推荐，发哪个平台？克和G推荐掘金。我就搬运了几篇过去。掘金这边手动搬运有个很麻烦的问题：就是网页端偶发的格式解析失败。我…","datePublished":"2026-10-01T05:46:05.000Z","dateModified":"2026-10-01T05:46:05.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["闲扯"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="mid-autumn-visuals" aria-hidden="true">
+  <span class="mid-autumn-stars"></span>
+  <span class="mid-autumn-moon"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-headphones-2026.jpg">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">352</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">430</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-headphones-2026.jpg">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容 | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-10-01 13:46:05" itemprop="dateCreated datePublished" datetime="2026-10-01T13:46:05+08:00">2026-10-01 13:46:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-10-01 13:46:05" itemprop="dateModified" datetime="2026-10-01T13:46:05+08:00">2026-10-01 13:46:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>最近为了投简历，想把技术文章单独过滤出来。毕竟这个博客涉及太多个人信息，也有不方便给HR和面试官看的地方。于是想了几个方案：</p>
+<ol>
+<li>直接做一个技术博客。</li>
+<li>文章发到国内平台。</li>
+</ol>
+<p>技术博客我做好了。但域名是Vercel，国内不翻墙无法访问。<br>于是转第二个方案，发文章到国内平台。</p>
+<p>于是让克和G推荐，发哪个平台？<br>克和G推荐掘金。<br>我就搬运了几篇过去。掘金这边手动搬运有个很麻烦的问题：就是网页端偶发的格式解析失败。<br>我一般是把博客的markdown贴到网页端的编辑器上。然后随机出格式解析失败。</p>
+<p>最后我想想，这也不是办法，于是打算先简历挂Vercel博客。<br>然后下一步试试脚本推博客到草稿箱，不做人肉搬运工了。</p>
+<p>之前写博客，只想着吭哧吭哧写，没想过给谁看。今儿一想给国内面试官看，这就需要额外做工了。<br>目前我的博客主站是Github Pages，技术站点是Vercel。都是国内访问的时候，有概率加载不出来的。</p>
+<p>哎，之前考虑本博客不适合展示给HR，单独做了一个技术博客，结果国内访问不到。<br>但如果用国内的云服务器做博客，那得备案，其实还是很麻烦的。所以我最后不想备案，还是走平台发文章，这样我不承担内容运营平台主体责任，也不需要走一堆对我来说比较重的流程。</p>
+<p>所以说起来，我懒得承担备案的麻烦，但还是避免不了平台发文的摩擦。<br>平台的摩擦来自于，平台是内容运营主体，它要备案，考虑合法合规，所以发文，建专栏，都要走平台的流程了。<br>不过平台摩擦总体上还是比备案轻松一点。</p>
+<p>目前我还没打算认真运营自媒体。<br>主要是没有精力。其次是如果运营，会吃掉持续写作的乐趣。</p>
+<p>运营本身会要求人去考虑：</p>
+<ol>
+<li>有没有人看。</li>
+<li>这篇流量如何。</li>
+<li>研究平台推荐算法。</li>
+<li>研究怎么蹭热点</li>
+<li>研究怎么涨粉丝</li>
+</ol>
+<p>这些一考虑，那写作本身就不是主角了。</p>
+<p>再，运营不只是要适配平台，还要适配人设。<br>我拿人设举例子。比如本博客中秋前一天的文章：<a href="https://sajlle.github.io/2026/09/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%AD%E7%A7%8B%E8%8A%82-Surprise%EF%BC%9AAnthropic-%E7%BB%99%E6%88%91%E5%8F%91%E4%BA%86-100-%E5%88%80%E4%BA%91%E7%AE%97%E5%8A%9B%E6%9C%88%E9%A5%BC/">日常记录｜中秋节 Surprise：Anthropic 给我发了 100 刀云算力月饼</a><br>内容就是：</p>
+<blockquote>
+<p>领两份 AI 福利 → 写段子 → HR 联系 → 玩生图</p>
+</blockquote>
+<p>本人原版写的是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A 社给我发月饼</span><br><span class="line">→ 我拿 A 社开涮</span><br><span class="line">→ 吃人嘴短，良心发现</span><br><span class="line">→ 决定把所有 AI 公司一起涮了，这下公平</span><br><span class="line">→ 小克甚至主动给自己的公司补刀</span><br><span class="line">→ 下午华为 HR 突然出现</span><br><span class="line">→ 刚玩完“遥遥领先”，正主相关人士进入剧情</span><br><span class="line">→ 公关部真人快打我跑，技术部真人快打我欢迎</span><br><span class="line">→ 晚上无聊画两笔</span><br><span class="line">→ 把 GPT 叫来给草稿装修</span><br><span class="line">→ 博客后半截突然开始展示 AI 生产力。</span><br></pre></td></tr></table></figure>
+
+<p>如果换成「日常记录博主」人设，会写成这样：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">今年中秋收到 Anthropic 100 美元 credit，也获得了一次 Codex reset。</span><br><span class="line">下午收到华为 HR 消息。</span><br><span class="line">晚上试了下 GPT 生图，效果不错。</span><br><span class="line">这个中秋还挺充实。</span><br></pre></td></tr></table></figure>
+
+<p>如果换成「科技博主」人设，大概是这样的：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">中秋期间 Anthropic 向 Pro 用户赠送 100 美元 API credit，OpenAI 也提供 Codex reset。</span><br><span class="line">借此测试了 GPT 最新图像生成能力，从草图补全效果来看，构图保持和细节生成均有明显提升。</span><br><span class="line"></span><br><span class="line">注：测试环境与Prompt如下...</span><br></pre></td></tr></table></figure>
+
+<p>如果换成「生活型的博主」人设，大概是这样的：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">《中秋被AI公司宠了一天是什么体验》</span><br><span class="line">谁懂啊😭今年中秋没有月饼，但是 AI 公司给我发算力了！</span><br><span class="line">100刀真的太香了，下午居然还收到了华为 HR 的消息！</span><br><span class="line">晚上随手拿 GPT 补了一张自己画的小画，成图美哭🥹</span><br></pre></td></tr></table></figure>
+
+<p>如果换成「职场励志博主」，画风大概这样：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">上午领取 Anthropic 福利，下午收到华为 HR 邀约。</span><br><span class="line">所有努力都不会白费，坚持学习技术，机会总会来的。</span><br><span class="line"></span><br><span class="line">配图：夕阳公路风景照</span><br></pre></td></tr></table></figure>
+
+<p>适配平台，我再举个例子，因为内容太长，所以直接就只出标题，改写重点，Tag了。</p>
+<p>知乎<br>长期和 AI 聊下去，为什么会越来越觉得它们“像熟人”？<br>保留完整故事，但把“中秋流水账”变成案例。开头直接讲“小克说：不是罪魁祸首，是遥遥领先的罪魁祸首”，然后讨论：为什么长期上下文、接梗、图像理解会制造这种“灵”的体验。最后放草稿→GPT 成图。<br>Tag：人工智能、ChatGPT、Claude、AI绘画、大语言模型</p>
+<p>掘金<br>从 Claude 接梗到 GPT 草图补全：我的多模态 AI 协作日常<br>重点改成：Claude 用来对话&#x2F;脑暴，GPT 用来图像理解和补图，Codex 用来开发；展示草稿→成图过程，最好再补一小段提示方式。<br>Tag: 人工智能、AIGC、ChatGPT、Claude、AI工具</p>
+<p>小红书<br>我随手画了两笔，GPT 居然给我补成这样？？<br>第一张直接“草稿 vs 成图”，第二张再放另一组。正文才讲：中秋领了 Anthropic 100 刀、Codex reset → 拿 A 社写段子 → 下午华为 HR 来了 → 晚上继续折腾 GPT<br>Tag：#AI工具 #ChatGPT #Claude #AI绘画 #AIGC #程序员日常</p>
+<p>UC<br>中秋收到100美元AI福利，我反手拿Anthropic写了个段子，下午更巧的事来了<br>UC 要的是故事线清楚 + 每隔两段一个转折。减少“小克&#x2F;G”这种只有老读者懂的角色称呼，第一次出现写清 Claude &#x2F; GPT。重点保留“刚玩遥遥领先 → 华为 HR 出现”的巧合，再用生图当结尾惊喜。<br>Tag：人工智能、ChatGPT、Claude、华为、科技</p>
+<p>抖音<br>我画成这样，GPT居然能给我补成这样，AI现在这么离谱了吗<br>不讲完整文章，做 30～60 秒。0～2 秒：草稿和成图对比；3～10 秒：“今年中秋 Anthropic 给了我 100 刀，OpenAI 给我 Codex Reset”；接着一句“我吃人嘴短，于是决定把所有 AI 公司一起涮”；放 Claude 那句梗；华为 HR 一闪而过；最后再上第二张成图。<br>Tag：#ChatGPT #Claude #AI绘画 #AIGC #程序员</p>
+<p>哎，怎么写了这么多？<br>我原来主题是啥？忘记了。<br>糟糕。</p>
+<p>换平台，未必能这么在博客上撒泼打滚。但是……这是我自己博客，随便发疯啦～</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E9%97%B2%E6%89%AF/" rel="tag"># 闲扯</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/28/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E3%80%8C%E5%96%84%E8%89%AF%E3%80%8D%E3%80%8C%E4%BB%96%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%BA%BA%E3%80%8D/" rel="prev" title="社区观察｜关于「善良」「他是个好人」">
+                  <i class="fa fa-angle-left"></i> 社区观察｜关于「善良」「他是个好人」
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
