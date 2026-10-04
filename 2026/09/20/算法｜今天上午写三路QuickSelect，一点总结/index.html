@@ -26,8 +26,8 @@
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="基本思路就是把数组划分为四个区间：  low ~ lt-1: &lt; pivot lt ~ i-1: &#x3D; pivot i ~ gt: 未知区 gt+1 ~ high: &gt; pivot  然后保证未知区一定缩水： 1234567891011121314nums[i] &lt; pivot-&gt; 跟 lt 交换，左边收走，lt++-&gt; i++-&gt; 未知区左边收缩num">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-09-20T03:26:07.000Z">
-<meta property="article:modified_time" content="2026-09-20T03:26:07.000Z">
+<meta property="article:published_time" content="2026-09-20T11:26:07.000Z">
+<meta property="article:modified_time" content="2026-09-20T11:26:07.000Z">
 <meta property="article:author" content="之瑞">
 <meta property="article:tag" content="Quick Select">
 <meta name="twitter:card" content="summary">
@@ -72,7 +72,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/"},"headline":"算法｜今天上午写215题三路QuickSelect，一点总结","description":"基本思路就是把数组划分为四个区间： low ~ lt-1: &lt; pivot lt ~ i-1: &#x3D; pivot i ~ gt: 未知区 gt+1 ~ high: &gt; pivot 然后保证未知区一定缩水： 1234567891011121314nums[i] &lt; pivot-&gt; 跟 lt 交换，左边收走，lt++-&gt; i++-&gt; 未知区左边收缩nums…","datePublished":"2026-09-20T03:26:07.000Z","dateModified":"2026-09-20T03:26:07.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Quick Select"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/"},"headline":"算法｜今天上午写215题三路QuickSelect，一点总结","description":"基本思路就是把数组划分为四个区间： low ~ lt-1: &lt; pivot lt ~ i-1: &#x3D; pivot i ~ gt: 未知区 gt+1 ~ high: &gt; pivot 然后保证未知区一定缩水： 1234567891011121314nums[i] &lt; pivot-&gt; 跟 lt 交换，左边收走，lt++-&gt; i++-&gt; 未知区左边收缩nums…","datePublished":"2026-09-20T11:26:07.000Z","dateModified":"2026-09-20T11:26:07.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-headphones-2026.jpg"],"keywords":["Quick Select"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -185,7 +185,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">352</span>
+          <span class="site-state-item-count">353</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -196,7 +196,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">430</span>
+        <span class="site-state-item-count">431</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -255,14 +255,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-09-20 11:26:07" itemprop="dateCreated datePublished" datetime="2026-09-20T11:26:07+08:00">2026-09-20 11:26:07</time>
+      <time title="创建时间：2026-09-20 11:26:07" itemprop="dateCreated datePublished" datetime="2026-09-20T11:26:07+00:00">2026-09-20 11:26:07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-20 11:26:07" itemprop="dateModified" datetime="2026-09-20T11:26:07+08:00">2026-09-20 11:26:07</time>
+      <time title="修改时间：2026-09-20 11:26:07" itemprop="dateModified" datetime="2026-09-20T11:26:07+00:00">2026-09-20 11:26:07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
