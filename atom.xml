@@ -36,12 +36,12 @@
     <category term="Surface" scheme="https://sajlle.github.io/tags/Surface/"/>
     <id>https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/</id>
     <link href="https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/"/>
-    <published>2026-10-06T01:49:37.326Z</published>
+    <published>2026-10-06T01:51:35.301Z</published>
     <summary>
       <![CDATA[<p>主要原因是同设备换绑codex账户容易被风控，所以就一个codex放surface，一个codex放mac。<br>surface上的那个codex我布置任务，它云端沙盒跑，跑完提交之后我在mac上拉下来最新分支之后重新在本地写。</p>]]>
     </summary>
     <title>日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号</title>
-    <updated>2026-10-06T01:49:37.326Z</updated>
+    <updated>2026-10-06T01:51:35.301Z</updated>
   </entry>
   <entry>
     <author>
@@ -49,12 +49,12 @@
     </author>
     <id>https://sajlle.github.io/2026/10/06/hello-world/</id>
     <link href="https://sajlle.github.io/2026/10/06/hello-world/"/>
-    <published>2026-10-06T01:49:37.320Z</published>
+    <published>2026-10-06T01:51:35.295Z</published>
     <summary>
       <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can]]>
     </summary>
     <title>Hello World</title>
-    <updated>2026-10-06T01:49:37.320Z</updated>
+    <updated>2026-10-06T01:51:35.295Z</updated>
   </entry>
   <entry>
     <author>
