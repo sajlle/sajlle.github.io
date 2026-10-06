@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-06T01:42:58.000Z</updated>
+  <updated>2026-10-06T08:45:21.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="反转孝子游戏" scheme="https://sajlle.github.io/tags/%E5%8F%8D%E8%BD%AC%E5%AD%9D%E5%AD%90%E6%B8%B8%E6%88%8F/"/>
+    <id>https://sajlle.github.io/2026/10/06/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%88%B6%E6%AF%8D%E5%B8%B8%E8%AF%B4%E7%9A%84%E8%AF%9D%E5%80%92%E8%BD%AC%E8%BF%87%E6%9D%A5%EF%BC%8C%E4%BC%9A%E6%98%AF%E5%95%A5%E6%A0%B7%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/10/06/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%88%B6%E6%AF%8D%E5%B8%B8%E8%AF%B4%E7%9A%84%E8%AF%9D%E5%80%92%E8%BD%AC%E8%BF%87%E6%9D%A5%EF%BC%8C%E4%BC%9A%E6%98%AF%E5%95%A5%E6%A0%B7%EF%BC%9F/"/>
+    <published>2026-10-06T08:45:21.000Z</published>
+    <summary>
+      <![CDATA[<p>有些道理特别神奇：父母对子女说时天经地义，子女对父母说时立刻大逆不道。<br>那我们今天做个公平性测试：所有“为你好”的话，一律开放双向调用。</p>
+<h2 id="上半场：真人真事"><a href="#上半场：真人真事" class="headerlink" title="上半场：真人真事"></a>上半场：真人真事</h2><p>现实：<br>本人：6岁半被叫起来在自家店干活儿，寒暑]]>
+    </summary>
+    <title>脑洞｜如果把父母常说的话倒转过来，会是啥样？</title>
+    <updated>2026-10-06T08:45:21.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -38,6 +54,34 @@
     <author>
       <name>之瑞</name>
     </author>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
+    <category term="Surface" scheme="https://sajlle.github.io/tags/Surface/"/>
+    <id>https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/</id>
+    <link href="https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/"/>
+    <published>2026-10-06T01:40:54.824Z</published>
+    <summary>
+      <![CDATA[<p>主要原因是同设备换绑codex账户容易被风控，所以就一个codex放surface，一个codex放mac。<br>surface上的那个codex我布置任务，它云端沙盒跑，跑完提交之后我在mac上拉下来最新分支之后重新在本地写。</p>]]>
+    </summary>
+    <title>日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号</title>
+    <updated>2026-10-06T01:40:54.824Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <id>https://sajlle.github.io/2026/10/06/hello-world/</id>
+    <link href="https://sajlle.github.io/2026/10/06/hello-world/"/>
+    <published>2026-10-06T01:40:54.819Z</published>
+    <summary>
+      <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can]]>
+    </summary>
+    <title>Hello World</title>
+    <updated>2026-10-06T01:40:54.819Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
     <category term="家庭尸检" scheme="https://sajlle.github.io/categories/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80/"/>
     <category term="窗户问题" scheme="https://sajlle.github.io/tags/%E7%AA%97%E6%88%B7%E9%97%AE%E9%A2%98/"/>
     <id>https://sajlle.github.io/2026/10/06/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80%EF%BD%9C%E5%A6%88%E7%88%B9%E7%BB%A7%E7%BB%AD%E6%89%BE%E8%8C%AC%EF%BC%8C%E5%A4%9C%E9%97%B4%E5%B0%8F%E8%AE%B0/</id>
@@ -49,34 +93,6 @@
     </summary>
     <title>家庭尸检｜妈爹继续找茬，夜间小记</title>
     <updated>2026-10-06T00:58:54.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
-    <category term="Surface" scheme="https://sajlle.github.io/tags/Surface/"/>
-    <id>https://sajlle.github.io/2026/10/05/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/</id>
-    <link href="https://sajlle.github.io/2026/10/05/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/"/>
-    <published>2026-10-05T18:09:36.522Z</published>
-    <summary>
-      <![CDATA[<p>主要原因是同设备换绑codex账户容易被风控，所以就一个codex放surface，一个codex放mac。<br>surface上的那个codex我布置任务，它云端沙盒跑，跑完提交之后我在mac上拉下来最新分支之后重新在本地写。</p>]]>
-    </summary>
-    <title>日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号</title>
-    <updated>2026-10-05T18:09:36.522Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <id>https://sajlle.github.io/2026/10/05/hello-world/</id>
-    <link href="https://sajlle.github.io/2026/10/05/hello-world/"/>
-    <published>2026-10-05T18:09:36.515Z</published>
-    <summary>
-      <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can]]>
-    </summary>
-    <title>Hello World</title>
-    <updated>2026-10-05T18:09:36.515Z</updated>
   </entry>
   <entry>
     <author>
@@ -509,23 +525,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：REFUND_INSTANCE_USED_CONFLICT很诱人，但没证据就不去实现</title>
     <updated>2026-09-14T15:44:58.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="bug prevention" scheme="https://sajlle.github.io/tags/bug-prevention/"/>
-    <category term="timeline" scheme="https://sajlle.github.io/tags/timeline/"/>
-    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ATimeline%E5%B7%AE%E7%82%B9%E8%A2%AB%E5%BD%93%E6%88%90%E7%8A%B6%E6%80%81%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/</id>
-    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ATimeline%E5%B7%AE%E7%82%B9%E8%A2%AB%E5%BD%93%E6%88%90%E7%8A%B6%E6%80%81%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/"/>
-    <published>2026-09-14T15:41:07.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～</p>
-<p>实际数据库只有：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span clas]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：Timeline差点被当成状态迁移历史</title>
-    <updated>2026-09-14T15:41:07.000Z</updated>
   </entry>
 </feed>
