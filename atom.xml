@@ -11,7 +11,51 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-06T08:45:21.000Z</updated>
+  <updated>2026-10-08T08:18:50.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/10/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%80%E7%82%B9%E9%9A%8F%E6%83%B3/</id>
+    <link href="https://sajlle.github.io/2026/10/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%80%E7%82%B9%E9%9A%8F%E6%83%B3/"/>
+    <published>2026-10-08T08:18:50.000Z</published>
+    <summary>
+      <![CDATA[<p>自从妈爹开窗事件之后，连着休息了2天，总算逐渐转好了。<br>不过今天起来又咳嗽，又特别困，所以我起来点了个外卖，来写博客了。</p>
+<p>今天起床拿到GPT给我的岗位总结。<br>看了下，Agent能力在朝着企业化、生产、落地方向走了。同时Agent开发也逐渐归并到后端日常了。<br>8月17日，我写过一篇博客聊职业转向策略&#x3D;&gt;<a href="https://sajll]]>
+    </summary>
+    <title>日常记录｜一点随想</title>
+    <updated>2026-10-08T08:18:50.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
+    <category term="Surface" scheme="https://sajlle.github.io/tags/Surface/"/>
+    <id>https://sajlle.github.io/2026/10/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/</id>
+    <link href="https://sajlle.github.io/2026/10/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/"/>
+    <published>2026-10-08T02:27:21.762Z</published>
+    <summary>
+      <![CDATA[<p>主要原因是同设备换绑codex账户容易被风控，所以就一个codex放surface，一个codex放mac。<br>surface上的那个codex我布置任务，它云端沙盒跑，跑完提交之后我在mac上拉下来最新分支之后重新在本地写。</p>]]>
+    </summary>
+    <title>日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号</title>
+    <updated>2026-10-08T02:27:21.762Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <id>https://sajlle.github.io/2026/10/08/hello-world/</id>
+    <link href="https://sajlle.github.io/2026/10/08/hello-world/"/>
+    <published>2026-10-08T02:27:21.758Z</published>
+    <summary>
+      <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can]]>
+    </summary>
+    <title>Hello World</title>
+    <updated>2026-10-08T02:27:21.758Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -27,34 +71,6 @@
     </summary>
     <title>脑洞｜如果把父母常说的话倒转过来，会是啥样？</title>
     <updated>2026-10-06T08:45:21.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
-    <category term="Surface" scheme="https://sajlle.github.io/tags/Surface/"/>
-    <id>https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/</id>
-    <link href="https://sajlle.github.io/2026/10/06/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%AE%97%E4%BA%86%E4%B8%8BCodex%E9%A2%9D%E5%BA%A6%EF%BC%8C%E5%8F%91%E7%8E%B0%E4%BF%A9Team%E5%8F%B7%E9%83%BD%E5%BE%97%E8%B7%91%E6%BB%A1%E6%89%8D%E8%A1%8C%EF%BC%8C%E4%BA%8E%E6%98%AF%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8B%8E%E5%87%BA%E6%88%91%E7%9A%84%E6%97%A7Surface-Go2%EF%BC%8C%E8%AE%A9%E5%AE%83%E8%B7%91%E4%B8%80%E4%B8%AAteam%E5%8F%B7/"/>
-    <published>2026-10-06T01:51:35.301Z</published>
-    <summary>
-      <![CDATA[<p>主要原因是同设备换绑codex账户容易被风控，所以就一个codex放surface，一个codex放mac。<br>surface上的那个codex我布置任务，它云端沙盒跑，跑完提交之后我在mac上拉下来最新分支之后重新在本地写。</p>]]>
-    </summary>
-    <title>日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号</title>
-    <updated>2026-10-06T01:51:35.301Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <id>https://sajlle.github.io/2026/10/06/hello-world/</id>
-    <link href="https://sajlle.github.io/2026/10/06/hello-world/"/>
-    <published>2026-10-06T01:51:35.295Z</published>
-    <summary>
-      <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can]]>
-    </summary>
-    <title>Hello World</title>
-    <updated>2026-10-06T01:51:35.295Z</updated>
   </entry>
   <entry>
     <author>
@@ -510,20 +526,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：OpenAI 与兼容供应商双开会导致应用启动失败</title>
     <updated>2026-09-14T15:55:31.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="Agent证据建模" scheme="https://sajlle.github.io/tags/Agent%E8%AF%81%E6%8D%AE%E5%BB%BA%E6%A8%A1/"/>
-    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/</id>
-    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/"/>
-    <published>2026-09-14T15:44:58.000Z</published>
-    <summary>
-      <![CDATA[<p>因为DB持久化的数据不足以证明<code>USED</code>，究竟发生在退款冻结前还是退款之后，所以没有为了Agent显得很牛来硬判。<br>算是主动删除了一条看起来很亮，但没办法呗证据确定支持的规则。</p>]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：REFUND_INSTANCE_USED_CONFLICT很诱人，但没证据就不去实现</title>
-    <updated>2026-09-14T15:44:58.000Z</updated>
   </entry>
 </feed>
