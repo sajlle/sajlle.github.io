@@ -1,6 +1,7 @@
 ---
 title: 日常记录｜今天算了下Codex额度，发现俩Team号都得跑满才行，于是不得不拎出我的旧Surface Go2，让它跑一个team号
-date: 2026-08-13
+date: 2026-08-13 12:23:56
+categories:
   - 日常记录
 tags:
   - Codex
