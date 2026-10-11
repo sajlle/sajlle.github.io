@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-08T15:51:23.000Z</updated>
+  <updated>2026-10-11T09:46:38.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="日常" scheme="https://sajlle.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
+    <id>https://sajlle.github.io/2026/10/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%9C%80%E8%BF%91%E7%9A%84%E5%B0%8F%E4%BA%8B/</id>
+    <link href="https://sajlle.github.io/2026/10/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%9C%80%E8%BF%91%E7%9A%84%E5%B0%8F%E4%BA%8B/"/>
+    <published>2026-10-11T09:46:38.000Z</published>
+    <summary>
+      <![CDATA[<p>今天趁着GPT给我统计数据，我随便写写日常。</p>
+<p>最近一年的节奏越来越快了。去年12月我开博客，到今年，写了358篇，单论今年写的，有293篇了。2026年1月1日到今天有283天了。几乎是日均一篇。<br>博客都是顺手写的，今年还改项目+智能家居+Agent+血糖控制+运动+处理冲突+回乡送亲+送往迎来。</p>
+<p>今年体感是轮子转的越来越快，发呆的时间少了很多。<br>因为]]>
+    </summary>
+    <title>日常记录｜最近在做智能家居 + 任务看板 + 领AMD的GPU</title>
+    <updated>2026-10-11T09:46:38.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -518,20 +535,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：OpenAI 与兼容供应商双开会导致应用启动失败</title>
     <updated>2026-09-14T15:55:31.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="Agent证据建模" scheme="https://sajlle.github.io/tags/Agent%E8%AF%81%E6%8D%AE%E5%BB%BA%E6%A8%A1/"/>
-    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/</id>
-    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/"/>
-    <published>2026-09-14T15:44:58.000Z</published>
-    <summary>
-      <![CDATA[<p>因为DB持久化的数据不足以证明<code>USED</code>，究竟发生在退款冻结前还是退款之后，所以没有为了Agent显得很牛来硬判。<br>算是主动删除了一条看起来很亮，但没办法呗证据确定支持的规则。</p>]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：REFUND_INSTANCE_USED_CONFLICT很诱人，但没证据就不去实现</title>
-    <updated>2026-09-14T15:44:58.000Z</updated>
   </entry>
 </feed>
