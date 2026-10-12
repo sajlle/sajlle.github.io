@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-11T09:46:38.000Z</updated>
+  <updated>2026-10-12T20:55:50.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="可视化" scheme="https://sajlle.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    <id>https://sajlle.github.io/2026/10/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%81%9A%E4%BA%86%E7%9C%8B%E6%9D%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%B7%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E4%BA%86/</id>
+    <link href="https://sajlle.github.io/2026/10/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%81%9A%E4%BA%86%E7%9C%8B%E6%9D%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%B7%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E4%BA%86/"/>
+    <published>2026-10-12T20:55:50.000Z</published>
+    <summary>
+      <![CDATA[<p>最近找小克做的算法看板。统计刷题时间，下一次刷，卡点，是否30分钟之内做出来。<br>效率比我之前边拿文档边自己做，方便多了。</p>
+<p>最近发现，有效的练习跟无效的练习差别挺大。<br>有效练习，比如LC200，岛屿数量，两周后做，5分钟搞定。全排列总组合这类，5～8分钟搞定。新题LC216，7分钟搞定。<br>无效练习，比如LC209，就卡60分钟。</p>
+<p>有效练习的几个板块]]>
+    </summary>
+    <title>日常记录｜做了看板之后，刷算法效率提升了</title>
+    <updated>2026-10-12T20:55:50.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -520,20 +537,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：兼容层的“本地强校验”实际上不是严格 Schema 校验</title>
     <updated>2026-09-14T15:59:54.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
-    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-%E4%B8%8E%E5%85%BC%E5%AE%B9%E4%BE%9B%E5%BA%94%E5%95%86%E5%8F%8C%E5%BC%80%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</id>
-    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-%E4%B8%8E%E5%85%BC%E5%AE%B9%E4%BE%9B%E5%BA%94%E5%95%86%E5%8F%8C%E5%BC%80%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/"/>
-    <published>2026-09-14T15:55:31.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～<br>项目的 AI 解释层原来只接 OpenAI。为了支持 Anthropic、DeepSeek 等供应商，我保留统一的 <code>LlmReasoner</code> 接口，但在适配层分别使用官方 OpenAI Responses API、Anthropic Messages API，以及复用 <code>openai-java</code> 的 Chat Completions]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：OpenAI 与兼容供应商双开会导致应用启动失败</title>
-    <updated>2026-09-14T15:55:31.000Z</updated>
   </entry>
 </feed>
