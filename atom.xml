@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-13T17:10:01.000Z</updated>
+  <updated>2026-10-13T17:30:06.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="AI" scheme="https://sajlle.github.io/tags/AI/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/"/>
+    <published>2026-10-13T17:30:06.000Z</published>
+    <summary>
+      <![CDATA[<p>哎呀，马上要去拿快递，所以只说一点想法。</p>
+<p>其实就是把模型自己没有判断好情境的风险转嫁给用户了。<br>也就是，我也不知道这个地方要不要提醒一下用户，但提醒一下用户总归是好的。</p>
+<p>于是……悲催了～<br>本来说的是A，模型提醒你B，你争辩C，最后原始问题呢？原始问题的时间被占用了。</p>
+<p>所以，还是独断专行吧～</p>
+<p>另，模型没有灰区对弈的经验，总是要]]>
+    </summary>
+    <title>日常记录｜关于AI大平均建议吐槽</title>
+    <updated>2026-10-13T17:30:06.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -537,18 +556,5 @@
     </summary>
     <title>脑洞｜如果把经典文学改成起点网文标题，画风是啥样的？</title>
     <updated>2026-09-19T17:52:20.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="AgentV0" scheme="https://sajlle.github.io/tags/AgentV0/"/>
-    <category term="Jackson" scheme="https://sajlle.github.io/tags/Jackson/"/>
-    <id>https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/</id>
-    <link href="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/"/>
-    <published>2026-09-18T20:17:19.000Z</published>
-    <title>BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转</title>
-    <updated>2026-09-18T20:17:19.000Z</updated>
   </entry>
 </feed>
