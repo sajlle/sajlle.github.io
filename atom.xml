@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-12T20:55:50.000Z</updated>
+  <updated>2026-10-13T09:41:42.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="客观" scheme="https://sajlle.github.io/tags/%E5%AE%A2%E8%A7%82/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/"/>
+    <published>2026-10-13T09:41:42.000Z</published>
+    <summary>
+      <![CDATA[<p>反正早上吃完饭了，不想立刻写算法，就先写一下博客？</p>
+<p>早饭是牛奶燕麦西红柿辣椒丝瓜汤。算了下，一顿碳水55克，蛋白质30克，脂肪30克，热量大概600卡。十分钟出锅。<br>成本：牛奶2元一盒，丝瓜我妈种的，西红柿不到5毛钱，辣椒一个5毛。燕麦30克3毛钱。花生5毛钱，早饭成本（食材）不到4RMB。<br>味道：类似奶辣风味的咖喱炖菜。</p>
+<p>今天早饭碳水不低，我还是得打]]>
+    </summary>
+    <title>日常记录｜早餐，SNS包装和客观的尺度</title>
+    <updated>2026-10-13T09:41:42.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -521,21 +538,5 @@
     </summary>
     <title>BugFix｜AgentV0Bug：多供应商LLM SDK接入的时候，结束状态采用黑名单，仍可能接收未正常完成的响应</title>
     <updated>2026-09-14T16:10:08.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
-    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/</id>
-    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/"/>
-    <published>2026-09-14T15:59:54.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～<br>供应商的Gateway采用的是共享生产全局ObjectMapper反序列化。如果发送了如下错误响应，则会被接受：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：兼容层的“本地强校验”实际上不是严格 Schema 校验</title>
-    <updated>2026-09-14T15:59:54.000Z</updated>
   </entry>
 </feed>
