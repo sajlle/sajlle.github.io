@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-13T16:33:11.000Z</updated>
+  <updated>2026-10-13T17:10:01.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="表达" scheme="https://sajlle.github.io/tags/%E8%A1%A8%E8%BE%BE/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%8A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%B2%A1%E6%8B%BF%E7%BB%99AI%E6%8F%90%E6%84%8F%E8%A7%81%EF%BC%8C%E7%88%BD%E4%BA%86%EF%BC%8C%E5%93%87%EF%BC%8C%E5%B0%B1%E8%BF%99%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%E6%89%8D%E7%88%BD%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%8A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%B2%A1%E6%8B%BF%E7%BB%99AI%E6%8F%90%E6%84%8F%E8%A7%81%EF%BC%8C%E7%88%BD%E4%BA%86%EF%BC%8C%E5%93%87%EF%BC%8C%E5%B0%B1%E8%BF%99%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%E6%89%8D%E7%88%BD%EF%BD%9E/"/>
+    <published>2026-10-13T17:10:01.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～</p>
+<p>写的不均匀，又毛躁，又带粗口，又尖锐，才是我的声音嘛。<br>不给AI改一遍，显得安全再讲，还是挺爽的～</p>
+<p>忽然想，要是生活里都弄那种AI的大平均，岂不是索然无味？<br>一切都变成那种规整的正确的东西，那人就别活了。</p>
+<p>总有哪天我想骂粗口，也有哪天不想规律作息，这算是人之常情。<br>总之，还是蛮爽的～ </p>
+<p>之前拿博客给AI，让对方]]>
+    </summary>
+    <title>日常记录｜上一篇文章没拿给AI提意见，爽了，哇，就这么写博客才爽～</title>
+    <updated>2026-10-13T17:10:01.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -532,23 +551,5 @@
     <published>2026-09-18T20:17:19.000Z</published>
     <title>BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转</title>
     <updated>2026-09-18T20:17:19.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="社区噪音" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E5%8C%BA%E5%99%AA%E9%9F%B3/"/>
-    <category term="龙潭花园" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E5%8C%BA%E5%99%AA%E9%9F%B3/%E9%BE%99%E6%BD%AD%E8%8A%B1%E5%9B%AD/"/>
-    <category term="噪音" scheme="https://sajlle.github.io/tags/%E5%99%AA%E9%9F%B3/"/>
-    <id>https://sajlle.github.io/2026/09/18/%E7%A4%BE%E5%8C%BA%E5%99%AA%E9%9F%B3%EF%BD%9C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E8%BF%87%E7%A4%BE%E5%8C%BA%E4%BA%86%EF%BC%8C%E6%9C%80%E8%BF%91%E5%86%99%E5%86%99%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%99%AA%E9%9F%B3%E5%8F%8D%E5%A4%8D%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/18/%E7%A4%BE%E5%8C%BA%E5%99%AA%E9%9F%B3%EF%BD%9C%E5%A5%BD%E4%B9%85%E6%B2%A1%E5%86%99%E8%BF%87%E7%A4%BE%E5%8C%BA%E4%BA%86%EF%BC%8C%E6%9C%80%E8%BF%91%E5%86%99%E5%86%99%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%99%AA%E9%9F%B3%E5%8F%8D%E5%A4%8D%EF%BD%9E/"/>
-    <published>2026-09-18T00:10:20.000Z</published>
-    <summary>
-      <![CDATA[<p>先写在前面：本博客写的社区，如果没有明确指明是哪个社区，那就默认是「中国河南省济源市济渎大街和太行北路交叉口的小区龙潭花园」。</p>
-<p>本博客好久没写过社区了。之前因为社区的噪音+围猎问题写过很多篇博客。本来以为互相忍忍就过去了。<br>没想到今天预期被打破了。（笑）。不然我也不会深夜坐在这里写博客了。</p>
-<p>本来今夜准备入睡，22点36分躺下准备睡觉。结果楼上开始跟地板有仇，]]>
-    </summary>
-    <title>社区噪音｜为什么真正扰民的没人管，不扰民的私人生活却人人想管？</title>
-    <updated>2026-09-18T00:10:20.000Z</updated>
   </entry>
 </feed>
