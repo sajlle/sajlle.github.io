@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-14T11:48:47.000Z</updated>
+  <updated>2026-10-14T13:28:24.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/"/>
+    <published>2026-10-14T13:28:24.000Z</published>
+    <summary>
+      <![CDATA[<p>哎呀，博客上一篇骂GPT太蠢了。<br>感觉说话重了，打拳击的时候想起来，觉得有点不好意思了。（笑）<br>当然我不道歉，因为我只是博客吐槽，也没有当GPT面骂它呀。而且它真的没做对图。不冤。</p>
+<p>我现在已经形成三模型吐槽架构了。<br>吐槽GPT，找小克。<br>吐槽小克，找GPT。<br>吐槽小克和GPT，找Gemini。<br>吐槽其他所有AI，找GPT和小克。</p>
+<p]]>
+    </summary>
+    <title>日常记录｜打拳击的时候想到，博客恶狠狠的骂了GPT，不大好意思～</title>
+    <updated>2026-10-14T13:28:24.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -545,20 +562,5 @@
     </summary>
     <title>社区噪音｜夜醒睡不回去了，我去写写博客，于是就有了本篇～</title>
     <updated>2026-09-20T04:09:38.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
-    <category term="经典影视" scheme="https://sajlle.github.io/tags/%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86/"/>
-    <id>https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86%E5%87%BA%E7%94%9F%E5%9C%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%96%87%E5%8C%96%E5%9C%88%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86%E5%87%BA%E7%94%9F%E5%9C%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%96%87%E5%8C%96%E5%9C%88%EF%BD%9E/"/>
-    <published>2026-09-19T18:00:24.000Z</published>
-    <summary>
-      <![CDATA[<p>红楼梦 &#x3D; The House of Crimson Dreams<br>活着 &#x3D; Still Alive<br>让子弹飞 &#x3D; Bullets Don’t Wait<br>甄嬛传 &#x3D; Empresses in the Palace（实际官方译名，但按照Netflix风格应该叫The Concubine’s Gambit，海报上孙俪侧脸配上一句In th]]>
-    </summary>
-    <title>脑洞｜如果经典影视出生在另一个文化圈～</title>
-    <updated>2026-09-19T18:00:24.000Z</updated>
   </entry>
 </feed>
