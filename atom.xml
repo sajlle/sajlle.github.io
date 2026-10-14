@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-14T13:28:24.000Z</updated>
+  <updated>2026-10-14T15:06:44.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="模型" scheme="https://sajlle.github.io/tags/%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/</id>
+    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/"/>
+    <published>2026-10-14T15:06:44.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～</p>
+<p>关于吐槽GPT的种种。<br>上午吐槽它不按指示做图，下午忽然想到这个点，非要二选一的话，慢但准的模型是无害的。顶多没有增量。<br>快但蠢的模型，犯错之后，可能不仅没有增量，还要你额外花时间修补它的问题。</p>
+<p>不过下午，G已经可以做Slide了，嗯，感！天！动！地！<br>哎，算了，撤回上午对它的吐槽好了。<br>（虽然也是偷偷的在博客讲，它并不知道～）</]]>
+    </summary>
+    <title>日常记录｜关于模型是快还是准？非要选一个，我宁可它慢，不希望它蠢</title>
+    <updated>2026-10-14T15:06:44.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -542,25 +559,5 @@
     </summary>
     <title>社区观察｜不是这个地方碰巧坏人多，而是一个靠共同嘲弄来维持秩序的群体，总得不断制造新的坏人</title>
     <updated>2026-09-20T04:40:06.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="社区冲突" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E7%A4%BE%E5%8C%BA%E5%86%B2%E7%AA%81/"/>
-    <category term="家庭尸检" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E7%A4%BE%E5%8C%BA%E5%86%B2%E7%AA%81/%E5%AE%B6%E5%BA%AD%E5%B0%B8%E6%A3%80/"/>
-    <category term="噪音" scheme="https://sajlle.github.io/tags/%E5%99%AA%E9%9F%B3/"/>
-    <id>https://sajlle.github.io/2026/09/20/%E6%A2%A6%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A4%9C%E9%86%92%E7%9D%A1%E4%B8%8D%E5%9B%9E%E5%8E%BB%E4%BA%86%EF%BC%8C%E6%88%91%E5%8E%BB%E5%86%99%E5%86%99%E6%A2%A6%E7%9B%B8%E5%85%B3/</id>
-    <link href="https://sajlle.github.io/2026/09/20/%E6%A2%A6%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A4%9C%E9%86%92%E7%9D%A1%E4%B8%8D%E5%9B%9E%E5%8E%BB%E4%BA%86%EF%BC%8C%E6%88%91%E5%8E%BB%E5%86%99%E5%86%99%E6%A2%A6%E7%9B%B8%E5%85%B3/"/>
-    <published>2026-09-20T04:09:38.000Z</published>
-    <summary>
-      <![CDATA[<p>声明：本社区指的是中国河南省济源市济渎大街和太行北路交叉口的小区龙潭花园。</p>
-<p>本来夜里3点起夜。<br>醒来之后还没开灯，楼下一声电驴响起。滴滴滴。我起来了，妈爹也已经起来准备摆摊。<br>二位没多久就回去了。</p>
-<p>我躺回床上。凌晨四点左右，又被楼下的汽车喇叭吵醒。<br>不得不再度起来，写博客。</p>
-<p>虽然我觉得写博客写社区噪音是件极其愚蠢的事情（笑）。但你看]]>
-    </summary>
-    <title>社区噪音｜夜醒睡不回去了，我去写写博客，于是就有了本篇～</title>
-    <updated>2026-09-20T04:09:38.000Z</updated>
   </entry>
 </feed>
