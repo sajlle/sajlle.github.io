@@ -11,13 +11,31 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-14T15:06:44.000Z</updated>
+  <updated>2026-10-14T20:19:23.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="故事" scheme="https://sajlle.github.io/categories/%E6%95%85%E4%BA%8B/"/>
+    <category term="印度占星" scheme="https://sajlle.github.io/tags/%E5%8D%B0%E5%BA%A6%E5%8D%A0%E6%98%9F/"/>
+    <id>https://sajlle.github.io/2026/10/14/post-%E6%95%85%E4%BA%8B%E4%BC%9A%EF%BD%9C%E6%A0%B9%E6%8D%AE%E6%98%9F%E7%9B%98%E5%86%99%E5%86%99%E5%8D%B0%E5%BA%A6%E5%8D%A0%E6%98%9F%E6%95%85%E4%BA%8B/</id>
+    <link href="https://sajlle.github.io/2026/10/14/post-%E6%95%85%E4%BA%8B%E4%BC%9A%EF%BD%9C%E6%A0%B9%E6%8D%AE%E6%98%9F%E7%9B%98%E5%86%99%E5%86%99%E5%8D%B0%E5%BA%A6%E5%8D%A0%E6%98%9F%E6%95%85%E4%BA%8B/"/>
+    <published>2026-10-14T20:19:23.000Z</published>
+    <summary>
+      <![CDATA[<p>文：Arashi &amp; Claude(是Opus 5.5酱哦～)</p>
+<p>最近看印度占星，发现如果不先讲神话，很多行星和星宿就只剩下一串名字。所以先写一篇世界观：天神和阿修罗为什么打了几千年，两个阵营的老师分别是谁，以及众神之王因陀罗到底闯过多少祸（笑）。</p>
+<h3 id="阿修罗和天神：谁是神，谁是魔，取决于谁在写历史"><a href="#阿修罗和天神：谁是神，谁是魔，]]>
+    </summary>
+    <title>印度占星｜谁是神，谁是魔：天神、阿修罗和总在闯祸的神王</title>
+    <updated>2026-10-14T20:19:23.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
     </author>
     <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
     <category term="模型" scheme="https://sajlle.github.io/tags/%E6%A8%A1%E5%9E%8B/"/>
+    <category term="快思慢想" scheme="https://sajlle.github.io/tags/%E5%BF%AB%E6%80%9D%E6%85%A2%E6%83%B3/"/>
     <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/</id>
     <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/"/>
     <published>2026-10-14T15:06:44.000Z</published>
@@ -541,23 +559,5 @@
     </summary>
     <title>家庭尸检｜写写一扇窗户，怎么成为家庭冲突外溢到社区的东西？</title>
     <updated>2026-09-20T05:05:36.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="社区冲突" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E5%8C%BA%E5%86%B2%E7%AA%81/"/>
-    <category term="社区观察" scheme="https://sajlle.github.io/tags/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F/"/>
-    <category term="围猎" scheme="https://sajlle.github.io/tags/%E5%9B%B4%E7%8C%8E/"/>
-    <id>https://sajlle.github.io/2026/09/20/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E5%82%BB%E5%AD%90/</id>
-    <link href="https://sajlle.github.io/2026/09/20/%E7%A4%BE%E5%8C%BA%E8%A7%82%E5%AF%9F%EF%BD%9C%E5%85%B3%E4%BA%8E%E5%82%BB%E5%AD%90/"/>
-    <published>2026-09-20T04:40:06.000Z</published>
-    <summary>
-      <![CDATA[<p>声明：本文所指社区为河南省济源市龙潭花园小区。</p>
-<p>去年9月，有人造谣我是妓女。我的电动车被扔了屎。楼下大妈骂我不要脸。<br>今年4月，楼下小孩在窗台上辱骂我。<br>5月我出门逛公园，一个穿紫色衬衫的中年男人骂我是傻逼。我举起手机准备拍摄，他立刻逃走。</p>
-<p>这些人，我甚至都根本不认识。<br>围猎最严重的时候，我从不认识的小孩身边经过，都会被骂。我做了什么呢？不就是过]]>
-    </summary>
-    <title>社区观察｜不是这个地方碰巧坏人多，而是一个靠共同嘲弄来维持秩序的群体，总得不断制造新的坏人</title>
-    <updated>2026-09-20T04:40:06.000Z</updated>
   </entry>
 </feed>
