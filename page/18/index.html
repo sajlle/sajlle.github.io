@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-count">277</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,149 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/" class="post-title-link" itemprop="url">空值缓存可以防止缓存穿透，但……什么时候要用它呢？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 15:41:52" itemprop="dateCreated datePublished" datetime="2026-01-05T15:41:52+00:00">2026-01-05 15:41:52</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-05 15:41:52" itemprop="dateModified" datetime="2026-01-05T15:41:52+00:00">2026-01-05 15:41:52</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h1><p>我写店铺列表接口，要不要上空值缓存呢？<br>key是固定的<code>cache:shop:types</code></p>
+<h1 id="列表接口缓存空值，到底在防啥？"><a href="#列表接口缓存空值，到底在防啥？" class="headerlink" title="列表接口缓存空值，到底在防啥？"></a>列表接口缓存空值，到底在防啥？</h1><p>因为我们这边的key是固定的，所以不大可能会出现“不同id被人恶意传参穿透“的情况。</p>
+<p>但它会遇到两种现实的问题：</p>
+<h2 id="场景1：数据真的为空（初始化-测试库-被误删-迁移期间）"><a href="#场景1：数据真的为空（初始化-测试库-被误删-迁移期间）" class="headerlink" title="场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）"></a>场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）</h2><p>比如：</p>
+<ul>
+<li>新环境刚起，<code>shop_type</code>表还没有导入</li>
+<li>测试库就是空的</li>
+<li>生产迁移时短暂空窗</li>
+<li>有人误删了类型表数据</li>
+</ul>
+<p>这时候你如果不缓存空列表，会发生什么？</p>
+<ul>
+<li>每一个请求都会miss（因为你不写缓存）</li>
+<li>每一个请求都会去查DB</li>
+<li>DB这条SQL会被持续刷屏<br>这叫“空结果击穿&#x2F;持续回源”（不算经典穿透，但效果类似：一直打库）</li>
+</ul>
+<p>缓存空值，就能让系统在“确定为空”期间：</p>
+<ul>
+<li>只打库一次</li>
+<li>后续请求都直接返回空列表</li>
+<li>等数据补上之后（或者删除缓存），再恢复正常<blockquote>
+<p>这在“配置&#x2F;字典类数据”上很常见，你要允许系统在异常数据态下仍然稳定。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）"><a href="#场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）" class="headerlink" title="场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）"></a>场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）</h2><p>有些情况会被认为「查不到就是空」，但可能是：</p>
+<ul>
+<li>读库刚切换，延迟，短暂不可用</li>
+<li>超时会被熔断&#x2F;降级处理成空集合</li>
+<li>SQL会被限流，返回空（取决于代理&#x2F;中间件）</li>
+<li>catch了异常，错误地返回<code>Collections.emptyList()</code></li>
+</ul>
+<p>如果这类偶发空，经常发生，而空值缓存TTL设置的很长，就会把偶发故障固化。</p>
+<p>所以正确的姿势是：</p>
+<ul>
+<li>空值缓存也可以做，但TTL要够短（分钟级）</li>
+<li>让它只是短暂回血，而不是长期误导</li>
+</ul>
+<h1 id="那店铺列表真的需要空值缓存吗？"><a href="#那店铺列表真的需要空值缓存吗？" class="headerlink" title="那店铺列表真的需要空值缓存吗？"></a>那店铺列表真的需要空值缓存吗？</h1><p>看业务约束。</p>
+<p>如果你认为“店铺列表类型不可能为空，空就是故障”，那你可以：</p>
+<ul>
+<li>不缓存空值</li>
+<li>直接抛异常&#x2F;返回错误码</li>
+<li>同时报警</li>
+</ul>
+<p>如果你希望“就算为空也别把DB打爆，系统先稳住“，那就：</p>
+<ul>
+<li>缓存空列表，TTL分钟级（2～10分钟）</li>
+<li>并且在后台日志里标记，店铺列表为空，供后续排查</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>查询详情：防 穿透（不存在的id反复被查询）</li>
+<li>查询列表：防 空结果持续回源（确实为空的时候反复被查）+ 防止故障抖动导致反复重建&#x2F;打库</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1464,161 +1607,6 @@
 <p><strong>是我有没有保持输出&#x2F;学习&#x2F;行动？</strong></p>
 </blockquote>
 <p>不是收入，是进度。 人只要动起来，就不会塌。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/31/%E8%B5%B7%E6%AD%A5%E6%9C%9F24%E4%B8%AA%E6%9C%88%E7%94%9F%E5%AD%98%E6%A8%A1%E6%9D%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/31/%E8%B5%B7%E6%AD%A5%E6%9C%9F24%E4%B8%AA%E6%9C%88%E7%94%9F%E5%AD%98%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">起步期24个月生存模板</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-31 15:19:35" itemprop="dateCreated datePublished" datetime="2025-12-31T15:19:35+00:00">2025-12-31 15:19:35</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-31 15:19:35" itemprop="dateModified" datetime="2025-12-31T15:19:35+00:00">2025-12-31 15:19:35</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这是一份起步期的核心财务原则，目标不是存钱最大化，而是不断供，不崩溃，不被拖回去。</p>
-<p>所以收入模型分为四个部分</p>
-<blockquote>
-<p>月收入 &#x3D; 100%</p>
-<p>A. 生存刚性（必须活）</p>
-<p>B. 生存弹性（允许波动）</p>
-<p>C. 成长投入（不能断）</p>
-<p>D. 缓冲&#x2F;兜底（救命钱）</p>
-</blockquote>
-<h1 id="起步期24个月，推荐比例区间"><a href="#起步期24个月，推荐比例区间" class="headerlink" title="起步期24个月，推荐比例区间"></a>起步期24个月，推荐比例区间</h1><h2 id="A-生存刚性（35-～40-）"><a href="#A-生存刚性（35-～40-）" class="headerlink" title="A | 生存刚性（35%～40%）"></a>A | 生存刚性（35%～40%）</h2><ul>
-<li>房租 + 水电 + 网：25%–30%</li>
-<li>基础吃饭（不靠意志）：15%–20%</li>
-</ul>
-<p><strong>👉 合计上限：40%</strong></p>
-<p>⚠️ 重点：</p>
-<ul>
-<li>房租宁可贵一点，也不要通勤地狱</li>
-<li>吃饭宁可普通，也不要长期饿或凑合</li>
-</ul>
-<h2 id="B｜生存弹性（5-–10-）"><a href="#B｜生存弹性（5-–10-）" class="headerlink" title="B｜生存弹性（5%–10%）"></a>B｜生存弹性（5%–10%）</h2><ul>
-<li>通勤</li>
-<li>偶尔外食&#x2F;加班餐</li>
-<li>日用品</li>
-<li>小维修&#x2F;小替换</li>
-</ul>
-<h2 id="C-成长投入（10-～15-）【不能断】"><a href="#C-成长投入（10-～15-）【不能断】" class="headerlink" title="C | 成长投入（10%～15%）【不能断】"></a>C | 成长投入（10%～15%）【不能断】</h2><ul>
-<li>技术学习</li>
-<li>工具&#x2F;软件</li>
-<li>书</li>
-<li>稳定出所需成本<br>这部分一旦被压，人开始焦虑 + 走偏路。</li>
-</ul>
-<h2 id="D-兜底-缓冲（10-～20-）"><a href="#D-兜底-缓冲（10-～20-）" class="headerlink" title="D | 兜底&#x2F;缓冲（10%～20%）"></a>D | 兜底&#x2F;缓冲（10%～20%）</h2><ul>
-<li>应急储备</li>
-<li>极端情况（失业&#x2F;空窗期跳槽）<br>前12个月目标：攒到 &gt;&#x3D; 3个月生存费用</li>
-</ul>
-<p>前24个月目标：6个月</p>
-<h1 id="总结版"><a href="#总结版" class="headerlink" title="总结版"></a>总结版</h1><table>
-<thead>
-<tr>
-<th>项目</th>
-<th>比例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>生存刚性</td>
-<td>35%–40%</td>
-</tr>
-<tr>
-<td>生存弹性</td>
-<td>5%–10%</td>
-</tr>
-<tr>
-<td>成长投入</td>
-<td>10%–15%</td>
-</tr>
-<tr>
-<td>兜底储备</td>
-<td>10%–20%</td>
-</tr>
-<tr>
-<td><strong>合计</strong></td>
-<td>≈100%</td>
-</tr>
-</tbody></table>
-<h1 id="两条红线【绝对不可以碰】"><a href="#两条红线【绝对不可以碰】" class="headerlink" title="两条红线【绝对不可以碰】"></a>两条红线【绝对不可以碰】</h1><h2 id="红线1"><a href="#红线1" class="headerlink" title="红线1:"></a>红线1:</h2><p>为了省房租，把自己扔回高压环境。<br>这是毁掉未来空间。</p>
-<h2 id="红线2"><a href="#红线2" class="headerlink" title="红线2:"></a>红线2:</h2><p>为了比例好看，砍掉成长投入。<br>这是慢性自杀。</p>
 
       
 

@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-count">277</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%AF%9B%E7%97%85%E5%87%BA%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%AF%9B%E7%97%85%E5%87%BA%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8A/" class="post-title-link" itemprop="url">技术手记｜启动项目失败，毛病出在目录上</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-11 11:06:55" itemprop="dateCreated datePublished" datetime="2026-02-11T11:06:55+00:00">2026-02-11 11:06:55</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-11 11:06:55" itemprop="dateModified" datetime="2026-02-11T11:06:55+00:00">2026-02-11 11:06:55</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>另，今儿我重测的时候，发现项目启动失败了，错误原因是找不到mapper目录。<br>我仔细一看目录，哎，不知道项目目录里啥时候混进了<code>.idea</code>目录了，删了这个目录，重新编译一下，就可以正常跑了。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1454,114 +1544,6 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> <span class="keyword">user</span> (status) <span class="keyword">VALUES</span> (#&#123;status&#125;)</span><br></pre></td></tr></table></figure>
 <p>如果<code>status = null</code>，实际执行的是：<code>status = null</code>，DB默认不会生效，直接报错。<br>解决办法，用动态SQL</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    status,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    #&#123;status&#125;,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%86%99%E5%8A%A0%E5%AF%86%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%8C%E6%8A%8Apepper%E5%BD%93message%E4%BC%A0%E5%85%A5%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%86%99%E5%8A%A0%E5%AF%86%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%8C%E6%8A%8Apepper%E5%BD%93message%E4%BC%A0%E5%85%A5%E4%BA%86/" class="post-title-link" itemprop="url">技术手记｜我写加密工具类，又踩新坑，把pepper当message传入了</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-08 20:15:05" itemprop="dateCreated datePublished" datetime="2026-02-08T20:15:05+00:00">2026-02-08 20:15:05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-08 20:15:05" itemprop="dateModified" datetime="2026-02-08T20:15:05+00:00">2026-02-08 20:15:05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误版本：SHA256(input + pepper)</p>
-<p>这个版本错误有二：</p>
-<ol>
-<li><code>input + pepper</code>在密码学上是自制协议，有长度拓展，歧义风险</li>
-<li>语义不清：pepper是密钥，不能当成message的一部分</li>
-</ol>
-<p>正确版本：HMAC(key &#x3D; pepper, message &#x3D; input)，在Java里就是HmacSHA256</p>
-<p>另，其他bug：</p>
-<ol>
-<li><code>@Autowire</code>不能注入static</li>
-<li><code>new Security()</code>会绕过Spring，可以改为构造器注入</li>
-</ol>
-<p>这种写法的使用场景：</p>
-<ol>
-<li>登录校验</li>
-<li>token派生（服务端不可伪造token）</li>
-<li>签名校验</li>
-<li>内部安全字段</li>
-</ol>
 
       
 
