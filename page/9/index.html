@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="节点人生">
+<meta property="og:url" content="https://sajlle.github.io/page/9/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AI Agent">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="RabbitMQ">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="个人成长">
+<meta property="article:tag" content="技术复盘">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/page/9/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/9/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>节点人生 - 之瑞的技术复盘、AI Agent 实践与生活观察</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+<meta name="robots" content="noindex">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">节点人生</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="mid-autumn-visuals" aria-hidden="true">
+  <span class="mid-autumn-stars"></span>
+  <span class="mid-autumn-moon"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/29/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%BA%E5%9C%A8%E8%80%81%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84-10086-%E4%B8%AA%E5%9C%A8%E5%A4%96%E9%9D%A2%E6%A0%B9%E6%9C%AC%E7%94%A8%E4%B8%8D%E4%B8%8A%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7%C2%B7AI%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/29/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%BA%E5%9C%A8%E8%80%81%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84-10086-%E4%B8%AA%E5%9C%A8%E5%A4%96%E9%9D%A2%E6%A0%B9%E6%9C%AC%E7%94%A8%E4%B8%8D%E4%B8%8A%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7%C2%B7AI%E7%AF%87/" class="post-title-link" itemprop="url">日常记录｜论在老中学到的 10086 个在外面根本用不上的小技巧·AI篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-29 09:37:48" itemprop="dateCreated datePublished" datetime="2026-06-29T09:37:48+00:00">2026-06-29 09:37:48</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-29 09:37:48" itemprop="dateModified" datetime="2026-06-29T09:37:48+00:00">2026-06-29 09:37:48</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="论在老中学到的-10086-个在外面根本用不上的小技巧"><a href="#论在老中学到的-10086-个在外面根本用不上的小技巧" class="headerlink" title="论在老中学到的 10086 个在外面根本用不上的小技巧"></a>论在老中学到的 10086 个在外面根本用不上的小技巧</h1><p>在一个正常世界里，用户购买 AI 订阅，只需要点击付款。</p>
+<p>在我的世界里，付款前要检查 IP、账号区、手机号、支付卡、礼品卡余额、浏览器缓存、Apple Pay 页面、风控状态，以及自己今天有没有被系统随机选中成为“异常用户”。</p>
+<p>我不是在使用 AI。<br>我是在参加一场由支付系统、地缘限制、风控模型和平台客服共同举办的密室逃脱。</p>
+<p>最荒诞的是，这些技巧并不是我想学的。</p>
+<p>我本来只是想用 AI 写代码，刷算法，整理项目，准备面试。结果一路学下来，Java 后端还没完全拿下，账号地缘政治先学会了；Redis Lua 还没背熟，支付链路排雷已经烂熟于心；三数之和还会漏 <code>Arrays.sort(nums)</code>，但判断一个平台是前台 404 还是后台风控，我已经有了近乎野生工程师的直觉。</p>
+<p>别人学 AI，是学：</p>
+<p>Prompt engineering。<br>Agent workflow。<br>AI productivity。<br>Context management。</p>
+<p>我学 AI，是学：</p>
+<p>账号区怎么影响付款。<br>手机号怎么保号。<br>哪个浏览器容易抽风。<br>Apple Pay 为什么会突然 page not found。<br>礼品卡充值之后为什么还是像在抽盲盒。<br>同一个按钮点下去，为什么昨天是付款，今天是献祭。</p>
+<p>这是一种很老中特色的技能树。</p>
+<p>它不是生产力工具教程。<br>它是“如何在一个不稳定系统里尽量活下来”。</p>
+<p>比如，你不能默认一个服务会正常工作。你要默认它随时背刺你。</p>
+<p>你不能默认报错信息是真的。<br>它说 page not found，可能不是页面不存在。<br>它说 payment failed，可能不是钱不够。<br>它说 try again later，可能是你这辈子都别想再试。<br>它什么都不说，只转圈，那更可怕，说明系统已经进入一种“我知道你急，但我不想负责”的禅定状态。</p>
+<p>于是用户被迫成为侦探。</p>
+<p>先看是不是网络问题。<br>再看是不是浏览器问题。<br>再看是不是地区问题。<br>再看是不是卡的问题。<br>再看是不是账号的问题。<br>再看是不是风控的问题。<br>最后看是不是自己命不好。</p>
+<p>一套排查下来，感觉自己不是在买订阅，而是在做跨境支付链路压测。</p>
+<p>更离谱的是，很多时候你真的能排出来。</p>
+<p>这就是老中互联网训练出来的荒诞能力：平台不说人话，但我能猜出它在想什么。</p>
+<p>按钮灰了，不是按钮的问题。<br>验证码不到，不是手机的问题。<br>订单失败，不一定是支付的问题。<br>页面 404，也未必是页面的问题。</p>
+<p>一个正常用户看到 404 会说：页面不存在。<br>一个老中 AI 用户看到 404 会说：前台假死，后台风控，接口可能被拦了。</p>
+<p>你看，这种能力多么没有必要，又多么熟练。</p>
+<p>它像一种生活污染。你明明只是想用工具，却被迫理解工具背后的限制、漏洞、合规、地区、风控和平台性格。你不是消费者，你是半个运维、半个风控分析师、半个支付灾难幸存者。</p>
+<p>而且这些小技巧出了这个环境，很多都毫无用处。</p>
+<p>在正常环境里，买订阅就是买订阅。<br>在我们这里，买订阅像打副本。</p>
+<p>你要准备主账号。<br>准备备用账号。<br>准备备用邮箱。<br>准备备用手机号。<br>准备备用支付方式。<br>准备不同浏览器。<br>准备不同网络环境。<br>准备礼品卡。<br>准备截图。<br>准备客服沟通材料。<br>准备一颗被折磨到没有脾气的心。</p>
+<p>最后还要准备接受现实：你都准备好了，系统还是可以随机发疯。</p>
+<p>这就很像老中生活教给人的一种底层经验：不要相信流程，不要相信承诺，不要相信“应该可以”。你要相信异常，相信备份，相信截图，相信留痕，相信多准备一套方案。</p>
+<p>这套能力当然有用。<br>但它的有用本身就很悲哀。</p>
+<p>因为在一个正常系统里，用户本来不该学会这些。</p>
+<p>用户不该学会如何判断后台风控。<br>不该学会如何绕过支付失败。<br>不该学会如何给账号做风险隔离。<br>不该学会如何在多个平台之间分配身份、手机号、订阅和额度。<br>不该买一个 AI 工具，买出一种边境线上的求生感。</p>
+<p>更不该在写完力扣三数之和以后，还要复盘：今天真正偷走我一小时的不是算法，是 Apple gift card。</p>
+<p>算法至少给我反馈。<br>错了就是错了。<br>漏排序就是漏排序。<br><code>right++</code> 写错就是写错。<br>改完就能过。</p>
+<p>但风控系统不会告诉你哪里错。它只会给你一个错误页面，让你在浏览器、账号、支付卡、网络环境之间来回怀疑人生。</p>
+<p>力扣骂你，是明着骂。<br>平台折磨你，是装作自己没折磨你。</p>
+<p>所以我有时候觉得，老中女用 AI 命苦，不是矫情，是客观事实。</p>
+<p>要学技术。<br>要防封号。<br>要防支付失败。<br>要防地区限制。<br>要防平台抽风。<br>要防工具突然涨价。<br>要防服务不可用。<br>还要防自己被这一套乱七八糟的东西磨到怀疑人生。</p>
+<p>别人使用 AI，是打开一扇门。<br>我们使用 AI，是先确认门后有没有摄像头、门禁、风控、验证码、支付墙，以及门会不会在我刚伸脚进去的时候突然消失。</p>
+<p>最可气的是，折腾完以后，AI 真的有用。</p>
+<p>所以你还不能潇洒地说“老娘不用了”。</p>
+<p>你只能一边骂，一边继续用。<br>一边排雷，一边写代码。<br>一边防封，一边刷题。<br>一边被 Apple gift card 偷走一小时，一边在力扣上把三数之和写到通过。</p>
+<p>这就是当代 AI 用户的荒诞日常：</p>
+<p>我不是在追赶技术革命。<br>我是在技术革命的门口反复证明：我不是异常用户。</p>
+<p>而我在老中学到的 10086 个小技巧，最终都指向同一句话：</p>
+<p>在一个足够不稳定的环境里，普通人会被迫变得非常聪明。<br>但这种聪明，很多时候不是天赋。<br>是被系统折磨出来的防御性熟练。</p>
+<p>所以如果有一天，我真的到了一个正常环境，点击付款，订阅成功，验证码秒到，账号安全，服务稳定，没有 404，没有风控，没有玄学，没有“请稍后重试”。</p>
+<p>我可能不会立刻高兴。</p>
+<p>我会先愣住三秒，然后怀疑：<br>这是不是又是什么新的陷阱？</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/29/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CApple-%E5%AE%98%E7%BD%91%E4%B9%B0%E7%A4%BC%E5%93%81%E5%8D%A1%E7%BF%BB%E8%BD%A6%E8%AE%B0%EF%BC%9A%E5%89%8D%E5%8F%B0404%EF%BC%8C%E5%90%8E%E5%8F%B0541%EF%BC%8C%E6%98%AF%E6%8A%8A%E7%94%A8%E6%88%B7%E5%BD%93%E5%85%8D%E8%B4%B9%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BA%86%E5%90%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/29/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CApple-%E5%AE%98%E7%BD%91%E4%B9%B0%E7%A4%BC%E5%93%81%E5%8D%A1%E7%BF%BB%E8%BD%A6%E8%AE%B0%EF%BC%9A%E5%89%8D%E5%8F%B0404%EF%BC%8C%E5%90%8E%E5%8F%B0541%EF%BC%8C%E6%98%AF%E6%8A%8A%E7%94%A8%E6%88%B7%E5%BD%93%E5%85%8D%E8%B4%B9%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BA%86%E5%90%97/" class="post-title-link" itemprop="url">日常记录｜Apple 官网买礼品卡翻车记：前台404，后台541，用户的时间不是时间？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-29 08:30:08" itemprop="dateCreated datePublished" datetime="2026-06-29T08:30:08+00:00">2026-06-29 08:30:08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-29 08:30:08" itemprop="dateModified" datetime="2026-06-29T08:30:08+00:00">2026-06-29 08:30:08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Apple-官网买礼品卡翻车记：前台-404，后台-541，用户时间不是时间吗？"><a href="#Apple-官网买礼品卡翻车记：前台-404，后台-541，用户时间不是时间吗？" class="headerlink" title="Apple 官网买礼品卡翻车记：前台 404，后台 541，用户时间不是时间吗？"></a>Apple 官网买礼品卡翻车记：前台 404，后台 541，用户时间不是时间吗？</h1><p>今天本来只是想在 Apple 官网买一张 20 美元的 Apple Gift Card。</p>
+<p>很简单的用户路径：</p>
+<p>选择金额 → 填收件人邮箱 → 填发件人邮箱 → 选择 Apple Pay → 付款。</p>
+<p>理论上，这应该是一个大型科技公司最成熟、最基础、最不该出问题的链路。毕竟这是 Apple，不是某个小作坊商城。结果我被它折腾到没脾气。</p>
+<p>问题表现非常离谱：每次到付款环节，选择 Apple Pay 之后，页面直接跳到：</p>
+<blockquote>
+<p>The page you’re looking for can’t be found.</p>
+</blockquote>
+<p>也就是经典 404。</p>
+<p>我一开始还以为是浏览器问题。于是换浏览器，换模式，试 guest checkout，来回折腾。结果依然是同一个结局：付款时跳 404。</p>
+<p>最烦人的不是失败本身，而是它完全不告诉用户为什么失败。</p>
+<p>你到底是：</p>
+<ul>
+<li>付款没通过？</li>
+<li>风控没过？</li>
+<li>地区不匹配？</li>
+<li>Apple Pay 回调失败？</li>
+<li>订单创建失败？</li>
+<li>购物袋 session 崩了？</li>
+<li>礼品卡这个品类不允许当前环境购买？</li>
+<li>还是你 Apple 自己后端炸了？</li>
+</ul>
+<p>它都不说。</p>
+<p>最后我打开浏览器开发者工具，才看到真正有用的信息：在发起一个 Apple Store 购物袋相关的 POST 请求时，后端返回了 <code>541</code>。</p>
+<p>这就更有意思了。</p>
+<p>前台给用户看的，是“页面找不到”。<br>后台实际发生的，是某个 POST 请求失败，并返回了一个非标准的 5xx 状态码。</p>
+<p>也就是说，这不是用户访问了一个不存在的网页，而是 Apple 的业务链路在付款&#x2F;购物袋&#x2F;订单状态这一段失败了。前端没有把真实业务错误展示给用户，而是把用户扔进了一个毫无信息量的 404 页面。</p>
+<p>这类体验对普通用户非常不友好。因为用户看到 404，只会以为是自己哪里操作错了，于是开始：</p>
+<p>换浏览器。<br>清缓存。<br>换无痕。<br>换 guest。<br>重新填写表单。<br>检查邮箱。<br>检查扣款。<br>担心是不是重复下单。<br>担心是不是 pending 授权。</p>
+<p>也就是说，平台自己的错误处理没做好，最后让用户用时间帮它排障。</p>
+<p>从工程角度看，这个问题最不应该的地方不是“系统失败”。任何系统都会失败，支付链路、风控链路、订单链路都可能失败，这很正常。</p>
+<p>真正不应该的是：失败之后没有清晰的错误反馈。</p>
+<p>一个合格的电商&#x2F;支付链路，至少应该告诉用户：</p>
+<blockquote>
+<p>We can’t complete this purchase right now. Please try another payment method or contact Apple Support.</p>
+</blockquote>
+<p>或者更具体一点：</p>
+<blockquote>
+<p>Your payment was not completed. You have not been charged.</p>
+</blockquote>
+<p>或者：</p>
+<blockquote>
+<p>We’re unable to process this gift card order right now. Please try again later.</p>
+</blockquote>
+<p>哪怕因为风控原因不能暴露具体规则，也应该给用户一个明确的状态：付款是否成功，订单是否创建，用户下一步应该做什么。</p>
+<p>但 Apple 这次给我的体验是：</p>
+<p>前端：页面找不到。<br>后端：POST 失败，541。<br>用户：我是谁？我在哪？钱扣没扣？</p>
+<p>这就是典型的“内部复杂度外溢”。</p>
+<p>风控不想暴露细节，可以理解。支付链路需要谨慎，也可以理解。但不能因为你内部系统复杂，就让用户面对一个伪装成网页不存在的错误页。用户不是你们的测试工程师，也不是你们的日志分析系统。</p>
+<p>更讽刺的是，这还是 Apple。</p>
+<p>Apple 一向强调设计、体验、流畅、少让用户思考。结果到了 Apple Store 网页购买礼品卡这种基础链路上，居然能出现“前台 404，后台 541”的割裂体验。</p>
+<p>这不是审美问题，这是工程问题。</p>
+<p>一个 404 页面背后，可能藏着风控、地区、支付、购物袋、订单创建、session、回调一整串复杂链路。但用户不需要知道这些。用户只需要知道：</p>
+<p>我这单成了吗？<br>钱扣了吗？<br>我该等，还是该重试？<br>重试会不会重复扣款？<br>我应该换付款方式，还是联系客服？</p>
+<p>这些问题，页面一个都没回答。</p>
+<p>所以我最后的结论是：</p>
+<p>Apple 官网这条 Gift Card 购买链路，至少在我这次遇到的场景下，错误处理非常糟糕。</p>
+<p>不是“不让买”让人烦。<br>是“不让买也不说为什么，还用 404 装死”让人烦。</p>
+<p>后端可以风控，前端可以兜底，支付可以失败，订单可以不创建。<br>但请不要把一个业务失败包装成页面不存在。</p>
+<p>用户的时间也是时间。</p>
+<p>别让用户在 404 页面前，靠开发者工具考古你们的后端事故。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%B7%B2%E7%BB%8F%E9%AA%8C%E8%AF%81%E8%BF%87GPT%E5%8F%AF%E4%BB%A5%E5%8A%A0%E9%80%9F%E5%86%99%E4%BD%9C%EF%BC%8C%E6%88%91%E5%A5%BD%E5%A5%87%E5%8D%83%E9%97%AE%E5%A6%82%E4%BD%95%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%81%9A%E4%BA%86%E4%B8%AA%E5%B0%8F%E6%B5%8B%E8%AF%95%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%B7%B2%E7%BB%8F%E9%AA%8C%E8%AF%81%E8%BF%87GPT%E5%8F%AF%E4%BB%A5%E5%8A%A0%E9%80%9F%E5%86%99%E4%BD%9C%EF%BC%8C%E6%88%91%E5%A5%BD%E5%A5%87%E5%8D%83%E9%97%AE%E5%A6%82%E4%BD%95%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%81%9A%E4%BA%86%E4%B8%AA%E5%B0%8F%E6%B5%8B%E8%AF%95%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜我已经验证过GPT可以加速写作，我好奇千问如何，于是做了个小测试～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-28 17:08:58" itemprop="dateCreated datePublished" datetime="2026-06-28T17:08:58+00:00">2026-06-28 17:08:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-28 17:08:58" itemprop="dateModified" datetime="2026-06-28T17:08:58+00:00">2026-06-28 17:08:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>哎，我用的是Qwen 3.7 Max，是2026年5月18日发布的新模型。之前教育资源幻觉的长文，是跟GPT 4o协作的（嗯，去年聊出来的初稿，只是一直没改没发）。</p>
+<p>测试的方式是： 跟和gpt 4o聊天一样，也是闲聊起手。边聊边喂料。<br>（之前4o那篇我也不是直接写提示词让它如何如何写的，而是边瞎扯边扩充）。</p>
+<p>最后千问的表现不大行：</p>
+<ol>
+<li>不主动，我跟4o聊的时候，聊到信息密度高的地方，4o主动提议，要不要搞一篇文章发布？千问我不推它不动。</li>
+<li>跟我聊的时候，千问在思考链里泄漏了系统提示词</li>
+<li>千问不好塑形，我喂了很多尖锐的聊和观察，它最后还是给我端出来一锅「大家都很难」「家长鸡娃很辛苦」「孩子压力大很辛苦」「教育需要改善」「不要功利化教育」这种大杂烩鸡汤。其实我本来的意思是「很多人以为自己在教育上给孩子努力了，但努力的方向错了，孩子没得到实际支持，反而要承担家庭&amp;学校双重压力导致的失败」。千问把这一层尖锐的地方抹平了</li>
+</ol>
+<p>嗯，GPT 4o是2024年发布的模型，Qwen 3.7 Max是2026年5月发布的模型，后者还是被前者爆杀……</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B9%8B%E5%89%8D%E9%82%A3%E7%AF%87%E8%AE%B2%E5%8E%BF%E5%9F%8E%E6%95%99%E8%82%B2%E8%B5%84%E6%BA%90%E5%B9%BB%E8%A7%89%E7%9A%84%E9%95%BF%E6%96%87%EF%BC%8C%E4%B8%89%E5%B0%8F%E6%97%B6%E5%87%BA%E9%94%85%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B9%8B%E5%89%8D%E9%82%A3%E7%AF%87%E8%AE%B2%E5%8E%BF%E5%9F%8E%E6%95%99%E8%82%B2%E8%B5%84%E6%BA%90%E5%B9%BB%E8%A7%89%E7%9A%84%E9%95%BF%E6%96%87%EF%BC%8C%E4%B8%89%E5%B0%8F%E6%97%B6%E5%87%BA%E9%94%85%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜之前那篇讲县城教育资源幻觉的长文，三小时出锅～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-28 16:59:15" itemprop="dateCreated datePublished" datetime="2026-06-28T16:59:15+00:00">2026-06-28 16:59:15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-28 16:59:15" itemprop="dateModified" datetime="2026-06-28T16:59:15+00:00">2026-06-28 16:59:15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>流程如下：</p>
+<ol>
+<li>我跟GPT聊了1小时48分钟，搞出来一个初稿</li>
+<li>我去改初稿，排版，发布1小时</li>
+</ol>
+<p>如果正常写这种万字长文，我的速度可能是5～10小时。取决于我是否熟悉素材，是否熟悉写法，是否熟悉概念。</p>
+<p>但我用GPT加速，可以把时间压缩的很短。<br>GPT帮我做的事儿，就是压缩结构，提炼洞察（虽然我喂给它的料本来就很尖锐了）。</p>
+<p>我现在理解程序员看AI写代码的时候那种复杂心态了。<br>AI现在给它一个标题，它没办法写的这么有指向性，但喂给它料，然后纠正它，可以把写作这件事本身，加速的非常快～</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CCodex%E6%90%AC%E7%A0%96%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%9C%A8%E5%8F%91%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%93%8E%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%AE%B6%E6%B2%A1%E4%BA%86Codex%E5%8F%AF%E6%80%8E%E4%B9%88%E5%8A%9E%E5%91%80%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CCodex%E6%90%AC%E7%A0%96%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%9C%A8%E5%8F%91%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%93%8E%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%AE%B6%E6%B2%A1%E4%BA%86Codex%E5%8F%AF%E6%80%8E%E4%B9%88%E5%8A%9E%E5%91%80%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜Codex搬砖的时候，我在发博客，哎，这个家没了Codex可怎么办呀～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-28 16:53:55" itemprop="dateCreated datePublished" datetime="2026-06-28T16:53:55+00:00">2026-06-28 16:53:55</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-28 16:53:55" itemprop="dateModified" datetime="2026-06-28T16:53:55+00:00">2026-06-28 16:53:55</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题～</p>
+<p>我现在也遇到一个新问题，Codex搬砖的时候，我该干点啥？<br>目前就是发发博客～</p>
+<p>哎，反正是我自己的博客，随便写废话也无所谓，人有时候就得干点无聊的事儿，放松一下呀～</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%B5%8B%E8%AF%95%E7%9A%84%E6%97%B6%E5%80%99%E6%88%91%E8%BF%98%E6%98%AF%E7%94%A8curl%E5%90%A7%EF%BC%8C%E5%A5%BD%E7%83%A6Swagger%EF%BC%8C%E7%82%B9%E7%82%B9%E7%82%B9%E7%9A%84%E6%97%B6%E5%80%99%E7%81%AB%E8%B9%AD%E8%B9%AD%E8%B9%AD%E7%9A%84%E6%B6%A8%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%B5%8B%E8%AF%95%E7%9A%84%E6%97%B6%E5%80%99%E6%88%91%E8%BF%98%E6%98%AF%E7%94%A8curl%E5%90%A7%EF%BC%8C%E5%A5%BD%E7%83%A6Swagger%EF%BC%8C%E7%82%B9%E7%82%B9%E7%82%B9%E7%9A%84%E6%97%B6%E5%80%99%E7%81%AB%E8%B9%AD%E8%B9%AD%E8%B9%AD%E7%9A%84%E6%B6%A8%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜测试的时候我还是用curl吧，好烦Swagger，点点点的时候火蹭蹭蹭的涨～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-28 16:22:03" itemprop="dateCreated datePublished" datetime="2026-06-28T16:22:03+00:00">2026-06-28 16:22:03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-28 16:22:03" itemprop="dateModified" datetime="2026-06-28T16:22:03+00:00">2026-06-28 16:22:03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>嗯，今天测试的时候很烦，测试的时候还是自己写脚本算了，用Swagger点点点的时候，很烦～</p>
+<p>边跑测试边改链路边修理bug的时候，用Swagger点点点太烦了～<br>项目没稳定的时候，还是自己写测试脚本吧。</p>
+<p>项目稳定了再搞文档展示～</p>
+<p>嗯，这工具最烦的一点就是会自作主张帮你做很多你没要求的事儿，比如</p>
+<blockquote>
+<p>自动拼 Authorization，自动带默认 header ，Content-Type &#x2F; Accept 自动补 ，参数空值处理不透明 ，表单 &#x2F; JSON 类型切换不明显 ，请求体被 UI 格式化 ，token scheme 配置错了还会悄悄影响请求</p>
+</blockquote>
+<p>然后接口测不通的时候，会想：</p>
+<blockquote>
+<p>到底是我接口错了？ 还是 Swagger 发的请求跟我以为的不一样？</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/27/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%9B%E6%AD%A5%E6%9C%80%E5%BF%AB%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%98%AF%E6%88%91%E7%94%A8AI%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%BE%88%E5%A5%BD%E5%A5%87%EF%BC%8CAI%E8%83%BD%E5%90%A6%E5%AE%9E%E7%8E%B0%E5%AD%A6%E4%B9%A0%E5%B9%B3%E6%9D%83%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/27/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%9B%E6%AD%A5%E6%9C%80%E5%BF%AB%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%98%AF%E6%88%91%E7%94%A8AI%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%BE%88%E5%A5%BD%E5%A5%87%EF%BC%8CAI%E8%83%BD%E5%90%A6%E5%AE%9E%E7%8E%B0%E5%AD%A6%E4%B9%A0%E5%B9%B3%E6%9D%83%EF%BC%9F/" class="post-title-link" itemprop="url">日常记录｜我学计算机进步最快的时候，是我抓着 AI 问废话的时候</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-27 09:50:47" itemprop="dateCreated datePublished" datetime="2026-06-27T09:50:47+00:00">2026-06-27 09:50:47</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-27 09:50:47" itemprop="dateModified" datetime="2026-06-27T09:50:47+00:00">2026-06-27 09:50:47</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>其实，AI 并没有自动抹平能力差距，但它显著降低了非科班、非名校、非大厂实习背景的人接触工程隐性知识的门槛。</p>
+<p>培训班和AI的差别是？<br>培训班是：先讲概念 → 跟敲代码 → 项目跑通。<br>AI是：我现在要改这个业务 → 遇到具体问题 → 追问原因 → 修改 → 跑通 → 再抽象成理解。</p>
+<p>培训班和AI的教学效率？</p>
+<ul>
+<li>培训班时期，我用六七个月，只学会了抄代码。</li>
+<li>用AI的时候，2个月从一窍不通到能写支付模块。</li>
+</ul>
+<p>培训班的时期，我无法获得真实的工程经验。<br>但如今，我能靠着AI，在遇到真实问题的时候，获取藏在项目组，公司经验，师徒关系里的隐性知识。</p>
+<p>培训班给我的是跑通的代码，AI给我的是追问的机会。<br>而我本来的优势不是获取信息差，而是处理信息、拆问题、反复追问、把散乱东西组织成理解。<br>正好，AI时代，会奖励这些能力。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9F%A5%E4%B9%8E%E8%A2%AB%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%E4%BA%86%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%8D%A2%E7%9C%8B%E4%B9%A6%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9F%A5%E4%B9%8E%E8%A2%AB%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%E4%BA%86%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%8D%A2%E7%9C%8B%E4%B9%A6%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜最近厕所看知乎被鬼图吓到了，于是换看书～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-25 16:31:10" itemprop="dateCreated datePublished" datetime="2026-06-25T16:31:10+00:00">2026-06-25 16:31:10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-25 16:31:10" itemprop="dateModified" datetime="2026-06-25T16:31:10+00:00">2026-06-25 16:31:10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>嗯，如题。</p>
+<p>目前打算在厕所看的是《叫魂》，嗯，要不是今儿连着发两段摘抄，写的很精彩。</p>
+<p>回头一看作者孔飞力还有几本有趣的书，我列下来，等叫魂看完看：</p>
+<ul>
+<li>《中华帝国晚期的叛乱及其敌人：1796—1864年的军事化与社会结构》<ul>
+<li>《叫魂》讲的是：「恐慌如何穿透皇帝、官僚和民间社会？」</li>
+<li>这本讲的是：「暴乱如何迫使国家把暴力能力下放给地方精英？」</li>
+<li>大概会涉及「太平天国」「白莲教」「湘军」「团练」等等</li>
+</ul>
+</li>
+<li>《他者中的华人：中国近现代移民史》<ul>
+<li>这本讲的是：华人如何在中国、殖民帝国、当地社会、世界资本流动之间，被不断定位、利用、排斥、整合。</li>
+<li>跟《叫魂》很像的地方是，这本也在讲边缘人如何在夹缝中生存，叫魂里的边缘人是石匠，和尚，铁匠等等，这本书里的边缘人是华人移民</li>
+<li>这本书时间跨度很大，大概从1400年讲到改革开放</li>
+</ul>
+</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/25/%E4%B9%A6%E6%96%8B%EF%BD%9C%E3%80%8A%E5%8F%AB%E9%AD%82%E3%80%8B%EF%BC%9A%E6%B2%A1%E4%BA%BA%E4%BC%9A%E5%93%80%E6%82%BC%E4%B8%AD%E5%9B%BD%E7%9A%84%E6%97%A7%E5%AE%98%E5%83%9A%E5%88%B6%E5%BA%A6%E2%80%A6%E2%80%A6%E4%BD%86%E4%B8%8D%E8%AE%BA%E6%98%AF%E5%A5%BD%E4%BA%8B%E8%BF%98%E6%98%AF%E5%9D%8F%E4%BA%8B%EF%BC%8C%E5%AE%83%E7%9A%84%E7%89%B9%E6%80%A7%E5%8D%B4%E5%8F%AF%E4%BB%A5%E9%98%BB%E6%8C%A1%E4%BB%BB%E4%BD%95%E4%B8%80%E7%A7%8D%E7%8B%82%E7%83%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/25/%E4%B9%A6%E6%96%8B%EF%BD%9C%E3%80%8A%E5%8F%AB%E9%AD%82%E3%80%8B%EF%BC%9A%E6%B2%A1%E4%BA%BA%E4%BC%9A%E5%93%80%E6%82%BC%E4%B8%AD%E5%9B%BD%E7%9A%84%E6%97%A7%E5%AE%98%E5%83%9A%E5%88%B6%E5%BA%A6%E2%80%A6%E2%80%A6%E4%BD%86%E4%B8%8D%E8%AE%BA%E6%98%AF%E5%A5%BD%E4%BA%8B%E8%BF%98%E6%98%AF%E5%9D%8F%E4%BA%8B%EF%BC%8C%E5%AE%83%E7%9A%84%E7%89%B9%E6%80%A7%E5%8D%B4%E5%8F%AF%E4%BB%A5%E9%98%BB%E6%8C%A1%E4%BB%BB%E4%BD%95%E4%B8%80%E7%A7%8D%E7%8B%82%E7%83%AD/" class="post-title-link" itemprop="url">书斋｜读〈叫魂〉：恐慌政治中的制度刹车</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-25 15:08:34" itemprop="dateCreated datePublished" datetime="2026-06-25T15:08:34+00:00">2026-06-25 15:08:34</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-25 15:08:34" itemprop="dateModified" datetime="2026-06-25T15:08:34+00:00">2026-06-25 15:08:34</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B9%A6%E6%96%8B/" itemprop="url" rel="index"><span itemprop="name">书斋</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>以下为《叫魂：1768年中国妖术大恐慌》阅读摘抄，供日后回看。<br>这一段来自书最后一章《官僚制度：谨慎的喝彩》</p>
+<p>没有人会哀悼旧中国的官僚制度。即使按照当时的标准，它所造成的社会伤害也已超出了仅仅压碎几个无依无助的游民踝骨的程度。</p>
+<p>但不论是好事还是坏事，它的特性却可以阻挡任何一种狂热。没有这样一个应急的锚碇，中国就会在风暴中急剧偏航。</p>
+<p>在缺乏一种可行的替代制度的情况下，统治者就可以利用操纵民众的恐惧，将之转变为可怕的力量。生活于我们时代的那些异见人士和因社会背景或怪异信仰而易受指控的替罪羊，便会成为这种力量的攻击目标。</p>
+<p>没有什么能够伫立其间，以阻挡这种疯狂。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/25/%E4%B9%A6%E6%91%98%EF%BD%9C%E6%98%A8%E5%84%BF%E4%B8%8A%E5%8E%95%E6%89%80%E8%A2%AB%E7%9F%A5%E4%B9%8E%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%EF%BC%8C%E4%BB%8A%E5%84%BF%E6%88%91%E6%8D%A2%E6%88%90%E4%BA%86%E7%9C%8B%E4%B9%A6%EF%BC%8C%E8%B0%81%E4%B8%8D%E6%83%B3%E6%8B%89%E5%B1%8E%E7%9A%84%E6%97%B6%E5%80%99%E8%B5%A4%E6%80%A5%E7%99%BD%E8%84%B8%E7%9A%84%E7%9C%8B%E4%B8%A4%E9%A1%B5%E3%80%8A%E5%8F%AB%E9%AD%82%E3%80%8B%E5%91%A2%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/25/%E4%B9%A6%E6%91%98%EF%BD%9C%E6%98%A8%E5%84%BF%E4%B8%8A%E5%8E%95%E6%89%80%E8%A2%AB%E7%9F%A5%E4%B9%8E%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%EF%BC%8C%E4%BB%8A%E5%84%BF%E6%88%91%E6%8D%A2%E6%88%90%E4%BA%86%E7%9C%8B%E4%B9%A6%EF%BC%8C%E8%B0%81%E4%B8%8D%E6%83%B3%E6%8B%89%E5%B1%8E%E7%9A%84%E6%97%B6%E5%80%99%E8%B5%A4%E6%80%A5%E7%99%BD%E8%84%B8%E7%9A%84%E7%9C%8B%E4%B8%A4%E9%A1%B5%E3%80%8A%E5%8F%AB%E9%AD%82%E3%80%8B%E5%91%A2%EF%BC%9F/" class="post-title-link" itemprop="url">书斋｜〈叫魂〉札记：恐慌如何成为权力</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-25 14:44:16" itemprop="dateCreated datePublished" datetime="2026-06-25T14:44:16+00:00">2026-06-25 14:44:16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-25 14:44:16" itemprop="dateModified" datetime="2026-06-25T14:44:16+00:00">2026-06-25 14:44:16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B9%A6%E6%96%8B/" itemprop="url" rel="index"><span itemprop="name">书斋</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>以下为《叫魂：1768年中国妖术大恐慌》阅读摘抄，供日后回看。</p>
+<p>作为现代中国的前奏，叫魂大恐慌向中国社会的观察者们凸显了一个特别令人难过的现象：<strong>社会上到处表现出以冤冤相报为形式的敌意</strong>。</p>
+<p>叫魂案从一开始就带有这种令人不快的特征。</p>
+<p>在叫魂幽灵的发源地德清，慈相寺的和尚们为把进香客从与他们竞争的那个寺庙吓跑而欲图挑起人们对妖术的恐惧。更有甚者，他们虚构了一个容易为人们相信的故事，即一伙石匠试图用妖术来加害于自己的竞争对手。这是一场戏中戏，每一出都用民间的恐惧来做文章。除了丑恶的妒嫉，还有无耻的贪婪：县役蔡瑞为从肖山和尚们身上勒索钱文，也编造出了可信的罪证。</p>
+<p><strong>一旦官府认真发起对妖术的清剿，普通人就有了很好的机会来清算宿怨或谋取私利</strong>。<strong>这是扔在大街上的上了膛的武器，每个人——无论恶棍或良善——都可以取而用之</strong>。</p>
+<p>在这个权力对普通民众来说向来稀缺的社会里，以“叫魂”罪名来恶意中伤他人成了普通人的一种突然可得的权力。对任何受到横暴的族人或贪婪的债主逼迫的人来说，这一权力为他们提供了某种解脱；对害怕受到迫害的人，它提供了一块盾牌；对想得到好处的人，它提供了奖赏；对妒嫉者，它是一种补偿；对恶棍，它是一种力量；对虐待狂，它则是一种乐趣。</p>
+<p>我们在这里所瞥见的，是否是一个已经被人口过度增长，人均资源比例恶化，社会道德堕落所困扰的社会所遭遇的一种道德报应？在这样一个倍受困扰的社会里，人们会对自己能否通过工作或者学习来改善自身的境遇产生怀疑。这种情况由于腐败而不负责任的司法制度而变得更加无法容忍，没有一个平民百姓指望从制度中获取公平的补偿。</p>
+<p><strong>在这样一个世界里，妖术既是一种权力幻觉，又是对每一个人的一种潜在的权力补偿</strong>。即使叫魂这样的事情从来没有发审过，人们仍然普遍的相信，任何人只要有适当的「技巧」便可以通过窃取别人灵魂而召唤出阴间的力量。这是一种既可怕又富刺激的幻觉。与之相对应的则是真实权力————<strong>人们可以通过指控某人为叫魂者，或者提出这种指控相威胁而得到这种权力。</strong> 施行妖术和提出妖术指控所折射反映出来的是人们的无权无势的状态。对一些无权无势的普通民众来说，弘历的清剿给他们带来了慷慨的机会。</p>
+<p>这种“受困扰社会”（impacted society）为反常的权力所搅扰，它和莱斯特·瑟罗（Lester Thurow）所描述的二十世纪美国“零和社会”在某一方面是很相似的。这两种社会都发现，<strong>它们所面临的基本问题已无法通过增进生产来解决，而需要“对损失进行分摊”。</strong> </p>
+<p>但是，两者的一个主要区别在于，在瑟罗笔下的后工业化的美国，人们被出卖的感觉是由于进步和经济成长的信念而产生并得到强化的——这种进步和经济成长一度曾使西方世界相信，所有的困难都会屈服于人类的努力，从中某些人会得益却不会有任何人受到损害。</p>
+<p>与此形成对照，在帝制后期的中国从未有人设想人的努力能够（或应该）产生无限的进步和成长。同一个富裕的工业社会相比较（不管这个社会的贫富差距有多大），“损失分摊”在一个贫穷的农业社会是一种更为严酷的过程。当中国进入近代的时候，社会拥挤、贫穷，人们对于正在侵蚀着普通大众生存机会的种种实际力量则几乎完全没有了解。 “受困扰社会”的特殊政治就是在这种情况下产生的。</p>
+<p>在帝制后期的中国，绝大多数人没有接近政治权力的机会，也就不能以此通过各自的利益相较去竞争社会资源。对普通臣民来说，仅仅是组成团体去追求特殊的社会利益便构成了政治上的风险。</p>
+<p>有时，人们便会到旧的帝国制度之外去寻求这种权力；其结果就是造反和革命。但对大多数人来说，权力通常只是存在于幻觉之中；或者，当国家清剿异己时，他们便会抓住这偶尔出现的机会攫取这种自由飘浮的社会权力。只有非常的境况才会给无权无势者带来突然的机会，使他们得以改善自己的状况或打击自己的敌人。</p>
+<p>即使在今天，让普通民众享有权力仍是一个还未实现的许诺。毫不奇怪，冤冤相报（这是“受困扰社会”中最为普遍的社会进攻方式）仍然是中国社会生活的一个显著特点。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

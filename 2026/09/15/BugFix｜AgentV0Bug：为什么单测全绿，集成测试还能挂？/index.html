@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？">
+<meta property="og:url" content="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-15T18:57:26.000Z">
+<meta property="article:modified_time" content="2026-09-15T18:57:26.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AgentV0">
+<meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/","path":"2026/09/15/BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？/","title":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"},"headline":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？","description":"TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结…","datePublished":"2026-09-15T18:57:26.000Z","dateModified":"2026-09-15T18:57:26.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["AgentV0","Spring Boot"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="mid-autumn-visuals" aria-hidden="true">
+  <span class="mid-autumn-stars"></span>
+  <span class="mid-autumn-moon"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">2.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AF-production-wiring-%E8%BF%98%E6%98%AF-test-wiring%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">是 production wiring 还是 test wiring？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text">根因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-%E4%B8%BA%E5%95%A5%E6%B2%A1%E6%9C%89%E5%85%9C%E5%BA%95%E5%91%A2%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">Optional 为啥没有兜底呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5-Gateway-%E5%8D%95%E6%B5%8B%E3%80%81Provider-selection-test%E3%80%81mvn-test-%E5%85%A8%E7%BB%BF%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">为啥 Gateway 单测、Provider selection test、mvn test 全绿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%B3%95%E5%92%8C%E9%94%99%E8%AF%AF%E4%BF%AE%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">修法和错误修法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired-required-false"><span class="nav-number">7.1.</span> <span class="nav-text">@Autowired(required&#x3D;false)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99-PromptFactory-%E9%9A%8F%E4%BE%BF%E5%86%8D%E5%8A%A0%E4%B8%80%E4%B8%AA-Component"><span class="nav-number">7.2.</span> <span class="nav-text">给 PromptFactory 随便再加一个 @Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-%E6%95%B4%E4%B8%AA-RefundCaseExplanationService"><span class="nav-number">7.3.</span> <span class="nav-text">Mock 整个 RefundCaseExplanationService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A-Optional-%E5%BD%93%E5%85%9C%E5%BA%95"><span class="nav-number">7.4.</span> <span class="nav-text">把 Optional 当兜底</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BD%93%E5%88%9D%E4%BC%9A%E6%89%8B%E5%86%99-Import"><span class="nav-number">8.</span> <span class="nav-text">为什么当初会手写 @Import</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E5%A4%8D%E5%8F%91"><span class="nav-number">9.</span> <span class="nav-text">防止复发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E6%9D%9F"><span class="nav-number">10.</span> <span class="nav-text">收束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="nav-number">10.1.</span> <span class="nav-text">import 配置问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8B%93%E6%89%91%E5%92%8C%E7%94%9F%E4%BA%A7%E6%8B%93%E6%89%91%E6%BC%82%E7%A7%BB"><span class="nav-number">10.2.</span> <span class="nav-text">测试拓扑和生产拓扑漂移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-Provider-%E9%87%8D%E6%9E%84%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%85%AC%E5%85%B1-%E7%A7%81%E6%9C%89%E9%85%8D%E7%BD%AE%E8%BE%B9%E7%95%8C"><span class="nav-number">10.3.</span> <span class="nav-text">多 Provider 重构带来的公共&#x2F;私有配置边界</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ｜AgentV0Bug：为什么单测全绿，集成测试还能挂？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-15 18:57:26" itemprop="dateCreated datePublished" datetime="2026-09-15T18:57:26+00:00">2026-09-15 18:57:26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-15 18:57:26" itemprop="dateModified" datetime="2026-09-15T18:57:26+00:00">2026-09-15 18:57:26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
+<p>最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。</p>
+<p>修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。</p>
+<p>总结：测试上下文和生产上下文并不天然等价。</p>
+<h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>IT 稳定 5&#x2F;5 失败，单独跑也挂，所以不是 flaky；</p>
+<p>报错是 UnsatisfiedDependencyException 包了 NoSuchBeanDefinitionException。</p>
+<p>此时单测全绿，mvn test 全绿。</p>
+<h2 id="是-production-wiring-还是-test-wiring？"><a href="#是-production-wiring-还是-test-wiring？" class="headerlink" title="是 production wiring 还是 test wiring？"></a>是 production wiring 还是 test wiring？</h2><p>一开始先不预设是测试的问题，先追完整的依赖链条，看是 production wiring 还是 test wiring？</p>
+<p>有 2 个假设：</p>
+<ul>
+<li>假设 1：production-environment context 缺 bean 导致报错。</li>
+<li>假设 2：production context 正常，但集成测试配置缺 bean，导致测试失败。</li>
+</ul>
+<p>于是我设计了两个 case，验证这两个假设：</p>
+<ul>
+<li>caseA 验证应用在没有开启 AI Explanation 的时候，能正常启动。说明 deterministic core 没有被 AI 配置污染。但不能排除 AI-enabled production wiring 有问题。</li>
+<li>caseB 验证开启 AI Explanation 的时候，当前真实调用链能成功装配。如果 production-equivalent context 本身也缺 bean，那这就是 production wiring defect，假设 1 成立。反之则是假设 2 成立。</li>
+</ul>
+<p>于是我给 Codex 下指令，让它执行命令：</p>
+<ol>
+<li>先追踪完整依赖链条，读取完整的 Spring context failure，明确 constructor 依赖哪个 bean，最终要求 explanationPromptFactory，为什么当前的 ApplicationContext 没有注册它。先汇报实际的 dependency chain，不先改代码。</li>
+<li>分别验证 caseA 和 caseB：不用真实 API key，不调用真实互联网，用测试配置或 fake provider。如果 production-equivalent context 本身也缺 bean，那就是 production wiring defect，不许只修测试。</li>
+<li>如果仅 TestConfiguration 缺乏 bean，也就是 production context 正常，但是 RefundCaseExplanationControllerIT 因为自己的 @Import&#x2F;@TestConfiguration 替换 provider 之后漏掉了 deterministic prompt factory，则只修装配测试。优先注册真实的 explanationPromptFactory，因为 prompt factory 是纯确定性组件，没必要 mock。不许为了让 context 绿了就把<ul>
+<li>production dependency 改成 optional</li>
+<li>使用 @Autowired(required&#x3D;false)</li>
+<li>给整个 application 加宽泛的 component scan</li>
+<li>mock 掉 RefundCaseExplanationService</li>
+<li>mock 掉 deterministic diagnosis chain</li>
+</ul>
+</li>
+</ol>
+<h2 id="根因"><a href="#根因" class="headerlink" title="根因"></a>根因</h2><p>真实的调用链是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RefundCaseExplanationController</span><br><span class="line">-&gt; RefundCaseExplanationService</span><br><span class="line">-&gt; Optional&lt;LlmReasoner&gt;</span><br><span class="line">-&gt; OpenAiLlmReasoner</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br></pre></td></tr></table></figure>
+
+<p>重构之前是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OpenAI configuration ≈ 整个AI configuration</span><br></pre></td></tr></table></figure>
+
+<p>后来为了多 SDK&#x2F;多 provider，把公共逻辑抽出去了，Configuration 包含 LlmCommonConfiguration 和 OpenAiLlmConfiguration，也就是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LlmCommonConfiguration</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br><span class="line"></span><br><span class="line">OpenAiLlmConfiguration</span><br><span class="line">-&gt; OpenAiLlmReasoner</span><br><span class="line"></span><br><span class="line">Anthropic...</span><br></pre></td></tr></table></figure>
+
+<p>所以生产环境的 component scan 会把二者都扫描进来。</p>
+<p>但是测试手写的 @Import(OpenAiLlmConfiguration) 只能拿到 OpenAiLlmConfiguration。</p>
+<p>这就 Bug 了。</p>
+<p>关于这点，证据如下。</p>
+<p>caseA 结果：</p>
+<ul>
+<li>OpenAiLlmConfigurationTest：无 AI 配置时 context 正常启动，不创建 provider Bean。</li>
+<li>RefundCaseControllerIT：5&#x2F;5，通过真实 HTTP → controller → deterministic core 链路验证 &#x2F;diagnose 可用。</li>
+</ul>
+<p>这条结果验证了 AI disabled 的时候，deterministic core 独立成立，防止 explanation 配置反向污染 &#x2F;diagnose。</p>
+<p>caseB 结果。这里要先说清楚一件事：修复后的 IT 跑绿，只能证明「测试 wiring 修好后能跑」，不能反推 production 在 37caac9 时原本就是好的。所以我补做了一次历史 revision 验证：</p>
+<ul>
+<li>Revision：37caac9b2121f3c8662bf0272189a204e5c9bf99</li>
+<li>使用 production 的扫描根 com.coupon，扫描真实的 LlmCommonConfiguration 和 OpenAiLlmConfiguration</li>
+<li>AI enabled，使用测试 key 和不可访问的本地 base URL，不调用供应商</li>
+<li>没有导入修复后的 RefundCaseExplanationControllerIT</li>
+<li>明确断言：context 启动成功、ExplanationPromptFactory 恰好一个、LlmReasoner 恰好一个</li>
+</ul>
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HistoricalProductionLlmScanTest</span><br><span class="line">Tests run: 1, Failures: 0, Errors: 0</span><br><span class="line">BUILD SUCCESS</span><br></pre></td></tr></table></figure>
+
+<p>临时验证代码只存在于 37caac9 的隔离快照里，没有修改当前工作树。</p>
+<p>于是在同一个 revision 上形成了真正的 A&#x2F;B 对照：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">production-package-scan context</span><br><span class="line">→ LlmCommonConfiguration 被扫描</span><br><span class="line">→ ExplanationPromptFactory 唯一</span><br><span class="line">→ LlmReasoner 成功创建</span><br><span class="line">→ PASS</span><br><span class="line"></span><br><span class="line">RefundCaseExplanationControllerIT 手写窄上下文</span><br><span class="line">→ 只 @Import OpenAiLlmConfiguration</span><br><span class="line">→ 没有扫描/导入 LlmCommonConfiguration</span><br><span class="line">→ 缺 ExplanationPromptFactory</span><br><span class="line">→ 5/5 context error</span><br></pre></td></tr></table></figure>
+
+<p>证据边界也要说清楚：这证明的是与本问题直接相关的 LLM Bean 装配子图，不等于在该历史 revision 上完整启动了包含 MySQL、Redis、RabbitMQ、调度器的整个 CouponApplication。</p>
+<p>两个 case 合起来，可以确定坏的是 test wiring drift，而不是 production wiring defect。</p>
+<h2 id="Optional-为啥没有兜底呢？"><a href="#Optional-为啥没有兜底呢？" class="headerlink" title="Optional 为啥没有兜底呢？"></a>Optional 为啥没有兜底呢？</h2><p>因为 Optional&lt;T&gt; 能处理的是「0 个 T -&gt; Optional.empty()」，处理不了「有一个 T 是候选，但这个 T 是坏的，创建失败」。</p>
+<p>如果用 Optional 来修，会扭曲架构语义。我这边原本架构是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AI disabled</span><br><span class="line">-&gt; 没有LlmReasoner</span><br><span class="line">-&gt; /diagnose 正常</span><br><span class="line"></span><br><span class="line">AI enabled</span><br><span class="line">-&gt; LlmReasoner 必须完整可创建</span><br><span class="line">-&gt; 配置错误就应该启动失败</span><br></pre></td></tr></table></figure>
+
+<p>而不是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AI enabled但是配置失败</span><br><span class="line">-&gt; 算了，当AI disabled吧</span><br></pre></td></tr></table></figure>
+
+<p>后者会隐藏部署错误。</p>
+<p>所以，Optional 允许缺席，但不允许失败。</p>
+<h2 id="为啥-Gateway-单测、Provider-selection-test、mvn-test-全绿？"><a href="#为啥-Gateway-单测、Provider-selection-test、mvn-test-全绿？" class="headerlink" title="为啥 Gateway 单测、Provider selection test、mvn test 全绿？"></a>为啥 Gateway 单测、Provider selection test、mvn test 全绿？</h2><p>因为测试层级不同。</p>
+<p>Gateway 单测，大概类似 new SdkCompatChatGateway(…)，对象直接 new。它能验证：</p>
+<ul>
+<li>JSON parsing</li>
+<li>strict schema</li>
+<li>finish reason</li>
+<li>coercion</li>
+<li>malformed response</li>
+</ul>
+<p>但它根本没问 Spring：你能不能把整条 &#x2F;explain 依赖装配起来。所以看不到 bean 丢失。</p>
+<p>那为啥 Provider selection test 绿了呢？因为这类测试已经显式地 import 了 LlmCommonConfiguration，所以它也是绿的。</p>
+<p>为啥普通的 mvn test 也绿呢？因为普通的 mvn test 的时候，Failsafe 的 *IT 不执行。所以单元测试全绿，并不代表整个 Spring HTTP integration context 能启动。直到 mvn verify 跑到 RefundCaseExplanationControllerIT，才第一次真正走了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Spring Context</span><br><span class="line">-&gt; Controller</span><br><span class="line">-&gt; Service</span><br><span class="line">-&gt; Provider Bean</span><br><span class="line">-&gt; PromptFactory</span><br></pre></td></tr></table></figure>
+
+<p>所以炸出来了。</p>
+<p>三个测试都绿了，是真的。但没有一个在回答整条 &#x2F;explain 能不能被 Spring 装起来。</p>
+<h2 id="修法和错误修法"><a href="#修法和错误修法" class="headerlink" title="修法和错误修法"></a>修法和错误修法</h2><p>最终改动是两行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;</span></span><br><span class="line"><span class="meta">        LlmCommonConfiguration.class,   // ← 补这一行</span></span><br><span class="line"><span class="meta">        OpenAiLlmConfiguration.class,</span></span><br><span class="line"><span class="meta">        ...</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么只动测试不动生产？因为上面 caseA&#x2F;caseB 已经证明了 production-equivalent context 能完整装配，坏的是测试自己裁剪过的 context。生产 wiring 没坏，就不该为了让测试绿而去改生产。</p>
+<p>验收结果。先是修复后的 IT，<code>RefundCaseExplanationControllerIT#normalCaseShouldFlowFromMysqlThroughRealSdkHttpAdapterToExplanation</code>：</p>
+<ul>
+<li>通过 MockMvc 调用真实 &#x2F;explain Controller。</li>
+<li>真实 RefundCaseExplanationService、真实 deterministic diagnosis 链路、真实 OpenAI SDK adapter 全部参与。</li>
+<li>base-url 被替换成本机 Fake Server，Fake Server 明确监听 &#x2F;v1&#x2F;responses，未调用付费 API。</li>
+</ul>
+<p>这条 IT 本身没有单独写 <code>assertThat(context).hasSingleBean(ExplanationPromptFactory.class);</code>，它对唯一性的证明是间接的：openAiLlmReasoner 的必选参数就是 ExplanationPromptFactory，Bean 为 0 个或多个时 context 都起不来，5&#x2F;5 通过说明解析到了唯一候选。唯一性的直接断言在上面 caseB 的历史验证里。</p>
+<p>然后是两次 mvn clean verify，两次之间不改文件：</p>
+<ul>
+<li>第一次：BUILD SUCCESS，耗时 1:14</li>
+<li>第二次：BUILD SUCCESS，耗时 1:22</li>
+<li>第二次报告汇总：Surefire 341&#x2F;341、Failsafe 41&#x2F;41，0 failures、0 errors、0 skipped</li>
+</ul>
+<p>下面是几个不该用的修法。</p>
+<h3 id="Autowired-required-false"><a href="#Autowired-required-false" class="headerlink" title="@Autowired(required&#x3D;false)"></a>@Autowired(required&#x3D;false)</h3><p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired(required=false)</span></span><br><span class="line"><span class="keyword">private</span> ExplanationPromptFactory promptFactory;</span><br></pre></td></tr></table></figure>
+
+<p>这只是把启动时报错，改成了运行到这一行才 NPE&#x2F;fallback。甚至更糟糕，因为 PromptFactory 明明是依赖必须，就应该在启动 provider 的时候明确存在。</p>
+<h3 id="给-PromptFactory-随便再加一个-Component"><a href="#给-PromptFactory-随便再加一个-Component" class="headerlink" title="给 PromptFactory 随便再加一个 @Component"></a>给 PromptFactory 随便再加一个 @Component</h3><p>生产本来已经是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LlmCommonConfiguration -&gt; Bean</span><br></pre></td></tr></table></figure>
+
+<p>再加 @Component，很可能以后直接得到 NoUniqueBeanDefinitionException，那就从缺一个，变成多两个。</p>
+<h3 id="Mock-整个-RefundCaseExplanationService"><a href="#Mock-整个-RefundCaseExplanationService" class="headerlink" title="Mock 整个 RefundCaseExplanationService"></a>Mock 整个 RefundCaseExplanationService</h3><p>这样 ControllerIT 可绿了：HTTP -&gt; mocked service。但真正想验证的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Controller</span><br><span class="line">-&gt; ExplanationService</span><br><span class="line">-&gt; deterministic diagnosis</span><br><span class="line">-&gt; provider adapter</span><br><span class="line">-&gt; fake network</span><br></pre></td></tr></table></figure>
+
+<p>全部被绕过去。这属于是把报警器拆了，不是修路子。</p>
+<h3 id="把-Optional-当兜底"><a href="#把-Optional-当兜底" class="headerlink" title="把 Optional 当兜底"></a>把 Optional 当兜底</h3><p>上面已经说过了，这会把「配置错误」伪装成「功能关闭」，隐藏部署错误。</p>
+<h2 id="为什么当初会手写-Import"><a href="#为什么当初会手写-Import" class="headerlink" title="为什么当初会手写 @Import"></a>为什么当初会手写 @Import</h2><p>回头看这个 bug，容易得出”手写 @Import 是坏习惯”的结论。但当初写成那样，动机是完全正当的：这个 IT 要验证 explanation pipeline，就必须指定用哪个 provider、必须不打付费 API、还得让上下文起得快一点。</p>
+<p>目标没错，错的是实现方式。为了隔离外部依赖，我把整个 dependency graph 重建了一遍，而不是在边界上替换。</p>
+<p><strong>隔离外部依赖，和重建依赖图，是两件事。前者只需要换掉边界，后者会复制一份必然过期的生产拓扑。</strong></p>
+<p>这里其实有三种做法，不是两种。之所以要把第二种也摆出来，是因为正是它的缺点，逼着大家去选第一种：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A. 手写窄 @Import</th>
+<th>B. 完整生产 context + 真外部依赖</th>
+<th>C. 生产装配入口 + 只 fake 边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>真实性</td>
+<td>低。装的是测试自己裁剪的拓扑，不是生产拓扑</td>
+<td>高，但代价是真连供应商</td>
+<td>高。拓扑与生产同源，只有边界被替换</td>
+</tr>
+<tr>
+<td>外部依赖</td>
+<td>已隔离</td>
+<td>需要真实 API key，会产生费用</td>
+<td>已隔离，fake server 在本机</td>
+</tr>
+<tr>
+<td>漂移风险</td>
+<td>高。生产重构后测试不会自动跟进</td>
+<td>无。生产变了测试自动跟着变</td>
+<td>无。同一个装配入口，改一处两边都变</td>
+</tr>
+<tr>
+<td>架构重构时要改几处</td>
+<td>每个手写 IT 各改一处</td>
+<td>0</td>
+<td>1 处（装配入口）</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>待测</td>
+<td>待测</td>
+<td>待测</td>
+</tr>
+</tbody></table>
+<p>本次踩的就是 A 的漂移风险那一格，而且证据是现成的：同一个 37caac9 revision 上，production 扫描根能把 LLM 子图完整装起来，手写窄上下文却缺 Bean——这就是 A 和 C 的差距被量出来的样子。</p>
+<p>B 在现实里基本不可用，所以真正的选择从来不是「隔离」还是「真实」，而是「在哪一层做隔离」。A 在配置层做，于是复制了拓扑；C 在边界层做，拓扑留给生产自己算。</p>
+<h2 id="防止复发"><a href="#防止复发" class="headerlink" title="防止复发"></a>防止复发</h2><p>第一条是原则：集成测试不要复制 production dependency graph。让 production 自己构造 dependency graph，测试只替换 side-effect boundary。</p>
+<p>具体做法：测试不再手挑 configuration 类，改 import 一个生产测试共用的 LLM 装配入口，只在 provider&#x2F;网络边界做替换。</p>
+<p>回归测试：加 wiring regression test，覆盖 AI disabled context 能起，以及 explanation context 下 PromptFactory 有且只有一个。</p>
+<p>这条其实已经有现成的原型了。上面 caseB 用的 HistoricalProductionLlmScanTest，就是一个以 production 扫描根启动、断言 Bean 唯一的最小上下文测试，只不过它只活在 37caac9 的隔离快照里，删掉就没了。把它固化进仓库（换个名字，比如 ProductionLlmWiringTest），下次再抽公共层，先红的就是它，而不是等 Failsafe 跑到 Controller IT。一个临时的排查脚手架，顺手就能变成常驻的护栏。</p>
+<p>流程上，mvn test 不跑 IT，确实是漏洞。IT 红了多久？最早是从多 SDK 重构、公共配置抽离后开始失效；真正首次被完整 verify 捕获是在后续 strict-schema 修复阶段。也就是从 37caac9 持续到 4e3aca8，最后用两行测试 wiring 修复结束。</p>
+<p>日常和 CI 到底应该跑什么？日常：targeted tests &#x2F; mvn test；pre-merge CI：mvn clean verify；可选 nightly：clean verify + repeated flaky-sensitive IT。</p>
+<h2 id="收束"><a href="#收束" class="headerlink" title="收束"></a>收束</h2><p>这个 bug 反映了三层问题：表层是 import 配置问题 -&gt; 中层是拓扑漂移 -&gt; 深层是模块化边界。</p>
+<h3 id="import-配置问题"><a href="#import-配置问题" class="headerlink" title="import 配置问题"></a>import 配置问题</h3><p>最表层的是：@Import 漏了一个配置类。</p>
+<h3 id="测试拓扑和生产拓扑漂移"><a href="#测试拓扑和生产拓扑漂移" class="headerlink" title="测试拓扑和生产拓扑漂移"></a>测试拓扑和生产拓扑漂移</h3><p>也就是测试为了隔离外部 Provider，构造了一个缩小版的 ApplicationContext，架构重构以后生产依赖拓扑变化了，但测试拓扑没有同步变化。</p>
+<h3 id="多-Provider-重构带来的公共-私有配置边界"><a href="#多-Provider-重构带来的公共-私有配置边界" class="headerlink" title="多 Provider 重构带来的公共&#x2F;私有配置边界"></a>多 Provider 重构带来的公共&#x2F;私有配置边界</h3><p>我这边的配置是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common LLM layer</span><br><span class="line">-&gt; ExplanationPromptFactory</span><br><span class="line">-&gt; shared contracts</span><br><span class="line">-&gt; shared policies</span><br><span class="line"></span><br><span class="line">provider layer</span><br><span class="line">-&gt; OpenAI</span><br><span class="line">-&gt; Anthropic</span><br><span class="line">-&gt; compatible provider</span><br></pre></td></tr></table></figure>
+
+<p>这个分层，意味着测试不能够把 OpenAiLlmConfiguration 继续当整个 LLM 系统。</p>
+<p>拆包之后，原来隐式共存的依赖，变成了显式依赖。a</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AgentV0/" rel="tag"># AgentV0</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E6%8A%8A%E5%86%85%E5%AE%B9%E5%9E%8Bhook%E6%94%B9%E6%88%90%E8%BF%90%E8%90%A5%E5%9E%8Bhook%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%95%A5%EF%BC%9F/" rel="prev" title="内容运营｜当我把内容型hook改成运营型hook，会发生啥？">
+                  <i class="fa fa-angle-left"></i> 内容运营｜当我把内容型hook改成运营型hook，会发生啥？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/" rel="next" title="BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转">
+                  BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

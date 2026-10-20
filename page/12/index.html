@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="节点人生">
+<meta property="og:url" content="https://sajlle.github.io/page/12/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AI Agent">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="RabbitMQ">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="个人成长">
+<meta property="article:tag" content="技术复盘">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/page/12/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/12/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>节点人生 - 之瑞的技术复盘、AI Agent 实践与生活观察</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">节点人生</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="mid-autumn-visuals" aria-hidden="true">
+  <span class="mid-autumn-stars"></span>
+  <span class="mid-autumn-moon"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9D%A1%E5%89%8D%E5%88%B7%E4%BA%86%E4%B8%80%E7%82%B9%E6%96%B0%E9%97%BB%EF%BC%8C%E6%88%91%E8%A7%89%E5%BE%97%E7%8E%B0%E5%9C%A8%E5%85%B3%E4%BA%8EAI%E7%9A%84%E4%B8%80%E5%88%87%E6%9C%89%E7%82%B9%E7%96%AF%E7%8B%82%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9D%A1%E5%89%8D%E5%88%B7%E4%BA%86%E4%B8%80%E7%82%B9%E6%96%B0%E9%97%BB%EF%BC%8C%E6%88%91%E8%A7%89%E5%BE%97%E7%8E%B0%E5%9C%A8%E5%85%B3%E4%BA%8EAI%E7%9A%84%E4%B8%80%E5%88%87%E6%9C%89%E7%82%B9%E7%96%AF%E7%8B%82%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜睡前刷了一点新闻，我觉得现在关于AI的一切有点疯狂～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-17 09:36:24" itemprop="dateCreated datePublished" datetime="2026-05-17T09:36:24+00:00">2026-05-17 09:36:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-17 09:36:24" itemprop="dateModified" datetime="2026-05-17T09:36:24+00:00">2026-05-17 09:36:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>睡前我跟GPT瞎扯，又看到了OAI的消息。貌似是更新GPT的记忆系统。</p>
+<p>现在AI概念一个接一个飞过来，我觉得很疯狂。更疯狂的是，我看到的更多的是关于技术的狂热。我没看到与这股狂热对应的伦理进展。所以我觉得这一切很疯狂，程序员拼命写AI，用来代替自己。<br>AI能写代码之后，我想，对效率的追求又该变态的上升了。哎，我总是好奇，以后，能被AI颠覆的一切，会不会变得越来越快？</p>
+<p>OAI和Anthropic都在2026年试图IPO到二级市场抢点钱。<br>这两家公司，很难说，谁在伦理上更好一些，虽然两家在技术上各有千秋。</p>
+<p>OAI把AI技术包装成威胁，所以他们有资格且必须把AI技术掌握在自己手中。<br>Anthropic把技术包装成伦理，所以他们有资格且必须把AI技术掌握在自己手中。</p>
+<p>最近OAI重置了Codex额度，Codex出了手机版，技术上很热闹。但还有一件事，是OAI悄悄把用户的对话信息分享给谷歌和FaceBook。而且各家训练商都默认个人用户数据用于模型训练（笑）。</p>
+<p>另，OAI的4o事件，也做的很难看。当时Anthropic借此营销了一波，承诺不会突然下架自家模型。但很有趣的是，最近Sonnet 4.5也要下架了。<br>OAI做的难看，不代表它的对手就一定很清白。我想，只是OAI把最难看的坑踩了，然后等其他家模型做大，也会变成OAI的。只是到了那时候，用户们早就见怪不怪了。</p>
+<p>所以我觉得……哎，我之前很努力学技术，是我把技术想的太好了，现在去看，那些整个世界最好的技术脑子们，在努力的用技术替代自己。忽然就觉得，哎，技术是技术，智慧是智慧，生存是生存。<br>之前我努力学技术，除了对技术有期待，也对技术好的人有期待，但现在看，貌似这些人……也不过如此。（笑）。</p>
+<p>哎，不过也许人就是如此疯狂，不然怎么会在几十年间，把人口翻倍到80亿呢～</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%87%AA%E4%BB%8E%E5%86%99%E5%8D%9A%E5%AE%A2%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BE%88%E5%B0%91%E5%86%99%E6%97%A5%E8%AE%B0%E4%BA%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/17/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%87%AA%E4%BB%8E%E5%86%99%E5%8D%9A%E5%AE%A2%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%BE%88%E5%B0%91%E5%86%99%E6%97%A5%E8%AE%B0%E4%BA%86/" class="post-title-link" itemprop="url">日常记录｜自从写博客之后，我很少写日记了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-17 09:29:12" itemprop="dateCreated datePublished" datetime="2026-05-17T09:29:12+00:00">2026-05-17 09:29:12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-17 09:29:12" itemprop="dateModified" datetime="2026-05-17T09:29:12+00:00">2026-05-17 09:29:12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。<br>自从我开始写博客之后，我就很少写日记了。</p>
+<p>之前写日记，我一直用DayOne，是360图书馆上的一个命理博主那里看到的。这人算紫微斗数的，每天发发算命笔记。</p>
+<p>再之前，我用OneNote，写了大概八百篇日记。日记跟笔记混在一起。</p>
+<p>再再之前，就是写在微信公众号和知乎上。不过这俩号我应该已经注销了。</p>
+<p>然后换了苹果手机，就写在手记上。开了博客之后，就换成博客。</p>
+<p>这里与其是我的博客，不如是我的私人园地。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CCodex%E6%8E%A8%E5%87%BA%E6%89%8B%E6%9C%BA%E7%89%88%E5%95%A6%EF%BC%8C%E8%BF%99%E6%98%AF%E6%88%91%E7%94%A8Codex%E6%89%8B%E6%9C%BA%E7%89%88%E6%8E%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CCodex%E6%8E%A8%E5%87%BA%E6%89%8B%E6%9C%BA%E7%89%88%E5%95%A6%EF%BC%8C%E8%BF%99%E6%98%AF%E6%88%91%E7%94%A8Codex%E6%89%8B%E6%9C%BA%E7%89%88%E6%8E%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜Codex推出手机版啦，这是我用Codex手机版推的第一个博客～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-15 13:40:40" itemprop="dateCreated datePublished" datetime="2026-05-15T13:40:40+00:00">2026-05-15 13:40:40</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-15 13:40:40" itemprop="dateModified" datetime="2026-05-15T13:40:40+00:00">2026-05-15 13:40:40</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E8%8A%82%E7%82%B9%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">节点人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天Codex发布了手机版，从ChatGPT手机版Codex按钮进入，然后可以支配Codex了。这下更方便了。跟GPT扯出点子，不用憋到家用Mac发博客了，直接手机版Codex直接发～</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/15/%E8%84%91%E6%B4%9E%EF%BD%9C%E6%A4%8D%E7%89%A9%E5%9B%AD%E5%B9%BF%E5%9C%BA%E8%88%9E%E8%84%91%E5%86%85%E6%97%81%E7%99%BD%C2%B7AI%E6%A8%A1%E5%9E%8B%E7%89%88%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/15/%E8%84%91%E6%B4%9E%EF%BD%9C%E6%A4%8D%E7%89%A9%E5%9B%AD%E5%B9%BF%E5%9C%BA%E8%88%9E%E8%84%91%E5%86%85%E6%97%81%E7%99%BD%C2%B7AI%E6%A8%A1%E5%9E%8B%E7%89%88%EF%BD%9E/" class="post-title-link" itemprop="url">脑洞｜植物园广场舞脑内旁白·AI模型版～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-15 10:39:18" itemprop="dateCreated datePublished" datetime="2026-05-15T10:39:18+00:00">2026-05-15 10:39:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-15 10:39:18" itemprop="dateModified" datetime="2026-05-15T10:39:18+00:00">2026-05-15 10:39:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h1><p>植物园跳广场舞，脑内旁白歪到了成功学，当然写完不过瘾，于是又写了一个AI模型的版本</p>
+<h1 id="开场："><a href="#开场：" class="headerlink" title="开场："></a>开场：</h1><p>世界不分男女。<br>只分三种人：<br>会用 AI 的人，<br>不会用 AI 的人，<br>以及以为自己会用 AI、其实在给模型当免费测试员的人。</p>
+<h1 id="动作开始："><a href="#动作开始：" class="headerlink" title="动作开始："></a>动作开始：</h1><p>右手举起：Vibe Coding！<br>不写需求，不写设计，先让模型给我跑起来！</p>
+<p>原地踏步：接龙虾！<br>进度条动了，钱包也动了，项目好像没动。</p>
+<p>左右横移：Agent 自动化！<br>一个 agent 写代码，一个 agent 改 bug，一个 agent 解释为什么前两个都不靠谱。</p>
+<p>扭胯两下：快做飞轮！<br>内容飞轮、产品飞轮、增长飞轮、情绪飞轮——最后我本人先飞出去了。</p>
+<p>拍手：噫～我成了！<br>今天我也是 AI 原住民、生产力先锋、未来已来体验官！</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>跑两步：debug 累死。<br>模型说“应该可以”，项目说“不可以”。</p>
+<p>转身回头：新模型来了。<br>我昨天写的 prompt，今天过期。<br>我上周搭的 skill，本周被原生能力吃掉。<br>我辛苦做的自动化，成了模型更新日志里的一句话。</p>
+<p>最后定格：<br>折腾一大圈，归来仍是人工。</p>
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>要成功，先发疯；<br>要自动化，先手动调三天；<br>要做飞轮，先被新模型碾一轮。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%9C%A8%E6%A4%8D%E7%89%A9%E5%9B%AD%E8%B7%9F%E8%B7%B3%E5%B9%BF%E5%9C%BA%E8%88%9E%EF%BC%8C%E7%BB%93%E6%9E%9C%E8%A2%AB%E9%99%88%E5%AE%89%E4%B9%8B%E5%A4%BA%E8%88%8D%E4%BA%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%9C%A8%E6%A4%8D%E7%89%A9%E5%9B%AD%E8%B7%9F%E8%B7%B3%E5%B9%BF%E5%9C%BA%E8%88%9E%EF%BC%8C%E7%BB%93%E6%9E%9C%E8%A2%AB%E9%99%88%E5%AE%89%E4%B9%8B%E5%A4%BA%E8%88%8D%E4%BA%86/" class="post-title-link" itemprop="url">日常记录｜我在植物园跟跳广场舞，结果被陈安之夺舍了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-15 10:12:06" itemprop="dateCreated datePublished" datetime="2026-05-15T10:12:06+00:00">2026-05-15 10:12:06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-15 10:12:06" itemprop="dateModified" datetime="2026-05-15T10:12:06+00:00">2026-05-15 10:12:06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>夜里去植物园散步，正好植物园很多跳广场舞的，我也就加入进去，开始活动自己不协调的四肢。结果……太无聊，脑子开始歪到不正经的地方了。</p>
+<p>广场舞动作本身不难，其实就是：<br>右手举起来<br>左脚点几下地<br>身体转一转<br>扭扭胯<br>再来一次</p>
+<p>但我脑子开始自动加载背景音了，还是陈安之的成功学背景音</p>
+<blockquote>
+<p>朋友们，你为啥还没成功？<br>因为你没有在植物园晚上八点，对着居民楼，把右手举向命运</p>
+</blockquote>
+<blockquote>
+<p>要成功，先发疯<br>要翻身，先扭胯<br>要改变人生，先把右手举过肩膀</p>
+</blockquote>
+<p>再来一段，成功学七式·植物园广场舞版</p>
+<blockquote>
+<p>右手上举：抓住机会式<br>双手打开：打开格局式<br>原地踏步：坚持执行式<br>左右摆胯：突破舒适圈式<br>突然转身：赛道切换式<br>拍手两下：成交闭环式<br>最后定点微笑：财富自由但没完全自由式</p>
+</blockquote>
+<p>还没结束，那就再来脑补一段，2026新春美食游乐狂欢节招商成功学峰会</p>
+<blockquote>
+<p>来！右手举起来！<br>不是为了投降！<br>是为了向命运索要一个摊位！</p>
+</blockquote>
+<blockquote>
+<p>左脚踏出去！<br>不是你在跳舞！<br>是现金流在向你靠近！</p>
+</blockquote>
+<blockquote>
+<p>转身！微笑！打开格局！<br>你不成功，谁成功？旁边套圈老板吗？！</p>
+</blockquote>
+<p>最后，因为体力不支，提前结束广场舞，当然，成功学怎么能这么草草落幕？嗯，我宣布，今晚的落幕词是</p>
+<blockquote>
+<p>要成功，先发疯；要转化，先扭胯；要招商，先举右手。<br>不是我在挥手，是时代在召唤我！<br>朋友们！你今天不扭胯，明天就被时代甩胯！<br>把手举起来！把格局打开！把植物园摊位费交上来！</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%BF%BD%E7%84%B6%E5%BF%98%E8%AE%B0%E4%BA%86%EF%BC%8Ccodex%E6%98%AF%E5%8F%AF%E4%BB%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%82%BB%E5%82%BB%E7%AD%89%E4%BB%BB%E5%8A%A11%E7%BB%93%E6%9D%9F%E5%86%8D%E6%B4%BE%E4%BB%BB%E5%8A%A12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%88%91%E5%BF%BD%E7%84%B6%E5%BF%98%E8%AE%B0%E4%BA%86%EF%BC%8Ccodex%E6%98%AF%E5%8F%AF%E4%BB%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%82%BB%E5%82%BB%E7%AD%89%E4%BB%BB%E5%8A%A11%E7%BB%93%E6%9D%9F%E5%86%8D%E6%B4%BE%E4%BB%BB%E5%8A%A12/" class="post-title-link" itemprop="url">日常记录｜我忽然忘记了，codex是可以多线程的，于是傻傻等任务1结束再派任务2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-15 10:03:28" itemprop="dateCreated datePublished" datetime="2026-05-15T10:03:28+00:00">2026-05-15 10:03:28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-15 10:03:28" itemprop="dateModified" datetime="2026-05-15T10:03:28+00:00">2026-05-15 10:03:28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我今儿脑抽了，没想起来codex可以多线程，于是派了任务1，就傻乎乎等任务1执行结束，再派任务2。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/07/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%EF%BC%8C%E6%83%B3%E8%B5%B7%E4%B9%8B%E5%89%8D%E6%9C%8B%E5%8F%8B%E5%AF%B9%E6%88%91%E8%AF%B4%E7%9A%84%EF%BC%8C%E6%8A%8A%E4%BA%BA%E7%94%9F%E6%90%9E%E7%A0%B8%E7%9A%84%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%98%AF%E7%81%BE%E9%9A%BE%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BA%BA%E9%9D%A2%E5%AF%B9%E7%81%BE%E9%9A%BE%E6%97%B6%EF%BC%8C%E5%BC%80%E5%A7%8B%E6%81%90%E6%85%8C%EF%BC%8C%E5%BC%80%E5%A7%8B%E6%B7%B7%E4%B9%B1%EF%BC%8C%E5%BC%80%E5%A7%8B%E4%B9%B1%E6%8A%98%E8%85%BE%E4%B8%80%E6%B0%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/07/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%EF%BC%8C%E6%83%B3%E8%B5%B7%E4%B9%8B%E5%89%8D%E6%9C%8B%E5%8F%8B%E5%AF%B9%E6%88%91%E8%AF%B4%E7%9A%84%EF%BC%8C%E6%8A%8A%E4%BA%BA%E7%94%9F%E6%90%9E%E7%A0%B8%E7%9A%84%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%98%AF%E7%81%BE%E9%9A%BE%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BA%BA%E9%9D%A2%E5%AF%B9%E7%81%BE%E9%9A%BE%E6%97%B6%EF%BC%8C%E5%BC%80%E5%A7%8B%E6%81%90%E6%85%8C%EF%BC%8C%E5%BC%80%E5%A7%8B%E6%B7%B7%E4%B9%B1%EF%BC%8C%E5%BC%80%E5%A7%8B%E4%B9%B1%E6%8A%98%E8%85%BE%E4%B8%80%E6%B0%94/" class="post-title-link" itemprop="url">日常记录｜写着写着，想起之前朋友对我说的，把人生搞砸的不一定是灾难，而是人面对灾难时，开始恐慌，开始混乱，开始乱折腾一气</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-07 20:36:12" itemprop="dateCreated datePublished" datetime="2026-05-07T20:36:12+00:00">2026-05-07 20:36:12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-07 20:36:12" itemprop="dateModified" datetime="2026-05-07T20:36:12+00:00">2026-05-07 20:36:12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>写着写着，忽然想起我之前的一个朋友教我一件事。<br>她说，人生的灾难，不是从坏事发生就开始的，而是人面对灾难的时候，开始慌乱，开始乱折腾，最后把事儿彻底搞砸的。</p>
+<p>我最近的处境拆开看，最怕的就是人开始乱恐慌，把之前积累的东西都推翻了，那这就太可惜了（笑）。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/03/daily-codespace-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/03/daily-codespace-blog/" class="post-title-link" itemprop="url">日常记录｜我开始用codespace远程写博客了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-03 01:45:24" itemprop="dateCreated datePublished" datetime="2026-05-03T01:45:24+00:00">2026-05-03 01:45:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-03 01:45:24" itemprop="dateModified" datetime="2026-05-03T01:45:24+00:00">2026-05-03 01:45:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>昨儿在农村大席上啃完肘子，吃饱了刷手机比较尴尬，就想不如写写博客？但我又只带了手机和平板，不知道怎么写完发布。</p>
+<p>于是，在gpt的推荐下，我开始用github的codespace写博客。</p>
+<p>这篇，就是codespace博客第一篇。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/05/02/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E4%B8%8Ecodex%E5%90%88%E4%BD%9C%E7%9A%84%E6%96%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%88%91%E6%8F%90%E9%9C%80%E6%B1%82%EF%BC%8CGPT%E8%BE%85%E5%8A%A9%E5%88%A4%E6%96%AD%E8%BE%B9%E7%95%8C%EF%BC%8CCodex%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/02/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E4%B8%8Ecodex%E5%90%88%E4%BD%9C%E7%9A%84%E6%96%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%88%91%E6%8F%90%E9%9C%80%E6%B1%82%EF%BC%8CGPT%E8%BE%85%E5%8A%A9%E5%88%A4%E6%96%AD%E8%BE%B9%E7%95%8C%EF%BC%8CCodex%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/" class="post-title-link" itemprop="url">技术手记｜我与codex合作的新模式：我提需求，GPT辅助判断边界，Codex执行细节</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-02 21:49:09" itemprop="dateCreated datePublished" datetime="2026-05-02T21:49:09+00:00">2026-05-02 21:49:09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-02 21:49:09" itemprop="dateModified" datetime="2026-05-02T21:49:09+00:00">2026-05-02 21:49:09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。<br>GPT帮我搞清楚最小概念，我来跑一个小demo搞清楚最需要注意的地方，防止被codex糊弄。<br>codex帮我干细节，我再测试。</p>
+<p>另，之前我怀疑大厂用token用量作为AI绩效考核标准，今儿试了试，有效。（笑）。我很好奇这个指标怎么发挥作用的。<br>（那我以后多看类似的某些大厂的评价指标，试一试效果）</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/04/26/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E4%B8%9A%E5%8A%A1%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/04/26/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E4%B8%9A%E5%8A%A1%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜如何启动一个新业务？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-26 21:03:02" itemprop="dateCreated datePublished" datetime="2026-04-26T21:03:02+00:00">2026-04-26 21:03:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-04-26 21:03:02" itemprop="dateModified" datetime="2026-04-26T21:03:02+00:00">2026-04-26 21:03:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用途：快速理解新业务、识别核心对象与状态机、搭主流程、找 demo 与真实业务的差距，并形成可落地的实现顺序。</p>
+<p>适用：支付、秒杀、登录、风控、核销、退款、通知、任务调度、第三方回调等业务模块。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/04/26/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E4%B8%9A%E5%8A%A1%EF%BC%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

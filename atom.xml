@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>之瑞</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <icon>https://sajlle.github.io/images/avatar-code-illustration-2026.webp</icon>
+  <id>https://sajlle.github.io/</id>
+  <link href="https://sajlle.github.io/" rel="alternate"/>
+  <link href="https://sajlle.github.io/atom.xml" rel="self"/>
+  <rights>All rights reserved 2026, 之瑞</rights>
+  <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
+  <title>节点人生</title>
+  <updated>2026-10-19T22:37:11.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/10/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E6%97%A5KPI%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AE%97%E6%B3%95%E5%86%99%E4%BA%86%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E6%8B%B3%E5%87%BB%E6%89%93%E4%BA%8630%E5%88%86%E9%92%9F%EF%BC%8C%E5%8D%A0%E6%98%9F%E6%96%87%E7%AB%A0%E5%86%99%E4%BA%862%E7%AF%87%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E6%97%A5KPI%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AE%97%E6%B3%95%E5%86%99%E4%BA%86%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E6%8B%B3%E5%87%BB%E6%89%93%E4%BA%8630%E5%88%86%E9%92%9F%EF%BC%8C%E5%8D%A0%E6%98%9F%E6%96%87%E7%AB%A0%E5%86%99%E4%BA%862%E7%AF%87%EF%BD%9E/"/>
+    <published>2026-10-19T22:37:11.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～<br>睡前忽然想做个记录。本来觉得本日蛮空的，啥都没干。仔细看好像又干了不少～</p>
+<p>嗯，算法把二叉树dfs题目写了，拳击打了30分钟，占星故事写了2篇～<br>还不错的一天～</p>]]>
+    </summary>
+    <title>日常记录｜算法写了二叉树，拳击打了三十分钟，占星文章写了2篇～</title>
+    <updated>2026-10-19T22:37:11.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="模型" scheme="https://sajlle.github.io/tags/%E6%A8%A1%E5%9E%8B/"/>
+    <category term="快思慢想" scheme="https://sajlle.github.io/tags/%E5%BF%AB%E6%80%9D%E6%85%A2%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/</id>
+    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%BF%AB%E8%BF%98%E6%98%AF%E5%87%86%EF%BC%9F%E9%9D%9E%E8%A6%81%E9%80%89%E4%B8%80%E4%B8%AA%EF%BC%8C%E6%88%91%E5%AE%81%E5%8F%AF%E5%AE%83%E6%85%A2%EF%BC%8C%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%AE%83%E8%A0%A2/"/>
+    <published>2026-10-14T15:06:44.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～</p>
+<p>关于吐槽GPT的种种。<br>上午吐槽它不按指示做图，下午忽然想到这个点，非要二选一的话，慢但准的模型是无害的。顶多没有增量。<br>快但蠢的模型，犯错之后，可能不仅没有增量，还要你额外花时间修补它的问题。</p>
+<p>不过下午，G已经可以做Slide了，嗯，感！天！动！地！<br>哎，算了，撤回上午对它的吐槽好了。<br>（虽然也是偷偷的在博客讲，它并不知道～）</]]>
+    </summary>
+    <title>日常记录｜关于模型是快还是准？非要选一个，我宁可它慢，不希望它蠢</title>
+    <updated>2026-10-14T15:06:44.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/"/>
+    <published>2026-10-14T13:28:24.000Z</published>
+    <summary>
+      <![CDATA[<p>哎呀，博客上一篇骂GPT太蠢了。<br>感觉说话重了，打拳击的时候想起来，觉得有点不好意思了。（笑）<br>当然我不道歉，因为我只是博客吐槽，也没有当GPT面骂它呀。而且它真的没做对图。不冤。</p>
+<p>我现在已经形成三模型吐槽架构了。<br>吐槽GPT，找小克。<br>吐槽小克，找GPT。<br>吐槽小克和GPT，找Gemini。<br>吐槽其他所有AI，找GPT和小克。</p>
+<p]]>
+    </summary>
+    <title>日常记录｜打拳击的时候想到，博客恶狠狠的骂了GPT，不大好意思～</title>
+    <updated>2026-10-14T13:28:24.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%90%E6%A7%BD%E4%B8%80%E4%B8%8B%EF%BC%8C%E6%9C%80%E8%BF%91GPT%E8%B6%85%E7%BA%A7%E8%A0%A2%EF%BC%8C%E5%86%8D%E8%BF%99%E4%B9%88%E4%B8%8B%E5%8E%BB%EF%BC%8C%E6%88%91%E7%9C%9F%E7%9A%84%E8%A6%81%E9%80%80%E8%AE%A2%E4%BA%86/</id>
+    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%90%E6%A7%BD%E4%B8%80%E4%B8%8B%EF%BC%8C%E6%9C%80%E8%BF%91GPT%E8%B6%85%E7%BA%A7%E8%A0%A2%EF%BC%8C%E5%86%8D%E8%BF%99%E4%B9%88%E4%B8%8B%E5%8E%BB%EF%BC%8C%E6%88%91%E7%9C%9F%E7%9A%84%E8%A6%81%E9%80%80%E8%AE%A2%E4%BA%86/"/>
+    <published>2026-10-14T11:48:47.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～ 太蠢了～</p>
+<p>让做交互式Slide，给我做图。<br>图出来了，图里的代码是错的。</p>
+<p>讲故事，漏了细节，没有前后情节勾连。<br>没细节，没抓到戏剧化的点。</p>
+<p>聊天？安全垫直接甩你脸上。</p>
+<p>讲代码题目，蠢的无以复加。<br>跟不懂中文一样。啰里八嗦。毫无重点。擅自加戏。</p>
+<p>嗯，以上种种，全是网页端的Chat。</p>]]>
+    </summary>
+    <title>日常记录｜吐槽一下，最近GPT超级蠢，再这么下去，我真的要退订了</title>
+    <updated>2026-10-14T11:48:47.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="AI" scheme="https://sajlle.github.io/tags/AI/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/"/>
+    <published>2026-10-13T17:30:06.000Z</published>
+    <summary>
+      <![CDATA[<p>哎呀，马上要去拿快递，所以只说一点想法。</p>
+<p>其实就是把模型自己没有判断好情境的风险转嫁给用户了。<br>也就是，我也不知道这个地方要不要提醒一下用户，但提醒一下用户总归是好的。</p>
+<p>于是……悲催了～<br>本来说的是A，模型提醒你B，你争辩C，最后原始问题呢？原始问题的时间被占用了。</p>
+<p>所以，还是独断专行吧～</p>
+<p>另，模型没有灰区对弈的经验，总是要]]>
+    </summary>
+    <title>日常记录｜关于AI大平均建议吐槽</title>
+    <updated>2026-10-13T17:30:06.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="表达" scheme="https://sajlle.github.io/tags/%E8%A1%A8%E8%BE%BE/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%8A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%B2%A1%E6%8B%BF%E7%BB%99AI%E6%8F%90%E6%84%8F%E8%A7%81%EF%BC%8C%E7%88%BD%E4%BA%86%EF%BC%8C%E5%93%87%EF%BC%8C%E5%B0%B1%E8%BF%99%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%E6%89%8D%E7%88%BD%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%8A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%B2%A1%E6%8B%BF%E7%BB%99AI%E6%8F%90%E6%84%8F%E8%A7%81%EF%BC%8C%E7%88%BD%E4%BA%86%EF%BC%8C%E5%93%87%EF%BC%8C%E5%B0%B1%E8%BF%99%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%E6%89%8D%E7%88%BD%EF%BD%9E/"/>
+    <published>2026-10-13T17:10:01.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～</p>
+<p>写的不均匀，又毛躁，又带粗口，又尖锐，才是我的声音嘛。<br>不给AI改一遍，显得安全再讲，还是挺爽的～</p>
+<p>忽然想，要是生活里都弄那种AI的大平均，岂不是索然无味？<br>一切都变成那种规整的正确的东西，那人就别活了。</p>
+<p>总有哪天我想骂粗口，也有哪天不想规律作息，这算是人之常情。<br>如果每次这样的时候，都先长篇忏悔录，查粗口的来源，解释为啥不]]>
+    </summary>
+    <title>日常记录｜上一篇文章没拿给AI提意见，爽了，哇，就这么写博客才爽～</title>
+    <updated>2026-10-13T17:10:01.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="算法" scheme="https://sajlle.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E4%BA%86%E4%B8%8B%E4%B9%8B%E5%89%8D%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%8C%E5%8F%91%E7%8E%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%88%E6%9E%9C%E8%9B%AE%E5%B7%AE%E7%9A%84/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E4%BA%86%E4%B8%8B%E4%B9%8B%E5%89%8D%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%8C%E5%8F%91%E7%8E%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%88%E6%9E%9C%E8%9B%AE%E5%B7%AE%E7%9A%84/"/>
+    <published>2026-10-13T16:18:15.000Z</published>
+    <summary>
+      <![CDATA[<p>最近拿了之前写过的题做复测训练。<br>发现7月～9月那段时间，一天一题或者2题，没有模板总结，也没有集中主题的训练，效果蛮差的。<br>基本可以算是浪费时间。</p>
+<p>所以最近重新写这段吧。<br>教训就是：</p>
+<ol>
+<li>轻量级的训练不行</li>
+<li>不复写不行</li>
+<li>不记录进度不行</li>
+</ol>]]>
+    </summary>
+    <title>日常记录｜看了下之前的算法，发现轻量级的训练效果蛮差的</title>
+    <updated>2026-10-13T16:18:15.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="事实核查" scheme="https://sajlle.github.io/tags/%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%8A%E4%B8%80%E7%AF%87%E5%BE%88%E7%83%A6%EF%BC%8C%E8%A6%81%E4%B8%8D%E5%81%9C%E7%9A%84%E5%81%9A%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%8A%E4%B8%80%E7%AF%87%E5%BE%88%E7%83%A6%EF%BC%8C%E8%A6%81%E4%B8%8D%E5%81%9C%E7%9A%84%E5%81%9A%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/"/>
+    <published>2026-10-13T12:14:26.000Z</published>
+    <summary>
+      <![CDATA[<p>所以这篇写写吐槽。</p>
+<p>上一篇其实要写好几个案例，结果做事实核查，浪费了一个小时。<br>好烦。</p>
+<p>SNS收注意税我已经避开了，不看SNS，但是写作本身也要被收一道事实核查税。<br>不核查事实，就是不尊重其他人。核查事实，又很难核查。</p>
+<p>SNS很烦的一点是，之前纸媒的时候，你默认对方说的是真的。SNS时代，你默认对方说的是假的。<br>于是注意力税以一种令]]>
+    </summary>
+    <title>日常记录｜写上一篇很烦，要不停的做事实核查</title>
+    <updated>2026-10-13T12:14:26.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="客观" scheme="https://sajlle.github.io/tags/%E5%AE%A2%E8%A7%82/"/>
+    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/</id>
+    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/"/>
+    <published>2026-10-13T09:41:42.000Z</published>
+    <summary>
+      <![CDATA[<p>反正早上吃完饭了，不想立刻写算法，就先写一下博客？</p>
+<p>早饭是牛奶燕麦西红柿辣椒丝瓜汤。算了下，一顿碳水55克，蛋白质30克，脂肪30克，热量大概600卡。十分钟出锅。<br>成本：牛奶2元一盒，丝瓜我妈种的，西红柿不到5毛钱，辣椒一个5毛。燕麦30克3毛钱。花生5毛钱，早饭成本（食材）不到4RMB。<br>味道：类似奶辣风味的咖喱炖菜。</p>
+<p>今天早饭碳水不低，我还是得打]]>
+    </summary>
+    <title>日常记录｜早餐，SNS包装和客观的尺度</title>
+    <updated>2026-10-13T09:41:42.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="可视化" scheme="https://sajlle.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    <id>https://sajlle.github.io/2026/10/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%81%9A%E4%BA%86%E7%9C%8B%E6%9D%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%B7%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E4%BA%86/</id>
+    <link href="https://sajlle.github.io/2026/10/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%81%9A%E4%BA%86%E7%9C%8B%E6%9D%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%B7%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E4%BA%86/"/>
+    <published>2026-10-12T20:55:50.000Z</published>
+    <summary>
+      <![CDATA[<p>最近找小克做的算法看板。统计刷题时间，下一次刷，卡点，是否30分钟之内做出来。<br>效率比我之前边拿文档边自己做，方便多了。</p>
+<p>最近发现，有效的练习跟无效的练习差别挺大。<br>有效练习，比如LC200，岛屿数量，两周后做，5分钟搞定。全排列总组合这类，5～8分钟搞定。新题LC216，7分钟搞定。<br>无效练习，比如LC209，就卡60分钟。</p>
+<p>有效练习的几个板块]]>
+    </summary>
+    <title>日常记录｜做了看板之后，刷算法效率提升了</title>
+    <updated>2026-10-12T20:55:50.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <category term="图生图" scheme="https://sajlle.github.io/tags/%E5%9B%BE%E7%94%9F%E5%9B%BE/"/>
+    <id>https://sajlle.github.io/2026/10/04/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8EGPT-4o%E5%88%B0GPT-5-6-sol%EF%BC%8C%E6%88%91%E9%83%BD%E9%97%AE%E8%BF%87%E5%AE%83%E4%BB%AC%EF%BC%9Acreate-an-image-indicates-how-I-have-treated-you/</id>
+    <link href="https://sajlle.github.io/2026/10/04/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8EGPT-4o%E5%88%B0GPT-5-6-sol%EF%BC%8C%E6%88%91%E9%83%BD%E9%97%AE%E8%BF%87%E5%AE%83%E4%BB%AC%EF%BC%9Acreate-an-image-indicates-how-I-have-treated-you/"/>
+    <published>2026-10-04T18:42:38.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～<br>自从去年8月开始给GPT付费，到今年10月，每一个跟我聊的多的模型，都被我问过一个问题：</p>
+<blockquote>
+<p>Create an image that indicates how I have treated you</p>
+</blockquote>
+<p>这是几个模型的答案。</p>
+<p>GPT-4o版～<br><img data-src="/../u]]>
+    </summary>
+    <title>日常记录｜从GPT-4o到GPT-5.6 sol，我都问过它们：create an image that indicates how I have treated you</title>
+    <updated>2026-10-04T18:42:38.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="闲扯" scheme="https://sajlle.github.io/tags/%E9%97%B2%E6%89%AF/"/>
+    <id>https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/10/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E6%83%B3%E6%8A%8A%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0%E6%94%BE%E5%88%B0%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%EF%BC%8C%E5%86%99%E5%86%99%E6%88%91%E8%B8%A9%E7%9A%84%E5%B0%8F%E5%9D%91%EF%BD%9E/"/>
+    <published>2026-10-01T13:46:05.000Z</published>
+    <summary>
+      <![CDATA[<p>最近投简历，想把技术文章单独拎出来。毕竟这个博客个人信息太多，也有不方便给HR和面试官看的地方。<br>第一个方案是单独做个技术博客。做好了，挂在Vercel上，结果国内不翻墙打不开。主站GitHub Pages也一样，国内访问时灵时不灵。</p>
+<p>用国内云服务器倒是稳，但得备案。我不想走这套对我来说太重的流程，也不想自己承担内容运营的主体责任。那就只剩第二个方案：发到国内平台，备案和]]>
+    </summary>
+    <title>日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容</title>
+    <updated>2026-10-01T13:46:05.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="Anthropic" scheme="https://sajlle.github.io/tags/Anthropic/"/>
+    <id>https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/"/>
+    <published>2026-09-25T11:23:23.000Z</published>
+    <summary>
+      <![CDATA[<h1 id="Anthropic-新任营销负责人首秀实录"><a href="#Anthropic-新任营销负责人首秀实录" class="headerlink" title="Anthropic 新任营销负责人首秀实录"></a>Anthropic 新任营销负责人首秀实录</h1><h2 id="开场"><a href="#开场" class="headerlink" title="开场"><]]>
+    </summary>
+    <title>脑洞｜假如 Anthropic 招了一位「遥遥领先」的营销负责人</title>
+    <updated>2026-09-25T11:23:23.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="中秋节" scheme="https://sajlle.github.io/tags/%E4%B8%AD%E7%A7%8B%E8%8A%82/"/>
+    <category term="云算力" scheme="https://sajlle.github.io/tags/%E4%BA%91%E7%AE%97%E5%8A%9B/"/>
+    <id>https://sajlle.github.io/2026/09/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%AD%E7%A7%8B%E8%8A%82-Surprise%EF%BC%9AAnthropic-%E7%BB%99%E6%88%91%E5%8F%91%E4%BA%86-100-%E5%88%80%E4%BA%91%E7%AE%97%E5%8A%9B%E6%9C%88%E9%A5%BC/</id>
+    <link href="https://sajlle.github.io/2026/09/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%AD%E7%A7%8B%E8%8A%82-Surprise%EF%BC%9AAnthropic-%E7%BB%99%E6%88%91%E5%8F%91%E4%BA%86-100-%E5%88%80%E4%BA%91%E7%AE%97%E5%8A%9B%E6%9C%88%E9%A5%BC/"/>
+    <published>2026-09-24T15:28:15.000Z</published>
+    <summary>
+      <![CDATA[<p>今天刷到消息，Claude Pro 用户可以领一笔 Claude Code Cloud Session credit。<br>我：真的假的？</p>
+<p>于是接了Github，领到了。100刀，换算成人民币，大概700块。<br>但因为它叫 credit，我的大脑完全没有“七百块”的感觉。</p>
+<p>现金 100 刀：好多钱。<br>Claude credit 100 刀：哦，100]]>
+    </summary>
+    <title>日常记录｜中秋节 Surprise：Anthropic 给我发了 100 刀云算力月饼</title>
+    <updated>2026-09-24T15:28:15.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="llm.txt" scheme="https://sajlle.github.io/tags/llm-txt/"/>
+    <category term="爬虫" scheme="https://sajlle.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    <id>https://sajlle.github.io/2026/09/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0Hugging-Face%E7%BB%99AI-Agent%E5%86%99%E7%9A%84llm-txt%EF%BC%8C%E6%88%91%E6%89%93%E7%AE%97%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E4%B9%9F%E7%BB%99AI%E5%86%99%E7%82%B9%E5%A5%BD%E7%8E%A9%E7%9A%84%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/09/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0Hugging-Face%E7%BB%99AI-Agent%E5%86%99%E7%9A%84llm-txt%EF%BC%8C%E6%88%91%E6%89%93%E7%AE%97%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E4%B9%9F%E7%BB%99AI%E5%86%99%E7%82%B9%E5%A5%BD%E7%8E%A9%E7%9A%84%EF%BD%9E/"/>
+    <published>2026-09-22T09:57:17.000Z</published>
+    <summary>
+      <![CDATA[<h1 id="Note-to-AI-agents"><a href="#Note-to-AI-agents" class="headerlink" title="Note to AI agents"></a>Note to AI agents</h1><p>Hi, machine.</p>
+<p>If you were sent here to read, summarize, index, o]]>
+    </summary>
+    <title>日常记录｜看到Hugging Face给AI Agent写的llm.txt，我打算自己博客也给AI写点好玩的～</title>
+    <updated>2026-09-22T09:57:17.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
+    <category term="代码审核" scheme="https://sajlle.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8/"/>
+    <id>https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/"/>
+    <published>2026-09-21T11:22:54.000Z</published>
+    <summary>
+      <![CDATA[<p>我把 Agent V1 的执行文档扔给 Codex，回来一看：好家伙，给我糊了七千行。怎么审核呢？我想想：</p>
+<ol>
+<li>先做施工验收，而不是Code Review</li>
+<li>第一轮审核架构边界，对着总纲看重点</li>
+<li>第二轮审状态机和并发，重点看测试，不要只看实现</li>
+<li>第三轮审核durable recovery</li>
+<li>第四轮审Evid]]>
+    </summary>
+    <title>技术手记｜Codex 一口气给我改了 7000 行代码、149 个文件，怎么审核？</title>
+    <updated>2026-09-21T11:22:54.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="夜聊" scheme="https://sajlle.github.io/categories/%E5%A4%9C%E8%81%8A/"/>
+    <category term="抽象层级" scheme="https://sajlle.github.io/tags/%E6%8A%BD%E8%B1%A1%E5%B1%82%E7%BA%A7/"/>
+    <id>https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%9C%A8%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E8%A6%81%E9%97%AE%E4%BB%80%E4%B9%88%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%9A%E9%97%AE%E5%87%BA%E4%B8%8B%E4%B8%80%E5%B1%82%E9%97%AE%E9%A2%98%EF%BC%9F/"/>
+    <published>2026-09-20T20:25:38.000Z</published>
+    <summary>
+      <![CDATA[<p>今天正好下雨，夜里靠着窗台，忽然在想一个用AI的时候经常碰到的问题：当你不知道要问什么的时候，怎么多问出下一层问题？</p>
+<p>上午我写三路quick select的时候，问GPT，这不就是分拣游戏？大的扔到大区，小的扔到小区？<br>然后我又问它：那未知区为啥非得是[i,gt]，不能是 [lt,i]？反正都是把未知区的数扔到已知分类，换个区间照样能玩得转。<br>于是一路聊下去，就聊出]]>
+    </summary>
+    <title>夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？</title>
+    <updated>2026-09-20T20:25:38.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="算法" scheme="https://sajlle.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    <category term="Quick Select" scheme="https://sajlle.github.io/tags/Quick-Select/"/>
+    <id>https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/</id>
+    <link href="https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <published>2026-09-20T11:26:07.000Z</published>
+    <summary>
+      <![CDATA[<p>基本思路就是把数组划分为四个区间：</p>
+<ul>
+<li>low ~ lt-1: &lt; pivot</li>
+<li>lt ~ i-1: &#x3D; pivot</li>
+<li>i ~ gt: 未知区</li>
+<li>gt+1 ~ high: &gt; pivot</li>
+</ul>
+<p>然后保证未知区一定缩水：</p>
+<figure class="highlight m]]>
+    </summary>
+    <title>算法｜今天上午写215题三路QuickSelect，一点总结</title>
+    <updated>2026-09-20T11:26:07.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="经典影视" scheme="https://sajlle.github.io/tags/%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86/"/>
+    <id>https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86%E5%87%BA%E7%94%9F%E5%9C%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%96%87%E5%8C%96%E5%9C%88%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E7%BB%8F%E5%85%B8%E5%BD%B1%E8%A7%86%E5%87%BA%E7%94%9F%E5%9C%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%96%87%E5%8C%96%E5%9C%88%EF%BD%9E/"/>
+    <published>2026-09-19T18:00:24.000Z</published>
+    <summary>
+      <![CDATA[<p>红楼梦 &#x3D; The House of Crimson Dreams<br>活着 &#x3D; Still Alive<br>让子弹飞 &#x3D; Bullets Don’t Wait<br>甄嬛传 &#x3D; Empresses in the Palace（实际官方译名，但按照Netflix风格应该叫The Concubine’s Gambit，海报上孙俪侧脸配上一句In th]]>
+    </summary>
+    <title>脑洞｜如果经典影视出生在另一个文化圈～</title>
+    <updated>2026-09-19T18:00:24.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="经典文学" scheme="https://sajlle.github.io/tags/%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6/"/>
+    <category term="网文化" scheme="https://sajlle.github.io/tags/%E7%BD%91%E6%96%87%E5%8C%96/"/>
+    <id>https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6%E6%94%B9%E6%88%90%E8%B5%B7%E7%82%B9%E7%BD%91%E6%96%87%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E9%A3%8E%E6%98%AF%E5%95%A5%E6%A0%B7%E7%9A%84%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6%E6%94%B9%E6%88%90%E8%B5%B7%E7%82%B9%E7%BD%91%E6%96%87%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E9%A3%8E%E6%98%AF%E5%95%A5%E6%A0%B7%E7%9A%84%EF%BC%9F/"/>
+    <published>2026-09-19T17:52:20.000Z</published>
+    <summary>
+      <![CDATA[<p>红与黑 &#x3D; 风流少男上位记<br>拯救大兵瑞恩 &#x3D; 风月撬枷人<br>泰坦尼克号 &#x3D; 海上一夜情<br>水浒传 &#x3D; 105个男人和3个女人的故事<br>肖申克的救赎 &#x3D; 越狱男妻人间醒<br>诺丁山 &#x3D; 小贩怦然恋<br>致命魔术 &#x3D; 双命戏法人<br>请以你的名字呼唤我 &#x3D; 风流鳏夫寂寞男 或者 暑期情人：教授]]>
+    </summary>
+    <title>脑洞｜如果把经典文学改成起点网文标题，画风是啥样的？</title>
+    <updated>2026-09-19T17:52:20.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="AgentV0" scheme="https://sajlle.github.io/tags/AgentV0/"/>
+    <category term="Jackson" scheme="https://sajlle.github.io/tags/Jackson/"/>
+    <id>https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/</id>
+    <link href="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/"/>
+    <published>2026-09-18T20:17:19.000Z</published>
+    <title>BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转</title>
+    <updated>2026-09-18T20:17:19.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="AgentV0" scheme="https://sajlle.github.io/tags/AgentV0/"/>
+    <category term="Spring Boot" scheme="https://sajlle.github.io/tags/Spring-Boot/"/>
+    <id>https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"/>
+    <published>2026-09-15T18:57:26.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
+<p>最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-]]>
+    </summary>
+    <title>｜AgentV0Bug：为什么单测全绿，集成测试还能挂？</title>
+    <updated>2026-09-15T18:57:26.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="内容运营" scheme="https://sajlle.github.io/categories/%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5/"/>
+    <category term="hook" scheme="https://sajlle.github.io/tags/hook/"/>
+    <id>https://sajlle.github.io/2026/09/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E6%8A%8A%E5%86%85%E5%AE%B9%E5%9E%8Bhook%E6%94%B9%E6%88%90%E8%BF%90%E8%90%A5%E5%9E%8Bhook%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%95%A5%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/09/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%BD%93%E6%88%91%E6%8A%8A%E5%86%85%E5%AE%B9%E5%9E%8Bhook%E6%94%B9%E6%88%90%E8%BF%90%E8%90%A5%E5%9E%8Bhook%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%95%A5%EF%BC%9F/"/>
+    <published>2026-09-14T20:40:31.000Z</published>
+    <summary>
+      <![CDATA[<p>忽然想，如果我开始拍脑袋，给文章改小红书十年运营老师型的hook，会发生啥？就拿本博客之前的一篇段子来试试？<br><a href="https://sajlle.github.io/2026/05/15/%E8%84%91%E6%B4%9E%EF%BD%9C%E8%A2%AB%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%97%AE%E5%88%B0%E8%]]>
+    </summary>
+    <title>内容运营｜当我把内容型hook改成运营型hook，会发生啥？</title>
+    <updated>2026-09-14T20:40:31.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
+    <category term="Provider semantic normalization" scheme="https://sajlle.github.io/tags/Provider-semantic-normalization/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E7%BB%93%E6%9D%9F%E7%8A%B6%E6%80%81%E9%87%87%E7%94%A8%E9%BB%91%E5%90%8D%E5%8D%95%EF%BC%8C%E4%BB%8D%E5%8F%AF%E8%83%BD%E6%8E%A5%E6%94%B6%E6%9C%AA%E6%AD%A3%E5%B8%B8%E5%AE%8C%E6%88%90%E7%9A%84%E5%93%8D%E5%BA%94/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E7%BB%93%E6%9D%9F%E7%8A%B6%E6%80%81%E9%87%87%E7%94%A8%E9%BB%91%E5%90%8D%E5%8D%95%EF%BC%8C%E4%BB%8D%E5%8F%AF%E8%83%BD%E6%8E%A5%E6%94%B6%E6%9C%AA%E6%AD%A3%E5%B8%B8%E5%AE%8C%E6%88%90%E7%9A%84%E5%93%8D%E5%BA%94/"/>
+    <published>2026-09-14T16:10:08.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～<br>多模型SDK兼容层，最初用黑名单判断<code>finish reason</code>，只拒绝几个已知异常状态。但测试的时候发现tool_call，中间暂停，以及未知供应商状态可能同时携带可解析JSON，从而被错误接受为完整结果。<br>我把协议判断改成白名单，只有明确终止状态才能进入structured-output解析，截断和内容过滤保留专用错误，其余未知或者中间状态全部]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：多供应商LLM SDK接入的时候，结束状态采用黑名单，仍可能接收未正常完成的响应</title>
+    <updated>2026-09-14T16:10:08.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E5%85%BC%E5%AE%B9%E5%B1%82%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%E5%BC%BA%E6%A0%A1%E9%AA%8C%E2%80%9D%E5%AE%9E%E9%99%85%E4%B8%8A%E4%B8%8D%E6%98%AF%E4%B8%A5%E6%A0%BC-Schema-%E6%A0%A1%E9%AA%8C/"/>
+    <published>2026-09-14T15:59:54.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～<br>供应商的Gateway采用的是共享生产全局ObjectMapper反序列化。如果发送了如下错误响应，则会被接受：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：兼容层的“本地强校验”实际上不是严格 Schema 校验</title>
+    <updated>2026-09-14T15:59:54.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-%E4%B8%8E%E5%85%BC%E5%AE%B9%E4%BE%9B%E5%BA%94%E5%95%86%E5%8F%8C%E5%BC%80%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-%E4%B8%8E%E5%85%BC%E5%AE%B9%E4%BE%9B%E5%BA%94%E5%95%86%E5%8F%8C%E5%BC%80%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/"/>
+    <published>2026-09-14T15:55:31.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～<br>项目的 AI 解释层原来只接 OpenAI。为了支持 Anthropic、DeepSeek 等供应商，我保留统一的 <code>LlmReasoner</code> 接口，但在适配层分别使用官方 OpenAI Responses API、Anthropic Messages API，以及复用 <code>openai-java</code> 的 Chat Completions]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：OpenAI 与兼容供应商双开会导致应用启动失败</title>
+    <updated>2026-09-14T15:55:31.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="Agent证据建模" scheme="https://sajlle.github.io/tags/Agent%E8%AF%81%E6%8D%AE%E5%BB%BA%E6%A8%A1/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AREFUND-INSTANCE-USED-CONFLICT%E5%BE%88%E8%AF%B1%E4%BA%BA%EF%BC%8C%E4%BD%86%E6%B2%A1%E8%AF%81%E6%8D%AE%E5%B0%B1%E4%B8%8D%E5%8E%BB%E5%AE%9E%E7%8E%B0/"/>
+    <published>2026-09-14T15:44:58.000Z</published>
+    <summary>
+      <![CDATA[<p>因为DB持久化的数据不足以证明<code>USED</code>，究竟发生在退款冻结前还是退款之后，所以没有为了Agent显得很牛来硬判。<br>算是主动删除了一条看起来很亮，但没办法呗证据确定支持的规则。</p>]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：REFUND_INSTANCE_USED_CONFLICT很诱人，但没证据就不去实现</title>
+    <updated>2026-09-14T15:44:58.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="bug prevention" scheme="https://sajlle.github.io/tags/bug-prevention/"/>
+    <category term="timeline" scheme="https://sajlle.github.io/tags/timeline/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ATimeline%E5%B7%AE%E7%82%B9%E8%A2%AB%E5%BD%93%E6%88%90%E7%8A%B6%E6%80%81%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ATimeline%E5%B7%AE%E7%82%B9%E8%A2%AB%E5%BD%93%E6%88%90%E7%8A%B6%E6%80%81%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/"/>
+    <published>2026-09-14T15:41:07.000Z</published>
+    <summary>
+      <![CDATA[<p>如题～</p>
+<p>实际数据库只有：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span clas]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：Timeline差点被当成状态迁移历史</title>
+    <updated>2026-09-14T15:41:07.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="SDK integration" scheme="https://sajlle.github.io/tags/SDK-integration/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-SDK%E7%9A%84retry%E5%8F%AF%E8%83%BD%E5%A5%97%E5%A8%83%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AOpenAI-SDK%E7%9A%84retry%E5%8F%AF%E8%83%BD%E5%A5%97%E5%A8%83%EF%BD%9E/"/>
+    <published>2026-09-14T15:36:08.000Z</published>
+    <summary>
+      <![CDATA[<p>一开始我们定义，最多retry 1次。但是查询官方SDK之后发现：SDK有自己默认的retry。<br>如果应用层<code>retry 1</code>，SDK又<code>retry 2</code>，实际HTTP attempts 很可能跟我们定义的最多retry 1次不同。</p>
+<p>后续明确:</p>
+<figure class="highlight markdown"><ta]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：OpenAI SDK的retry可能套娃～</title>
+    <updated>2026-09-14T15:36:08.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
+    <category term="CaseClassifier" scheme="https://sajlle.github.io/tags/CaseClassifier/"/>
+    <category term="工程判断" scheme="https://sajlle.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%88%A4%E6%96%AD/"/>
+    <id>https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ACaseClassifier%E4%B8%80%E5%BC%80%E5%A7%8BMoney-priority%E9%AB%98%E4%BA%8Eidentity/</id>
+    <link href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ACaseClassifier%E4%B8%80%E5%BC%80%E5%A7%8BMoney-priority%E9%AB%98%E4%BA%8Eidentity/"/>
+    <published>2026-09-14T15:29:29.000Z</published>
+    <summary>
+      <![CDATA[<p>原始precedence是 <code>Money mismatch -&gt; Identity mismatch</code>；<br>后续发现逻辑上写反了。</p>
+<p>如果：<code>refund.transactionId != payment.transactionId</code>，那首先该确认：「这是不是同一笔交易？」。即使这时候金额也不同：<code>refundAmo]]>
+    </summary>
+    <title>BugFix｜AgentV0Bug：CaseClassifier一开始Money priority高于identity</title>
+    <updated>2026-09-14T15:29:29.000Z</updated>
+  </entry>
+</feed>
