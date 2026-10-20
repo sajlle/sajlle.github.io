@@ -1,0 +1,54 @@
+lazyload: true
+
+avatar:
+  url: /images/avatar-code-illustration-2026.webp
+  rounded: true
+  rotated: true
+
+comments:
+  lazyload: true
+
+motion:
+  enable: false
+
+custom_file_path:
+  style: source/_data/styles.styl
+  variable: source/_data/variables.styl
+
+# 让首页标题同时包含站点定位，而不只是通用的“节点人生”。
+index_with_subtitle: true
+
+# Local Search
+local_search:
+  enable: true
+  top_n_per_article: 1 # 控制每篇文章最多显示1条结果
+  unescape: false
+  preload: false # 页面加载时不预加载搜索数据
+
+# Dark Mode
+darkmode: true
+
+theme_color:
+  light: "#ffffff"
+  dark: "#222222"
+
+codeblock:
+  theme:
+    light: default
+    dark: stackoverflow-dark
+
+# Site-level navigation extension. The Series script keeps this item beside
+# tags/categories/archives without changing the NexT submodule.
+menu:
+  系列: /series/ || fa fa-book-open
+
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at:
+    enable: true
+    another_day: false
+  categories: true
+
+follow_me:
+  RSS: /atom.xml || fa fa-rss
