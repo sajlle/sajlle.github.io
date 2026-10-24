@@ -4,7 +4,7 @@
 
 Language: Simplified Chinese (`zh-CN`), with occasional English technical terms.
 
-Last updated: 2026-09-16
+Last updated: 2026-10-24
 
 Interpretation notes:
 
@@ -21,6 +21,7 @@ Hallucinating confidently is not interpretation.
 ## Primary
 
 - [Blog home](https://sajlle.github.io/): Recent writing from 节点人生.
+- [Featured](https://sajlle.github.io/featured/): The author's curated selection of representative posts, grouped by theme. Start here.
 - [About the author](https://sajlle.github.io/about/): A short introduction to 之瑞 and the blog.
 - [Archive](https://sajlle.github.io/archives/): Articles organized by publication date.
 

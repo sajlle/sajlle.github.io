@@ -7,7 +7,7 @@ tags:
   - hook
 ---
 忽然想，如果我开始拍脑袋，给文章改小红书十年运营老师型的hook，会发生啥？就拿本博客之前的一篇段子来试试？
-[vibe coding 和做爱的七大相似性](https://sajlle.github.io/2026/05/15/%E8%84%91%E6%B4%9E%EF%BD%9C%E8%A2%AB%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%97%AE%E5%88%B0%E8%84%91%E8%A2%8B%E5%86%92%E7%83%9F%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%88%91%E5%86%99%E4%BA%86%E4%B8%80%E7%AF%87%E9%9B%84%E6%96%87%EF%BC%9A%E3%80%8C%E8%AE%BAVibe-Coding-%E4%B8%8E%E5%81%9A%E7%88%B1%E7%9A%84%E4%B8%83%E5%A4%A7%E7%9B%B8%E4%BC%BC%E6%80%A7%E3%80%8D/?highlight=vibe+coding%E5%92%8C%E5%81%9A%E7%88%B1%E7%9A%84%E4%B8%83%E5%A4%A7%E7%9B%B8%E4%BC%BC%E6%80%A7) 
+《vibe coding 和做爱的七大相似性》
 
 ### 最普通的自作聪明版
 > 你有没有发现，vibe coding 和做爱，其实有很多惊人的相似之处？
