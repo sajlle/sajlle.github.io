@@ -21,7 +21,7 @@
 
     <meta name="description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？">
+<meta property="og:title" content="BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？">
 <meta property="og:url" content="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
 <meta property="og:site_name" content="节点人生">
 <meta property="og:description" content="TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结：">
@@ -37,10 +37,10 @@
 <link rel="canonical" href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/","path":"2026/09/15/BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？/","title":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/","path":"2026/09/15/BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？/","title":"BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生</title>
+<title>BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生</title>
   
 
 
@@ -73,7 +73,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"},"headline":"｜AgentV0Bug：为什么单测全绿，集成测试还能挂？","description":"TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结…","datePublished":"2026-09-15T18:57:26.000Z","dateModified":"2026-09-15T18:57:26.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["AgentV0","Spring Boot"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"},"headline":"BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？","description":"TL;DR为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。 最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-neutral 公共配置；生产 wiring 完好。 修复方式：只给 IT 补 import LlmCommonConfiguration，生产代码 0 改动。 总结…","datePublished":"2026-09-15T18:57:26.000Z","dateModified":"2026-09-15T18:57:26.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["AgentV0","Spring Boot"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -114,7 +114,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -187,18 +187,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">205</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">267</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -241,12 +241,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生">
+      <meta itemprop="name" content="BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？ | 节点人生">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ｜AgentV0Bug：为什么单测全绿，集成测试还能挂？
+          BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？
         </h1>
 
         <div class="post-meta-container">

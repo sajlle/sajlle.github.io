@@ -76,7 +76,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T21:24:50.000Z","dateModified":"2026-02-08T21:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["DB","Redis","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T21:24:50.000Z","dateModified":"2026-02-08T21:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["Redis","DB","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -117,7 +117,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -189,18 +189,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">205</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">267</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -377,8 +377,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/DB/" rel="tag"># DB</a>
               <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/DB/" rel="tag"># DB</a>
               <a href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag"># 事务</a>
               <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
               <a href="/tags/Canal/" rel="tag"># Canal</a>
@@ -393,8 +393,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/02/09/%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%AF%9D%EF%BD%9C%E6%88%91%E9%97%AEGemini%EF%BC%8C%E5%A6%82%E6%9E%9C%E7%9C%9F%E6%8E%A5%E5%85%A5%E4%BD%A0%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E8%83%BD%E7%9C%8B%E5%88%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E4%B8%96%E7%95%8C%EF%BC%9F/" rel="next" title="模型对话｜我问Gemini，如果真接入你的数据，我能看到什么样的世界？">
-                  模型对话｜我问Gemini，如果真接入你的数据，我能看到什么样的世界？ <i class="fa fa-angle-right"></i>
+                <a href="/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/" rel="next" title="技术手记｜代码审核新思路">
+                  技术手记｜代码审核新思路 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

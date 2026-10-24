@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 昨晚我很不高兴，因为跟妈爹吵架了。今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。">
+    <meta name="description" content="这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="日常记录｜今天去公园整理了微信支付接入的流程，风大，我鼻涕直冒">
 <meta property="og:url" content="https://sajlle.github.io/2026/03/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%8E%BB%E5%85%AC%E5%9B%AD%E6%95%B4%E7%90%86%E4%BA%86%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8C%E9%A3%8E%E5%A4%A7%EF%BC%8C%E6%88%91%E9%BC%BB%E6%B6%95%E7%9B%B4%E5%86%92/">
 <meta property="og:site_name" content="节点人生">
-<meta property="og:description" content="这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 昨晚我很不高兴，因为跟妈爹吵架了。今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。">
+<meta property="og:description" content="这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-15T20:16:14.000Z">
 <meta property="article:modified_time" content="2026-03-15T20:16:14.000Z">
@@ -73,7 +73,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/03/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%8E%BB%E5%85%AC%E5%9B%AD%E6%95%B4%E7%90%86%E4%BA%86%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8C%E9%A3%8E%E5%A4%A7%EF%BC%8C%E6%88%91%E9%BC%BB%E6%B6%95%E7%9B%B4%E5%86%92/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/03/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%8E%BB%E5%85%AC%E5%9B%AD%E6%95%B4%E7%90%86%E4%BA%86%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8C%E9%A3%8E%E5%A4%A7%EF%BC%8C%E6%88%91%E9%BC%BB%E6%B6%95%E7%9B%B4%E5%86%92/"},"headline":"日常记录｜今天去公园整理了微信支付接入的流程，风大，我鼻涕直冒","description":"这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 昨晚我很不高兴，因为跟妈爹吵架了。今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。","datePublished":"2026-03-15T20:16:14.000Z","dateModified":"2026-03-15T20:16:14.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["微信支付","公园"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/03/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%8E%BB%E5%85%AC%E5%9B%AD%E6%95%B4%E7%90%86%E4%BA%86%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8C%E9%A3%8E%E5%A4%A7%EF%BC%8C%E6%88%91%E9%BC%BB%E6%B6%95%E7%9B%B4%E5%86%92/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/03/15/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E5%8E%BB%E5%85%AC%E5%9B%AD%E6%95%B4%E7%90%86%E4%BA%86%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%8C%E9%A3%8E%E5%A4%A7%EF%BC%8C%E6%88%91%E9%BC%BB%E6%B6%95%E7%9B%B4%E5%86%92/"},"headline":"日常记录｜今天去公园整理了微信支付接入的流程，风大，我鼻涕直冒","description":"这几天本来预报有雨，但今天晴了，我就带着包出门了。公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。 今天我出门转一转。很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。 下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。晚上，我就先写一写博客。或者修一下白天没写好的代码。","datePublished":"2026-03-15T20:16:14.000Z","dateModified":"2026-03-15T20:16:14.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["微信支付","公园"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -114,7 +114,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -186,18 +186,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">205</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">267</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -285,7 +285,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>这几天本来预报有雨，但今天晴了，我就带着包出门了。<br>公园正好有桌子，我带着mac出门，看昨天没看完的微信支付接口。</p>
-<p>昨晚我很不高兴，因为跟妈爹吵架了。今天我出门转一转。<br>很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。</p>
+<p>今天我出门转一转。<br>很冷，风大。我穿的薄。呆了一阵，把流程推到支付回调就收工了。</p>
 <p>下午继续改，改完之后晚上了，吃完饭刷抖音。本来打算把微信支付的流程画画图，这样子只能等明天了。<br>晚上，我就先写一写博客。或者修一下白天没写好的代码。</p>
 
 
