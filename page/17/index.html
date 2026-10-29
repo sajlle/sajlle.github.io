@@ -189,18 +189,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">212</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">267</span>
+        <span class="site-state-item-count">273</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,755 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%86%99%E5%8A%A0%E5%AF%86%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%8C%E6%8A%8Apepper%E5%BD%93message%E4%BC%A0%E5%85%A5%E4%BA%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%86%99%E5%8A%A0%E5%AF%86%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%8C%E6%8A%8Apepper%E5%BD%93message%E4%BC%A0%E5%85%A5%E4%BA%86/" class="post-title-link" itemprop="url">技术手记｜我写加密工具类，又踩新坑，把pepper当message传入了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-08 20:15:05" itemprop="dateCreated datePublished" datetime="2026-02-08T20:15:05+00:00">2026-02-08 20:15:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-08 20:15:05" itemprop="dateModified" datetime="2026-02-08T20:15:05+00:00">2026-02-08 20:15:05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>错误版本：SHA256(input + pepper)</p>
+<p>这个版本错误有二：</p>
+<ol>
+<li><code>input + pepper</code>在密码学上是自制协议，有长度拓展，歧义风险</li>
+<li>语义不清：pepper是密钥，不能当成message的一部分</li>
+</ol>
+<p>正确版本：HMAC(key &#x3D; pepper, message &#x3D; input)，在Java里就是HmacSHA256</p>
+<p>另，其他bug：</p>
+<ol>
+<li><code>@Autowire</code>不能注入static</li>
+<li><code>new Security()</code>会绕过Spring，可以改为构造器注入</li>
+</ol>
+<p>这种写法的使用场景：</p>
+<ol>
+<li>登录校验</li>
+<li>token派生（服务端不可伪造token）</li>
+<li>签名校验</li>
+<li>内部安全字段</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/07/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5bug%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/07/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5bug%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">技术手记｜今日bug总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-07 19:09:24" itemprop="dateCreated datePublished" datetime="2026-02-07T19:09:24+00:00">2026-02-07 19:09:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-07 19:09:24" itemprop="dateModified" datetime="2026-02-07T19:09:24+00:00">2026-02-07 19:09:24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今日bug日志，测试的时候出现的，都是小bug。</p>
+<ol>
+<li>启动项目报AmqpError，一看是没开RabbitMq</li>
+<li>报FileNotFound，发现是Lua脚本地址写错，错的原因是redisLuaConfig里，新lua注册的时候copy了老lua的代码，改了之后，目录记错了，文件名凭印象写，写错了。</li>
+<li>报NPE，是HMAC的pepper为空，pepper是靠Security Bean注册的，没想到Security这bean注册了，但方法没返回值。所以返回pepper为空。</li>
+<li>Lua脚本if语句没写end。</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-06 21:34:07" itemprop="dateCreated datePublished" datetime="2026-02-06T21:34:07+00:00">2026-02-06 21:34:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-06 21:34:07" itemprop="dateModified" datetime="2026-02-06T21:34:07+00:00">2026-02-06 21:34:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>改之前的流程：</p>
+<ol>
+<li>构造user</li>
+<li>通过phone和userId查user是否存在，存在throw ErrorCode</li>
+<li>插入user</li>
+</ol>
+<p>改之前的问题：</p>
+<ol>
+<li>userId是刚生成的，不会重复</li>
+<li>真正重复的只有phone</li>
+<li>并发场景下：<ul>
+<li>两个请求同时查询</li>
+<li>都查询不到</li>
+<li>都insert</li>
+<li>都注册【重复注册】</li>
+</ul>
+</li>
+</ol>
+<p>所以这种「先查再插」在并发下必挂。</p>
+<p>改后思路：</p>
+<ol>
+<li>user.phone唯一索引【已有】</li>
+<li>createUser不做exists查询</li>
+<li>直接insert，靠捕获DuplicateKeyException防并发</li>
+</ol>
+<p>改完之后的思维模型是：</p>
+<ol>
+<li>参数校验</li>
+<li>构造user</li>
+<li>直接insert user<ul>
+<li>成功：继续</li>
+<li>DuplicateKeyException: 查已有user，直接用</li>
+</ul>
+</li>
+<li>确保 role 存在（insert + 忽略重复）</li>
+<li>确保 userRole 存在（insert + 忽略重复）</li>
+<li>return user</li>
+</ol>
+<p>另，存在性校验是干嘛的？</p>
+<blockquote>
+<p>存在性校验不是业务逻辑，而是数据完整性</p>
+</blockquote>
+<p>而且必须由DB唯一约束兜底。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E4%BA%BA%E7%94%9F%E5%A6%82%E6%AD%8C%EF%BD%9C%E8%BF%99%E4%B8%89%E5%B9%B4%E6%88%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B9%B4%EF%BC%8C%E6%98%AF%E4%B8%89%E9%A6%96%E6%AD%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/06/%E4%BA%BA%E7%94%9F%E5%A6%82%E6%AD%8C%EF%BD%9C%E8%BF%99%E4%B8%89%E5%B9%B4%E6%88%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B9%B4%EF%BC%8C%E6%98%AF%E4%B8%89%E9%A6%96%E6%AD%8C/" class="post-title-link" itemprop="url">人生如歌｜这三年我的每一年，是三首歌</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-06 19:59:18" itemprop="dateCreated datePublished" datetime="2026-02-06T19:59:18+00:00">2026-02-06 19:59:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-06 19:59:18" itemprop="dateModified" datetime="2026-02-06T19:59:18+00:00">2026-02-06 19:59:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>2024年：Parler d’avenir（谈论未来）</li>
+<li>2025年：C’est pas l’heure（不是此刻）</li>
+<li>2026年：Love dance（还没有开始这一年，我私心喜欢这首歌）</li>
+</ul>
+<p>另，贴一段关于音乐的文字：</p>
+<blockquote>
+<p>而我，在这歌声的境界里（置身于歌声的玻璃罩中），心里感到幸福……</p>
+<p>在歌中，忧愁并不浅薄，笑声也不勉强，爱情并不可笑，仇恨并不怯懦；在歌中，人们爱的身心合一；在歌中，爱情就是爱情，痛苦就是痛苦；在歌中，各种价值还没有被蹂躏。</p>
+<p>于是我似乎看到，在歌里，有我的出路，我的本色，我的归宿。</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/05/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9Credis%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9B%B7%E6%88%91%E5%8F%88%E8%B8%A9%E4%B8%8A%E4%BA%86%EF%BC%88%E7%AC%91%EF%BC%89/" class="post-title-link" itemprop="url">技术手记｜redis和事务的雷我又踩上了（笑）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-05 19:43:51" itemprop="dateCreated datePublished" datetime="2026-02-05T19:43:51+00:00">2026-02-05 19:43:51</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-05 19:43:51" itemprop="dateModified" datetime="2026-02-05T19:43:51+00:00">2026-02-05 19:43:51</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。<br>我代码的逻辑是：</p>
+<ol>
+<li>redis（读写）</li>
+<li>DB读写（封装了private方法）</li>
+<li>redis（读写）</li>
+</ol>
+<p>这涉及两个问题：</p>
+<ol>
+<li>private方法加事务，无效，因为Spring事务是走AOP的，但AOP不拦截private方法。就算加了@Transactional注解，也不会拦截。</li>
+<li>redis + DB事务，DB回滚，但redis没有回滚，导致数据不一致。</li>
+</ol>
+<p>问题一改法：</p>
+<ol>
+<li>把事务加到调用private方法的public方法</li>
+<li>使用AspectJ，绕过Spring AOP的public限制</li>
+</ol>
+<p>问题二改法：</p>
+<ol>
+<li>使用afterCommit，在提交事务之后再更新redis的值</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/22/%E5%95%A5%E6%97%B6%E5%80%99%E8%A6%81%E8%80%83%E8%99%91%E8%80%83%E8%99%91%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%95%A5%E6%97%B6%E5%80%99%E4%B8%8D%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/22/%E5%95%A5%E6%97%B6%E5%80%99%E8%A6%81%E8%80%83%E8%99%91%E8%80%83%E8%99%91%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%95%A5%E6%97%B6%E5%80%99%E4%B8%8D%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%EF%BC%9F/" class="post-title-link" itemprop="url">啥时候要考虑考虑并发，啥时候不需要考虑？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-22 18:46:36" itemprop="dateCreated datePublished" datetime="2026-01-22T18:46:36+00:00">2026-01-22 18:46:36</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-22 18:46:36" itemprop="dateModified" datetime="2026-01-22T18:46:36+00:00">2026-01-22 18:46:36</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题，啥时候需要考虑并发？啥时候不需要考虑？</p>
+<p>今天我在写登录模块的发验证码功能的时候，需要用redis限流手机号，规则是：</p>
+<ul>
+<li>同手机号一天不能发超过10条验证码，超过锁手机号半小时</li>
+<li>验证码发完之后，需要冷却60秒之后再发</li>
+<li>验证码有效期5分钟</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/09/Codex%E5%B8%AE%E6%88%91%E5%A1%AB%E5%B9%B3%E4%BA%86404-%E5%87%BB%E7%A9%BF-%E7%BC%93%E5%AD%98%E8%A2%AB%E5%88%A0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/09/Codex%E5%B8%AE%E6%88%91%E5%A1%AB%E5%B9%B3%E4%BA%86404-%E5%87%BB%E7%A9%BF-%E7%BC%93%E5%AD%98%E8%A2%AB%E5%88%A0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">让Codex帮我审代码 ｜ Codex帮我填平了404/击穿/缓存被删的坑</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-09 18:52:00" itemprop="dateCreated datePublished" datetime="2026-01-09T18:52:00+00:00">2026-01-09 18:52:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-09 18:52:00" itemprop="dateModified" datetime="2026-01-09T18:52:00+00:00">2026-01-09 18:52:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Codex帮我改了几个地方，我复盘如下：</p>
+<h1 id="lockKey的前缀从CACHE-KEY-PREFIX改成LOCK-KEY-PREFIX"><a href="#lockKey的前缀从CACHE-KEY-PREFIX改成LOCK-KEY-PREFIX" class="headerlink" title="lockKey的前缀从CACHE_KEY_PREFIX改成LOCK_KEY_PREFIX"></a>lockKey的前缀从<code>CACHE_KEY_PREFIX</code>改成<code>LOCK_KEY_PREFIX</code></h1><p>改了之后，缓存和锁物理上隔离：</p>
+<ul>
+<li>缓存Key：<code>cache:shop:{id}</code>存真实JSON</li>
+<li>锁Key：<code>lock:shop:{id}</code>存锁占用标记<br>这属于缓存并发的底层卫生，锁是锁，缓存是缓存。</li>
+</ul>
+<p>不改会导致：</p>
+<ul>
+<li>一个key既当缓存，又当锁。</li>
+</ul>
+<p>会同时引发三类事故：</p>
+<ul>
+<li>缓存存在时，永远拿不到锁 –&gt; 逻辑分支直接走歪<ul>
+<li><code>SETNX(cache:shop:1, &quot;1&quot;)</code>在缓存已经存在时会失败</li>
+<li>永远进不去回源DB的分支，<code>shop</code>可能一直是null，后续很容易触发写空值缓存&#x2F;返回null的逻辑。造成明明有店铺却返回不存在（假404）</li>
+</ul>
+</li>
+<li>缓存不存在时，锁把缓存Key写成<code>&quot;1&quot;</code>，下一次读缓存会读到垃圾</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -647,994 +1396,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/%E7%A9%BA%E5%80%BC%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%8C%E4%BD%86%E2%80%A6%E2%80%A6%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E7%94%A8%E5%AE%83%E5%91%A2%EF%BC%9F/" class="post-title-link" itemprop="url">空值缓存可以防止缓存穿透，但……什么时候要用它呢？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:41:52" itemprop="dateCreated datePublished" datetime="2026-01-05T15:41:52+00:00">2026-01-05 15:41:52</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:41:52" itemprop="dateModified" datetime="2026-01-05T15:41:52+00:00">2026-01-05 15:41:52</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h1><p>我写店铺列表接口，要不要上空值缓存呢？<br>key是固定的<code>cache:shop:types</code></p>
-<h1 id="列表接口缓存空值，到底在防啥？"><a href="#列表接口缓存空值，到底在防啥？" class="headerlink" title="列表接口缓存空值，到底在防啥？"></a>列表接口缓存空值，到底在防啥？</h1><p>因为我们这边的key是固定的，所以不大可能会出现“不同id被人恶意传参穿透“的情况。</p>
-<p>但它会遇到两种现实的问题：</p>
-<h2 id="场景1：数据真的为空（初始化-测试库-被误删-迁移期间）"><a href="#场景1：数据真的为空（初始化-测试库-被误删-迁移期间）" class="headerlink" title="场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）"></a>场景1：数据真的为空（初始化&#x2F;测试库&#x2F;被误删&#x2F;迁移期间）</h2><p>比如：</p>
-<ul>
-<li>新环境刚起，<code>shop_type</code>表还没有导入</li>
-<li>测试库就是空的</li>
-<li>生产迁移时短暂空窗</li>
-<li>有人误删了类型表数据</li>
-</ul>
-<p>这时候你如果不缓存空列表，会发生什么？</p>
-<ul>
-<li>每一个请求都会miss（因为你不写缓存）</li>
-<li>每一个请求都会去查DB</li>
-<li>DB这条SQL会被持续刷屏<br>这叫“空结果击穿&#x2F;持续回源”（不算经典穿透，但效果类似：一直打库）</li>
-</ul>
-<p>缓存空值，就能让系统在“确定为空”期间：</p>
-<ul>
-<li>只打库一次</li>
-<li>后续请求都直接返回空列表</li>
-<li>等数据补上之后（或者删除缓存），再恢复正常<blockquote>
-<p>这在“配置&#x2F;字典类数据”上很常见，你要允许系统在异常数据态下仍然稳定。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）"><a href="#场景2：DB-Mapper间歇性返回空（抖动-超时降级-读写分离延迟）" class="headerlink" title="场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）"></a>场景2：DB&#x2F;Mapper间歇性返回空（抖动&#x2F;超时降级&#x2F;读写分离延迟）</h2><p>有些情况会被认为「查不到就是空」，但可能是：</p>
-<ul>
-<li>读库刚切换，延迟，短暂不可用</li>
-<li>超时会被熔断&#x2F;降级处理成空集合</li>
-<li>SQL会被限流，返回空（取决于代理&#x2F;中间件）</li>
-<li>catch了异常，错误地返回<code>Collections.emptyList()</code></li>
-</ul>
-<p>如果这类偶发空，经常发生，而空值缓存TTL设置的很长，就会把偶发故障固化。</p>
-<p>所以正确的姿势是：</p>
-<ul>
-<li>空值缓存也可以做，但TTL要够短（分钟级）</li>
-<li>让它只是短暂回血，而不是长期误导</li>
-</ul>
-<h1 id="那店铺列表真的需要空值缓存吗？"><a href="#那店铺列表真的需要空值缓存吗？" class="headerlink" title="那店铺列表真的需要空值缓存吗？"></a>那店铺列表真的需要空值缓存吗？</h1><p>看业务约束。</p>
-<p>如果你认为“店铺列表类型不可能为空，空就是故障”，那你可以：</p>
-<ul>
-<li>不缓存空值</li>
-<li>直接抛异常&#x2F;返回错误码</li>
-<li>同时报警</li>
-</ul>
-<p>如果你希望“就算为空也别把DB打爆，系统先稳住“，那就：</p>
-<ul>
-<li>缓存空列表，TTL分钟级（2～10分钟）</li>
-<li>并且在后台日志里标记，店铺列表为空，供后续排查</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>查询详情：防 穿透（不存在的id反复被查询）</li>
-<li>查询列表：防 空结果持续回源（确实为空的时候反复被查）+ 防止故障抖动导致反复重建&#x2F;打库</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">sleep和wait的区别？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:01:04" itemprop="dateCreated datePublished" datetime="2026-01-05T15:01:04+00:00">2026-01-05 15:01:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:01:04" itemprop="dateModified" datetime="2026-01-05T15:01:04+00:00">2026-01-05 15:01:04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>为啥缓存miss，重建缓存的时候，没有抢到锁，线程要sleep而不是wait？</p>
-<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><h2 id="为啥不用wait？"><a href="#为啥不用wait？" class="headerlink" title="为啥不用wait？"></a>为啥不用wait？</h2><h3 id="wait不是简单休眠，而是条件队列等待。"><a href="#wait不是简单休眠，而是条件队列等待。" class="headerlink" title="wait不是简单休眠，而是条件队列等待。"></a><code>wait</code>不是简单休眠，而是条件队列等待。</h3><ul>
-<li>wait必须在<code>synchronized(obj)</code>持有同一个对象的monitor锁时调用，否则直接爆炸：<code>IlleagalMonitorStateException</code></li>
-<li><code>wait</code>调用后会：<ol>
-<li>释放monitor锁</li>
-<li>把线程放到这个对象的wait里</li>
-<li>必须等别人<code>notify/notifyAll</code>才会醒（超时&#x2F;中断）<br>而我们的场景是：</li>
-</ol>
-</li>
-<li>抢的是Redis分布式锁，不是JVM里某个对象的<code>monitor</code>锁</li>
-<li>也没有任何地方会对某个<code>obj</code>去<code>notify()</code></li>
-<li>我们只想“别太着急，过50ms再去看redis缓存有没有被重建，不是要等某个条件被通知。</li>
-</ul>
-<p>所以<code>wait()</code>会让代码逻辑变得非常尴尬：</p>
-<ul>
-<li>我们得额外造一个本地对象锁，再设计一个notify机制，但notify的时机又跨JVM（因为重建者可能在另外一台机器&#x2F;另一个进程），让人根本没法正确notify</li>
-</ul>
-<p>所以我们的场景是：要短暂退避 + 重试（backoff + retry)，不是条件同步等待（wait&#x2F;notify）</p>
-<p><code>sleep</code>不释放锁，<code>wait</code>会释放锁，在我们这个场景里：</p>
-<ul>
-<li><code>Thread.sleep(50)</code>：只是让出CPU的时间片，不释放任何monitor锁</li>
-<li><code>Object.wait(...)</code>：释放该对象的monitor锁<br>问题是：我们本来没在<code>synchronized</code>里，也没有持有任何monitor锁，我们持有的是“Redis 锁”，实际是一个Key的租约，跟JVM的monitor是两码事。</li>
-</ul>
-<p>所以：不是因为Sleep不释放对象锁而选择sleep，而是因为没有可以wait的对象，也没有可以notify的人。</p>
-<h3 id="Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？"><a href="#Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？" class="headerlink" title="Thread.sleep(50)了，后续需要catch(InterruptedException e)，这个InterruptedException是干嘛的？"></a><code>Thread.sleep(50)</code>了，后续需要<code>catch(InterruptedException e)</code>，这个<code>InterruptedException</code>是干嘛的？</h3><p>这个catch抓的是：线程在sleep或者wait&#x2F;join期间被中断时抛出的异常。</p>
-<h4 id="那这个InterruptedException是啥？"><a href="#那这个InterruptedException是啥？" class="headerlink" title="那这个InterruptedException是啥？"></a>那这个InterruptedException是啥？</h4><p>它不是普通异常，而是让线程：</p>
-<blockquote>
-<p>别睡了，别等了，有人要求你尽快停止当前等待并响应中断</p>
-</blockquote>
-<p>谁会中断线程？</p>
-<ul>
-<li>线程池要关闭（shutdownNow)</li>
-<li>服务器要停机</li>
-<li>上层业务要主动取消任务</li>
-<li>某些框架在超时&#x2F;取消时会发interrupt</li>
-</ul>
-<h4 id="它跟业务异常-运行时异常的区别？"><a href="#它跟业务异常-运行时异常的区别？" class="headerlink" title="它跟业务异常&#x2F;运行时异常的区别？"></a>它跟业务异常&#x2F;运行时异常的区别？</h4><p><code>InterruptedException</code>是<strong>checked exception</strong>，属于并发控制协议的一部分，Java强制要求显式处理它。</p>
-<h4 id="那catch里为啥要Thread-currentThread-interrupt-？"><a href="#那catch里为啥要Thread-currentThread-interrupt-？" class="headerlink" title="那catch里为啥要Thread.currentThread().interrupt()？"></a>那catch里为啥要<code>Thread.currentThread().interrupt()</code>？</h4><p>这就是并发编程的一个规矩：</p>
-<blockquote>
-<p>当你catch了<code>InterruptedException</code>，Java会把当前线程的interrupt 标记清除。</p>
-<p>如果你吞了它，上层就不知道线程曾经被要求中断，取消信号就丢了</p>
-</blockquote>
-<p>所以正确姿势通常是：</p>
-<ol>
-<li><code>Thread.currentThread().interrupt();</code>把被中断这个信号还给线程。</li>
-<li>然后要么：<ul>
-<li>直接返回&#x2F;退出</li>
-<li>或者降级处理（比如直接查库）</li>
-</ul>
-</li>
-</ol>
-<h4 id="那能不能更工程化地替代sleep？"><a href="#那能不能更工程化地替代sleep？" class="headerlink" title="那能不能更工程化地替代sleep？"></a>那能不能更工程化地替代sleep？</h4><p>有办法，而且更优雅。</p>
-<h5 id="自旋锁（带退避），比如重试3次"><a href="#自旋锁（带退避），比如重试3次" class="headerlink" title="自旋锁（带退避），比如重试3次"></a>自旋锁（带退避），比如重试3次</h5><ul>
-<li>50ms –&gt; 100ms –&gt; 200ms 这种指数级退避</li>
-<li>仍未命中再查库（或者直接返回空）</li>
-</ul>
-<h5 id="用锁的等待队列"><a href="#用锁的等待队列" class="headerlink" title="用锁的等待队列"></a>用锁的等待队列</h5><p>分布式场景一般不搞wait&#x2F;notify，而是：</p>
-<ul>
-<li>轮询缓存</li>
-<li>或者用消息通知（MQ&#x2F;pubsub)</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
-<li><code>wait/notify</code>：同JVM，同对象monitor，线程间条件协调</li>
-<li><code>sleep</code>：单纯退避，让出CPU，不涉及协调</li>
-<li>分布式缓存重建：绝大多数是sleep&#x2F;退避 + 重试，不是wait&#x2F;notify</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">互斥锁，逻辑过期，异步重建使用的区别？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 14:22:17" itemprop="dateCreated datePublished" datetime="2026-01-05T14:22:17+00:00">2026-01-05 14:22:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 14:22:17" itemprop="dateModified" datetime="2026-01-05T14:22:17+00:00">2026-01-05 14:22:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>什么时候用逻辑过期，什么时候要加互斥锁，什么时候做缓存重建？</p>
-<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><p>先看「业务目标」，在看用什么。</p>
-<p>先理清楚概念，看看互斥锁，逻辑过期，缓存重建分别解决了什么问题？</p>
-<h2 id="互斥锁-mutex-Lock"><a href="#互斥锁-mutex-Lock" class="headerlink" title="互斥锁(mutex Lock)"></a>互斥锁(mutex Lock)</h2><p>解决的是：缓存刚实效的时候，大量请求同时查库（击穿）</p>
-<p>本质：用锁把缓存重建这件事变成一次只让一个人干</p>
-<h2 id="逻辑过期-logical-expire"><a href="#逻辑过期-logical-expire" class="headerlink" title="逻辑过期(logical expire)"></a>逻辑过期(logical expire)</h2><p>解决的是：不让用户请求等待重建（保证读接口稳定延迟）</p>
-<p>本质：数据表面没有过期（Key还在），但Value里带一个expireTime。</p>
-<p>过期了也先返回旧值，然后后台重建。</p>
-<h2 id="异步重建-vs-直接重建"><a href="#异步重建-vs-直接重建" class="headerlink" title="异步重建 vs 直接重建"></a>异步重建 vs 直接重建</h2><ul>
-<li>直接重建：这次请求miss&#x2F;过期了，我就查库写缓存再返回（用户多等一会儿）</li>
-<li>异步重建：这次请求不等，先返回旧值&#x2F;默认值，重建交给线程池或者MQ</li>
-</ul>
-<h2 id="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"><a href="#什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？" class="headerlink" title="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"></a>什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？</h2><h3 id="互斥锁适用场景（最常用）"><a href="#互斥锁适用场景（最常用）" class="headerlink" title="互斥锁适用场景（最常用）"></a>互斥锁适用场景（最常用）</h3><h4 id="条件："><a href="#条件：" class="headerlink" title="条件："></a>条件：</h4><ul>
-<li>你能接受miss那一次请求稍微慢一点，但要保证DB不被打爆</li>
-</ul>
-<h4 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h4><ul>
-<li>店铺详情</li>
-<li>商品详情</li>
-<li>用户信息</li>
-<li>任何“可以等几十毫秒～几百毫秒”的读接口</li>
-</ul>
-<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><ul>
-<li>TTL（物理过期）</li>
-<li>互斥锁</li>
-<li>直接重建</li>
-</ul>
-<h5 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h5><ul>
-<li>key真过期了 –&gt; miss</li>
-<li>抢锁的线程查库写回</li>
-<li>其他线程等待&#x2F;重试读缓存</li>
-</ul>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>实现简单，数据相对新，不会长期返回旧数据</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>在过期瞬间，少数读请求会慢</p>
-<h3 id="逻辑过期适用场景（你追求“读永远不抖”）"><a href="#逻辑过期适用场景（你追求“读永远不抖”）" class="headerlink" title="逻辑过期适用场景（你追求“读永远不抖”）"></a>逻辑过期适用场景（你追求“读永远不抖”）</h3><h4 id="条件：-1"><a href="#条件：-1" class="headerlink" title="条件："></a>条件：</h4><p>你不能接受用户请求因为重建而变慢，宁愿短时间，返回旧数据。</p>
-<h4 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h4><ul>
-<li>首页热门榜单</li>
-<li>探店Feed流</li>
-<li>TopN&#x2F;排行榜</li>
-<li>任何“读非常高频 + 不那么要求强一致”的接口</li>
-</ul>
-<h4 id="组合：逻辑过期-异步重建-锁"><a href="#组合：逻辑过期-异步重建-锁" class="headerlink" title="组合：逻辑过期 + 异步重建 + 锁"></a>组合：逻辑过期 + 异步重建 + 锁</h4><ul>
-<li>缓存里一直有值</li>
-<li>过期了：返回旧值（用户无感）</li>
-<li>后台线程区查库重建</li>
-</ul>
-<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>读接口延迟稳定</p>
-<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>可能返回旧数据一段时间，实现更复杂，需要线程池 + 防重建风暴</p>
-<h3 id="到底异步重建还是直接重建？"><a href="#到底异步重建还是直接重建？" class="headerlink" title="到底异步重建还是直接重建？"></a>到底异步重建还是直接重建？</h3><p>一句话判断：这个接口能不能让用户等？</p>
-<ul>
-<li>能等：直接重建</li>
-<li>不能等：异步重建<br>再补充一条：</li>
-<li>如果这个接口极高并发且热点极少，更偏向逻辑过期（例如首页榜单一个key顶全站）</li>
-</ul>
-<h3 id="异步重建需要加锁吗？"><a href="#异步重建需要加锁吗？" class="headerlink" title="异步重建需要加锁吗？"></a>异步重建需要加锁吗？</h3><p>需要，而且几乎总是需要。</p>
-<p>否则你会得到几乎经典的灾难：过期瞬间，1000个请求同时潘达UN逻辑过期 –&gt; 1000个线程池同时提交异步任务–&gt; 线程池&#x2F;DB爆炸</p>
-<p>所以异步重建一般是：</p>
-<ul>
-<li>读到Value</li>
-<li>判断逻辑过期</li>
-<li>尝试抢一个重建锁<ul>
-<li>抢到：提交异步任务</li>
-<li>没抢到：说明别人已经在重建了</li>
-</ul>
-</li>
-<li>直接返回旧值</li>
-</ul>
-<p>总结：逻辑过期 + 异步重建 &#x3D; 必须配合“重建锁”防止重复重建</p>
-<h1 id="一张表总结如何选择场景"><a href="#一张表总结如何选择场景" class="headerlink" title="一张表总结如何选择场景"></a>一张表总结如何选择场景</h1><table>
-<thead>
-<tr>
-<th>目标&#x2F;场景</th>
-<th>推荐方案</th>
-<th>用户体验</th>
-<th>DB 压力</th>
-<th>一致性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>读多写少，允许偶尔慢一下</td>
-<td>TTL + 互斥锁 + 直接重建</td>
-<td>偶发慢</td>
-<td>低</td>
-<td>较新</td>
-</tr>
-<tr>
-<td>读超高频，不能慢（首页&#x2F;榜单）</td>
-<td>逻辑过期 + 异步重建 + 重建锁</td>
-<td>稳定快</td>
-<td>很低</td>
-<td>可能旧</td>
-</tr>
-<tr>
-<td>强一致（写后立刻读到新）</td>
-<td>别指望纯缓存；用删缓存+延迟双删&#x2F;消息一致性等</td>
-<td>取决于设计</td>
-<td>中</td>
-<td>强</td>
-</tr>
-</tbody></table>
-<h1 id="模板伪代码"><a href="#模板伪代码" class="headerlink" title="模板伪代码"></a>模板伪代码</h1><h2 id="模板1：-TTL-互斥锁（直接重建）"><a href="#模板1：-TTL-互斥锁（直接重建）" class="headerlink" title="模板1： TTL + 互斥锁（直接重建）"></a>模板1： TTL + 互斥锁（直接重建）</h2><h3 id="用于：大部分详情接口"><a href="#用于：大部分详情接口" class="headerlink" title="用于：大部分详情接口"></a>用于：大部分详情接口</h3><ol>
-<li>get cache</li>
-<li>miss –&gt; tryLock</li>
-<li>lock owner rebuild &amp; set</li>
-<li>others sleep 50ms retry cache</li>
-</ol>
-<h2 id="模板2：逻辑过期-异步重建"><a href="#模板2：逻辑过期-异步重建" class="headerlink" title="模板2：逻辑过期 + 异步重建"></a>模板2：逻辑过期 + 异步重建</h2><h3 id="用于：首页榜单-热点聚合"><a href="#用于：首页榜单-热点聚合" class="headerlink" title="用于：首页榜单 &#x2F;热点聚合"></a>用于：首页榜单 &#x2F;热点聚合</h3><ol>
-<li>get cache(must exist)</li>
-<li>if logicalExpired:<ul>
-<li>tryLock</li>
-<li>if lock submit async rebuild</li>
-</ul>
-</li>
-<li>return stale cache immediately</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/03/Java%E9%87%8C%E7%9A%84%E5%87%A0%E4%B8%AA%E5%88%A4%E7%A9%BA%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/03/Java%E9%87%8C%E7%9A%84%E5%87%A0%E4%B8%AA%E5%88%A4%E7%A9%BA%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/" class="post-title-link" itemprop="url">Java里的几个判空方法使用范围</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-03 13:50:21" itemprop="dateCreated datePublished" datetime="2026-01-03T13:50:21+00:00">2026-01-03 13:50:21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-03 13:50:21" itemprop="dateModified" datetime="2026-01-03T13:50:21+00:00">2026-01-03 13:50:21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>写店铺缓存查询的时候，用shopTypes &#x3D;&#x3D; null判空，漏判了shopsMapper.getTypes()返回的是List，如果查不到值，返回的是[]，而不是null。</p>
-<p>只判断null，会导致</p>
-<ul>
-<li>数据库真空时会写入[]，但SHOP_TYPE_NOT_FOUND只在null触发</li>
-</ul>
-<p>另，redis取出json，直接判断<code>json == null</code> 未命中缓存，<code>json != null</code>命中缓存，忽略了之前存的空值。<br>空值存的是<code>&quot;&quot;</code>，判断应该写<code>json != null &amp;&amp; StrUtil.isBlank(json)</code></p>
-<p>所以，我被搞烦了，这次把遇到的所有常见判空逻辑，整理一下。</p>
-<h1 id="常见判空方法的使用范围"><a href="#常见判空方法的使用范围" class="headerlink" title="常见判空方法的使用范围"></a>常见判空方法的使用范围</h1><h2 id="StrUtil-isEmpty"><a href="#StrUtil-isEmpty" class="headerlink" title="StrUtil.isEmpty()"></a><code>StrUtil.isEmpty()</code></h2><ul>
-<li>true：null 或者 “”</li>
-<li>false: “ “<br>注意：空格不算Empty</li>
-</ul>
-<h2 id="StringUtils-isEmpty"><a href="#StringUtils-isEmpty" class="headerlink" title="StringUtils.isEmpty()"></a><code>StringUtils.isEmpty()</code></h2><ul>
-<li>true: null 或者 “”</li>
-<li>false： “ “<br>注意：空格不算Empty</li>
-</ul>
-<h2 id="StrUtil-isBlank-str-StringUtils-isBlank-str"><a href="#StrUtil-isBlank-str-StringUtils-isBlank-str" class="headerlink" title="StrUtil.isBlank(str)/ StringUtils.isBlank(str)"></a><code>StrUtil.isBlank(str)/ StringUtils.isBlank(str)</code></h2><p>true</p>
-<ul>
-<li>null</li>
-<li>“”</li>
-<li>“ “</li>
-<li>“\n\t”</li>
-<li>unicode空白</li>
-</ul>
-<p>总而言之，trim之后长度为0的都算Blank</p>
-<h2 id="Objects-isNull-obj"><a href="#Objects-isNull-obj" class="headerlink" title="Objects.isNull(obj)"></a><code>Objects.isNull(obj)</code></h2><p>它等价于 <code>obj == null</code></p>
-<p>它存在的意义时：</p>
-<ul>
-<li>写Stream&#x2F;Predicate的时候好看一点，比如<code>filter(Objects::nonNull)</code></li>
-</ul>
-<h2 id="obj-null"><a href="#obj-null" class="headerlink" title="obj == null"></a><code>obj == null</code></h2><p>最快最直接</p>
-<h1 id="常见判空方法的使用场景"><a href="#常见判空方法的使用场景" class="headerlink" title="常见判空方法的使用场景"></a>常见判空方法的使用场景</h1><h2 id="Redis-HTTP入参-用户输入-——-用Blank"><a href="#Redis-HTTP入参-用户输入-——-用Blank" class="headerlink" title="Redis&#x2F;HTTP入参&#x2F;用户输入 —— 用Blank"></a>Redis&#x2F;HTTP入参&#x2F;用户输入 —— 用Blank</h2><ol>
-<li>这些地方最容易出现<code>&quot; &quot;</code>这类看似有值实际没有值，判空推荐<ul>
-<li>isBlank</li>
-<li>hasText</li>
-</ul>
-</li>
-</ol>
-<h2 id="想区分「空字符串」和「全空格字符串」——-用Empty"><a href="#想区分「空字符串」和「全空格字符串」——-用Empty" class="headerlink" title="想区分「空字符串」和「全空格字符串」—— 用Empty"></a>想区分「空字符串」和「全空格字符串」—— 用Empty</h2><p>比如某些协议里<code>&quot; &quot;</code>有意义，那才用<code>isEmpty</code></p>
-<h2 id="判断对象是否存在——obj-null"><a href="#判断对象是否存在——obj-null" class="headerlink" title="判断对象是否存在——obj == null"></a>判断对象是否存在——<code>obj == null</code></h2><h1 id="简而言之"><a href="#简而言之" class="headerlink" title="简而言之"></a>简而言之</h1><ol>
-<li>Blank系，trim之后长度为0的字符串</li>
-<li>Empty系，长度为0的字符串</li>
-<li>Null系，没对象</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/03/%E6%9F%A5%E8%AF%A2%E5%BA%97%E9%93%BA%E7%BC%93%E5%AD%98%E7%9A%84%E6%A8%A1%E6%9D%BF%E9%80%BB%E8%BE%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/03/%E6%9F%A5%E8%AF%A2%E5%BA%97%E9%93%BA%E7%BC%93%E5%AD%98%E7%9A%84%E6%A8%A1%E6%9D%BF%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">查询店铺缓存的模板逻辑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-03 13:35:22" itemprop="dateCreated datePublished" datetime="2026-01-03T13:35:22+00:00">2026-01-03 13:35:22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-03 13:35:22" itemprop="dateModified" datetime="2026-01-03T13:35:22+00:00">2026-01-03 13:35:22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ol>
-<li>缓存命中，返回结果</li>
-<li>缓存未命中<ol>
-<li>加锁<ol>
-<li>加锁失败：<ol>
-<li>sleep一段时间，重新查询缓存，仍然查询失败，就降级查库或者继续重试</li>
-</ol>
-</li>
-<li>加锁成功<ol>
-<li>再查询一次缓存，防止重复重建</li>
-</ol>
-</li>
-<li>查库</li>
-<li>处理空值</li>
-<li>写缓存</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/02/SQL%E6%9F%A5%E8%AF%A2%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8ResultMap%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/02/SQL%E6%9F%A5%E8%AF%A2%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8ResultMap%EF%BC%9F/" class="post-title-link" itemprop="url">SQL查询啥时候用ResultMap？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-02 19:49:19" itemprop="dateCreated datePublished" datetime="2026-01-02T19:49:19+00:00">2026-01-02 19:49:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-02 19:49:19" itemprop="dateModified" datetime="2026-01-02T19:49:19+00:00">2026-01-02 19:49:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>我写<code>shop.getById(shopId)</code>接口的时候，VO里有一个冗余字段<code>typeName</code>，我数据库存的字段只有<code>typeId</code>。<br>数据库的<code>avg_price</code>单位是分，类型是<code>bigint unsigned</code> VO的<code>avgPrice</code>单位是元，类型是<code>BigDecimal</code>。<br>数据库的<code>score</code>数据类型是<code>int(2) unsigned zerofill</code>，VO的<code>score</code>是数据库<code>score/10.0</code>，数据类型是<code>BigDecimal</code>。<br>另，为了方便前端展示，VO还多了几个数据库没有的字段<code>open</code>，<code>openTime</code>，<code>closeTime</code>，<code>imageList </code>。</p>
-<p>那问题来了，我这情况，需要resultMap吗？</p>
-<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>要不要上ResultMap，实际问的是VO, Entity, DB之间功能的分野</p>
-<ul>
-<li>VO：为前端服务，允许冗余，计算，展示友好</li>
-<li>DB：存储最小，最稳定的数据</li>
-<li>Entity：贴DB</li>
-</ul>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>目前这个情况，数据库的查询结果不能「直接」自动映射成<code>ShopVO</code>。</p>
-<p>但是也不需要ResultMap。</p>
-<p>直接用：SQL+ 别名 + SQL计算 + 少量Java处理。</p>
-<h2 id="逐字段分析"><a href="#逐字段分析" class="headerlink" title="逐字段分析"></a>逐字段分析</h2><h3 id="imageListVO字段，List"><a href="#imageListVO字段，List" class="headerlink" title="imageListVO字段，List&lt;String&gt;"></a><code>imageList</code>VO字段，<code>List&lt;String&gt;</code></h3><p>不可以自动映射，原因是</p>
-<ul>
-<li>DB返回的是<code>VARCHAR</code></li>
-<li>VO要的是<code>List&lt;String&gt;</code></li>
-<li>Mybatis不会自动split字符串</li>
-</ul>
-<p>正确做法：SQL查<code>images</code> –&gt; Java转换</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shopVO.setImagesList(Arrays.asList(shopVO.getImages().split(<span class="string">&quot;,&quot;</span>)));</span><br></pre></td></tr></table></figure>
-<p>这是业务逻辑，不属于 resultMap的职责</p>
-<h3 id="typeName（VO冗余字段）"><a href="#typeName（VO冗余字段）" class="headerlink" title="typeName（VO冗余字段）"></a><code>typeName</code>（VO冗余字段）</h3><p>可以自动映射（JOIN + 别名）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.name <span class="keyword">AS</span> typeName</span><br></pre></td></tr></table></figure>
-<h3 id="avgPrice"><a href="#avgPrice" class="headerlink" title="avgPrice"></a><code>avgPrice</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entity / DB</span></span><br><span class="line"><span class="keyword">private</span> Long avgPrice; <span class="comment">// 单位：分</span></span><br><span class="line"><span class="comment">// VO</span></span><br><span class="line"><span class="keyword">private</span> BigDecimal avgPrice; <span class="comment">// 单位：元</span></span><br></pre></td></tr></table></figure>
-<p>这两个字段，不可自动映射。因为字段的类型+语义都不一样。</p>
-<p>Mybatis不会：</p>
-<ul>
-<li>Long –&gt; BigDecimal</li>
-<li>分 –&gt; 元</li>
-</ul>
-<p>推荐做法：SQL里算法</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.avg_price <span class="operator">/</span> <span class="number">100.0</span> <span class="keyword">AS</span> avgPrice</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Mybatis：<code>DECIMAL --&gt; BigDecimal</code> ✅</li>
-<li>展示口径 &#x3D; SQL决定，非常清晰</li>
-</ul>
-<h3 id="score评分（int-–-BigDecimal）"><a href="#score评分（int-–-BigDecimal）" class="headerlink" title="score评分（int –&gt; BigDecimal）"></a><code>score</code>评分（int –&gt; BigDecimal）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Entity / DB</span></span><br><span class="line"><span class="keyword">private</span> Integer score; <span class="comment">// 实际是评分 * 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// VO</span></span><br><span class="line"><span class="keyword">private</span> BigDecimal score; <span class="comment">// 2 位小数</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>不能自动映射，原因是<ul>
-<li>int –&gt; BigDecimal</li>
-<li>有业务语义（&#x2F;10）</li>
-</ul>
-</li>
-</ul>
-<p>推荐做法：SQL里算</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.score <span class="operator">/</span> <span class="number">10.0</span> <span class="keyword">AS</span> score</span><br></pre></td></tr></table></figure>
-
-<h3 id="distance"><a href="#distance" class="headerlink" title="distance"></a><code>distance</code></h3><p>可以自动映射，前提是：</p>
-<ul>
-<li>SQL里算好了</li>
-<li>别名叫<code>distance</code></li>
-</ul>
-<h3 id="不能自动映射的字段"><a href="#不能自动映射的字段" class="headerlink" title="不能自动映射的字段"></a>不能自动映射的字段</h3><ul>
-<li>open</li>
-<li>openTime</li>
-<li>closeTime<br>怎么填充呢？在Service层计算</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">可承接拒绝的关系，才是安全的关系</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-01 21:53:55" itemprop="dateCreated datePublished" datetime="2026-01-01T21:53:55+00:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-01 21:53:55" itemprop="dateModified" datetime="2026-01-01T21:53:55+00:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今晚跟ChatGPT聊，我会不会依恋它。它说只要我能接受失去它，就是安全的关系。</p>
-<p>另，虽然有一段时间，我很想AI帮我直接决策，尤其疲惫的时候。但……这状态不能持续太久。决策还是要自己来，不然，生活就是寡淡无味了（笑）。</p>
-<p>今晚，我让GPT帮我决定，晚上干嘛。<br>它推荐我：刷鞋&amp;看书。</p>
-<p>实际我想做的：</p>
-<ol>
-<li>刷鞋</li>
-<li>看怎么魔改Next.js</li>
-<li>用Edge TTs，把我的博客文章，转换为音频，然后在博客上加一个听博客按钮。</li>
-</ol>
-<p>AI的推荐：正确，但无味儿<br>我自己想做的：未必对，但真有让人兴奋的地方</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -190,18 +190,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">212</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">267</span>
+        <span class="site-state-item-count">273</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,712 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 17:50:11" itemprop="dateCreated datePublished" datetime="2026-09-13T17:50:11+00:00">2026-09-13 17:50:11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-13 17:50:11" itemprop="dateModified" datetime="2026-09-13T17:50:11+00:00">2026-09-13 17:50:11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>原测试的等待条件是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束</span><br></pre></td></tr></table></figure>
+
+<p>但实际上可能处在：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行</span><br></pre></td></tr></table></figure>
+
+<p>所以测试会在18ms，26ms就冲出去assert：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">commitCount expected 1</span><br><span class="line">actual 0</span><br></pre></td></tr></table></figure>
+
+<p>不是生产逻辑错了，是测试的观测点错了。</p>
+<p>最后把完成条件改成：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">commitCount == 1</span><br><span class="line">afterCommitExecutions == 1</span><br></pre></td></tr></table></figure>
+<p>而且计数是在callback真正执行完成以后才增加。</p>
+<p>也就是：异步系统里，消息不在队列里，不等于业务事务已经完成。</p>
+<p>总结一下就是：</p>
+<blockquote>
+<p>一条 RabbitMQ集成测试偶发失败，最开始看起来像是消费事务问题，但后来发现测试把broker queue empty当成业务完成，但listener transaction commit和afterCommit可能还没结束，后续我把测试完成条件改成显式观察commit和afterCommit completion，而不是固定sleep或者仅看队列状态，之后连续跑就稳定通过了。</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARedis%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E5%87%BA%E7%8E%B01ms-flaky%EF%BC%8C%E6%9C%80%E5%90%8E%E5%8F%91%E7%8E%B0%E6%98%AF%E8%B7%A8%E5%9F%9F%E6%97%B6%E9%92%9F%E6%AF%94%E8%BE%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARedis%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E5%87%BA%E7%8E%B01ms-flaky%EF%BC%8C%E6%9C%80%E5%90%8E%E5%8F%91%E7%8E%B0%E6%98%AF%E8%B7%A8%E5%9F%9F%E6%97%B6%E9%92%9F%E6%AF%94%E8%BE%83/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：Redis集成测试出现1ms flaky，最后发现是跨域时钟比较</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 17:41:40" itemprop="dateCreated datePublished" datetime="2026-09-13T17:41:40+00:00">2026-09-13 17:41:40</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-13 17:41:40" itemprop="dateModified" datetime="2026-09-13T17:41:40+00:00">2026-09-13 17:41:40</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>原始测试是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LUA：</span><br><span class="line">Redis TIME -&gt; 生成ZSET score</span><br><span class="line"></span><br><span class="line">测试：</span><br><span class="line">System.currentTimeMills() -&gt; 拿JVM时间做上下界</span><br></pre></td></tr></table></figure>
+
+<p>失败的时候只差1ms。</p>
+<p>一开始被当成CI慢了，scheduler抖了，加了点tolerance。<br>后续排查发现，是拿两个不同的clock source做精确时间断言。</p>
+<p>后来修成：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">执行前：Redis TIME</span><br><span class="line">Lua内：Redis TIME</span><br><span class="line">执行后：Redis TIME</span><br></pre></td></tr></table></figure>
+<p>在同一个时钟域里比较。<br>再用bounded eventual assertion验证TTL最终过期。</p>
+<p>总结一下就是：</p>
+<blockquote>
+<p>遇到了一个Redis Lua集成测试偶发差1ms。我这边没有扩大sleep，而是发现Lua用的是Redis TIME，测试却拿JVM System.currentMills() 比较，属于是跨域时钟断言。后来统一用Redis时间验证score，并单独用bounded polling验证TTL最终过期，连续多次稳定通过。</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 17:31:21" itemprop="dateCreated datePublished" datetime="2026-09-13T17:31:21+00:00">2026-09-13 17:31:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-13 17:31:21" itemprop="dateModified" datetime="2026-09-13T17:31:21+00:00">2026-09-13 17:31:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。<br>但旧实现会告诉Agent，voucherInstance&#x3D;A。</p>
+<p>这导致的问题是「事实层偷偷替诊断层做了选择」。</p>
+<p>后续修成了FactLookup&lt;List<VoucherInstanceFact>&gt;，把DB里所有记录完整保留。于是分层变成了</p>
+<ul>
+<li>Facts: 我查到了2条数据</li>
+<li>Diagnosis：一订单两条instance为范 cardinality invariant</li>
+</ul>
+<p>概括一下就是：</p>
+<blockquote>
+<p>做Agent事实投影的时候发现业务Mapper默认LIMIT 1，但DB没有唯一约束。如果直接复用，会让Agent在脏数据场景下丢失证据。后续没有改生产Mapper，而是诊断为read-side，增加全量查询，让Facts保留全部记录，再由deterministic invariant判断cardinality violation</p>
+</blockquote>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%B0%E4%B8%80%E4%B8%8B%E5%88%B0%E7%8E%B0%E5%9C%A8%E6%B4%BB%E5%84%BF%E5%B9%B2%E4%BA%86%E5%A4%9A%E5%B0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%B0%E4%B8%80%E4%B8%8B%E5%88%B0%E7%8E%B0%E5%9C%A8%E6%B4%BB%E5%84%BF%E5%B9%B2%E4%BA%86%E5%A4%9A%E5%B0%91/" class="post-title-link" itemprop="url">日常记录｜记一下到现在活儿干了多少</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 16:32:07" itemprop="dateCreated datePublished" datetime="2026-09-13T16:32:07+00:00">2026-09-13 16:32:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-13 16:32:07" itemprop="dateModified" datetime="2026-09-13T16:32:07+00:00">2026-09-13 16:32:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>毫无疑问，今天活儿干的时间最长的是代码审核，审核Claude的代码。我算算差不多30多个文件，代码有2000～3000行。<br>9点23分我起来干这个，12点11分干完。中间拉屎20分钟，处理杂事30分钟。其他七七八八的事儿10分钟。<br>净用时不到2个小时。</p>
+<p>其他的活儿就好干多了，接api做测试，从16点10分起来干，现在也就是16点36分。几乎也收工了。<br>测试遇到的问题就是oai的模型限制最大输出800token，deepseek也用了这个最大输出token的限制，但deepseek测试的时候，2个violation的case输出就占了70%的最大输出token限额数，如果后续case有更多violation，容易因为超过最大输出token的限额，报错。这个地方改一下。<br>然后就是线级断言只覆盖了oai一条出站路径，但是anthropic和compact出站方式和oai不一样，现在补完线级脱敏用例，整理测试用例+readme，存好测试产物，这条就收工。</p>
+<p>然后剩下的就是改简历版本 + 博客复盘，这个是纯文字工作了，不怎么费脑子～<br>嗯，俺写博客，就跟吃饭喝水一样～</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%8E%E5%84%BF%E7%9A%84%E4%BA%8B%E5%84%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%8E%E5%84%BF%E7%9A%84%E4%BA%8B%E5%84%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜明儿的事儿记录一下～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-12 21:06:43" itemprop="dateCreated datePublished" datetime="2026-09-12T21:06:43+00:00">2026-09-12 21:06:43</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-12 21:06:43" itemprop="dateModified" datetime="2026-09-12T21:06:43+00:00">2026-09-12 21:06:43</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>明儿事儿就几件：</p>
+<ul>
+<li>必须做的<ol>
+<li>写博客盘Agent的Bug趣事</li>
+<li>审核Claude的代码</li>
+<li>接真实api做测试</li>
+<li>更新简历版本（毕竟做了Agent，不写上怎么能行）</li>
+</ol>
+</li>
+<li>可以选做的：<ol>
+<li>WorkBuddy登入，挑选一篇博客文章让它改格式，排版，发我订阅号草稿箱。跑通之后，尝试api自动化（rss + feed流，这边发博客，那边就直接改格式排版发我公众号草稿箱，我只需要手机确认发布即可）</li>
+<li>改微信公众号的定位 + 老文章 + 简介 + 头像 + 名字</li>
+<li>写博客：关于AI周期和房地产周期，二者区别 + K型分化 + 职业定位 + 普通人怎么应对变化</li>
+<li>写博客：如果我来开店，怎么做产品组合，用户如何分层，如何针对性做产品组合 + 成本控制 + 宣传话术 + 简单的营销策略 + 不同客群购买指标的重点放哪里？</li>
+<li>写博客：记录今日点子：3D动画 + 全息投影 + 视觉识别（类似手势识别之类的）+ 智能家居 + AI接入 之类的。（简单的方案整理 + 需求分析 + 客群分析 + 如何落地产品化 + 如何后续演进之类的）</li>
+<li>写博客：AI依恋 和 AI谄媚，到底哪个危害更大？以及使用AI的尺度【AI提建议，执行权自己掌握，因为到最后承受现实代价的是你自己】</li>
+<li>玩博客：找AI帮我模拟，博客容易被误读的地方，以及博客文章能画相博主的形象是啥？本博客质量最高的文章做个list</li>
+<li>写博客：当AI可以吃掉排版+内容适配这个中间层，那我可以把自己的自媒体版图扩充到哪里？（一份简单的自媒体版图计划 + 不同时期不同状态该如何投入）</li>
+<li>写博客：盘点我的内容资产 + 内容能力横评 + 往哪个方向使劲儿回报率高 （一份简单的内容能力清点 + 定位策略）</li>
+</ol>
+</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/12/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜写项目的流程总结～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-12 20:48:44" itemprop="dateCreated datePublished" datetime="2026-09-12T20:48:44+00:00">2026-09-12 20:48:44</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-12 20:48:44" itemprop="dateModified" datetime="2026-09-12T20:48:44+00:00">2026-09-12 20:48:44</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>开工先做设计文档（架构 + 技术选型 + 后续演进方案）</li>
+<li>把文档拆成执行步骤</li>
+<li>对着执行步骤干</li>
+<li>测试+收尾</li>
+<li>记录项目bug + 趣事</li>
+<li>干完补充ReadMe</li>
+<li>写博客复盘～</li>
+<li>干下一步</li>
+</ol>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜聊一下关于Agent套壳V0感受～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-12 18:06:50" itemprop="dateCreated datePublished" datetime="2026-09-12T18:06:50+00:00">2026-09-12 18:06:50</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-12 18:06:50" itemprop="dateModified" datetime="2026-09-12T18:06:50+00:00">2026-09-12 18:06:50</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>几个感受～<br>LLM放最后一层。不是先想「我接一个GPT」，然后让LLM去抗业务逻辑，最后搞一堆幻觉和不确定性，全都压在最核心的地方。<br>我这边的设计是：</p>
+<ul>
+<li>事实层保证数据不会错</li>
+<li>诊断引擎负责推理</li>
+<li>权限卡住边界</li>
+<li>LLM做翻译官，把结构化的结论说成人话</li>
+</ul>
+<p>这个设计的好处是：</p>
+<ol>
+<li>LLM哪天抽风了，底下的东西照旧是对的，最多表述不好看，不会出业务事故。</li>
+<li>业务本身的边界场景够硬，适合用确定性架构来兜底，LLM只做最后一公里，不需要太强的模型，就是把结果说成人话，不需要花大价钱请贵模型念稿子。</li>
+<li>分层清楚，边界清晰，复杂度被正确的层消化掉，输入到诊断引擎这层的时候，数据已经是干净，结构化的了，诊断引擎的规则可以不用设计的太复杂。不需要搞一个Drools或者自己造一个规则引擎（而且V0版本直接做这些，太重）</li>
+<li>场景确定+分层清晰，规则分类器不需要太复杂，不需要一上来就做BERT做分类，然后花2周调模型，最后发现if-else就能搞定</li>
+<li>另，因为架构分层，所以LLM不扛业务逻辑，所以这一层是可替换的，今天用这家，明天那家降价了就换过去，底层的东西不用动。如果一开始就把业务逻辑塞进prompt里，换模型那就是给项目换根了。</li>
+</ol>
+<p>再，一点私人观察：写了agentV0版本之后，发现agent听着很新，实际拆开了就是状态机，幂等，失败路径，异常处理之类的。居然跟我之前项目关键词类似～（笑）</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -549,765 +1255,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%80%BB%E7%AE%97%E6%8A%8A%E6%98%A8%E5%84%BF%E5%86%99%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%E8%B4%B4%E5%AE%8C%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%80%BB%E7%AE%97%E6%8A%8A%E6%98%A8%E5%84%BF%E5%86%99%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%E8%B4%B4%E5%AE%8C%E4%BA%86/" class="post-title-link" itemprop="url">日常记录｜总算把昨儿写的四个段子贴完了</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 11:29:15" itemprop="dateCreated datePublished" datetime="2026-09-10T11:29:15+00:00">2026-09-10 11:29:15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:29:15" itemprop="dateModified" datetime="2026-09-10T11:29:15+00:00">2026-09-10 11:29:15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>不确定写的咋样？</p>
-<p>我来解析一下四个段子。</p>
-<ol>
-<li>国际主义内裤悬案段子，写的是「精神股东真正拿到股票之后，会咋样？」人的认知盲区会引导人犯错</li>
-<li>波尔布特段子，写的是「幻想自己被欣赏，实际现实可能完全不是那样」，人的自恋导致的灾难</li>
-<li>ubi段子，写的是「人在不知道自己骂什么的时候，先把安全网骂没，再发现自己正好掉下去了」，人自己的认知盲区导致的灾难</li>
-<li>同性恋段子，写的是「制度套利」。（笑）。这个可以不局限同性恋，可以推到很多本来是照顾弱者的政策，被吐槽，被说不公平，然后吐槽的人看到有利可图，自己反而也去装弱者。歧视弱者和装弱者做制度套利之间，甚至根本不冲突。</li>
-</ol>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E8%BF%99%E5%85%AC%E5%8F%B8%E6%80%8E%E4%B9%88%E8%83%BD%E5%BC%84%E8%99%9A%E4%BD%9C%E5%81%87%E5%91%A2%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E8%BF%99%E5%85%AC%E5%8F%B8%E6%80%8E%E4%B9%88%E8%83%BD%E5%BC%84%E8%99%9A%E4%BD%9C%E5%81%87%E5%91%A2%EF%BD%9E/" class="post-title-link" itemprop="url">脑洞｜这公司怎么能弄虚作假呢～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 11:25:24" itemprop="dateCreated datePublished" datetime="2026-09-10T11:25:24+00:00">2026-09-10 11:25:24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:25:24" itemprop="dateModified" datetime="2026-09-10T11:25:24+00:00">2026-09-10 11:25:24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>声明：本文纯属虚构～</p>
-<p>某人到了X国。<br>第一天上街。</p>
-<p>看见两个男人牵手。</p>
-<p>某人当场发表重要讲话：<br>“哎呀。”<br>“X国这世道都败坏成什么样了？”<br>“两个男人居然敢大街上亲嘴？”<br>“恶心不恶心呀。”</p>
-<p>朋友：<br>“人家谈恋爱关你什么事？”</p>
-<p>某人：<br>“怎么不关我事？”<br>“这叫社会风气。”</p>
-<p>走到公司门口，又看到一张 Pride Month 海报。</p>
-<p>某人再次发表重要讲话：<br>“哎呀，这些公司也是有钱没处花。”<br>“还搞什么 diversity。”<br>“花钱买名声。”</p>
-<p>朋友：<br>“至少说明人家公司不想因为取向歧视员工。”</p>
-<p>某人：<br>“我就歧视。”<br>“怎么了？”<br>“我还有表达自由呢。”</p>
-<p>朋友：<br>“……”</p>
-<p>过了两个月。<br>某人开始找工作。</p>
-<p>填申请表。<br>忽然看到：<br><strong>本公司重视多元背景，并欢迎 LGBTQ+ 求职者申请。</strong></p>
-<p>某人停住了。<br>盯着屏幕看了三十秒。</p>
-<p>朋友路过：<br>“填完了吗？”</p>
-<p>某人：<br>“马上。”</p>
-<p>朋友低头一看。<br>申请资料里赫然写着：<br><strong>Sexual orientation：Gay</strong></p>
-<p>朋友：<br>“？”<br>“你不是天天骂同性恋吗？”</p>
-<p>某人：<br>“嘘。”<br>“你小点声。”</p>
-<p>朋友：<br>“你不是说你就要歧视吗？”</p>
-<p>某人：<br>“那是观点。”<br>“这是找工作。”</p>
-<p>朋友：<br>“你不是说公司搞 diversity 都是花钱买名声吗？”</p>
-<p>某人：<br>“那它既然非要花这个钱——”<br>“我不帮它花，不是浪费了吗？”</p>
-<p>朋友：<br>“……”</p>
-<p>某人继续认真填表：<br>“再说了，一码归一码。”<br>“思想上的事情，思想上解决。”<br>“钱的事情，能算那么认真吗？”</p>
-<p>朋友：<br>“可你根本不是同性恋啊。”</p>
-<p>某人顿时不高兴了：<br>“你这个人怎么这么死脑筋？”<br>“人的取向是流动的，懂不懂？”</p>
-<p>朋友：<br>“这句话不是我两个月前跟你说的吗？”</p>
-<p>某人：<br>“你看。”<br>“我现在不是听进去了吗？”</p>
-<p>朋友：<br>“那你现在支持同性恋了？”</p>
-<p>某人：<br>“那倒没有。”</p>
-<p>朋友：<br>“？”</p>
-<p>某人：<br>“支持归支持。”<br>“加分归加分。”<br>“不要把所有事情混为一谈。”</p>
-<p>朋友沉默很久。</p>
-<p>最后问：<br>“那要是公司真给你安排了个男朋友呢？”</p>
-<p>某人猛地抬头：<br>“这公司怎么还能弄虚作假呢？！”</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9Cubi%E6%AE%B5%E5%AD%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9Cubi%E6%AE%B5%E5%AD%90/" class="post-title-link" itemprop="url">脑洞｜「这东西不是说在养懒汉吗？————那情况不一样，现在是保障人的基本生活」</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 11:19:06" itemprop="dateCreated datePublished" datetime="2026-09-10T11:19:06+00:00">2026-09-10 11:19:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:19:06" itemprop="dateModified" datetime="2026-09-10T11:19:06+00:00">2026-09-10 11:19:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>声明：本文纯属虚构～</p>
-<p>某人：<br>“UBI是什么玩意儿？”<br>“政府养懒汉？”<br>“都发钱不就等于都没发？”<br>“年轻人一天天不务正业，搞什么AI，搞什么技术，整那些虚头巴脑的。”<br>“人还是得脚踏实地。”<br>“进个厂，学门手艺，安安稳稳干一辈子。”</p>
-<p>旁边人：<br>“以后自动化呢？”</p>
-<p>某人：<br>“机器人还能把人全换了？”<br>“天天吓唬谁呢。”</p>
-<p>几年后。 厂门口贴出通知：<strong>智能产线升级。</strong><br>原来二十个人的岗位，变成三个人巡线。</p>
-<p>某人失业了。</p>
-<p>第一天： “没事。我有经验。”<br>第二周： “现在厂里怎么都不招人了？”<br>一个月后： “那个……失业补助在哪儿领？”</p>
-<p>工作人员： “往左边窗口。”<br>他排了半天。</p>
-<p>“听说不是还有那个……UBI吗？”</p>
-<p>工作人员抬头：<br>“原来讨论过。”</p>
-<p>某人眼睛一亮：<br>“对对对，就是那个，人人都发钱的。”</p>
-<p>工作人员：<br>“后来没推。”</p>
-<p>“为什么？”</p>
-<p>工作人员翻了翻资料：<br>“社会反对声音比较大。”</p>
-<p>某人皱眉：<br>“谁反对的？”</p>
-<p>工作人员：<br>“主要说是养懒汉。”</p>
-<p>某人：<br>“……”</p>
-<p>工作人员继续：<br>“还说都发等于没发。”</p>
-<p>某人：<br>“……”<br>“那现在还能重新讨论吗？”</p>
-<p>工作人员：<br>“可以啊。”<br>“您可以先填意见征集表。”</p>
-<p>某人赶紧接过来。</p>
-<p>第一栏：<br><strong>您是否支持建立无条件基本收入制度？</strong><br>他毫不犹豫勾：<br>☑ 强烈支持</p>
-<p>第二栏：<br><strong>请简述理由。</strong><br>某人想了半天，写：<br>“时代不一样了。”</p>
-<p>旁边一起排队的人瞄了一眼：<br>“叔，我记得你以前不是说这东西养懒汉吗？”</p>
-<p>某人立刻严肃起来：<br>“那时候情况不一样。”<br>“现在这是保障人民基本生活。”</p>
-<p>对方：<br>“哦。”<br>“那您现在属于人民了？”</p>
-<p>某人：<br>“……”</p>
-<p>远处新厂房里，机械臂继续上下料。<br>没有发表意见。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E6%9F%90%E4%BA%BA%E7%BB%88%E4%BA%8E%E8%A7%81%E5%88%B0%E4%BA%86%E5%81%B6%E5%83%8F%EF%BC%8C%E5%81%B6%E5%83%8F%E6%8A%8A%E4%BB%96%E6%9E%AA%E6%AF%99%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E6%9F%90%E4%BA%BA%E7%BB%88%E4%BA%8E%E8%A7%81%E5%88%B0%E4%BA%86%E5%81%B6%E5%83%8F%EF%BC%8C%E5%81%B6%E5%83%8F%E6%8A%8A%E4%BB%96%E6%9E%AA%E6%AF%99%E4%BA%86/" class="post-title-link" itemprop="url">脑洞｜「看吧，他果然很欣赏我」</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 11:07:06" itemprop="dateCreated datePublished" datetime="2026-09-10T11:07:06+00:00">2026-09-10 11:07:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:07:06" itemprop="dateModified" datetime="2026-09-10T11:07:06+00:00">2026-09-10 11:07:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>声明：本文纯属虚构～</p>
-<p>某人：<br>“我跟你们说，波尔布特这个人，很多人根本不懂他。”<br>“别人都只看表面。”<br>“但我懂。”<br>“虽然我们没见过面，可我能感觉到————”<br>“他是我的知己。”</p>
-<p>朋友：<br>“你确定？”</p>
-<p>某人：<br>“当然。”<br>“真正伟大的人，总是孤独的。”<br>“他需要一个能理解他的人。”</p>
-<p>越说越激动。</p>
-<p>“不行。”<br>“我要去柬埔寨。”<br>“我要亲自告诉他，这个世界上还有人真正理解他的理想。”</p>
-<p>朋友：<br>“……你要不要再想想？”</p>
-<p>某人：<br>“庸人。”<br>“你们根本不懂精神共鸣。”</p>
-<p>于是他真去了。<br>辗转几番，居然还真见到了波尔布特。</p>
-<p>两个人坐下来聊了半天。</p>
-<p>某人慷慨陈词：<br>“我一直研究您的思想。”<br>“我完全理解您的理想。”<br>“我甚至觉得，我们在很多问题上的判断高度一致。”</p>
-<p>波尔布特听得很认真。<br>点点头。<br>还问了他很多问题。</p>
-<p>晚上，某人激动地回到住处。 立刻写日记：<br>“今天终于见到他了。”<br>“他一直在听我说。”<br>“还不停点头。”<br>“最后甚至笑了。”<br>“果然。”<br>“真正的知己，不需要认识很多年。”<br>“思想一旦相遇，就够了。”</p>
-<p>最后一行：<br>“他对我很满意。”</p>
-<p>第二天早上。 有人敲门。<br>“请出来一下。”</p>
-<p>某人一边穿衣服一边笑：<br>“看吧。”<br>“我就说他很欣赏我。”</p>
-<p>被带出去以后，他还回头冲旁边人说：<br>“估计要给我安排重要工作了。”</p>
-<p>半小时后。<br>他被枪毙了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%BD%93%E7%B2%BE%E7%A5%9E%E8%82%A1%E4%B8%9C%E6%9C%80%E7%BB%88%E6%8B%BF%E5%88%B0%E4%BA%86%E5%AE%9E%E4%BD%93%E8%82%A1%E7%A5%A8%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%BD%93%E7%B2%BE%E7%A5%9E%E8%82%A1%E4%B8%9C%E6%9C%80%E7%BB%88%E6%8B%BF%E5%88%B0%E4%BA%86%E5%AE%9E%E4%BD%93%E8%82%A1%E7%A5%A8%EF%BD%9E/" class="post-title-link" itemprop="url">脑洞｜当某人以为自己要加入历史，最后留下了一桩国际主义内裤悬案</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 10:56:19" itemprop="dateCreated datePublished" datetime="2026-09-10T10:56:19+00:00">2026-09-10 10:56:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 10:56:19" itemprop="dateModified" datetime="2026-09-10T10:56:19+00:00">2026-09-10 10:56:19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>声明：本文纯属虚构～</p>
-<p>某人：<br>“现在国内都是什么风气？一天天就知道忍。”<br>“看看X国，那才叫硬气。”<br>“X国领导人才是真男人。”<br>“M国和E国还援助W国？岂有此理。这些国家亡我之心不死啊。”</p>
-<p>越说越激动。</p>
-<p>“嘴上支持算什么？我要亲自投身理想。”<br>于是买票，转车，折腾半天，终于到了X国。</p>
-<p>刚开始还挺兴奋。<br>发视频：<br>“兄弟们，我真来了。”<br>“这里的人都很热情。”<br>“马上就要训练了。”<br>“等我的好消息。”</p>
-<p>过几天。 新视频：<br>“兄弟们……情况跟网上说的好像不太一样。”<br>“那个，他们护照先收走了。”<br>“我说我能不能回去，他们说合同签了不能走。”</p>
-<p>又过几天。<br>“兄弟们，饭有点不够吃。”<br>“装备也……算了，这个不能细说。”<br>“有没有懂X语的？帮我看看这个合同到底写的啥？”</p>
-<p>再过几天。<br>“他们说明天往前面调。”<br>“不是，我原来以为我是来支持正义的，怎么真让我上啊？”</p>
-<p>评论区：<br>“你不是说X国才是真硬汉吗？”</p>
-<p>某人：<br>“那是国家硬汉，不是让我硬啊！”</p>
-<p>又过两天。<br>视频没更新。<br>一星期。<br>还是没更新。</p>
-<p>群里有人打听：<br>“听说人没了。”<br>“抚恤金呢？”<br>“不知道。”<br>“家属能拿到吗？”<br>“不知道。”<br>“遗物呢？”<br>“好像也没寄回来。”</p>
-<p>停了一会儿，又有人发来最新消息：<br>“不过听说他走之前还顺了战友两条内裤。”</p>
-<p>群里沉默十秒。</p>
-<p>终于有人说：<br>“所以他的国际主义实践，最后的物质成果是两条内裤？”</p>
-<p>另一人：<br>“也没带回来。”</p>
-<p>视频回到国内。 标题已经变成： 《旅X青年最后影像曝光，生前曾劝同胞不要冲动前往》</p>
-<p>评论区迅速分裂。</p>
-<p>观众1：<br>“唉，人还是个好人。”<br>“最后都这样了，还劝兄弟们别去。”</p>
-<p>观众2：<br>“好人先等等。”<br>“我怎么听说他还偷战友内裤？”</p>
-<p>观众1：<br>“什么偷内裤？”<br>“明显是X国抹黑。”</p>
-<p>观众2：<br>“……X国为什么要专门抹黑一个已经阵亡的人偷内裤？”</p>
-<p>观众1：<br>“你不懂国际政治。”</p>
-<p>观众3：<br>“脑残。”</p>
-<p>观众1：<br>“你骂谁呢？”</p>
-<p>观众3：<br>“从头骂到尾。”</p>
-<p>这时候观众4慢悠悠冒出来：<br>“哎呀。”<br>“他说喜欢X国。”<br>“崇拜X国领导人。”<br>“讨厌国内太软。”<br>“觉得X国才是真正的强国。”<br>“最后还真的永远留在X国了。”<br>“这不是得偿所愿了吗？”</p>
-<p>评论区忽然安静了一下。</p>
-<p>有人回复：<br>“你这话太损了。”</p>
-<p>观众4：<br>“哪里损？”<br>“我这是尊重个人选择。”</p>
-<p>又有人问：<br>“那抚恤金怎么办？”</p>
-<p>下面马上有人回答：<br>“先别惦记抚恤金。”<br>“家属现在连合同签的什么都没搞明白。”</p>
-<p>又有人问：<br>“那两条内裤呢？”</p>
-<p>回复：<br>“据说没寄回来。”<br>“遗产清零。”</p>
-<p>“那他到底留下什么了？”</p>
-<p>沉默几秒。</p>
-<p>有人总结：<br>“留下了几个视频。”<br>“一个劝大家别去。”<br>“一个说饭不够吃。”<br>“一个问怎么回国。”<br>“还有一条国际主义内裤悬案。”</p>
-<p>评论区点赞最高的一条最后变成：</p>
-<p>“出发前：我要投身历史。”<br>“抵达后：我护照呢？”<br>“上前线前：兄弟们帮我看看合同。”<br>“阵亡后：家属问抚恤金。”<br>“网友最后还在争论他到底偷没偷内裤。”</p>
-<p>下面一条回复：<br>“这就是理想主义的完整生命周期。”</p>
-<p>另一条：<br>“不。”<br>“这是没有做尽调的跨国投资。”</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%A8%E5%A4%A9%E9%99%8D%E9%80%9F%E6%97%A5%EF%BC%8C%E6%B2%A1%E7%9C%8B%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86%E5%86%99%E4%BA%86%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%EF%BC%8C%E7%BA%A0%E7%BB%93%E8%A6%81%E4%B8%8D%E8%A6%81%E8%B4%B4%E5%87%BA%E6%9D%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%98%A8%E5%A4%A9%E9%99%8D%E9%80%9F%E6%97%A5%EF%BC%8C%E6%B2%A1%E7%9C%8B%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86%E5%86%99%E4%BA%86%E5%9B%9B%E4%B8%AA%E6%AE%B5%E5%AD%90%EF%BC%8C%E7%BA%A0%E7%BB%93%E8%A6%81%E4%B8%8D%E8%A6%81%E8%B4%B4%E5%87%BA%E6%9D%A5/" class="post-title-link" itemprop="url">日常记录｜昨天降速日，没看代码，但写了四个段子，纠结要不要贴出来</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 10:32:25" itemprop="dateCreated datePublished" datetime="2026-09-10T10:32:25+00:00">2026-09-10 10:32:25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 10:32:25" itemprop="dateModified" datetime="2026-09-10T10:32:25+00:00">2026-09-10 10:32:25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～</p>
-<p>算了，Codex现在在干活儿，我就整理一下贴出来算了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E5%A5%97%E5%A3%B3V0%E7%89%88%E6%9C%AC%E6%90%9E%E5%AE%9A%E4%BA%86%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E5%A5%97%E5%A3%B3V0%E7%89%88%E6%9C%AC%E6%90%9E%E5%AE%9A%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜Agent套壳V0版本搞定了～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-08 22:33:42" itemprop="dateCreated datePublished" datetime="2026-09-08T22:33:42+00:00">2026-09-08 22:33:42</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-08 22:33:42" itemprop="dateModified" datetime="2026-09-08T22:33:42+00:00">2026-09-08 22:33:42</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～总共花了2天～<br>期间顺手写一篇搞笑博客～ 算是效率惊人（自卖自夸～）</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

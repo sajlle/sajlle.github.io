@@ -75,7 +75,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/"},"headline":"一次把缓存当锁用的事故：Shop 查询接口击穿/误删/假404复盘","description":"一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘我在 Shop 查询接口里实现了缓存击穿保护，结果把缓存当锁用了：解锁时顺手把缓存删了。压测一跑，DB 像被踹了一脚，抖得很有节奏。 0. 背景：Day2 验收目标是什么？ 目标接口：GET &#x2F;shops&#x2F;{shopId} 验收： 店铺不存在：返回错误码，且不打爆 DB（空值缓存） 热点店铺…","datePublished":"2026-01-09T18:46:02.000Z","dateModified":"2026-01-09T18:46:02.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["Redis","Java","缓存","锁"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/"},"headline":"一次把缓存当锁用的事故：Shop 查询接口击穿/误删/假404复盘","description":"一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘我在 Shop 查询接口里实现了缓存击穿保护，结果把缓存当锁用了：解锁时顺手把缓存删了。压测一跑，DB 像被踹了一脚，抖得很有节奏。 0. 背景：Day2 验收目标是什么？ 目标接口：GET &#x2F;shops&#x2F;{shopId} 验收： 店铺不存在：返回错误码，且不打爆 DB（空值缓存） 热点店铺…","datePublished":"2026-01-09T18:46:02.000Z","dateModified":"2026-01-09T18:46:02.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["Redis","Java","锁","缓存"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -189,18 +189,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">212</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">267</span>
+        <span class="site-state-item-count">273</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -392,8 +392,8 @@
           <div class="post-tags">
               <a href="/tags/Redis/" rel="tag"># Redis</a>
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
               <a href="/tags/%E9%94%81/" rel="tag"># 锁</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
           </div>
 
         
