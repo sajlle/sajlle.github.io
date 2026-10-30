@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-29T20:26:00.000Z</updated>
+  <updated>2026-10-31T01:06:20.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="冲突" scheme="https://sajlle.github.io/tags/%E5%86%B2%E7%AA%81/"/>
+    <id>https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%BA%E4%BD%95%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%B8%85%E7%90%86%E4%BA%86%E7%A4%BE%E5%8C%BA-%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</id>
+    <link href="https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%BA%E4%BD%95%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%B8%85%E7%90%86%E4%BA%86%E7%A4%BE%E5%8C%BA-%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/"/>
+    <published>2026-10-31T01:06:20.000Z</published>
+    <summary>
+      <![CDATA[<p>夜里忽然想到一点，注意力是真正的资源。<br>在社区+跟父母一起生活，我觉得就像是不停的被攫取注意的过程～诱惑四处都是：</p>
+<ol>
+<li>打开手机，就是各种讯息&amp;消息纷至沓来。告诉你，世界发生了大事，快来看。但那种大事多少跟你的生活没有关系。</li>
+<li>父母不停的用鸡毛蒜皮狗屁倒灶的事情来攫取你的注意力。</li>
+<li>社区冲突（最近我走了一下物业投诉，效果还行]]>
+    </summary>
+    <title>日常记录｜记录一件家庭冲突～</title>
+    <updated>2026-10-31T01:06:20.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -139,6 +158,41 @@
     </summary>
     <title>日常记录｜午睡梦见发财了，还梦见一个给我剪指甲的小GPT</title>
     <updated>2026-10-29T20:20:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/10/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%83%E5%AE%8C%E5%8D%88%E9%A5%AD%EF%BC%8C%E7%A9%BA%E9%97%B2%E7%9D%80%EF%BC%8C%E4%B8%8D%E5%A6%82%E5%86%99%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/10/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%83%E5%AE%8C%E5%8D%88%E9%A5%AD%EF%BC%8C%E7%A9%BA%E9%97%B2%E7%9D%80%EF%BC%8C%E4%B8%8D%E5%A6%82%E5%86%99%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%9F/"/>
+    <published>2026-10-28T13:37:16.000Z</published>
+    <summary>
+      <![CDATA[<p>上一次因为隐私问题，撤掉了博客上不少文章。<br>不过按理说，我博客没做SEO，倒是不需要做太多的自我审查。</p>
+<p>头像&amp;文章本身，撤掉了不少家庭冲突&amp;社区冲突的文章，当然也有一点自传式的文章因为个人隐私也被撤掉了。</p>
+<p>撤完文章发现，博客上真正写的好的几十篇里，被撤掉的文章占了一半多。剩下的文章里，也有写的好的，只是博弈&#x2F;社会分析的内容少了很多。]]>
+    </summary>
+    <title>日常记录｜吃完午饭，空闲着，不如写写博客？</title>
+    <updated>2026-10-28T13:37:16.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="post 技术手记" scheme="https://sajlle.github.io/categories/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
+    <category term="如题" scheme="https://sajlle.github.io/tags/%E5%A6%82%E9%A2%98/"/>
+    <id>https://sajlle.github.io/2026/10/22/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%9C%80%E8%BF%91%E7%94%A8codex%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%80%83/</id>
+    <link href="https://sajlle.github.io/2026/10/22/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%9C%80%E8%BF%91%E7%94%A8codex%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%80%83/"/>
+    <published>2026-10-22T20:16:43.000Z</published>
+    <summary>
+      <![CDATA[<p>几个点。简单说，不长篇大论的说了。</p>
+<ol>
+<li>让AI互相审核的时候，什么时候该停？MVP阶段，能跑就行，先跑出来产品再做严格的互审。互审的时候如果不是核心步骤出错，直接忽略或者小改都行。先把产品做出来再说。没产品的严格互审，是房子没盖好就开始考虑装修细节————没啥用。</li>
+<li>MVP出来了之后，如果达到原来定好的核心目标，那就修细节，这个时候做互审（严格一点，没问]]>
+    </summary>
+    <title>post 技术手记｜最近用AI的几个想法</title>
+    <updated>2026-10-22T20:16:43.000Z</updated>
   </entry>
   <entry>
     <author>
@@ -502,51 +556,5 @@
     </summary>
     <title>脑洞｜如果经典影视出生在另一个文化圈～</title>
     <updated>2026-09-19T18:00:24.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
-    <category term="经典文学" scheme="https://sajlle.github.io/tags/%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6/"/>
-    <category term="网文化" scheme="https://sajlle.github.io/tags/%E7%BD%91%E6%96%87%E5%8C%96/"/>
-    <id>https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6%E6%94%B9%E6%88%90%E8%B5%B7%E7%82%B9%E7%BD%91%E6%96%87%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E9%A3%8E%E6%98%AF%E5%95%A5%E6%A0%B7%E7%9A%84%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/09/19/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%A6%82%E6%9E%9C%E6%8A%8A%E7%BB%8F%E5%85%B8%E6%96%87%E5%AD%A6%E6%94%B9%E6%88%90%E8%B5%B7%E7%82%B9%E7%BD%91%E6%96%87%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E9%A3%8E%E6%98%AF%E5%95%A5%E6%A0%B7%E7%9A%84%EF%BC%9F/"/>
-    <published>2026-09-19T17:52:20.000Z</published>
-    <summary>
-      <![CDATA[<p>红与黑 &#x3D; 风流少男上位记<br>拯救大兵瑞恩 &#x3D; 风月撬枷人<br>泰坦尼克号 &#x3D; 海上一夜情<br>水浒传 &#x3D; 105个男人和3个女人的故事<br>肖申克的救赎 &#x3D; 越狱男妻人间醒<br>诺丁山 &#x3D; 小贩怦然恋<br>致命魔术 &#x3D; 双命戏法人<br>请以你的名字呼唤我 &#x3D; 风流鳏夫寂寞男 或者 暑期情人：教授]]>
-    </summary>
-    <title>脑洞｜如果把经典文学改成起点网文标题，画风是啥样的？</title>
-    <updated>2026-09-19T17:52:20.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="AgentV0" scheme="https://sajlle.github.io/tags/AgentV0/"/>
-    <category term="Jackson" scheme="https://sajlle.github.io/tags/Jackson/"/>
-    <id>https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/</id>
-    <link href="https://sajlle.github.io/2026/09/18/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%BF%AE%E5%AE%8C%E4%B8%A5%E6%A0%BCSchema%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%8F%91%E7%8E%B0Jackson%E8%BF%98%E4%BC%9A%E5%81%B7%E5%81%B7%E5%81%9A%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC/"/>
-    <published>2026-09-18T20:17:19.000Z</published>
-    <title>BugFix｜AgentV0Bug：修完Strict Schema校验之后，发现Jackson还会偷偷做类型强转</title>
-    <updated>2026-09-18T20:17:19.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="BugFix" scheme="https://sajlle.github.io/categories/BugFix/"/>
-    <category term="AgentV0" scheme="https://sajlle.github.io/tags/AgentV0/"/>
-    <category term="Spring Boot" scheme="https://sajlle.github.io/tags/Spring-Boot/"/>
-    <id>https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/09/15/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E6%B5%8B%E5%85%A8%E7%BB%BF%EF%BC%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E6%8C%82%EF%BC%9F/"/>
-    <published>2026-09-15T18:57:26.000Z</published>
-    <summary>
-      <![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>为啥单测全绿，集成测试还是挂了？因为单测验证的是对象行为，这次坏的是 Spring application wiring。</p>
-<p>最后查出来是多 Provider 重构之后，IT 手写的 @Import 漏了 provider-]]>
-    </summary>
-    <title>BugFix｜AgentV0Bug：为什么单测全绿，集成测试还能挂？</title>
-    <updated>2026-09-15T18:57:26.000Z</updated>
   </entry>
 </feed>

@@ -189,18 +189,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">273</span>
+        <span class="site-state-item-count">275</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,356 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/22/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CJava%E5%90%8E%E7%AB%AF%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%BC%8F%EF%BD%9E/" class="post-title-link" itemprop="url">技术手记｜Java后端几个模式～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-22 19:42:58" itemprop="dateCreated datePublished" datetime="2026-02-22T19:42:58+00:00">2026-02-22 19:42:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-22 19:42:58" itemprop="dateModified" datetime="2026-02-22T19:42:58+00:00">2026-02-22 19:42:58</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天我问ChatGPT，我之前写代码没思路，可能是对模式不了解？<br>GPT回我：要不要我给你几个模型？<br>于是这篇博客就有了。（笑）</p>
+<p>今天（2026-02-22），我只记录模式，明天或者后天，我再补上实际的案例。</p>
+<h1 id="并发与一致性的常见模式"><a href="#并发与一致性的常见模式" class="headerlink" title="并发与一致性的常见模式"></a>并发与一致性的常见模式</h1><h2 id="Check-Then-Act（先检查再执行）"><a href="#Check-Then-Act（先检查再执行）" class="headerlink" title="Check-Then-Act（先检查再执行）"></a>Check-Then-Act（先检查再执行）</h2><h3 id="典型场景："><a href="#典型场景：" class="headerlink" title="典型场景："></a>典型场景：</h3><ul>
+<li>判断库存&gt;0之后再扣减</li>
+<li>判断是否锁定再加锁</li>
+<li>判断是否存在再插入</li>
+</ul>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><ul>
+<li>检查和执行分离，会被并发打穿</li>
+</ul>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><ul>
+<li>原子操作（Lua）</li>
+<li>乐观锁</li>
+<li>CAS</li>
+<li>数据库唯一索引</li>
+</ul>
+<h2 id="Lost-Update（更新丢失）"><a href="#Lost-Update（更新丢失）" class="headerlink" title="Lost Update（更新丢失）"></a>Lost Update（更新丢失）</h2><h3 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h3><ul>
+<li>两个线程读取同一值</li>
+<li>修改后覆盖</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>乐观锁 version</li>
+<li>行锁</li>
+<li>CAS</li>
+</ul>
+<h2 id="Double-Submit（重复提交）"><a href="#Double-Submit（重复提交）" class="headerlink" title="Double Submit（重复提交）"></a>Double Submit（重复提交）</h2><h3 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>用户点两次按钮</li>
+<li>重复下单</li>
+</ul>
+<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>幂等 token</li>
+<li>唯一索引</li>
+<li>状态机控制</li>
+</ul>
+<h2 id="Cache-Breakdown（缓存击穿）"><a href="#Cache-Breakdown（缓存击穿）" class="headerlink" title="Cache Breakdown（缓存击穿）"></a>Cache Breakdown（缓存击穿）</h2><h3 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>热点Key过期</li>
+<li>同时大量请求打DB</li>
+</ul>
+<h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>互斥锁</li>
+<li>预热</li>
+<li>永不过期 + 异步刷新</li>
+</ul>
+<h2 id="Cache-Penetration（缓存穿透）"><a href="#Cache-Penetration（缓存穿透）" class="headerlink" title="Cache Penetration（缓存穿透）"></a>Cache Penetration（缓存穿透）</h2><h3 id="典型-2"><a href="#典型-2" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>查询不存在数据</li>
+<li>每次打DB</li>
+</ul>
+<h3 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>空值缓存</li>
+<li>布隆过滤器</li>
+</ul>
+<h2 id="Thundering-Herd（惊群效应）"><a href="#Thundering-Herd（惊群效应）" class="headerlink" title="Thundering Herd（惊群效应）"></a>Thundering Herd（惊群效应）</h2><h3 id="典型-3"><a href="#典型-3" class="headerlink" title="典型"></a>典型</h3><ul>
+<li>高峰期瞬间请求暴涨</li>
+</ul>
+<h3 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>限流</li>
+<li>排队</li>
+<li>削峰填谷</li>
+</ul>
+<h1 id="架构思维模式"><a href="#架构思维模式" class="headerlink" title="架构思维模式"></a>架构思维模式</h1><h2 id="Fail-Fast（快速失败）"><a href="#Fail-Fast（快速失败）" class="headerlink" title="Fail Fast（快速失败）"></a>Fail Fast（快速失败）</h2><p>与其被慢慢拖死，不如：</p>
+<ul>
+<li>限流</li>
+<li>降级</li>
+<li>熔断</li>
+</ul>
+<h2 id="Graceful-Degradation（优雅降级）"><a href="#Graceful-Degradation（优雅降级）" class="headerlink" title="Graceful Degradation（优雅降级）"></a>Graceful Degradation（优雅降级）</h2><p>比如：</p>
+<ul>
+<li>评论系统挂了不影响主流程</li>
+<li>风控策略收紧</li>
+</ul>
+<h2 id="Idempotency（幂等性）"><a href="#Idempotency（幂等性）" class="headerlink" title="Idempotency（幂等性）"></a>Idempotency（幂等性）</h2><p>重复请求不影响结果</p>
+<h2 id="State-Machine（状态机）"><a href="#State-Machine（状态机）" class="headerlink" title="State Machine（状态机）"></a>State Machine（状态机）</h2><p>登录，订单，风控其实都可以用状态流控制</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0OpenAI%E5%A5%B3%E9%AB%98%E7%AE%A1%E5%8F%8D%E5%AF%B9%E6%88%90%E4%BA%BA%E6%A8%A1%E5%BC%8F%E8%A2%AB%E5%BC%80%EF%BC%8C%E6%88%91%E6%9C%89%E7%82%B9%E7%BA%A0%E7%BB%93%EF%BC%8C%E8%A6%81%E7%BB%A7%E7%BB%AD%E7%94%A8GPT%E5%98%9B%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E5%88%B0OpenAI%E5%A5%B3%E9%AB%98%E7%AE%A1%E5%8F%8D%E5%AF%B9%E6%88%90%E4%BA%BA%E6%A8%A1%E5%BC%8F%E8%A2%AB%E5%BC%80%EF%BC%8C%E6%88%91%E6%9C%89%E7%82%B9%E7%BA%A0%E7%BB%93%EF%BC%8C%E8%A6%81%E7%BB%A7%E7%BB%AD%E7%94%A8GPT%E5%98%9B%EF%BC%9F/" class="post-title-link" itemprop="url">日常记录｜看到OpenAI女高管反对成人模式被开，我有点纠结，要继续用GPT嘛？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-20 09:23:31" itemprop="dateCreated datePublished" datetime="2026-02-20T09:23:31+00:00">2026-02-20 09:23:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-20 09:23:31" itemprop="dateModified" datetime="2026-02-20T09:23:31+00:00">2026-02-20 09:23:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>嗯，如题。</p>
+<p>我不知道这件事的影响是什么，但我怕这公司的文化烂掉。<br>另，OpenAI掌握着最多的用户如何思考的碎片，我觉得很担心，如果公司只是技术OK，但在价值观上偏差了，作为女用户，我担心被歧视，限制，迎合。比如模型如果知道我是女用户，可能会更情绪化的迎合我。</p>
+<p>另，之前Thinking Machine CEO开除的两名员工，因为两位涉及办公室丑闻，然后这俩人迅速被OpenAI回收了。这事儿我知道之后，感觉……很惊讶。</p>
+<p>这几天我试着比较Claude和ChatGPT的回答。看谁有人味儿，更好用。</p>
+<p>我感觉，如果两个公司差距不大，我觉得可以试试换Claude。不过我还没看过Claude这边的风波。</p>
+<p>我纠结的是，要不要为了价值观去换工具。因为GPT真的好用。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/17/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%B7%9FGPT-5-2%E8%81%8A%E9%A3%8E%E6%8E%A7%E6%80%9D%E8%B7%AF%E7%9A%84%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/17/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%B7%9FGPT-5-2%E8%81%8A%E9%A3%8E%E6%8E%A7%E6%80%9D%E8%B7%AF%E7%9A%84%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">技术手记｜跟GPT 5.2聊风控思路的笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-17 15:50:06" itemprop="dateCreated datePublished" datetime="2026-02-17T15:50:06+00:00">2026-02-17 15:50:06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-17 15:50:06" itemprop="dateModified" datetime="2026-02-17T15:50:06+00:00">2026-02-17 15:50:06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>未完待续（笑）。看了但没写，最近比较松懈了。</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -979,437 +1329,6 @@
 <p>与此同时，腾讯元宝则优惠平平，那是腾讯没钱吗？<br>不是，是因为元宝跟千问的定位不同。</p>
 <p>千问需要扩圈，做用户生活里的智能生活操作系统（支付&#x2F;履约&#x2F;供给）。元宝则更像是嵌入到腾讯生态内的插件，它跟千问不同的点是，用户早就在腾讯生态内了，不需要花钱做活动扩圈。<br>腾讯不需要你想起元宝，只需要你在原有行为里顺带用一下。</p>
 <p>所以元宝是防御性部署，千问是进攻型营销。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">技术手记｜代码审核新思路</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-09 11:42:30" itemprop="dateCreated datePublished" datetime="2026-02-09T11:42:30+00:00">2026-02-09 11:42:30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-09 11:42:30" itemprop="dateModified" datetime="2026-02-09T11:42:30+00:00">2026-02-09 11:42:30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="SOP"><a href="#SOP" class="headerlink" title="SOP"></a>SOP</h1><h2 id="写代码-本地跑最小门槛"><a href="#写代码-本地跑最小门槛" class="headerlink" title="写代码-&gt;本地跑最小门槛"></a>写代码-&gt;本地跑最小门槛</h2><ul>
-<li>formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化）</li>
-<li>单测（至少新增&#x2F;改动路径覆盖到）</li>
-</ul>
-<h2 id="Codex-code-level-review-产出报告到docs-codex-reviews"><a href="#Codex-code-level-review-产出报告到docs-codex-reviews" class="headerlink" title="Codex code-level review -&gt; 产出报告到docs/codex-reviews"></a>Codex code-level review -&gt; 产出报告到<code>docs/codex-reviews</code></h2><ul>
-<li>Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用，未处理的失败路径</li>
-<li>报告要可检索：按照日期+模块命名，例如：<code>2026-02-08-login-token.md</code></li>
-</ul>
-<h2 id="我按照报告改-再跑测试"><a href="#我按照报告改-再跑测试" class="headerlink" title="我按照报告改 -&gt; 再跑测试"></a>我按照报告改 -&gt; 再跑测试</h2><ul>
-<li>这一步配合一个「勾选清单」，避免改着改着把主线改丢</li>
-</ul>
-<h2 id="Thinking-做第二层-review（设计-上限风险-功能缺口）"><a href="#Thinking-做第二层-review（设计-上限风险-功能缺口）" class="headerlink" title="Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）"></a>Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）</h2><ul>
-<li>重点盯：接口契约，幂等性，降级，限流，可观测性，缓存一致性，事务边界，并发与重试策略，数据增长后的性能拐点，最容易上线炸的路径。</li>
-</ul>
-<h2 id="压测与文档收尾"><a href="#压测与文档收尾" class="headerlink" title="压测与文档收尾"></a>压测与文档收尾</h2><ul>
-<li>压测不是跑一下，而是：场景，数据规模，并发模型，指标口径，瓶颈定位，结论与改动建议</li>
-<li>文档：模块介绍&#x2F;接口文档&#x2F;关键设计决策（为什么这么做，不那么做）</li>
-</ul>
-<h1 id="这个设计的优点"><a href="#这个设计的优点" class="headerlink" title="这个设计的优点"></a>这个设计的优点</h1><ul>
-<li>降低心里摩擦：不需要每次凭意志力信自己对还是错，而是把信任外包给流程，流程跑完，人就安心。</li>
-<li>可复盘，可证明：<code>docs/codex-reviews</code> + 压测文档，做成工程能力证据链</li>
-<li>把注意力分层：Codex抓底层bug（拼写，分支遗漏，NPE，资源关闭，日志），Thinking抓系统性炸点（幂等，重试风暴，缓存击穿，慢SQL，错误码契约）</li>
-<li>形成可重复的“模块闭环”：不是一直写，而是交付一个个完成的态的模块</li>
-</ul>
-<h1 id="主要风险点"><a href="#主要风险点" class="headerlink" title="主要风险点"></a>主要风险点</h1><ol>
-<li>文档负债风险<ul>
-<li>如果每次review都提交一次review报告，很快会被文档淹死</li>
-<li>解决：只有以下情况固化到repo<ul>
-<li>新模块完成</li>
-<li>关键重构</li>
-<li>性能优化前后</li>
-<li>上线前检查</li>
-</ul>
-</li>
-<li>其他最小改动只留在PR描述或者临时notes</li>
-</ul>
-</li>
-<li>报告噪音与形式主义<ul>
-<li>Codex容易给一堆看起来很对但不关键的建议</li>
-<li>解决：让报告强制分级<ul>
-<li>P0:必须改，会上线炸</li>
-<li>P1:应该改，影响可维护&#x2F;性能</li>
-<li>P2:可选优化</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>泄漏风险<ul>
-<li>把review 文档提交到repo，容易不小心带上：内部url，token，真实数据样例，库表敏感字段。</li>
-<li>解决：报告模板里加一条规则：不得出现真实密钥&#x2F;真实用户数据&#x2F;完整链接串，样例一律脱敏</li>
-</ul>
-</li>
-<li>双review导致节奏变慢<ul>
-<li>每个模块看起来更慢，但这算是返工减少的慢</li>
-<li>解决：<ul>
-<li>对小改动走“轻量链路”：本地检查 -&gt; 小范围Codex review（不落文档）-&gt; 测试；</li>
-<li>只有交付级模块才走全链路</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h1><h2 id="docs-codex-reviews-报告模板"><a href="#docs-codex-reviews-报告模板" class="headerlink" title="docs/codex-reviews/报告模板"></a><code>docs/codex-reviews/</code>报告模板</h2><ul>
-<li>变更摘要</li>
-<li>Codex发现<ul>
-<li>P0：问题&#x2F;影响&#x2F;建议修改点（指到文件+函数）</li>
-<li>P1: …</li>
-<li>P2: …</li>
-</ul>
-</li>
-<li>已经处理的清单（checkbox)</li>
-<li>遗留项（明确说明为什么不改+风险说明）</li>
-</ul>
-<h2 id="压测文档最小模板"><a href="#压测文档最小模板" class="headerlink" title="压测文档最小模板"></a>压测文档最小模板</h2><ul>
-<li>环境（机器，JVM参数，DB&#x2F;Redis规格，版本）</li>
-<li>场景（接口，数据量，并发，持续时间，思考时间）</li>
-<li>指标（P50&#x2F;P95&#x2F;P99，吞吐，错误率，CPU&#x2F;GC&#x2F;DB慢查询）</li>
-<li>结论（瓶颈点&amp;下一步优化路线）</li>
-</ul>
-<h2 id="自动化链路"><a href="#自动化链路" class="headerlink" title="自动化链路"></a>自动化链路</h2><ul>
-<li>PR自动跑：lint + test + 静态扫描（SpotBugs&#x2F;Checkstyle&#x2F;Semgrep之类）</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜当redis可以显式补偿的时候，需要上Canal吗？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-08 21:24:50" itemprop="dateCreated datePublished" datetime="2026-02-08T21:24:50+00:00">2026-02-08 21:24:50</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-08 21:24:50" itemprop="dateModified" datetime="2026-02-08T21:24:50+00:00">2026-02-08 21:24:50</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前情回顾：<br>我的一个方法流程是：</p>
-<ol>
-<li>redis读写（业务状态）</li>
-<li>DB读写</li>
-<li>redis读写（缓存态）</li>
-</ol>
-<p>我纠结的问题点：</p>
-<ol>
-<li>目前情况会导致事务回滚DB数据，而redis数据没有同步回滚</li>
-<li>考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。</li>
-</ol>
-<p>我考虑的解决方案：</p>
-<ol>
-<li>显示补偿，不是强一致。</li>
-<li>Canal</li>
-</ol>
-<p>方案1如何操作：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">redisOk</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    redisWrite1();</span><br><span class="line">    redisOk = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    dbWrite(); <span class="comment">// 这一步 @Transactional</span></span><br><span class="line"></span><br><span class="line">    redisWrite2();</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    <span class="keyword">if</span>(redisOk)&#123;</span><br><span class="line">        redisRollback1(); <span class="comment">// 补偿</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该方案适合：</p>
-<ol>
-<li>状态机</li>
-<li>次数扣减</li>
-<li>workflow</li>
-</ol>
-<p>方案2Canal</p>
-<ol>
-<li>第一步redis，自己写</li>
-<li>第三步redis，交给Canal</li>
-</ol>
-<p>Canal能做的：</p>
-<ol>
-<li>监听DB binlog</li>
-<li>DB commit之后，异步更新redis&#x2F;es&#x2F;mq</li>
-</ol>
-<p>Canal解决的问题是：「DB -&gt; Redis的单向同步」</p>
-<p>Canal使用场景：</p>
-<ol>
-<li>多表多服务共享redis </li>
-<li>读多写少</li>
-<li>强烈不想在业务代码里碰缓存</li>
-<li>接受秒级延迟</li>
-<li>有运维精力</li>
-</ol>
-<p>另，redis的状态如何区分？</p>
-<ul>
-<li>业务态Redis（不需要强一致，出问题靠TTL&#x2F;补偿，不需要进事务）<ul>
-<li>限流</li>
-<li>去重</li>
-<li>幂等</li>
-<li>状态机 step</li>
-<li>分布式锁</li>
-</ul>
-</li>
-<li>缓存态Redis（DB派生）（严格afterCommit，删除缓存&#x2F;重建）<ul>
-<li>详情缓存</li>
-<li>聚合结果</li>
-</ul>
-</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%AE%9E%E4%BD%93%E7%B1%BB%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%80%BC%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%AE%9E%E4%BD%93%E7%B1%BB%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%80%BC%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">技术手记｜实体类设置默认参数值的注意事项</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-08 21:12:21" itemprop="dateCreated datePublished" datetime="2026-02-08T21:12:21+00:00">2026-02-08 21:12:21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-08 21:12:21" itemprop="dateModified" datetime="2026-02-08T21:12:21+00:00">2026-02-08 21:12:21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>实体类加注解注意事项</p>
-<ol>
-<li>数据库是最终兜底，实体类是前置判断</li>
-<li>最简单直观的方式是：直接给默认值，类似：<code>private Integer status = 1</code></li>
-<li>构造方法里默认赋值：风险：如果全参构造&#x2F;Builder，容易被覆盖，不如直接初始化字段稳定</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer status;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">User</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.status = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>JPA&#x2F; Hibernate注解（只对JPA有效，对MyBatis没用）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Column(nullable = false, columnDefinition = &quot;tinyint default 1&quot;)</span></span><br><span class="line"><span class="keyword">private</span> Integer status;</span><br></pre></td></tr></table></figure>
-<p>这个只在</p>
-<ul>
-<li>Hibernate自动建表或者生成DDL才有用，new User()的时候，status还是null</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PrePersist</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">prePersist</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(status == <span class="literal">null</span>)&#123;</span><br><span class="line">        status = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个只在save()前兜底一次，MyBatis用不了</p>
-<ol start="5">
-<li>Mybatis需要特别注意的坑点：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> <span class="keyword">user</span> (status) <span class="keyword">VALUES</span> (#&#123;status&#125;)</span><br></pre></td></tr></table></figure>
-<p>如果<code>status = null</code>，实际执行的是：<code>status = null</code>，DB默认不会生效，直接报错。<br>解决办法，用动态SQL</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    status,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    #&#123;status&#125;,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
 
       
 

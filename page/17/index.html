@@ -189,18 +189,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-count">215</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">273</span>
+        <span class="site-state-item-count">275</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,437 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/09/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E6%96%B0%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">技术手记｜代码审核新思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-09 11:42:30" itemprop="dateCreated datePublished" datetime="2026-02-09T11:42:30+00:00">2026-02-09 11:42:30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-09 11:42:30" itemprop="dateModified" datetime="2026-02-09T11:42:30+00:00">2026-02-09 11:42:30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="SOP"><a href="#SOP" class="headerlink" title="SOP"></a>SOP</h1><h2 id="写代码-本地跑最小门槛"><a href="#写代码-本地跑最小门槛" class="headerlink" title="写代码-&gt;本地跑最小门槛"></a>写代码-&gt;本地跑最小门槛</h2><ul>
+<li>formatter&#x2F;lint&#x2F;静态检查（能自动化就自动化）</li>
+<li>单测（至少新增&#x2F;改动路径覆盖到）</li>
+</ul>
+<h2 id="Codex-code-level-review-产出报告到docs-codex-reviews"><a href="#Codex-code-level-review-产出报告到docs-codex-reviews" class="headerlink" title="Codex code-level review -&gt; 产出报告到docs/codex-reviews"></a>Codex code-level review -&gt; 产出报告到<code>docs/codex-reviews</code></h2><ul>
+<li>Codex只盯：可读性，明显bug，边界条件，并发&#x2F;资源泄露，日志与异常处理，潜在的NPE，SQL&#x2F;缓存误用，未处理的失败路径</li>
+<li>报告要可检索：按照日期+模块命名，例如：<code>2026-02-08-login-token.md</code></li>
+</ul>
+<h2 id="我按照报告改-再跑测试"><a href="#我按照报告改-再跑测试" class="headerlink" title="我按照报告改 -&gt; 再跑测试"></a>我按照报告改 -&gt; 再跑测试</h2><ul>
+<li>这一步配合一个「勾选清单」，避免改着改着把主线改丢</li>
+</ul>
+<h2 id="Thinking-做第二层-review（设计-上限风险-功能缺口）"><a href="#Thinking-做第二层-review（设计-上限风险-功能缺口）" class="headerlink" title="Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）"></a>Thinking 做第二层 review（设计&#x2F;上限风险&#x2F;功能缺口）</h2><ul>
+<li>重点盯：接口契约，幂等性，降级，限流，可观测性，缓存一致性，事务边界，并发与重试策略，数据增长后的性能拐点，最容易上线炸的路径。</li>
+</ul>
+<h2 id="压测与文档收尾"><a href="#压测与文档收尾" class="headerlink" title="压测与文档收尾"></a>压测与文档收尾</h2><ul>
+<li>压测不是跑一下，而是：场景，数据规模，并发模型，指标口径，瓶颈定位，结论与改动建议</li>
+<li>文档：模块介绍&#x2F;接口文档&#x2F;关键设计决策（为什么这么做，不那么做）</li>
+</ul>
+<h1 id="这个设计的优点"><a href="#这个设计的优点" class="headerlink" title="这个设计的优点"></a>这个设计的优点</h1><ul>
+<li>降低心里摩擦：不需要每次凭意志力信自己对还是错，而是把信任外包给流程，流程跑完，人就安心。</li>
+<li>可复盘，可证明：<code>docs/codex-reviews</code> + 压测文档，做成工程能力证据链</li>
+<li>把注意力分层：Codex抓底层bug（拼写，分支遗漏，NPE，资源关闭，日志），Thinking抓系统性炸点（幂等，重试风暴，缓存击穿，慢SQL，错误码契约）</li>
+<li>形成可重复的“模块闭环”：不是一直写，而是交付一个个完成的态的模块</li>
+</ul>
+<h1 id="主要风险点"><a href="#主要风险点" class="headerlink" title="主要风险点"></a>主要风险点</h1><ol>
+<li>文档负债风险<ul>
+<li>如果每次review都提交一次review报告，很快会被文档淹死</li>
+<li>解决：只有以下情况固化到repo<ul>
+<li>新模块完成</li>
+<li>关键重构</li>
+<li>性能优化前后</li>
+<li>上线前检查</li>
+</ul>
+</li>
+<li>其他最小改动只留在PR描述或者临时notes</li>
+</ul>
+</li>
+<li>报告噪音与形式主义<ul>
+<li>Codex容易给一堆看起来很对但不关键的建议</li>
+<li>解决：让报告强制分级<ul>
+<li>P0:必须改，会上线炸</li>
+<li>P1:应该改，影响可维护&#x2F;性能</li>
+<li>P2:可选优化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>泄漏风险<ul>
+<li>把review 文档提交到repo，容易不小心带上：内部url，token，真实数据样例，库表敏感字段。</li>
+<li>解决：报告模板里加一条规则：不得出现真实密钥&#x2F;真实用户数据&#x2F;完整链接串，样例一律脱敏</li>
+</ul>
+</li>
+<li>双review导致节奏变慢<ul>
+<li>每个模块看起来更慢，但这算是返工减少的慢</li>
+<li>解决：<ul>
+<li>对小改动走“轻量链路”：本地检查 -&gt; 小范围Codex review（不落文档）-&gt; 测试；</li>
+<li>只有交付级模块才走全链路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h1><h2 id="docs-codex-reviews-报告模板"><a href="#docs-codex-reviews-报告模板" class="headerlink" title="docs/codex-reviews/报告模板"></a><code>docs/codex-reviews/</code>报告模板</h2><ul>
+<li>变更摘要</li>
+<li>Codex发现<ul>
+<li>P0：问题&#x2F;影响&#x2F;建议修改点（指到文件+函数）</li>
+<li>P1: …</li>
+<li>P2: …</li>
+</ul>
+</li>
+<li>已经处理的清单（checkbox)</li>
+<li>遗留项（明确说明为什么不改+风险说明）</li>
+</ul>
+<h2 id="压测文档最小模板"><a href="#压测文档最小模板" class="headerlink" title="压测文档最小模板"></a>压测文档最小模板</h2><ul>
+<li>环境（机器，JVM参数，DB&#x2F;Redis规格，版本）</li>
+<li>场景（接口，数据量，并发，持续时间，思考时间）</li>
+<li>指标（P50&#x2F;P95&#x2F;P99，吞吐，错误率，CPU&#x2F;GC&#x2F;DB慢查询）</li>
+<li>结论（瓶颈点&amp;下一步优化路线）</li>
+</ul>
+<h2 id="自动化链路"><a href="#自动化链路" class="headerlink" title="自动化链路"></a>自动化链路</h2><ul>
+<li>PR自动跑：lint + test + 静态扫描（SpotBugs&#x2F;Checkstyle&#x2F;Semgrep之类）</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜当redis可以显式补偿的时候，需要上Canal吗？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-08 21:24:50" itemprop="dateCreated datePublished" datetime="2026-02-08T21:24:50+00:00">2026-02-08 21:24:50</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-08 21:24:50" itemprop="dateModified" datetime="2026-02-08T21:24:50+00:00">2026-02-08 21:24:50</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前情回顾：<br>我的一个方法流程是：</p>
+<ol>
+<li>redis读写（业务状态）</li>
+<li>DB读写</li>
+<li>redis读写（缓存态）</li>
+</ol>
+<p>我纠结的问题点：</p>
+<ol>
+<li>目前情况会导致事务回滚DB数据，而redis数据没有同步回滚</li>
+<li>考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。</li>
+</ol>
+<p>我考虑的解决方案：</p>
+<ol>
+<li>显示补偿，不是强一致。</li>
+<li>Canal</li>
+</ol>
+<p>方案1如何操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">redisOk</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    redisWrite1();</span><br><span class="line">    redisOk = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    dbWrite(); <span class="comment">// 这一步 @Transactional</span></span><br><span class="line"></span><br><span class="line">    redisWrite2();</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    <span class="keyword">if</span>(redisOk)&#123;</span><br><span class="line">        redisRollback1(); <span class="comment">// 补偿</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方案适合：</p>
+<ol>
+<li>状态机</li>
+<li>次数扣减</li>
+<li>workflow</li>
+</ol>
+<p>方案2Canal</p>
+<ol>
+<li>第一步redis，自己写</li>
+<li>第三步redis，交给Canal</li>
+</ol>
+<p>Canal能做的：</p>
+<ol>
+<li>监听DB binlog</li>
+<li>DB commit之后，异步更新redis&#x2F;es&#x2F;mq</li>
+</ol>
+<p>Canal解决的问题是：「DB -&gt; Redis的单向同步」</p>
+<p>Canal使用场景：</p>
+<ol>
+<li>多表多服务共享redis </li>
+<li>读多写少</li>
+<li>强烈不想在业务代码里碰缓存</li>
+<li>接受秒级延迟</li>
+<li>有运维精力</li>
+</ol>
+<p>另，redis的状态如何区分？</p>
+<ul>
+<li>业务态Redis（不需要强一致，出问题靠TTL&#x2F;补偿，不需要进事务）<ul>
+<li>限流</li>
+<li>去重</li>
+<li>幂等</li>
+<li>状态机 step</li>
+<li>分布式锁</li>
+</ul>
+</li>
+<li>缓存态Redis（DB派生）（严格afterCommit，删除缓存&#x2F;重建）<ul>
+<li>详情缓存</li>
+<li>聚合结果</li>
+</ul>
+</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%AE%9E%E4%BD%93%E7%B1%BB%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%80%BC%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%AE%9E%E4%BD%93%E7%B1%BB%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%80%BC%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">技术手记｜实体类设置默认参数值的注意事项</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-08 21:12:21" itemprop="dateCreated datePublished" datetime="2026-02-08T21:12:21+00:00">2026-02-08 21:12:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-08 21:12:21" itemprop="dateModified" datetime="2026-02-08T21:12:21+00:00">2026-02-08 21:12:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>实体类加注解注意事项</p>
+<ol>
+<li>数据库是最终兜底，实体类是前置判断</li>
+<li>最简单直观的方式是：直接给默认值，类似：<code>private Integer status = 1</code></li>
+<li>构造方法里默认赋值：风险：如果全参构造&#x2F;Builder，容易被覆盖，不如直接初始化字段稳定</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer status;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">User</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.status = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>JPA&#x2F; Hibernate注解（只对JPA有效，对MyBatis没用）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Column(nullable = false, columnDefinition = &quot;tinyint default 1&quot;)</span></span><br><span class="line"><span class="keyword">private</span> Integer status;</span><br></pre></td></tr></table></figure>
+<p>这个只在</p>
+<ul>
+<li>Hibernate自动建表或者生成DDL才有用，new User()的时候，status还是null</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PrePersist</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">prePersist</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(status == <span class="literal">null</span>)&#123;</span><br><span class="line">        status = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个只在save()前兜底一次，MyBatis用不了</p>
+<ol start="5">
+<li>Mybatis需要特别注意的坑点：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> <span class="keyword">user</span> (status) <span class="keyword">VALUES</span> (#&#123;status&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果<code>status = null</code>，实际执行的是：<code>status = null</code>，DB默认不会生效，直接报错。<br>解决办法，用动态SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    status,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;status != null&quot;<span class="operator">&gt;</span></span><br><span class="line">    #&#123;status&#125;,</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -947,432 +1378,6 @@
 </li>
 <li>缓存不存在时，锁把缓存Key写成<code>&quot;1&quot;</code>，下一次读缓存会读到垃圾</li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/09/%E4%B8%80%E6%AC%A1%E6%8A%8A%E7%BC%93%E5%AD%98%E5%BD%93%E9%94%81%E7%94%A8%E7%9A%84%E4%BA%8B%E6%95%85%EF%BC%9AShop-%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E5%87%BB%E7%A9%BF-%E8%AF%AF%E5%88%A0-%E5%81%87404%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">一次把缓存当锁用的事故：Shop 查询接口击穿/误删/假404复盘</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-09 18:46:02" itemprop="dateCreated datePublished" datetime="2026-01-09T18:46:02+00:00">2026-01-09 18:46:02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-09 18:46:02" itemprop="dateModified" datetime="2026-01-09T18:46:02+00:00">2026-01-09 18:46:02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="一次把缓存当锁用的事故：Shop-查询接口击穿-误删-假404复盘"><a href="#一次把缓存当锁用的事故：Shop-查询接口击穿-误删-假404复盘" class="headerlink" title="一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘"></a>一次把缓存当锁用的事故：Shop 查询接口击穿&#x2F;误删&#x2F;假404复盘</h1><p>我在 Shop 查询接口里实现了缓存击穿保护，结果把缓存当锁用了：解锁时顺手把缓存删了。压测一跑，DB 像被踹了一脚，抖得很有节奏。</p>
-<h2 id="0-背景：Day2-验收目标是什么？"><a href="#0-背景：Day2-验收目标是什么？" class="headerlink" title="0. 背景：Day2 验收目标是什么？"></a>0. 背景：Day2 验收目标是什么？</h2><ul>
-<li>目标接口：GET &#x2F;shops&#x2F;{shopId}</li>
-<li>验收：<ol>
-<li>店铺不存在：返回错误码，且不打爆 DB（空值缓存）</li>
-<li>热点店铺：并发下不打爆 DB（互斥&#x2F;逻辑过期）</li>
-</ol>
-</li>
-</ul>
-<h2 id="1-现象：问题怎么暴露的？"><a href="#1-现象：问题怎么暴露的？" class="headerlink" title="1. 现象：问题怎么暴露的？"></a>1. 现象：问题怎么暴露的？</h2><ul>
-<li>并发压测时 DB 回源次数异常</li>
-</ul>
-<h2 id="2-根因：到底哪里写错了？（按严重级别）"><a href="#2-根因：到底哪里写错了？（按严重级别）" class="headerlink" title="2. 根因：到底哪里写错了？（按严重级别）"></a>2. 根因：到底哪里写错了？（按严重级别）</h2><h3 id="2-1-Critical：锁-key-与缓存-key-混用"><a href="#2-1-Critical：锁-key-与缓存-key-混用" class="headerlink" title="2.1 Critical：锁 key 与缓存 key 混用"></a>2.1 Critical：锁 key 与缓存 key 混用</h3><ul>
-<li>现象：unlock 可能误删缓存，导致缓存抖动</li>
-<li>后果：热点击穿 → DB 抖动</li>
-<li>修复：lockKey 与 cacheKey 分前缀</li>
-</ul>
-<h3 id="2-2-Critical：并发-miss-抢不到锁却写空值缓存（假404）"><a href="#2-2-Critical：并发-miss-抢不到锁却写空值缓存（假404）" class="headerlink" title="2.2 Critical：并发 miss 抢不到锁却写空值缓存（假404）"></a>2.2 Critical：并发 miss 抢不到锁却写空值缓存（假404）</h3><ul>
-<li>现象：真实有数据却被缓存为空</li>
-<li>后果：长时间错误 404</li>
-<li>修复：拿不到锁就 sleep + 重读缓存，不写任何缓存</li>
-</ul>
-<h3 id="2-3-Medium：lon-lat-未判空导致-NPE"><a href="#2-3-Medium：lon-lat-未判空导致-NPE" class="headerlink" title="2.3 Medium：lon&#x2F;lat 未判空导致 NPE"></a>2.3 Medium：lon&#x2F;lat 未判空导致 NPE</h3><ul>
-<li>现象：不传定位参数直接 500</li>
-<li>修复：lon&#x2F;lat 与 shop 坐标双向判空</li>
-</ul>
-<h3 id="2-4-Low：type-判空缺失导致-NPE-错误码不清晰"><a href="#2-4-Low：type-判空缺失导致-NPE-错误码不清晰" class="headerlink" title="2.4 Low：type 判空缺失导致 NPE &#x2F; 错误码不清晰"></a>2.4 Low：type 判空缺失导致 NPE &#x2F; 错误码不清晰</h3><ul>
-<li>修复：type 为空返回明确错误码</li>
-</ul>
-<blockquote>
-<p>注：如果你的入口实际是 ShopServiceImpl#getById，还需要补齐 shopId&#x2F;status&#x2F;typeName&#x2F;空值缓存等校验。</p>
-</blockquote>
-<h2 id="3-最小补丁：改动点（只贴关键-diff）"><a href="#3-最小补丁：改动点（只贴关键-diff）" class="headerlink" title="3. 最小补丁：改动点（只贴关键 diff）"></a>3. 最小补丁：改动点（只贴关键 diff）</h2><ul>
-<li><ol>
-<li>lockKey 前缀修正</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>tryLock 失败的处理：sleep + 重读缓存</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>miss 回源后写入逻辑过期缓存 &#x2F; 空值缓存</li>
-</ol>
-</li>
-<li><ol start="4">
-<li>lon&#x2F;lat 判空</li>
-</ol>
-</li>
-</ul>
-<h2 id="4-回归测试：怎么证明真的修好了？"><a href="#4-回归测试：怎么证明真的修好了？" class="headerlink" title="4. 回归测试：怎么证明真的修好了？"></a>4. 回归测试：怎么证明真的修好了？</h2><h3 id="4-1-不存在店铺：防穿透"><a href="#4-1-不存在店铺：防穿透" class="headerlink" title="4.1 不存在店铺：防穿透"></a>4.1 不存在店铺：防穿透</h3><ul>
-<li>删除缓存 key</li>
-<li>并发请求不存在 shopId</li>
-<li>预期：DB 只回源一次（或极少），后续命中空值缓存</li>
-</ul>
-<h3 id="4-2-热点店铺：防击穿"><a href="#4-2-热点店铺：防击穿" class="headerlink" title="4.2 热点店铺：防击穿"></a>4.2 热点店铺：防击穿</h3><ul>
-<li>删除缓存 key</li>
-<li>“瞬间并发”请求同一 shopId（不要慢爬升）</li>
-<li>预期：DB 回源次数≈1，其余等待锁或读缓存</li>
-</ul>
-<h3 id="4-3-lon-lat-缺省"><a href="#4-3-lon-lat-缺省" class="headerlink" title="4.3 lon&#x2F;lat 缺省"></a>4.3 lon&#x2F;lat 缺省</h3><ul>
-<li>只传 shopId</li>
-<li>预期：200，distance 为空</li>
-</ul>
-<h2 id="5-沉淀：Shop-查询接口容错点清单（可复用）"><a href="#5-沉淀：Shop-查询接口容错点清单（可复用）" class="headerlink" title="5. 沉淀：Shop 查询接口容错点清单（可复用）"></a>5. 沉淀：Shop 查询接口容错点清单（可复用）</h2><ul>
-<li>容错点01：锁 key 与缓存 key 必须隔离</li>
-<li>容错点02：抢不到锁禁止写空值缓存</li>
-<li>容错点03：逻辑过期必须保证首次建缓存</li>
-<li>容错点04：经纬度可选参数要双向判空</li>
-<li>容错点05：type 可能脏数据要判空</li>
-<li>容错点06：status 校验必须在缓存层&#x2F;业务层明确</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%B8%E7%B3%8A%E7%9A%84%E9%94%81%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%B8%E7%B3%8A%E7%9A%84%E9%94%81%EF%BC%9F/" class="post-title-link" itemprop="url">如何写一个纸糊的锁？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 16:22:02" itemprop="dateCreated datePublished" datetime="2026-01-05T16:22:02+00:00">2026-01-05 16:22:02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 16:22:02" itemprop="dateModified" datetime="2026-01-05T16:22:02+00:00">2026-01-05 16:22:02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="unlock-无条件delete——会误删别人的锁"><a href="#unlock-无条件delete——会误删别人的锁" class="headerlink" title="unlock()无条件delete——会误删别人的锁"></a><code>unlock()</code>无条件delete——会误删别人的锁</h1><p>比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">(String lockKey)</span> &#123;</span><br><span class="line">    stringRedisTemplate.delete(lockKey);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>在分布式里会出现经典事故：</p>
-<ol>
-<li>线程A抢到锁（10秒过期）</li>
-<li>A业务执行慢（比如查库慢，GC，断点调试），超过10秒</li>
-<li>锁过期</li>
-<li>线程B抢到同一个锁key</li>
-<li>A执行完，finally里delete(lockKey)，把B的锁删了。</li>
-<li>线程C又抢到锁，于是B和C同时重建缓存&#x2F;同时写数据库</li>
-</ol>
-<blockquote>
-<p>这就是为啥分布式锁一定要有「锁拥有者标志（token）」，解锁必须校验。</p>
-</blockquote>
-<h1 id="tryLock缺乏token（唯一标志）"><a href="#tryLock缺乏token（唯一标志）" class="headerlink" title="tryLock缺乏token（唯一标志）"></a>tryLock缺乏token（唯一标志）</h1><p>比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setIfAbsent(lockKey, <span class="string">&quot;1&quot;</span>, expire, SECONDS);</span><br></pre></td></tr></table></figure>
-
-<p>这样不知道锁是不是自己加的，所以解锁时没法校验，只能盲删——于是必然有误删除的风险。</p>
-<h1 id="锁过期不续期——别人抢锁，误删别人的锁"><a href="#锁过期不续期——别人抢锁，误删别人的锁" class="headerlink" title="锁过期不续期——别人抢锁，误删别人的锁"></a>锁过期不续期——别人抢锁，误删别人的锁</h1><p>如果不做watch dog，而&#96;LOCK_EXPIRE &lt; 最坏情况下的缓存重建时间（查库 + 序列化 + 写Redis + 抖动）</p>
-<p>那么会出现：</p>
-<blockquote>
-<p>锁过期 –&gt; 别人抢到 –&gt; 误删别人锁</p>
-</blockquote>
-<h1 id="如何改？"><a href="#如何改？" class="headerlink" title="如何改？"></a>如何改？</h1><p>思路很简单：加token + Lua脚本原子校验删除</p>
-<ul>
-<li>tryLock：value存一个随机token（比如UUID）</li>
-<li>unlock：只有当Redis里value &#x3D;&#x3D; 我当初的token才delete<ul>
-<li>这一步必须原子（Lua），否则也会有竞态</li>
-</ul>
-</li>
-</ul>
-<p>要不要加watch dog？</p>
-<ul>
-<li>一般不要，因为缓存重建通常很快（几十毫秒～几百毫秒），但如果有<ul>
-<li>慢SQL（秒级）</li>
-<li>网络抖动</li>
-<li>调试时打断点<br>那锁过期就会频繁发生，工程上：要么把锁TTL拉长，要么做watch dog</li>
-</ul>
-</li>
-</ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/try-catch%E4%B8%BA%E5%95%A5%E8%A6%81%E5%86%99%E5%88%B0%E9%94%81%E5%A4%96%E9%9D%A2%EF%BC%9F/" class="post-title-link" itemprop="url">try catch为啥要写到锁外面？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 15:58:45" itemprop="dateCreated datePublished" datetime="2026-01-05T15:58:45+00:00">2026-01-05 15:58:45</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 15:58:45" itemprop="dateModified" datetime="2026-01-05T15:58:45+00:00">2026-01-05 15:58:45</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>简略答案：</p>
-<blockquote>
-<p>try&#x2F;catch准确来说是try&#x2F;finally要把可能提前return&#x2F;抛异常的整段流程罩住，才能保证只要拿到锁，就一定会释放锁。</p>
-</blockquote>
-<h1 id="锁的场景里，真正需要的是try-finally"><a href="#锁的场景里，真正需要的是try-finally" class="headerlink" title="锁的场景里，真正需要的是try&#x2F;finally"></a>锁的场景里，真正需要的是try&#x2F;finally</h1><p>锁的场景里，最关键的是：</p>
-<ul>
-<li>代码途中return </li>
-<li>JSON解析&#x2F;查库&#x2F;Redis任何一步抛异常</li>
-<li>甚至自己写错导致NPE</li>
-</ul>
-<p>都不能让人把锁带走，否则就死锁（分布式锁就是锁key一直挂着直到过期）</p>
-<p>所以标准结构是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock();</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// 不管里面怎么 return / throw</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>finally是兜底：return 也会执行finally</p>
-<h1 id="为什么try要写在锁外面那层，而不是塞进locked分支？"><a href="#为什么try要写在锁外面那层，而不是塞进locked分支？" class="headerlink" title="为什么try要写在锁外面那层，而不是塞进locked分支？"></a>为什么try要写在锁外面那层，而不是塞进locked分支？</h1><p>如果把try写进<code>if(locked){...}</code>里，会发生什么？</p>
-<h2 id="问题A：你会很难保证所有路径都释放锁"><a href="#问题A：你会很难保证所有路径都释放锁" class="headerlink" title="问题A：你会很难保证所有路径都释放锁"></a>问题A：你会很难保证所有路径都释放锁</h2><p>代码很多return</p>
-<ul>
-<li>命中缓存return</li>
-<li>double-check 命中 return</li>
-<li>查库后 return</li>
-</ul>
-<p>如果try&#x2F;finally只包住locked分支内部，一旦在外面某条路径return，就得自己记得释放锁。但人很容易忘记。</p>
-<p>把try&#x2F;finally放到外层：怎么return都跑不掉finally</p>
-<h2 id="问题B：你会被迫写多份儿try结构（长-乱-易错）"><a href="#问题B：你会被迫写多份儿try结构（长-乱-易错）" class="headerlink" title="问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）"></a>问题B：你会被迫写多份儿try结构（长&#x2F;乱&#x2F;易错）</h2><p>锁逻辑一般是：</p>
-<ul>
-<li>没拿到锁：sleep + retry</li>
-<li>拿到锁：double-check + rebuild<br>这两段都可能抛异常，都可能return</li>
-</ul>
-<p>如果try只写在locked分支里，那没拿到锁的分支要不要try？也要。</p>
-<p>结果：要复制一堆try&#x2F;catch&#x2F;finally，代码更长，bug概率更高。</p>
-<p>外层一个try&#x2F;finally，把所有分支统一罩住最省心。</p>
-<h2 id="问题C：异常不只会发生在锁内部"><a href="#问题C：异常不只会发生在锁内部" class="headerlink" title="问题C：异常不只会发生在锁内部"></a>问题C：异常不只会发生在锁内部</h2><p>很多异常点其实发生在locked之外，比如：</p>
-<ul>
-<li><code>Thread.sleep(...)</code>抛<code>InterruptedException</code>（通常在没有拿到锁那条分支）</li>
-<li>在else分支里重试读缓存，解析JSON</li>
-<li>甚至unlock本身，也可能出问题（例如 Redis 短暂不可用）</li>
-</ul>
-<p>所以try放外面是为了：所有路径异常都能被统一处理</p>
-<h1 id="锁代码骨架模板"><a href="#锁代码骨架模板" class="headerlink" title="锁代码骨架模板"></a>锁代码骨架模板</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">locked</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!locked)&#123;</span><br><span class="line">        <span class="comment">// 退避重试读缓存（可能sleep，可能解析）</span></span><br><span class="line">        <span class="comment">// 这里也可能return</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// locked == true : double check + rebuild（可能查库/写缓存）</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">catch</span>(InterrruptedException e)&#123;</span><br><span class="line">    Thread.currentThread().interrupt();</span><br><span class="line">    <span class="comment">// 降级策略</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(locked) &#123;</span><br><span class="line">        unlock(lockKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
-<li>try&#x2F;finally一定包住所有return的地方</li>
-<li>unlock只放finally</li>
-<li>只有locked &#x3D;&#x3D; true才unlock</li>
-</ol>
 
       
 
