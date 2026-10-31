@@ -1270,7 +1270,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #24e09e;
+    background: #1ff730;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2948,41 +2948,6 @@ header.header {
     padding: 10px 12px;
   }
 }
-@media screen and (hover: hover) and (pointer: fine) and (forced-colors: none) {
-  body {
-    cursor: url("/images/cursors/bat-default.svg") 2 2, auto;
-  }
-  input,
-  textarea,
-  [contenteditable]:not([contenteditable='false']),
-  .post-body pre,
-  .post-body code {
-    cursor: text;
-  }
-  a,
-  button,
-  [role='button'],
-  label,
-  summary,
-  .popup-trigger,
-  .back-to-top,
-  input[type='button'],
-  input[type='submit'],
-  input[type='reset'],
-  input[type='checkbox'],
-  input[type='radio'] {
-    cursor: url("/images/cursors/bat-link.svg") 2 2, pointer;
-  }
-  body [disabled],
-  body [aria-disabled='true'] {
-    cursor: not-allowed;
-  }
-}
-@media print {
-  #click-particles-canvas {
-    display: none;
-  }
-}
 /*
  * 南瓜夜读 — independent Halloween skin, loaded via seasonalTheme: halloween.
  * Orange / purple accents borrow Dracula's public palette:
@@ -3349,6 +3314,41 @@ header.header .seasonal-tagline {
   .main-inner .tabs-comment {
     border: 0;
     box-shadow: none;
+  }
+}
+@media screen and (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  body {
+    cursor: url("/images/cursors/bat-default.svg") 2 2, auto;
+  }
+  input,
+  textarea,
+  [contenteditable]:not([contenteditable='false']),
+  .post-body pre,
+  .post-body code {
+    cursor: text;
+  }
+  a,
+  button,
+  [role='button'],
+  label,
+  summary,
+  .popup-trigger,
+  .back-to-top,
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: url("/images/cursors/bat-link.svg") 2 2, pointer;
+  }
+  body [disabled],
+  body [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+}
+@media print {
+  #click-particles-canvas {
+    display: none;
   }
 }
 .search-active .search-pop-overlay {

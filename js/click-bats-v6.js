@@ -47,8 +47,8 @@
         gravity: 0,
         friction: 1,
         ringDuration: 14,
-        particleLifeMin: 28,
-        particleLifeMax: 34,
+        particleLifeMin: 52,
+        particleLifeMax: 64,
         maxTrail: 0,
         glowRadius: { mobile: 12, desktop: 18 },
         colors: {
@@ -422,7 +422,7 @@
       this.angle = angle;
       this.distance = random(isMobile() ? 48 : 72, isMobile() ? 84 : 125);
       this.bend = random(-24, 24);
-      this.baseSize = random(isMobile() ? 5 : 6, isMobile() ? 6.5 : 8);
+      this.baseSize = random(isMobile() ? 7 : 8, isMobile() ? 8.5 : 10);
       this.phase = random(0, Math.PI * 2);
     }
 
