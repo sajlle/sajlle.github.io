@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-31T01:06:20.000Z</updated>
+  <updated>2026-10-31T17:50:30.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9A%84%E9%9A%8F%E6%83%B3/</id>
+    <link href="https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9A%84%E9%9A%8F%E6%83%B3/"/>
+    <published>2026-10-31T17:50:30.000Z</published>
+    <summary>
+      <![CDATA[<p>最近老在想注意力分配这件事。<br>我也爱好刷抖音快手，也会领签到红包，还会蹲购物平台有无优惠。<br>动手之前，我想，我只是领取一个优惠，3分钟就行了。但一点进去，一小时就过去了。</p>
+<p>一天里，几个三分钟这么堆起来，日常的闲暇就被消耗完了。</p>
+<p>那为啥我还要反复去点呢？<br>因为我闲的时候，不知道该干点啥？毕业好几年之后，一直处在一种被催促的忙慌状态。好像休闲，坐下来]]>
+    </summary>
+    <title>日常记录｜最近的随想</title>
+    <updated>2026-10-31T17:50:30.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -540,28 +557,5 @@
     </summary>
     <title>夜聊｜在你不知道要问什么的时候，怎么多问出下一层问题？</title>
     <updated>2026-09-20T20:25:38.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="算法" scheme="https://sajlle.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    <category term="Quick Select" scheme="https://sajlle.github.io/tags/Quick-Select/"/>
-    <id>https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/</id>
-    <link href="https://sajlle.github.io/2026/09/20/%E7%AE%97%E6%B3%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E4%B8%8A%E5%8D%88%E5%86%99%E4%B8%89%E8%B7%AFQuickSelect%EF%BC%8C%E4%B8%80%E7%82%B9%E6%80%BB%E7%BB%93/"/>
-    <published>2026-09-20T11:26:07.000Z</published>
-    <summary>
-      <![CDATA[<p>基本思路就是把数组划分为四个区间：</p>
-<ul>
-<li>low ~ lt-1: &lt; pivot</li>
-<li>lt ~ i-1: &#x3D; pivot</li>
-<li>i ~ gt: 未知区</li>
-<li>gt+1 ~ high: &gt; pivot</li>
-</ul>
-<p>然后保证未知区一定缩水：</p>
-<figure class="highlight m]]>
-    </summary>
-    <title>算法｜今天上午写215题三路QuickSelect，一点总结</title>
-    <updated>2026-09-20T11:26:07.000Z</updated>
   </entry>
 </feed>

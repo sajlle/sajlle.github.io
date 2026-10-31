@@ -56,7 +56,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
-<script src="/js/click-fireworks-v5.js"></script>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
 <script src="/js/third-party/search/local-search.js" defer></script>
@@ -74,7 +74,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T17:50:11.000Z","dateModified":"2026-09-13T17:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["RabbitMQ","集成测试","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9ARabbitMQ%E6%B5%8B%E8%AF%95%E3%80%8C%E9%98%9F%E5%88%97%E7%A9%BA%E4%BA%86%E3%80%8D%EF%BC%8C%E4%BD%86%E4%BA%8B%E5%8A%A1%E8%BF%98%E6%B2%A1%E6%8F%90%E4%BA%A4%EF%BD%9E/"},"headline":"BugFix｜AgentV0Bug：RabbitMQ测试「队列空了」，但事务还没提交～","description":"原测试的等待条件是： 1attemps == 1 &amp;&amp; RabbitMQ management API 显示队列为空，测试认为处理结束 但实际上可能处在： 1listener 已经消费 -&gt; 队列暂时空 -&gt; transaction还没commit -&gt; afterCommit还没执行 所以测试会在18ms，26ms就冲出去assert： 12commitCou…","datePublished":"2026-09-13T17:50:11.000Z","dateModified":"2026-09-13T17:50:11.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["集成测试","RabbitMQ","异步队列"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -187,7 +187,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">216</span>
+          <span class="site-state-item-count">217</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -198,7 +198,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">278</span>
+        <span class="site-state-item-count">274</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -306,7 +306,7 @@
 
 
 
-      <script src="/js/click-fireworks-v5.js"></script>
+      
 
     </div>
 
@@ -334,8 +334,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
               <a href="/tags/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/" rel="tag"># 集成测试</a>
+              <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
               <a href="/tags/%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97/" rel="tag"># 异步队列</a>
           </div>
 
@@ -397,7 +397,7 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-<div class="seasonal-edge-scene" aria-hidden="true">
+<script src="/js/click-bats-v6.js" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
   <span class="halloween-edge-bat">🦇</span>
   <div class="halloween-lantern">
     <span class="halloween-lantern-handle"></span>
