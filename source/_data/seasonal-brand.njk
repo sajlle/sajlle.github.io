@@ -1,0 +1,38 @@
+{# Site-local extension of NexT 8's brand partial; original / Mid-Autumn keep NexT's own view. #}
+<div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="{{ __('accessibility.nav_toggle') }}" role="button">
+      {%- if theme.menu %}
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      {%- endif %}
+    </div>
+  </div>
+
+  <div class="site-meta">
+    {%- if theme.custom_logo and theme.scheme === 'Muse' %}
+      <img class="custom-logo-image" src="{{ url_for(theme.custom_logo) }}" alt="{{ title }}">
+    {%- endif %}
+    <a href="{{ config.root }}" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <{% if is_home() or is_archive() %}h1{% else %}p{% endif %} class="site-title">{{ title }}<span class="seasonal-brand-icon" aria-hidden="true">{% if config.seasonalTheme === 'halloween' %}🎃{% else %}🍂{% endif %}</span></{% if is_home() or is_archive() %}h1{% else %}p{% endif %}>
+      <i class="logo-line"></i>
+    </a>
+    {%- if subtitle %}
+      <p class="site-subtitle" itemprop="description">{{ subtitle }}</p>
+    {%- endif %}
+    <p class="seasonal-tagline">{% if config.seasonalTheme === 'halloween' %}南瓜夜读 · 今晚，留一盏灯{% else %}一个人，也好好生活{% endif %}</p>
+    {%- if theme.custom_logo and (theme.scheme === 'Gemini' or theme.scheme === 'Pisces') %}
+      <img class="custom-logo-image" src="{{ url_for(theme.custom_logo) }}" alt="{{ title }}">
+    {%- endif %}
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="{{ __('menu.search') }}" role="button">
+      {%- if theme.algolia_search.enable or theme.local_search.enable %}
+        <i class="fa fa-search fa-fw fa-lg"></i>
+      {%- endif %}
+    </div>
+  </div>
+</div>

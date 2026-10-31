@@ -1,0 +1,88 @@
+// Shared finishing details for the two reading skins.
+header.header .seasonal-brand-icon {
+  display: inline-block;
+  filter: drop-shadow(0 0 6px var(--seasonal-glow));
+  font-size: .76em;
+  letter-spacing: 0;
+  margin-left: .32em;
+  vertical-align: .05em;
+}
+
+header.header .seasonal-tagline {
+  color: var(--seasonal-accent);
+  font-size: 11px;
+  letter-spacing: .08em;
+  line-height: 1.8;
+  margin: 12px 0 0;
+}
+
+// Gemini repeats :not(:first-child) in its generated selector; match both.
+.main-inner .post-block,
+.main-inner .post-block:not(:first-child):not(:first-child),
+.sidebar-inner,
+.main-inner .pagination,
+.main-inner .comments,
+.main-inner .tabs-comment {
+  border: 1px solid var(--seasonal-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 32px var(--seasonal-shadow);
+}
+
+.posts-expand .post-title-link {
+  transition: color .2s ease;
+}
+
+.posts-expand .post-title-link:hover,
+.posts-expand .post-title-link:focus-visible {
+  color: var(--seasonal-accent);
+}
+
+.posts-expand .post-title-link::before {
+  background: var(--seasonal-accent);
+}
+
+.seasonal-edge-scene {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  user-select: none;
+  z-index: 1;
+}
+
+// At narrower widths the header carries the decorations, keeping the reading
+// column and floating NexT controls free of overlapping artwork.
+@media (max-width: 1279px) {
+  .seasonal-edge-scene {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .posts-expand .post-title-link {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active), print {
+  .seasonal-edge-scene,
+  .seasonal-brand-icon {
+    display: none;
+  }
+}
+
+@media print {
+  header.header .seasonal-tagline {
+    color: #444;
+  }
+
+  .main-inner .post-block,
+  .main-inner .post-block:not(:first-child):not(:first-child),
+  .sidebar-inner,
+  .main-inner .pagination,
+  .main-inner .comments,
+  .main-inner .tabs-comment {
+    border: 0;
+    box-shadow: none;
+  }
+}

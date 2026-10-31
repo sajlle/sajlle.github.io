@@ -1,0 +1,356 @@
+/*
+ * 南瓜夜读 — independent Halloween skin, loaded via seasonalTheme: halloween.
+ * Orange / purple accents borrow Dracula's public palette:
+ * https://draculatheme.com/contribute
+ * Decorative elements stay in the header / empty desktop margins and never
+ * intercept clicks.
+ */
+
+:root {
+  --seasonal-accent: #ffb86c;
+  --seasonal-border: rgba(189, 147, 249, .13);
+  --seasonal-shadow: rgba(9, 5, 16, .14);
+  --seasonal-glow: rgba(255, 184, 108, .28);
+  --body-bg-color: #1c1924;
+  --content-bg-color: #292431;
+  --card-bg-color: #332c3e;
+  --text-color: #f4ede3;
+  --blockquote-color: #c0b4ca;
+  --link-color: #ffb86c;
+  --link-hover-color: #bd93f9;
+  --brand-color: #f4ede3;
+  --brand-hover-color: #ffb86c;
+  --selection-bg: #ffb86c;
+  --selection-color: #1c1924;
+  --table-row-odd-bg-color: #302938;
+  --table-row-hover-bg-color: #3b3046;
+  --menu-item-bg-color: #3b3046;
+  --theme-color: #1c1924;
+  --btn-default-bg: transparent;
+  --btn-default-color: #ffb86c;
+  --btn-default-border-color: #a47146;
+  --btn-default-hover-bg: #ffb86c;
+  --btn-default-hover-color: #1c1924;
+  --btn-default-hover-border-color: #ffb86c;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #1c1924;
+  background-image:
+    radial-gradient(ellipse at 8% 0%, rgba(189, 147, 249, .08), transparent 42%),
+    radial-gradient(ellipse at 95% 60%, rgba(255, 184, 108, .05), transparent 38%);
+  background-attachment: fixed;
+}
+
+.headband {
+  background: linear-gradient(90deg, #45344f, #ffb86c, #bd93f9, #45344f);
+}
+
+header.header {
+  background:
+    radial-gradient(circle at 90% 5%, rgba(255, 184, 108, .15), transparent 35%),
+    linear-gradient(155deg, #302238, #211a2b 65%, #291f31);
+  border: 1px solid rgba(189, 147, 249, .16);
+  border-radius: 12px;
+  box-shadow: 0 10px 32px rgba(9, 5, 16, .22);
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+header.header .site-brand-container,
+header.header .site-nav {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+header.header .site-meta {
+  padding: 38px 20px 28px;
+}
+
+header.header .brand,
+header.header .brand:hover,
+header.header .menu-item a {
+  color: #f4ede3;
+}
+
+header.header .site-title {
+  letter-spacing: .08em;
+  text-shadow: 0 0 22px rgba(255, 184, 108, .18);
+}
+
+header.header .site-subtitle {
+  color: #c0b4ca;
+}
+
+header.header .menu-item a:hover,
+header.header .menu-item a.menu-item-active {
+  background: rgba(255, 184, 108, .08);
+  color: #ffb86c;
+}
+
+.posts-expand .post-title-link {
+  color: #f4ede3;
+}
+
+.posts-expand .post-title-link:hover,
+.sidebar-nav .sidebar-nav-active,
+.sidebar-nav .sidebar-nav-active:hover,
+.sidebar-toc-active .sidebar-nav-toc,
+.sidebar-overview-active .sidebar-nav-overview {
+  border-bottom-color: #ffb86c;
+  color: #ffb86c;
+}
+
+.posts-expand .post-title-link::before {
+  background: #ffb86c;
+}
+
+.posts-expand .post-meta-container,
+.footer,
+.footer a {
+  color: #c0b4ca;
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+  border-bottom-color: rgba(189, 147, 249, .2);
+}
+
+.post-body blockquote {
+  border-left-color: #bd93f9;
+}
+
+.site-author-image {
+  border-color: rgba(255, 184, 108, .4);
+}
+
+.search-popup {
+  border: 1px solid rgba(189, 147, 249, .3);
+  border-radius: 12px;
+}
+
+.search-popup .search-header {
+  background: #332c3e;
+}
+
+.search-popup .search-icon,
+.search-popup .popup-btn-close {
+  color: #c0b4ca;
+}
+
+.pagination .page-number.current {
+  background: #ffb86c;
+  border-color: #ffb86c;
+  color: #1c1924;
+}
+
+figure.highlight {
+  border: 1px solid rgba(189, 147, 249, .14);
+  border-radius: 8px;
+  color-scheme: dark;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid #ffb86c;
+  outline-offset: 4px;
+}
+
+.halloween-visuals {
+  contain: layout paint;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  user-select: none;
+  z-index: 0;
+}
+
+.halloween-stars {
+  background-image:
+    radial-gradient(circle at 8% 8%, #bd93f9 0 1px, transparent 1.6px),
+    radial-gradient(circle at 22% 35%, #ffb86c 0 1px, transparent 1.6px),
+    radial-gradient(circle at 67% 10%, #ffb86c 0 1px, transparent 1.6px),
+    radial-gradient(circle at 92% 58%, #bd93f9 0 1px, transparent 1.6px),
+    radial-gradient(circle at 14% 83%, #bd93f9 0 1px, transparent 1.6px);
+  inset: 0;
+  opacity: .4;
+  position: absolute;
+}
+
+.halloween-moon {
+  background:
+    radial-gradient(circle at 30% 28%, rgba(126, 75, 37, .12) 0 9%, transparent 10%),
+    radial-gradient(circle at 67% 58%, rgba(126, 75, 37, .13) 0 13%, transparent 14%),
+    radial-gradient(circle at 39% 77%, rgba(126, 75, 37, .1) 0 8%, transparent 9%),
+    linear-gradient(135deg, #ffe4b4, #e5aa67);
+  border-radius: 50%;
+  box-shadow: 0 0 22px rgba(255, 184, 108, .2);
+  height: 36px;
+  opacity: .8;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  width: 36px;
+}
+
+.halloween-bat {
+  filter: drop-shadow(0 0 3px rgba(189, 147, 249, .5));
+  font-size: 18px;
+  line-height: 1;
+  opacity: .65;
+  position: absolute;
+}
+
+.halloween-bat--near {
+  left: 12px;
+  top: 12px;
+  transform: rotate(-16deg);
+}
+
+.halloween-bat--far {
+  font-size: 14px;
+  right: 55px;
+  top: 22px;
+  transform: rotate(12deg);
+}
+
+.halloween-edge-bat {
+  filter: drop-shadow(0 0 5px rgba(189, 147, 249, .2));
+  font-size: 24px;
+  left: 12px;
+  opacity: .4;
+  position: absolute;
+  top: 26%;
+  transform: rotate(-18deg);
+}
+
+.halloween-lantern {
+  bottom: 94px;
+  height: 68px;
+  position: absolute;
+  right: 8px;
+  width: 48px;
+}
+
+.halloween-lantern::before {
+  background: radial-gradient(ellipse, rgba(255, 169, 75, .23), transparent 68%);
+  content: '';
+  height: 124px;
+  left: -36px;
+  position: absolute;
+  top: -15px;
+  width: 124px;
+}
+
+.halloween-lantern-handle {
+  border: 2px solid #8c6549;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  height: 20px;
+  left: 14px;
+  position: absolute;
+  top: 0;
+  width: 20px;
+}
+
+.halloween-lantern-body {
+  filter: drop-shadow(0 0 12px rgba(255, 169, 75, .3));
+  font-size: 44px;
+  left: 0;
+  line-height: 1;
+  position: absolute;
+  top: 17px;
+}
+
+@media (max-width: 991px) {
+  header.header {
+    border-left: 0;
+    border-radius: 0 0 12px 12px;
+    border-right: 0;
+  }
+
+  .halloween-moon {
+    right: 58px;
+    top: 12px;
+  }
+
+  .halloween-bat--far {
+    display: none;
+  }
+
+}
+
+@media (forced-colors: active), print {
+  .halloween-visuals,
+  .headband {
+    display: none;
+  }
+
+  header.header,
+  body {
+    background: Canvas;
+  }
+
+  header.header .site-title {
+    text-shadow: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --body-bg-color: Canvas;
+    --content-bg-color: Canvas;
+    --card-bg-color: Canvas;
+    --text-color: CanvasText;
+    --blockquote-color: CanvasText;
+    --link-color: LinkText;
+    --link-hover-color: LinkText;
+  }
+
+  header.header .brand,
+  header.header .menu-item a,
+  header.header .site-subtitle,
+  .posts-expand .post-title-link,
+  .posts-expand .post-meta-container,
+  .footer,
+  .footer a {
+    color: CanvasText;
+  }
+}
+
+@media print {
+  :root {
+    --body-bg-color: #fff;
+    --content-bg-color: #fff;
+    --card-bg-color: #fff;
+    --text-color: #222;
+    --blockquote-color: #444;
+    --link-color: #222;
+    --link-hover-color: #222;
+    --highlight-background: #f5f5f5;
+    --highlight-foreground: #222;
+    --highlight-gutter-background: #f5f5f5;
+    --highlight-gutter-foreground: #444;
+    color-scheme: light;
+  }
+
+  header.header .brand,
+  header.header .menu-item a,
+  header.header .site-subtitle,
+  .posts-expand .post-title-link,
+  .posts-expand .post-meta-container,
+  .footer,
+  .footer a {
+    color: #222;
+  }
+
+}
+
+@import 'seasonal-reading';
