@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
 
 hexo.extend.filter.register('theme_inject', injects => {
   const configured = hexo.config.mouseEffects ?? 'auto';
@@ -24,6 +25,9 @@ hexo.extend.filter.register('theme_inject', injects => {
   if (effect === 'off') return;
   if (effect === 'bats') injects.style.push('source/_data/bat-pointer.styl');
   const file = effect === 'bats' ? 'click-bats-v6.js' : 'click-fireworks-v5.js';
+  const version = createHash('sha256')
+    .update(fs.readFileSync(path.join(hexo.source_dir, 'js', file)))
+    .digest('hex').slice(0, 12);
   injects.bodyEnd.raw('mouse-effects',
-    `<script src="{{ url_for('/js/${file}') }}" data-mouse-effect="${effect}" defer></script>`);
+    `<script src="{{ url_for('/js/${file}?v=${version}') }}" data-mouse-effect="${effect}" defer></script>`);
 });
