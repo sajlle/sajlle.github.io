@@ -115,6 +115,9 @@ theme: next
 # 每次只加载所选主题；中秋的样式和装饰独立保留，随时可以切回。
 seasonalTheme: halloween
 
+# auto：万圣节使用蝙蝠，其余主题使用原版；legacy：原版；bats：蝙蝠；off：关闭。
+mouseEffects: auto
+
 
 
 # ==== 自动添加的部署配置 ====

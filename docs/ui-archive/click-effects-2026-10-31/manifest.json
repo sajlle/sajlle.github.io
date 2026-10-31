@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "4293c3973dd6983d1106aa4459619a819c545b39",
+  "active_effect": "click-fireworks-v5.js",
+  "files": [
+    {
+      "source": "source/js/click-fireworks-v5.js",
+      "snapshot": "click-fireworks-v5.js",
+      "sha256": "134ed82498ccd2f5836fa8d99f780673a275bb30a2ae55b8378968c39330252f",
+      "bytes": 17052
+    },
+    {
+      "source": "themes/next/layout/_scripts/index.njk",
+      "snapshot": "next-scripts-index.njk",
+      "sha256": "cb9a72e8e23bd4960c6338a4dab901e0b01a872e8e06e1cbe06ce629f2f303a6",
+      "bytes": 549
+    },
+    {
+      "source": "themes/next/layout/_macro/post.njk",
+      "snapshot": "next-post-macro.njk",
+      "sha256": "d1e2d0ffffb24d8bac08e160c6ee1badf3ffbf884d3290e2f9d4de7cd3915472",
+      "bytes": 6261
+    }
+  ],
+  "loading": "The post macro loads v5 once per article; the global scripts partial loads it once more. The generated 10-post homepage contains 11 script tags. The v5 global guard prevents duplicate initialization."
+}

@@ -4,7 +4,7 @@ date: 2025-12-14 21:31:27
 categories:
   - 技术手记
 tags:
-  - bugFix
+  - BugFix
   - Java踩坑日常
 ---
 最近写项目，有点纠结，接口里走不通的分支，到底是return一个Result返回错误码，还是throw错误码回去？

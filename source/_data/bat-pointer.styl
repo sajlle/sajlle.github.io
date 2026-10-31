@@ -1,0 +1,41 @@
+// Native cursors keep an exact 2,2 hotspot, with browser fallbacks. Touch
+// devices never receive a simulated follower or a hidden system pointer.
+@media screen and (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  body {
+    cursor: url('/images/cursors/bat-default.svg') 2 2, auto;
+  }
+
+  input,
+  textarea,
+  [contenteditable]:not([contenteditable='false']),
+  .post-body pre,
+  .post-body code {
+    cursor: text;
+  }
+
+  a,
+  button,
+  [role='button'],
+  label,
+  summary,
+  .popup-trigger,
+  .back-to-top,
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: url('/images/cursors/bat-link.svg') 2 2, pointer;
+  }
+
+  body [disabled],
+  body [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+}
+
+@media print {
+  #click-particles-canvas {
+    display: none;
+  }
+}

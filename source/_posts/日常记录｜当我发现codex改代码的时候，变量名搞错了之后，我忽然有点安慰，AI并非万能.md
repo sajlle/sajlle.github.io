@@ -4,7 +4,7 @@ date: 2026-04-08 12:21:09
 categories:
   - 日常记录
 tags:
-  - codex
+  - Codex
   - AI
 ---
 如题。

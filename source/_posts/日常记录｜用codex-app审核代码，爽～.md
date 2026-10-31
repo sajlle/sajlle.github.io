@@ -5,7 +5,7 @@ categories:
   - 日常生活
   - 技术手记
 tags:
-  - codex
+  - Codex
   - code review
 ---
 最近，用codex审核代码，很爽。

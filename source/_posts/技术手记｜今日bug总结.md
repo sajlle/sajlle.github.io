@@ -4,12 +4,12 @@ date: 2026-02-07 19:09:24
 categories:
   - 技术手记
 tags:
-  - bugfix
+  - BugFix
   - NPE
   - FileNotFound
   - Amqp
   - Docker
-  - rabbitMq
+  - RabbitMQ
 ---
 今日bug日志，测试的时候出现的，都是小bug。
 1. 启动项目报AmqpError，一看是没开RabbitMq
