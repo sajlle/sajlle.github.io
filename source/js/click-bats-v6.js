@@ -438,6 +438,12 @@
       this.rotation = Math.sin(this.angle) * .35 + Math.sin(this.age * .15 + this.phase) * .1;
     }
 
+    // The fade-in starts at alpha 0, so the base alpha cutoff would cull every
+    // bat when the first frame's delta is ~0. Only age ends a bat's flight.
+    alive() {
+      return this.age < this.life;
+    }
+
     drawTrail() {} // The storyboard's dashed paths are guides, not particles.
 
     drawShape(ctx) {
