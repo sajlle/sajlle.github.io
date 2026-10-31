@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+  <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-dark","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="前情回顾：我的一个方法流程是：  redis读写（业务状态） DB读写 redis读写（缓存态）  我纠结的问题点：  目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。  我考虑的解决方案：  显示补偿，不是强一致。 Canal  方案1如何操作： 123456789101112131415b">
 <meta property="og:type" content="article">
@@ -76,7 +76,7 @@
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T21:24:50.000Z","dateModified":"2026-02-08T21:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["Redis","DB","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/02/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%BD%93redis%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E8%A1%A5%E5%81%BF%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%9C%80%E8%A6%81%E4%B8%8ACanal%E5%90%97%EF%BC%9F/"},"headline":"技术手记｜当redis可以显式补偿的时候，需要上Canal吗？","description":"前情回顾：我的一个方法流程是： redis读写（业务状态） DB读写 redis读写（缓存态） 我纠结的问题点： 目前情况会导致事务回滚DB数据，而redis数据没有同步回滚 考虑afterCommit，提交事务之后再读写redis，但因为流程不可拆，所以该方案不行。 我考虑的解决方案： 显示补偿，不是强一致。 Canal 方案1如何操作： 123456789101112131415boolea…","datePublished":"2026-02-08T21:24:50.000Z","dateModified":"2026-02-08T21:24:50.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["DB","Redis","事务","数据库","Canal"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -88,7 +88,8 @@
 
   <main class="main">
     <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+<div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -98,13 +99,13 @@
   </div>
 
   <div class="site-meta">
-
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">节点人生</p>
+      <p class="site-title">节点人生<span class="seasonal-brand-icon" aria-hidden="true">🎃</span></p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+    <p class="seasonal-tagline">南瓜夜读 · 今晚，留一盏灯</p>
   </div>
 
   <div class="site-nav-right">
@@ -149,12 +150,11 @@
       </div>
     </div>
   </div>
-<div class="mid-autumn-visuals" aria-hidden="true">
-  <span class="mid-autumn-stars"></span>
-  <span class="mid-autumn-moon"></span>
-  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
-  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
-  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+<div class="halloween-visuals" aria-hidden="true">
+  <span class="halloween-stars"></span>
+  <span class="halloween-moon"></span>
+  <span class="halloween-bat halloween-bat--near">🦇</span>
+  <span class="halloween-bat halloween-bat--far">🦇</span>
 </div>
 
 </header>
@@ -377,8 +377,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Redis/" rel="tag"># Redis</a>
               <a href="/tags/DB/" rel="tag"># DB</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
               <a href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag"># 事务</a>
               <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
               <a href="/tags/Canal/" rel="tag"># Canal</a>
@@ -442,6 +442,13 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<div class="seasonal-edge-scene" aria-hidden="true">
+  <span class="halloween-edge-bat">🦇</span>
+  <div class="halloween-lantern">
+    <span class="halloween-lantern-handle"></span>
+    <span class="halloween-lantern-body">🎃</span>
+  </div>
+</div>
 
 </body>
 </html>

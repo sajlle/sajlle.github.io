@@ -13,17 +13,17 @@
   --table-row-odd-bg-color: #f9f9f9;
   --table-row-hover-bg-color: #f5f5f5;
   --menu-item-bg-color: #f5f5f5;
-  --theme-color: #fff;
+  --theme-color: #1c1924;
   --btn-default-bg: #fff;
   --btn-default-color: #555;
   --btn-default-border-color: #555;
   --btn-default-hover-bg: #222;
   --btn-default-hover-color: #fff;
   --btn-default-hover-border-color: #222;
-  --highlight-background: #f3f3f3;
-  --highlight-foreground: #444;
-  --highlight-gutter-background: #e1e1e1;
-  --highlight-gutter-foreground: #555;
+  --highlight-background: #1c1b1b;
+  --highlight-foreground: #fff;
+  --highlight-gutter-background: #323131;
+  --highlight-gutter-foreground: #e8e8e8;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -42,7 +42,7 @@
     --table-row-odd-bg-color: #282828;
     --table-row-hover-bg-color: #363636;
     --menu-item-bg-color: #555;
-    --theme-color: #222;
+    --theme-color: #1c1924;
     --btn-default-bg: #222;
     --btn-default-color: #ccc;
     --btn-default-border-color: #555;
@@ -413,124 +413,6 @@ code.hljs {
   padding: 3px 5px
 }
 /*!
-  Theme: Default
-  Description: Original highlight.js style
-  Author: (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
-  Maintainer: @highlightjs/core-team
-  Website: https://highlightjs.org/
-  License: see project LICENSE
-  Touched: 2021
-*/
-/*
-This is left on purpose making default.css the single file that can be lifted
-as-is from the repository directly without the need for a build step
-
-Typically this "required" baseline CSS is added by `makestuff.js` during build.
-*/
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
-/* end baseline CSS */
-.hljs {
-  background: #F3F3F3;
-  color: #444
-}
-/* Base color: saturation 0; */
-.hljs-subst {
-  /* default */
-  
-}
-/* purposely ignored */
-.hljs-formula,
-.hljs-attr,
-.hljs-property,
-.hljs-params {
-  
-}
-.hljs-comment {
-  color: #697070
-}
-.hljs-tag,
-.hljs-punctuation {
-  color: #444a
-}
-.hljs-tag .hljs-name,
-.hljs-tag .hljs-attr {
-  color: #444
-}
-.hljs-keyword,
-.hljs-attribute,
-.hljs-selector-tag,
-.hljs-meta .hljs-keyword,
-.hljs-doctag,
-.hljs-name {
-  font-weight: bold
-}
-/* User color: hue: 0 */
-.hljs-type,
-.hljs-string,
-.hljs-number,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
-  color: #880000
-}
-.hljs-title,
-.hljs-section {
-  color: #880000;
-  font-weight: bold
-}
-.hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-operator,
-.hljs-selector-pseudo {
-  color: #ab5656
-}
-/* Language color: hue: 90; */
-.hljs-literal {
-  color: #695
-}
-.hljs-built_in,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
-  color: #397300
-}
-/* Meta color: hue: 200 */
-.hljs-meta {
-  color: #1f7199
-}
-.hljs-meta .hljs-string {
-  color: #38a
-}
-/* Misc effects */
-.hljs-emphasis {
-  font-style: italic
-}
-.hljs-strong {
-  font-weight: bold
-}
-@media (prefers-color-scheme: dark) {
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
-/*!
   Theme: StackOverflow Dark
   Description: Dark theme as used on stackoverflow.com
   Author: stackoverflow.com
@@ -638,7 +520,6 @@ code.hljs {
 .hljs-tag {
   /* purposely ignored */
   
-}
 }
 code,
 kbd,
@@ -1389,7 +1270,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #a7dbf7;
+    background: #77ff30;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -3068,54 +2949,142 @@ header.header {
   }
 }
 /*
- * Mid-Autumn seasonal theme.
- * Loaded only when `midAutumnTheme: true` in the root Hexo config.
- * All decorative elements stay inside `.mid-autumn-visuals`.
+ * 南瓜夜读 — independent Halloween skin, loaded via seasonalTheme: halloween.
+ * Orange / purple accents borrow Dracula's public palette:
+ * https://draculatheme.com/contribute
+ * Decorative elements stay in the header / empty desktop margins and never
+ * intercept clicks.
  */
+:root {
+  --seasonal-accent: #ffb86c;
+  --seasonal-border: rgba(189,147,249,0.13);
+  --seasonal-shadow: rgba(9,5,16,0.14);
+  --seasonal-glow: rgba(255,184,108,0.28);
+  --body-bg-color: #1c1924;
+  --content-bg-color: #292431;
+  --card-bg-color: #332c3e;
+  --text-color: #f4ede3;
+  --blockquote-color: #c0b4ca;
+  --link-color: #ffb86c;
+  --link-hover-color: #bd93f9;
+  --brand-color: #f4ede3;
+  --brand-hover-color: #ffb86c;
+  --selection-bg: #ffb86c;
+  --selection-color: #1c1924;
+  --table-row-odd-bg-color: #302938;
+  --table-row-hover-bg-color: #3b3046;
+  --menu-item-bg-color: #3b3046;
+  --theme-color: #1c1924;
+  --btn-default-bg: transparent;
+  --btn-default-color: #ffb86c;
+  --btn-default-border-color: #a47146;
+  --btn-default-hover-bg: #ffb86c;
+  --btn-default-hover-color: #1c1924;
+  --btn-default-hover-border-color: #ffb86c;
+  color-scheme: dark;
+}
 body {
-  background-color: #111827;
-  background-image: radial-gradient(circle at 7% 11%, rgba(238,244,255,0.32) 0 1px, transparent 1.5px), radial-gradient(circle at 91% 18%, rgba(250,235,180,0.24) 0 1px, transparent 1.5px), radial-gradient(circle at 14% 54%, rgba(238,244,255,0.2) 0 1px, transparent 1.5px), radial-gradient(circle at 95% 67%, rgba(238,244,255,0.22) 0 1px, transparent 1.5px), linear-gradient(180deg, #101827 0%, #182337 48%, #111a2a 100%);
+  background-color: #1c1924;
+  background-image: radial-gradient(ellipse at 8% 0%, rgba(189,147,249,0.08), transparent 42%), radial-gradient(ellipse at 95% 60%, rgba(255,184,108,0.05), transparent 38%);
   background-attachment: fixed;
 }
 .headband {
-  background: linear-gradient(90deg, #273650, rgba(230,202,126,0.72), #273650);
+  background: linear-gradient(90deg, #45344f, #ffb86c, #bd93f9, #45344f);
 }
 header.header {
-  background: radial-gradient(circle at 82% 0%, rgba(246,224,160,0.1) 0, transparent 34%), linear-gradient(145deg, #16243b 0%, #101a2c 58%, #1c2a42 100%);
-  border: 1px solid rgba(219,229,245,0.08);
-  box-shadow: 0 8px 24px rgba(4,10,22,0.2);
+  background: radial-gradient(circle at 90% 5%, rgba(255,184,108,0.15), transparent 35%), linear-gradient(155deg, #302238, #211a2b 65%, #291f31);
+  border: 1px solid rgba(189,147,249,0.16);
+  border-radius: 12px;
+  box-shadow: 0 10px 32px rgba(9,5,16,0.22);
   isolation: isolate;
   overflow: hidden;
   position: relative;
 }
 header.header .site-brand-container,
 header.header .site-nav {
+  background: transparent;
   position: relative;
   z-index: 1;
 }
-header.header .site-brand-container {
-  background: transparent;
+header.header .site-meta {
+  padding: 38px 20px 28px;
 }
 header.header .brand,
 header.header .brand:hover,
 header.header .menu-item a {
-  color: rgba(245,248,255,0.9);
+  color: #f4ede3;
+}
+header.header .site-title {
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 22px rgba(255,184,108,0.18);
+}
+header.header .site-subtitle {
+  color: #c0b4ca;
 }
 header.header .menu-item a:hover,
 header.header .menu-item a.menu-item-active {
-  background: rgba(235,241,255,0.08);
+  background: rgba(255,184,108,0.08);
+  color: #ffb86c;
 }
-header.header .site-subtitle {
-  color: rgba(225,233,246,0.76);
+.posts-expand .post-title-link {
+  color: #f4ede3;
 }
-header.header .site-title {
-  text-shadow: 0 0 14px rgba(255,232,166,0.3);
+.posts-expand .post-title-link:hover,
+.sidebar-nav .sidebar-nav-active,
+.sidebar-nav .sidebar-nav-active:hover,
+.sidebar-toc-active .sidebar-nav-toc,
+.sidebar-overview-active .sidebar-nav-overview {
+  border-bottom-color: #ffb86c;
+  color: #ffb86c;
 }
+.posts-expand .post-title-link::before {
+  background: #ffb86c;
+}
+.posts-expand .post-meta-container,
 .footer,
 .footer a {
-  color: rgba(224,232,245,0.72);
+  color: #c0b4ca;
 }
-.mid-autumn-visuals {
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+  border-bottom-color: rgba(189,147,249,0.2);
+}
+.post-body blockquote {
+  border-left-color: #bd93f9;
+}
+.site-author-image {
+  border-color: rgba(255,184,108,0.4);
+}
+.search-popup {
+  border: 1px solid rgba(189,147,249,0.3);
+  border-radius: 12px;
+}
+.search-popup .search-header {
+  background: #332c3e;
+}
+.search-popup .search-icon,
+.search-popup .popup-btn-close {
+  color: #c0b4ca;
+}
+.pagination .page-number.current {
+  background: #ffb86c;
+  border-color: #ffb86c;
+  color: #1c1924;
+}
+figure.highlight {
+  border: 1px solid rgba(189,147,249,0.14);
+  border-radius: 8px;
+  color-scheme: dark;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid #ffb86c;
+  outline-offset: 4px;
+}
+.halloween-visuals {
   contain: layout paint;
   inset: 0;
   overflow: hidden;
@@ -3124,145 +3093,227 @@ header.header .site-title {
   user-select: none;
   z-index: 0;
 }
-.mid-autumn-stars {
-  background-image: radial-gradient(circle at 10% 22%, rgba(255,249,222,0.72) 0 1px, transparent 1.4px), radial-gradient(circle at 25% 68%, rgba(224,235,255,0.48) 0 1px, transparent 1.4px), radial-gradient(circle at 44% 17%, rgba(224,235,255,0.38) 0 1px, transparent 1.4px), radial-gradient(circle at 63% 74%, rgba(255,249,222,0.46) 0 1px, transparent 1.4px), radial-gradient(circle at 76% 36%, rgba(224,235,255,0.42) 0 1px, transparent 1.4px), radial-gradient(circle at 93% 81%, rgba(255,249,222,0.42) 0 1px, transparent 1.4px);
+.halloween-stars {
+  background-image: radial-gradient(circle at 8% 8%, #bd93f9 0 1px, transparent 1.6px), radial-gradient(circle at 22% 35%, #ffb86c 0 1px, transparent 1.6px), radial-gradient(circle at 67% 10%, #ffb86c 0 1px, transparent 1.6px), radial-gradient(circle at 92% 58%, #bd93f9 0 1px, transparent 1.6px), radial-gradient(circle at 14% 83%, #bd93f9 0 1px, transparent 1.6px);
   inset: 0;
-  opacity: 0.55;
+  opacity: 0.4;
   position: absolute;
 }
-.mid-autumn-moon {
-  background: radial-gradient(circle at 31% 31%, rgba(179,151,84,0.15) 0 7%, transparent 8%), radial-gradient(circle at 67% 58%, rgba(179,151,84,0.13) 0 10%, transparent 11%), radial-gradient(circle at 45% 76%, rgba(179,151,84,0.1) 0 5%, transparent 6%), linear-gradient(135deg, #fff9dc 0%, #f4e6ad 55%, #dfc982 100%);
-  border: 1px solid rgba(255,250,222,0.62);
+.halloween-moon {
+  background: radial-gradient(circle at 30% 28%, rgba(126,75,37,0.12) 0 9%, transparent 10%), radial-gradient(circle at 67% 58%, rgba(126,75,37,0.13) 0 13%, transparent 14%), radial-gradient(circle at 39% 77%, rgba(126,75,37,0.1) 0 8%, transparent 9%), linear-gradient(135deg, #ffe4b4, #e5aa67);
   border-radius: 50%;
-  box-shadow: 0 0 14px rgba(255,235,170,0.46), 0 0 34px rgba(255,224,145,0.22);
-  height: 52px;
-  opacity: 0.88;
+  box-shadow: 0 0 22px rgba(255,184,108,0.2);
+  height: 36px;
+  opacity: 0.8;
   position: absolute;
-  right: 12px;
+  right: 14px;
   top: 12px;
-  width: 52px;
+  width: 36px;
 }
-.mid-autumn-cloud {
-  --mid-autumn-cloud-scale: 1;
-  animation: mid-autumn-cloud-drift 34s ease-in-out infinite alternate;
-  backface-visibility: hidden;
-  background: rgba(226,235,248,0.24);
-  border-radius: 999px;
-  height: 10px;
+.halloween-bat {
+  filter: drop-shadow(0 0 3px rgba(189,147,249,0.5));
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.65;
   position: absolute;
-  transform: translate3d(-6vw, 0, 0) scale(var(--mid-autumn-cloud-scale));
-  width: 96px;
-  will-change: transform;
 }
-.mid-autumn-cloud::before,
-.mid-autumn-cloud::after {
-  background: inherit;
-  border-radius: 50%;
+.halloween-bat--near {
+  left: 12px;
+  top: 12px;
+  transform: rotate(-16deg);
+}
+.halloween-bat--far {
+  font-size: 14px;
+  right: 55px;
+  top: 22px;
+  transform: rotate(12deg);
+}
+.halloween-edge-bat {
+  filter: drop-shadow(0 0 5px rgba(189,147,249,0.2));
+  font-size: 24px;
+  left: 12px;
+  opacity: 0.4;
+  position: absolute;
+  top: 26%;
+  transform: rotate(-18deg);
+}
+.halloween-lantern {
+  bottom: 94px;
+  height: 68px;
+  position: absolute;
+  right: 8px;
+  width: 48px;
+}
+.halloween-lantern::before {
+  background: radial-gradient(ellipse, rgba(255,169,75,0.23), transparent 68%);
   content: '';
+  height: 124px;
+  left: -36px;
   position: absolute;
+  top: -15px;
+  width: 124px;
 }
-.mid-autumn-cloud::before {
-  height: 22px;
-  left: 18px;
-  top: -10px;
-  width: 38px;
+.halloween-lantern-handle {
+  border: 2px solid #8c6549;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  height: 20px;
+  left: 14px;
+  position: absolute;
+  top: 0;
+  width: 20px;
 }
-.mid-autumn-cloud::after {
-  height: 17px;
-  right: 15px;
-  top: -7px;
-  width: 30px;
-}
-.mid-autumn-cloud--near {
-  bottom: 23px;
-  left: -18px;
-  opacity: 0.38;
-}
-.mid-autumn-cloud--middle {
-  --mid-autumn-cloud-scale: 0.78;
-  animation-delay: -11s;
-  animation-duration: 42s;
-  left: 44%;
-  opacity: 0.24;
-  top: 59px;
-}
-.mid-autumn-cloud--far {
-  --mid-autumn-cloud-scale: 0.6;
-  animation-delay: -19s;
-  animation-duration: 48s;
-  bottom: 44px;
-  left: 72%;
-  opacity: 0.16;
+.halloween-lantern-body {
+  filter: drop-shadow(0 0 12px rgba(255,169,75,0.3));
+  font-size: 44px;
+  left: 0;
+  line-height: 1;
+  position: absolute;
+  top: 17px;
 }
 @media (max-width: 991px) {
   header.header {
     border-left: 0;
+    border-radius: 0 0 12px 12px;
     border-right: 0;
   }
-  .mid-autumn-moon {
-    height: 50px;
+  .halloween-moon {
     right: 58px;
-    top: 10px;
-    width: 50px;
+    top: 12px;
   }
-  .mid-autumn-cloud--near {
-    bottom: 17px;
-  }
-  .mid-autumn-cloud--middle {
-    left: 58%;
-    top: 62px;
-  }
-  .mid-autumn-cloud--far {
+  .halloween-bat--far {
     display: none;
   }
 }
-@media (max-width: 360px) {
-  .mid-autumn-moon {
-    height: 42px;
-    right: 48px;
-    width: 42px;
-  }
-  .mid-autumn-cloud--middle {
-    opacity: 0.15;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mid-autumn-cloud {
-    animation: none;
-    transform: none;
-    will-change: auto;
-  }
-}
-@media (forced-colors: active) {
-  .mid-autumn-visuals {
+@media (forced-colors: active), print {
+  .halloween-visuals,
+  .headband {
     display: none;
   }
-  body,
-  header.header {
+  header.header,
+  body {
     background: Canvas;
   }
   header.header .site-title {
     text-shadow: none;
   }
 }
-@media print {
-  .mid-autumn-visuals {
-    display: none;
+@media (forced-colors: active) {
+  :root {
+    --body-bg-color: Canvas;
+    --content-bg-color: Canvas;
+    --card-bg-color: Canvas;
+    --text-color: CanvasText;
+    --blockquote-color: CanvasText;
+    --link-color: LinkText;
+    --link-hover-color: LinkText;
   }
-  body,
-  header.header {
-    background: #fff;
-  }
-  header.header .site-title {
-    text-shadow: none;
+  header.header .brand,
+  header.header .menu-item a,
+  header.header .site-subtitle,
+  .posts-expand .post-title-link,
+  .posts-expand .post-meta-container,
+  .footer,
+  .footer a {
+    color: CanvasText;
   }
 }
-@keyframes mid-autumn-cloud-drift {
-  from {
-    transform: translate3d(-6vw, 0, 0) scale(var(--mid-autumn-cloud-scale));
+@media print {
+  :root {
+    --body-bg-color: #fff;
+    --content-bg-color: #fff;
+    --card-bg-color: #fff;
+    --text-color: #222;
+    --blockquote-color: #444;
+    --link-color: #222;
+    --link-hover-color: #222;
+    --highlight-background: #f5f5f5;
+    --highlight-foreground: #222;
+    --highlight-gutter-background: #f5f5f5;
+    --highlight-gutter-foreground: #444;
+    color-scheme: light;
   }
-  to {
-    transform: translate3d(6vw, 0, 0) scale(var(--mid-autumn-cloud-scale));
+  header.header .brand,
+  header.header .menu-item a,
+  header.header .site-subtitle,
+  .posts-expand .post-title-link,
+  .posts-expand .post-meta-container,
+  .footer,
+  .footer a {
+    color: #222;
+  }
+}
+header.header .seasonal-brand-icon {
+  display: inline-block;
+  filter: drop-shadow(0 0 6px var(--seasonal-glow));
+  font-size: 0.76em;
+  letter-spacing: 0;
+  margin-left: 0.32em;
+  vertical-align: 0.05em;
+}
+header.header .seasonal-tagline {
+  color: var(--seasonal-accent);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  margin: 12px 0 0;
+}
+.main-inner .post-block,
+.main-inner .post-block:not(:first-child):not(:first-child),
+.sidebar-inner,
+.main-inner .pagination,
+.main-inner .comments,
+.main-inner .tabs-comment {
+  border: 1px solid var(--seasonal-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 32px var(--seasonal-shadow);
+}
+.posts-expand .post-title-link {
+  transition: color 0.2s ease;
+}
+.posts-expand .post-title-link:hover,
+.posts-expand .post-title-link:focus-visible {
+  color: var(--seasonal-accent);
+}
+.posts-expand .post-title-link::before {
+  background: var(--seasonal-accent);
+}
+.seasonal-edge-scene {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  user-select: none;
+  z-index: 1;
+}
+@media (max-width: 1279px) {
+  .seasonal-edge-scene {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .posts-expand .post-title-link {
+    transition: none;
+  }
+}
+@media (forced-colors: active), print {
+  .seasonal-edge-scene,
+  .seasonal-brand-icon {
+    display: none;
+  }
+}
+@media print {
+  header.header .seasonal-tagline {
+    color: #444;
+  }
+  .main-inner .post-block,
+  .main-inner .post-block:not(:first-child):not(:first-child),
+  .sidebar-inner,
+  .main-inner .pagination,
+  .main-inner .comments,
+  .main-inner .tabs-comment {
+    border: 0;
+    box-shadow: none;
   }
 }
 .search-active .search-pop-overlay {
