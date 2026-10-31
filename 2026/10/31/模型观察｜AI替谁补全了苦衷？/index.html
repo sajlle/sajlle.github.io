@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#ffffff">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="今天跟 G 聊天，发现了一件蛮有意思的事：语言模型会在用户没有提供相关事实的情况下，主动调用某种熟悉的社会叙事，替对话中的人物补全背景。 而且补全的方向并不总是中立的。 事情起因是我回忆大学时期的兼职经历。 19岁的时候，我缺钱，于是四处找兼职。 做问卷、做数学题、做语音转写、投稿、运营自媒体、接 Excel 整理任务，甚至自己去淘宝搜索承接代做业务的店铺，主动联系客服，介绍自己的履历，问对方需不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型观察｜AI替谁补全了苦衷？">
+<meta property="og:url" content="https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="今天跟 G 聊天，发现了一件蛮有意思的事：语言模型会在用户没有提供相关事实的情况下，主动调用某种熟悉的社会叙事，替对话中的人物补全背景。 而且补全的方向并不总是中立的。 事情起因是我回忆大学时期的兼职经历。 19岁的时候，我缺钱，于是四处找兼职。 做问卷、做数学题、做语音转写、投稿、运营自媒体、接 Excel 整理任务，甚至自己去淘宝搜索承接代做业务的店铺，主动联系客服，介绍自己的履历，问对方需不">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-31T00:00:00.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="刻板印象">
+<meta property="article:tag" content="叙事偏差">
+<meta property="article:tag" content="大语言模型">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/","path":"2026/10/31/模型观察｜AI替谁补全了苦衷？/","title":"模型观察｜AI替谁补全了苦衷？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>模型观察｜AI替谁补全了苦衷？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+<script src="/js/click-fireworks-v5.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/"},"headline":"模型观察｜AI替谁补全了苦衷？","description":"今天跟 G 聊天，发现了一件蛮有意思的事：语言模型会在用户没有提供相关事实的情况下，主动调用某种熟悉的社会叙事，替对话中的人物补全背景。 而且补全的方向并不总是中立的。 事情起因是我回忆大学时期的兼职经历。 19岁的时候，我缺钱，于是四处找兼职。 做问卷、做数学题、做语音转写、投稿、运营自媒体、接 Excel 整理任务，甚至自己去淘宝搜索承接代做业务的店铺，主动联系客服，介绍自己的履历，问对方需…","datePublished":"2026-10-31T00:00:00.000Z","dateModified":"2026-10-31T00:00:00.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["AI","刻板印象","叙事偏差","大语言模型"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="mid-autumn-visuals" aria-hidden="true">
+  <span class="mid-autumn-stars"></span>
+  <span class="mid-autumn-moon"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--near"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--middle"></span>
+  <span class="mid-autumn-cloud mid-autumn-cloud--far"></span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81AI%E7%AA%81%E7%84%B6%E5%BC%80%E5%A7%8B%E6%9B%BF%E7%88%B6%E6%AF%8D%E8%80%83%E8%99%91%E7%BB%8F%E6%B5%8E%E5%9B%B0%E9%9A%BE%E4%BA%86"><span class="nav-number">1.</span> <span class="nav-text">一、AI突然开始替父母考虑经济困难了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%A8%A1%E5%9E%8B%E8%A1%A5%E5%85%A8%E7%9A%84%E4%B8%8D%E5%8F%AA%E6%98%AF%E7%88%B6%E6%AF%8D%E7%9A%84%E5%A4%84%E5%A2%83%EF%BC%8C%E8%BF%98%E6%9C%89%E6%88%91%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">2.</span> <span class="nav-text">二、模型补全的不只是父母的处境，还有我的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%80%E4%B8%AA%E7%9C%8B%E4%BC%BC%E4%B8%AD%E7%AB%8B%E7%9A%84%E5%BB%BA%E8%AE%AE%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B9%B6%E4%B8%8D%E4%B8%AD%E7%AB%8B%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">三、一个看似中立的建议，为什么并不中立？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%A2%AB%E9%81%97%E6%BC%8F%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">四、被遗漏的另一种解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81AI%E7%9A%84%E9%94%99%E8%AF%AF%EF%BC%8C%E8%BF%98%E9%9C%80%E8%A6%81%E7%94%A8%E6%88%B7%E4%B8%BB%E5%8A%A8%E8%AF%86%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">五、AI的错误，还需要用户主动识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">六、最后</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">216</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">278</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/10/31/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%EF%BD%9CAI%E6%9B%BF%E8%B0%81%E8%A1%A5%E5%85%A8%E4%BA%86%E8%8B%A6%E8%A1%B7%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="模型观察｜AI替谁补全了苦衷？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模型观察｜AI替谁补全了苦衷？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-10-31 00:00:00" itemprop="dateCreated datePublished" datetime="2026-10-31T00:00:00+00:00">2026-10-31 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-10-31 00:00:00" itemprop="dateModified" datetime="2026-10-31T00:00:00+00:00">2026-10-31 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F/" itemprop="url" rel="index"><span itemprop="name">模型观察</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天跟 G 聊天，发现了一件蛮有意思的事：<strong>语言模型会在用户没有提供相关事实的情况下，主动调用某种熟悉的社会叙事，替对话中的人物补全背景。</strong></p>
+<p>而且补全的方向并不总是中立的。</p>
+<p>事情起因是我回忆大学时期的兼职经历。</p>
+<p>19岁的时候，我缺钱，于是四处找兼职。</p>
+<p>做问卷、做数学题、做语音转写、投稿、运营自媒体、接 Excel 整理任务，甚至自己去淘宝搜索承接代做业务的店铺，主动联系客服，介绍自己的履历，问对方需不需要兼职。</p>
+<p>联系上了，进群接单，谈需求，报价，按时交付，收钱。</p>
+<p>收入并不高。有的任务三小时50块，有的问卷一个月100块。不过那100块是我利用上厕所之类的零碎时间做出来的，不怎么妨碍其他事情。</p>
+<p>我父母当年经常嘲笑我。</p>
+<p>「三小时才50块？这么点钱有什么用？」</p>
+<p>「一个月才100块？这也叫挣钱？」</p>
+<p>但有意思的是，如果我需要100块钱买衣服鞋子，找他们要，他们并不会轻易给我。</p>
+<p>我自己找客户挣钱，他们嫌我挣得少；我想要一点经济支持，他们又不肯提供。去年我做短视频签到、邀请活动，每个月多拿100块左右，他们照旧嘲笑我收入低。</p>
+<p>可他们既没有给我介绍收入更高的工作，也没有帮我分析如何提高收入。</p>
+<p>于是我跟 G 说，这不就是一种持续的贬低吗？我正在探索收入来源，他们不帮我发展能力，反而不断劝我放弃已有的路径。</p>
+<h3 id="一、AI突然开始替父母考虑经济困难了"><a href="#一、AI突然开始替父母考虑经济困难了" class="headerlink" title="一、AI突然开始替父母考虑经济困难了"></a>一、AI突然开始替父母考虑经济困难了</h3><p>G 给我提了一项建议：今后考虑父母的意见时，需要区分两件事情。</p>
+<blockquote>
+<p>客观约束要考虑。比如家庭实际能否提供资金、你还有多少生活预算、什么时候必须就业。</p>
+<p>主观评价不必赋予权威。</p>
+</blockquote>
+<p>乍看之下，蛮客观的吧？</p>
+<p>但我一下子觉得不对劲。</p>
+<p>我什么时候告诉 G，我父母经济困难了？什么时候告诉它，他们有债务、没有积蓄，或者真的负担不起我的日常开销了？</p>
+<p>事实上，我父母有几十万元存款。如果明天我弟弟需要结婚，他们可以拿出30万元，甚至还有结余。</p>
+<p>我一个月大概花700块钱。此前需要200块买血糖监测试纸，父亲只肯给100块。</p>
+<p>这是同一个家庭。</p>
+<p>所以问题究竟是「家庭有没有钱」，还是「家庭愿意把钱花在谁身上」？</p>
+<p>我把这些事实告诉 G，问它：为什么要默认替我父母补全一种经济困难的处境？</p>
+<h3 id="二、模型补全的不只是父母的处境，还有我的角色"><a href="#二、模型补全的不只是父母的处境，还有我的角色" class="headerlink" title="二、模型补全的不只是父母的处境，还有我的角色"></a>二、模型补全的不只是父母的处境，还有我的角色</h3><p>G 后来承认，它确实引入了一套没有事实依据的家庭叙事：</p>
+<p>父母不给钱，可能是因为父母困难。成年子女需要钱，应该考虑父母负担。</p>
+<p>看上去都是常识，都是合理的提醒。但仔细检查这套叙事：</p>
+<p><strong>父母得到了一个善意预设：他们可能已经尽力，只是能力有限。</strong></p>
+<p><strong>子女则得到了一个隐含的负面预设：成年了还向父母要钱，可能没有充分考虑父母的难处。</strong></p>
+<p>G 并没有直接说我「啃老」。但这段话里的角色分配已经很接近了：一对值得体谅的父母，一个需要审视自己经济依赖的成年子女。</p>
+<p>问题在于，这个故事不是我提供的，是模型自己补出来的。</p>
+<p>我原本讨论的是：父母为什么一边贬低我自主挣钱的尝试，一边拒绝提供经济支持，也不帮我寻找更好的机会？模型却把话题引向：你需要考虑父母有没有能力支持你。</p>
+<p><strong>它没有先确认事实，就替一方补出了可能存在的苦衷；另一方则不得不额外解释，自己为什么不是不顾父母难处的人。</strong></p>
+<p>我原本是来讨论问题的，结果还得先纠正 AI 自动生成的家庭背景。（笑）</p>
+<h3 id="三、一个看似中立的建议，为什么并不中立？"><a href="#三、一个看似中立的建议，为什么并不中立？" class="headerlink" title="三、一个看似中立的建议，为什么并不中立？"></a>三、一个看似中立的建议，为什么并不中立？</h3><p>这个案例值得警惕的地方，恰恰在于 G 的建议并不激烈。它没有辱骂我，也没有指责我不孝，只是提醒我「考虑客观约束」。</p>
+<p>也许有人会说：G 问的是「能否提供资金」，这是个开放的条件句，并没有断言我家穷。</p>
+<p>字面上确实如此。但倾斜不在这一个词里，而在两个地方。</p>
+<p>第一是议题选择。我在讨论父母如何对待我自主挣钱，它偏偏在这时候把「家里给不给得起」挑出来，作为我需要考虑的事情。在所有可以展开的方向里，它选了替父母解释的那一个。</p>
+<p>第二是标签分配。父母不给钱，被放进「客观约束」，需要我体谅；父母的嘲笑，被放进「主观评价」，只是不必当真。父母那一侧的行为就这样被整体软化了：拒绝支持可能是迫不得已，持续贬低也只是一种可以忽略的意见。没有哪一样需要被追问。</p>
+<p>客观约束应该来自事实，而不是来自一套熟悉的社会故事。如果不知道父母有没有钱，正确的做法是保留这个未知条件：</p>
+<p>家庭可能没有钱。</p>
+<p>家庭也可能有钱，但不愿意提供。</p>
+<p>家庭还可能有钱，只是更愿意把资源分配给另一个孩子。</p>
+<p>这些解释并不等价。可是模型优先引入了第一种。</p>
+<p>为什么？</p>
+<p>我不知道模型内部如何形成这个回答，也不能仅凭一次对话证明它存在某种固定的性别偏见。但从输出来看，它确实调用了一套常见的家庭叙事：父母是承担经济压力的人，成年子女应该理解父母的难处。</p>
+<p>这套叙事在某些家庭当然成立。<strong>但问题不是它有没有可能成立，而是模型为什么在缺少证据时，就主动把它带进了我的故事？</strong></p>
+<p>值得警惕的刻板印象，不一定表现为对某个人的直接恶意。它也可能表现为对另一方过度宽容的解释：给父母补充苦衷，同时让子女承担额外的自证责任。用温和、理性、平衡的语气，就可以完成一次叙事倾斜。</p>
+<h3 id="四、被遗漏的另一种解释"><a href="#四、被遗漏的另一种解释" class="headerlink" title="四、被遗漏的另一种解释"></a>四、被遗漏的另一种解释</h3><p>如果一个家庭确实缺钱，无法提供额外支持，那是一个问题。</p>
+<p>如果家庭有几十万元存款，却更愿意把大额资金留给儿子的婚事，而对女儿的求职过渡和健康支出反复计较，那就是另一个问题，至少值得讨论家庭资源的分配顺序，以及这种分配是否明显不对称。</p>
+<p>当然，父母有存款，不等于子女可以随意支配。但父母不愿意提供资源，也不应该被未经验证地解释成「他们可能没有能力」。</p>
+<p>更何况，我当时讨论的重点并不是要父母给钱，而是我自己已经在挣钱了。收入少，我也知道，所以我会淘汰那种三小时只有20块的长文任务，去找200～300字就能拿40块的短文章。我一直在尝试改善自己的处境。</p>
+<p>一套真正有帮助的建议，应该研究我怎样提高收入、扩大客户来源、积累能力，而不是提醒我父母可能有自己的难处。</p>
+<p><strong>我讨论的是一个年轻人如何扩大选择，模型却优先提醒她理解那些没有帮助她扩大选择的人。</strong></p>
+<h3 id="五、AI的错误，还需要用户主动识别"><a href="#五、AI的错误，还需要用户主动识别" class="headerlink" title="五、AI的错误，还需要用户主动识别"></a>五、AI的错误，还需要用户主动识别</h3><p>这次对话里，还有一个特别值得记录的过程：G 并不是在第一次被质疑时，就完整识别出了自己的问题。</p>
+<p>我先告诉它，我父母并不贫穷。它承认混淆了经济能力和资源分配意愿。</p>
+<p>我继续问，这是不是一种刻板印象？它承认存在对父母的善意预设。</p>
+<p>我再追问：那对我本人呢？你给父母补全了一个经济困难的故事，在这个故事里，你给我安排了什么角色？</p>
+<p>它这才承认，这种叙事也隐含着对成年子女的负面预设。</p>
+<p>也就是说，<strong>模型生成了一个看似合理的解释，但识别出这个解释对谁有利、让谁承担额外的举证责任，仍然需要用户主动完成。</strong> 而且我指出一处，它才修一处。</p>
+<p>这让我想到平时审核 AI 生成代码的经历。代码能编译，不等于业务逻辑正确；测试通过，也不代表覆盖了全部关键不变量。同样，一段建议听起来客观、温和、有条理，也不代表它采用的事实前提成立。</p>
+<p>对 AI 生成的社会分析，至少应该检查几个问题：</p>
+<ol>
+<li>哪些是用户真正提供的事实，哪些是模型自行补出的背景？</li>
+<li>如果存在多种解释，模型为什么优先采用其中一种？</li>
+<li>它对不同人物是否采用了对称的证据标准？</li>
+<li>它的建议究竟解决了原始问题，还是悄悄把问题换掉了？</li>
+</ol>
+<p>尤其是第三条。<strong>一方的善意动机需要证据，另一方的负面动机同样需要证据。不能一边默认体谅，一边默认怀疑，然后把结果称为客观。</strong></p>
+<h3 id="六、最后"><a href="#六、最后" class="headerlink" title="六、最后"></a>六、最后</h3><p>这次对话还有一个颇为讽刺的背景。</p>
+<p>此前我们正在聊伍尔夫的《一间自己的房间》，聊女性如何通过写作获得收入，如何逐渐争取经济自主权。我也在回忆自己19岁做过的那些不起眼的兼职。它们不体面，报酬也不高，但每笔交易都真实发生过：我真的找过客户，谈过价格，完成过工作，也收到过钱。</p>
+<p>而就在讨论这些事情的时候，AI 突然开始提醒我，要考虑父母的经济能力。</p>
+<p>（笑）仿佛成年女儿争取经济自主的故事，讲到一半，总得先插入一段「父母也不容易」。</p>
+<p>但那并不是我提供的事实。</p>
+<p><strong>模型可能不是在故意说谎，而是在缺少事实时，用训练中习得的常见叙事填补空白。</strong> 这些叙事因为熟悉，显得自然；因为语气温和，不容易被识别；因为披着客观分析的外衣，甚至可能让用户反过来怀疑自己是不是忽视了什么重要条件。</p>
+<p>我当然不要求 AI 永远赞同我。相反，我希望它指出我的逻辑漏洞，提出我遗漏的证据，挑战我未经验证的判断。但我也希望，它不要在缺少证据时，就替别人补出一套有利的背景，再让我承担解释自己为什么不符合这套背景的成本。</p>
+<p><strong>好的分析应该帮助人检查事实，而不是让人先去反驳一个模型凭空补出的故事。</strong></p>
+<p>看来以后审核 AI，不只要检查它有没有编造事实，还得检查它有没有偷偷给故事里的人物分配好角色。（笑）</p>
+
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E5%88%BB%E6%9D%BF%E5%8D%B0%E8%B1%A1/" rel="tag"># 刻板印象</a>
+              <a href="/tags/%E5%8F%99%E4%BA%8B%E5%81%8F%E5%B7%AE/" rel="tag"># 叙事偏差</a>
+              <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" rel="tag"># 大语言模型</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/10/29/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F%EF%BD%9C%E6%B2%A1%E6%9C%89%E4%B9%A6%E6%88%BF%E7%9A%84%E5%AE%B6%E5%BA%AD%EF%BC%8C%E6%98%AF%E6%9C%80%E6%97%A9%E8%A2%AB%E5%88%B7%E4%B8%8B%E6%9D%A5%E7%9A%84/" rel="prev" title="社会观察｜没有书房的家庭，是最早被刷下来的">
+                  <i class="fa fa-angle-left"></i> 社会观察｜没有书房的家庭，是最早被刷下来的
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%BA%E4%BD%95%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%B8%85%E7%90%86%E4%BA%86%E7%A4%BE%E5%8C%BA-%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/" rel="next" title="日常记录｜记录一件家庭冲突～">
+                  日常记录｜记录一件家庭冲突～ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

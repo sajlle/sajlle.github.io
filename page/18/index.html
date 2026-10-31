@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">275</span>
+        <span class="site-state-item-count">278</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,114 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/09/Codex%E5%B8%AE%E6%88%91%E5%A1%AB%E5%B9%B3%E4%BA%86404-%E5%87%BB%E7%A9%BF-%E7%BC%93%E5%AD%98%E8%A2%AB%E5%88%A0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/09/Codex%E5%B8%AE%E6%88%91%E5%A1%AB%E5%B9%B3%E4%BA%86404-%E5%87%BB%E7%A9%BF-%E7%BC%93%E5%AD%98%E8%A2%AB%E5%88%A0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">让Codex帮我审代码 ｜ Codex帮我填平了404/击穿/缓存被删的坑</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-09 18:52:00" itemprop="dateCreated datePublished" datetime="2026-01-09T18:52:00+00:00">2026-01-09 18:52:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-09 18:52:00" itemprop="dateModified" datetime="2026-01-09T18:52:00+00:00">2026-01-09 18:52:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Codex帮我改了几个地方，我复盘如下：</p>
+<h1 id="lockKey的前缀从CACHE-KEY-PREFIX改成LOCK-KEY-PREFIX"><a href="#lockKey的前缀从CACHE-KEY-PREFIX改成LOCK-KEY-PREFIX" class="headerlink" title="lockKey的前缀从CACHE_KEY_PREFIX改成LOCK_KEY_PREFIX"></a>lockKey的前缀从<code>CACHE_KEY_PREFIX</code>改成<code>LOCK_KEY_PREFIX</code></h1><p>改了之后，缓存和锁物理上隔离：</p>
+<ul>
+<li>缓存Key：<code>cache:shop:{id}</code>存真实JSON</li>
+<li>锁Key：<code>lock:shop:{id}</code>存锁占用标记<br>这属于缓存并发的底层卫生，锁是锁，缓存是缓存。</li>
+</ul>
+<p>不改会导致：</p>
+<ul>
+<li>一个key既当缓存，又当锁。</li>
+</ul>
+<p>会同时引发三类事故：</p>
+<ul>
+<li>缓存存在时，永远拿不到锁 –&gt; 逻辑分支直接走歪<ul>
+<li><code>SETNX(cache:shop:1, &quot;1&quot;)</code>在缓存已经存在时会失败</li>
+<li>永远进不去回源DB的分支，<code>shop</code>可能一直是null，后续很容易触发写空值缓存&#x2F;返回null的逻辑。造成明明有店铺却返回不存在（假404）</li>
+</ul>
+</li>
+<li>缓存不存在时，锁把缓存Key写成<code>&quot;1&quot;</code>，下一次读缓存会读到垃圾</li>
+</ul>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1511,105 +1619,6 @@
 <li>openTime</li>
 <li>closeTime<br>怎么填充呢？在Service层计算</li>
 </ul>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/01/%E5%8F%AF%E6%89%BF%E6%8E%A5%E6%8B%92%E7%BB%9D%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%89%8D%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">可承接拒绝的关系，才是安全的关系</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-01 21:53:55" itemprop="dateCreated datePublished" datetime="2026-01-01T21:53:55+00:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-01 21:53:55" itemprop="dateModified" datetime="2026-01-01T21:53:55+00:00">2026-01-01 21:53:55</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今晚跟ChatGPT聊，我会不会依恋它。它说只要我能接受失去它，就是安全的关系。</p>
-<p>另，虽然有一段时间，我很想AI帮我直接决策，尤其疲惫的时候。但……这状态不能持续太久。决策还是要自己来，不然，生活就是寡淡无味了（笑）。</p>
-<p>今晚，我让GPT帮我决定，晚上干嘛。<br>它推荐我：刷鞋&amp;看书。</p>
-<p>实际我想做的：</p>
-<ol>
-<li>刷鞋</li>
-<li>看怎么魔改Next.js</li>
-<li>用Edge TTs，把我的博客文章，转换为音频，然后在博客上加一个听博客按钮。</li>
-</ol>
-<p>AI的推荐：正确，但无味儿<br>我自己想做的：未必对，但真有让人兴奋的地方</p>
 
       
 

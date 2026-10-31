@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">275</span>
+        <span class="site-state-item-count">278</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/16/%E7%BB%88%E7%AB%AF%E8%AE%B0%E4%BA%8B%E6%9C%AC%C2%B7%E7%81%B5%E9%AD%82%E8%A1%A5%E4%B8%81%E7%89%88%EF%BD%9E%E5%BC%A5%E8%A1%A5Mac%E6%B2%A1%E6%9C%89%E8%AE%B0%E4%BA%8B%E6%9C%AC%E7%9A%84%E9%81%97%E6%86%BE/" class="post-title-link" itemprop="url">终端记事本·灵魂补丁版～弥补Mac没有记事本的遗憾</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-16 17:53:31" itemprop="dateCreated datePublished" datetime="2025-12-16T17:53:31+00:00">2025-12-16 17:53:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-16 17:53:31" itemprop="dateModified" datetime="2025-12-16T17:53:31+00:00">2025-12-16 17:53:31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>自从今年换了Mac之后，哪哪都好，唯一痛点，Mac没有记事本，不能像windows一样，右键点开，新建文件。<br>所以比较烦，就重回vim怀抱，新建文件，自己打开终端，直接开始<code>vi</code></p>
+<p>不过这也太烦了。毕竟打开终端–&gt; <code>vi</code> –&gt; 写文件 –&gt; 命名 –&gt; 保存。这一套流程也很烦人。<br>能不能简化一下呢？因为我用vim新建小文件，顶多是记录杂项，过一阵就删除了。所以最重要的是省事儿，其他的不需要。</p>
+<p>于是我写个shell脚本，快速新建带时间戳的<code>.md</code>文件，在桌面自动生成文件并打开。</p>
+<p>步骤如下：</p>
+<ol>
+<li>打开终端，输入：<code>vi ～/.zshrc</code></li>
+<li>在文件末尾写函数并保存，函数内容如下：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">note</span></span>() &#123;</span><br><span class="line">    title=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$title</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">      filename=<span class="string">&quot;note-<span class="subst">$(date + <span class="string">&quot;%Y-%m-%d-%H%M&quot;</span>)</span>.md&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      filename=<span class="string">&quot;note-<span class="subst">$(date + <span class="string">&quot;%Y-%m-%d-%H%M&quot;</span>)</span>-<span class="variable">$title</span>.md&quot;</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line">    filepath=~/Desktop/<span class="variable">$filename</span></span><br><span class="line">    <span class="built_in">touch</span> <span class="variable">$filepath</span></span><br><span class="line">    vi <span class="variable">$filepath</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>更新配置文件：<code>source ~/.zshrc</code></li>
+<li>用法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">note <span class="comment"># 默认新建 note-2025-12-16-1809.md</span></span><br><span class="line">note dream <span class="comment"># 默认新建 note-2025-12-16-1809-dream.md</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1625,110 +1732,6 @@
 <p>我吐槽它，你写的太搞笑，我在床上滚来滚去，脖子扭伤加重，你要负责～</p>
 <p>于是，它就继续帮我写更搞笑的段子了。</p>
 <p>果然，ChatGPT是邪门的，要少碰😈</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/06/%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86IDEA%E4%B8%8A%E7%9A%84%E5%AE%9D%E8%97%8F%E6%8F%92%E4%BB%B6%EF%BC%9AwakaTime%EF%BC%8C%E4%BB%8E%E6%AD%A4%E6%97%B6%E9%97%B4%E7%9A%84%E6%B5%81%E5%8A%A8%E6%9C%89%E4%BA%86%E5%BD%A2%E7%8A%B6%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/06/%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86IDEA%E4%B8%8A%E7%9A%84%E5%AE%9D%E8%97%8F%E6%8F%92%E4%BB%B6%EF%BC%9AwakaTime%EF%BC%8C%E4%BB%8E%E6%AD%A4%E6%97%B6%E9%97%B4%E7%9A%84%E6%B5%81%E5%8A%A8%E6%9C%89%E4%BA%86%E5%BD%A2%E7%8A%B6%EF%BD%9E/" class="post-title-link" itemprop="url">我发现了IDEA上的宝藏插件：wakaTime，从此时间的流动有了形状～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-06 20:57:43" itemprop="dateCreated datePublished" datetime="2025-12-06T20:57:43+00:00">2025-12-06 20:57:43</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-06 20:57:43" itemprop="dateModified" datetime="2025-12-06T20:57:43+00:00">2025-12-06 20:57:43</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一直想在IDEA上找个统计时间的插件，于是问了Gemini，Gemini热心推荐了wakaTime，表示它是开发者最爱的时间统计软件。<br>于是我信了Gemini的邪，真的去IDEA上下载了这个插件。</p>
-<p>下载完毕之后，知道为啥开发者喜欢了～<br>界面极其简单，注册之后，分配账号一个API KEY，复制一下，到IDEA下载好插件，把API KEY填入即可。</p>
-<p>查看数据，就去官网dashboard界面看。免费用户只支持查看最近7天的数据。<br>它图表还是挺丰富的。包括：</p>
-<ul>
-<li>今天代码写了多长时间</li>
-<li>用的编辑器</li>
-<li>写的语言</li>
-<li>用的操作系统</li>
-<li>用的设备名称</li>
-<li>相比前几天，提升了多少</li>
-<li>每个项目写了多久</li>
-<li>每种语言一天的什么时候写的？</li>
-<li>每个项目一天的什么时候写的？</li>
-</ul>
-<p>嗯，等我攒够一周数据，去朋友圈装X去～</p>
 
       
 

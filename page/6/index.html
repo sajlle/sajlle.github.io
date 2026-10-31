@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">275</span>
+        <span class="site-state-item-count">278</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,102 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/12/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E8%81%8A%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8EAgent%E5%A5%97%E5%A3%B3V0%E6%84%9F%E5%8F%97%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜聊一下关于Agent套壳V0感受～</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-12 18:06:50" itemprop="dateCreated datePublished" datetime="2026-09-12T18:06:50+00:00">2026-09-12 18:06:50</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-12 18:06:50" itemprop="dateModified" datetime="2026-09-12T18:06:50+00:00">2026-09-12 18:06:50</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>几个感受～<br>LLM放最后一层。不是先想「我接一个GPT」，然后让LLM去抗业务逻辑，最后搞一堆幻觉和不确定性，全都压在最核心的地方。<br>我这边的设计是：</p>
+<ul>
+<li>事实层保证数据不会错</li>
+<li>诊断引擎负责推理</li>
+<li>权限卡住边界</li>
+<li>LLM做翻译官，把结构化的结论说成人话</li>
+</ul>
+<p>这个设计的好处是：</p>
+<ol>
+<li>LLM哪天抽风了，底下的东西照旧是对的，最多表述不好看，不会出业务事故。</li>
+<li>业务本身的边界场景够硬，适合用确定性架构来兜底，LLM只做最后一公里，不需要太强的模型，就是把结果说成人话，不需要花大价钱请贵模型念稿子。</li>
+<li>分层清楚，边界清晰，复杂度被正确的层消化掉，输入到诊断引擎这层的时候，数据已经是干净，结构化的了，诊断引擎的规则可以不用设计的太复杂。不需要搞一个Drools或者自己造一个规则引擎（而且V0版本直接做这些，太重）</li>
+<li>场景确定+分层清晰，规则分类器不需要太复杂，不需要一上来就做BERT做分类，然后花2周调模型，最后发现if-else就能搞定</li>
+<li>另，因为架构分层，所以LLM不扛业务逻辑，所以这一层是可替换的，今天用这家，明天那家降价了就换过去，底层的东西不用动。如果一开始就把业务逻辑塞进prompt里，换模型那就是给项目换根了。</li>
+</ol>
+<p>再，一点私人观察：写了agentV0版本之后，发现agent听着很新，实际拆开了就是状态机，幂等，失败路径，异常处理之类的。居然跟我之前项目关键词类似～（笑）</p>
+
+      
+
+
+      <script src="/js/click-fireworks-v5.js"></script>
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1193,96 +1289,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>如题～</p>
 <p>算了，Codex现在在干活儿，我就整理一下贴出来算了。</p>
-
-      
-
-
-      <script src="/js/click-fireworks-v5.js"></script>
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E5%A5%97%E5%A3%B3V0%E7%89%88%E6%9C%AC%E6%90%9E%E5%AE%9A%E4%BA%86%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/08/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9CAgent%E5%A5%97%E5%A3%B3V0%E7%89%88%E6%9C%AC%E6%90%9E%E5%AE%9A%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜Agent套壳V0版本搞定了～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-08 22:33:42" itemprop="dateCreated datePublished" datetime="2026-09-08T22:33:42+00:00">2026-09-08 22:33:42</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-08 22:33:42" itemprop="dateModified" datetime="2026-09-08T22:33:42+00:00">2026-09-08 22:33:42</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～总共花了2天～<br>期间顺手写一篇搞笑博客～ 算是效率惊人（自卖自夸～）</p>
 
       
 
