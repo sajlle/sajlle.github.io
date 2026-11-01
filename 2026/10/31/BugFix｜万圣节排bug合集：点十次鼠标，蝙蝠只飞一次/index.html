@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-dark","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="万圣节给博客上了个新UI，点一下鼠标，会有一群小蝙蝠从光标那儿散飞出去。 上线之后自己点了点，发现不对劲：点十次，只飞出来一次。一开始我以为是刷新率太低，先让Codex看了一轮，没看出来。后来让克（Claude）帮我查，查出来一个主bug，复现的路上又踩了好几个小坑，干脆写成一篇合集～ 1. 主bug：蝙蝠在第一帧就被判死了蝙蝠的粒子类 BatParticle，是从老烟花特效沿用下来的 Parti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次">
+<meta property="og:url" content="https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="万圣节给博客上了个新UI，点一下鼠标，会有一群小蝙蝠从光标那儿散飞出去。 上线之后自己点了点，发现不对劲：点十次，只飞出来一次。一开始我以为是刷新率太低，先让Codex看了一轮，没看出来。后来让克（Claude）帮我查，查出来一个主bug，复现的路上又踩了好几个小坑，干脆写成一篇合集～ 1. 主bug：蝙蝠在第一帧就被判死了蝙蝠的粒子类 BatParticle，是从老烟花特效沿用下来的 Parti">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-31T21:45:16.000Z">
+<meta property="article:modified_time" content="2026-10-31T21:45:16.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="BugFix">
+<meta property="article:tag" content="Canvas">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="前端动画">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/","path":"2026/10/31/BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次/","title":"BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次 | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/"},"headline":"BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次","description":"万圣节给博客上了个新UI，点一下鼠标，会有一群小蝙蝠从光标那儿散飞出去。 上线之后自己点了点，发现不对劲：点十次，只飞出来一次。一开始我以为是刷新率太低，先让Codex看了一轮，没看出来。后来让克（Claude）帮我查，查出来一个主bug，复现的路上又踩了好几个小坑，干脆写成一篇合集～ 1. 主bug：蝙蝠在第一帧就被判死了蝙蝠的粒子类 BatParticle，是从老烟花特效沿用下来的 Part…","datePublished":"2026-10-31T21:45:16.000Z","dateModified":"2026-10-31T21:45:16.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["BugFix","Hexo","Canvas","前端动画","Claude"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+<div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生<span class="seasonal-brand-icon" aria-hidden="true">🎃</span></p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+    <p class="seasonal-tagline">南瓜夜读 · 今晚，留一盏灯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="halloween-visuals" aria-hidden="true">
+  <span class="halloween-stars"></span>
+  <span class="halloween-moon"></span>
+  <span class="halloween-bat halloween-bat--near">🦇</span>
+  <span class="halloween-bat halloween-bat--far">🦇</span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%BBbug%EF%BC%9A%E8%9D%99%E8%9D%A0%E5%9C%A8%E7%AC%AC%E4%B8%80%E5%B8%A7%E5%B0%B1%E8%A2%AB%E5%88%A4%E6%AD%BB%E4%BA%86"><span class="nav-number">1.</span> <span class="nav-text">1. 主bug：蝙蝠在第一帧就被判死了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%8A%E4%B8%80%E8%BD%AE%E2%80%9D%E4%BF%AE%E2%80%9D%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%8D%E8%80%8C%E4%BF%AE%E5%BE%97%E6%9B%B4%E4%B8%A5%E9%87%8D%E4%BA%86"><span class="nav-number">2.</span> <span class="nav-text">2. 上一轮”修”的时候，反而修得更严重了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A4%8D%E7%8E%B0%E5%9D%91%E2%91%A0%EF%BC%9A%E8%87%AA%E5%8A%A8%E7%82%B9%E5%87%BB%EF%BC%8C%E5%8D%81%E6%AC%A1%E5%85%A8%E6%88%90%E5%8A%9F"><span class="nav-number">3.</span> <span class="nav-text">3. 复现坑①：自动点击，十次全成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A4%8D%E7%8E%B0%E5%9D%91%E2%91%A1%EF%BC%9A%E8%AE%A1%E6%95%B0%E5%99%A8%E6%8A%8A%E6%AD%BB%E8%9D%99%E8%9D%A0%E4%B9%9F%E7%AE%97%E6%88%90%E4%BA%86%E6%88%90%E5%8A%9F"><span class="nav-number">4.</span> <span class="nav-text">4. 复现坑②：计数器把死蝙蝠也算成了成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A4%8D%E7%8E%B0%E5%9D%91%E2%91%A2%EF%BC%9A%E6%9C%89%E7%9A%84%E7%82%B9%E5%87%BB%E4%B8%80%E5%B8%A7%E9%83%BD%E6%B2%A1%E8%B7%91"><span class="nav-number">5.</span> <span class="nav-text">5. 复现坑③：有的点击一帧都没跑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%A4%8D%E7%8E%B0%E5%9D%91%E2%91%A3%EF%BC%9A%E4%B8%80%E6%88%AA%E5%9B%BE%EF%BC%8C%E7%94%BB%E5%B8%83%E5%B0%B1%E7%A9%BA%E4%BA%86"><span class="nav-number">6.</span> <span class="nav-text">6. 复现坑④：一截图，画布就空了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%9C%80%E5%90%8E%E7%9A%84%E5%8A%9E%E6%B3%95%EF%BC%9A%E8%87%AA%E5%B7%B1%E6%8E%A5%E7%AE%A1%E5%B8%A7%E6%97%B6%E9%97%B4%E6%88%B3"><span class="nav-number">7.</span> <span class="nav-text">7. 最后的办法：自己接管帧时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5%E4%B8%8A%E4%B8%80%E8%BD%AE%E6%B2%A1%E7%9C%8B%E5%87%BA%E6%9D%A5"><span class="nav-number">8.</span> <span class="nav-text">为啥上一轮没看出来</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92bug%E5%90%88%E9%9B%86%EF%BC%9A%E7%82%B9%E5%8D%81%E6%AC%A1%E9%BC%A0%E6%A0%87%EF%BC%8C%E8%9D%99%E8%9D%A0%E5%8F%AA%E9%A3%9E%E4%B8%80%E6%AC%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次 | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-10-31 21:45:16" itemprop="dateCreated datePublished" datetime="2026-10-31T21:45:16+00:00">2026-10-31 21:45:16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-10-31 21:45:16" itemprop="dateModified" datetime="2026-10-31T21:45:16+00:00">2026-10-31 21:45:16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>万圣节给博客上了个新UI，点一下鼠标，会有一群小蝙蝠从光标那儿散飞出去。</p>
+<p>上线之后自己点了点，发现不对劲：点十次，只飞出来一次。一开始我以为是刷新率太低，先让Codex看了一轮，没看出来。后来让克（Claude）帮我查，查出来一个主bug，复现的路上又踩了好几个小坑，干脆写成一篇合集～</p>
+<h2 id="1-主bug：蝙蝠在第一帧就被判死了"><a href="#1-主bug：蝙蝠在第一帧就被判死了" class="headerlink" title="1. 主bug：蝙蝠在第一帧就被判死了"></a>1. 主bug：蝙蝠在第一帧就被判死了</h2><p>蝙蝠的粒子类 <code>BatParticle</code>，是从老烟花特效沿用下来的 <code>Particle</code> 继承来的。它自己重写了 <code>update()</code>，加了个淡入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">alpha</span> = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">1</span>, progress / <span class="number">.08</span>) * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">1</span> - progress, <span class="number">.65</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>progress</code> 从 0 开始，所以第一帧的 alpha 也是从 0 开始。</p>
+<p>但它没重写 <code>alive()</code>，用的还是父类的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">alive</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">age</span> &lt; <span class="variable language_">this</span>.<span class="property">life</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">alpha</span> &gt; <span class="number">0.01</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>老烟花的 alpha 是从 1 往下减的，这个判断没毛病。蝙蝠是从 0 往上涨的，第一帧要是涨得不够，直接就被判死、删掉了。</p>
+<p>第一帧涨多少，取决于 <code>delta</code>，也就是这一帧离点击隔了多久：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> delta = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">3</span>, <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, (now - lastFrame) / (<span class="number">1000</span> / <span class="number">60</span>)));</span><br></pre></td></tr></table></figure>
+
+<p><code>now</code> 是浏览器传给 <code>requestAnimationFrame</code> 的时间戳。浏览器有时候会把点击之后的第一帧，标成这一帧开始的时刻，这个时间可能比点击还早。一减是负数，被 <code>Math.max(0, …)</code> 截成 0，alpha 就是 0。</p>
+<p>算了一下（寿命按 58 帧算）：</p>
+<table>
+<thead>
+<tr>
+<th>第一帧离点击多久</th>
+<th>第一帧 alpha</th>
+<th>活下来没</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0ms</td>
+<td>0</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>0.33ms</td>
+<td>0.0043</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>0.67ms</td>
+<td>0.0086</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>0.83ms</td>
+<td>0.0108</td>
+<td>活了</td>
+</tr>
+<tr>
+<td>5ms</td>
+<td>0.0644</td>
+<td>活了</td>
+</tr>
+</tbody></table>
+<p>也就是说，只要第一帧在点击后 0.8ms 以内，8 只蝙蝠一只不剩。屏幕上只剩一个 14 帧的淡橙色小圈，一闪就没，我根本没注意到它。</p>
+<p>修法就 6 行，给蝙蝠单独写一个 <code>alive()</code>，只看飞行时间：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">alive</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">age</span> &lt; <span class="variable language_">this</span>.<span class="property">life</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>蝙蝠飞到最后 alpha 本来就会自己降到 0，所以不会出现突然消失的情况。</p>
+<h2 id="2-上一轮”修”的时候，反而修得更严重了"><a href="#2-上一轮”修”的时候，反而修得更严重了" class="headerlink" title="2. 上一轮”修”的时候，反而修得更严重了"></a>2. 上一轮”修”的时候，反而修得更严重了</h2><p>在这之前有一次提交，叫「让蝙蝠散飞更清楚」。思路是：既然看不清，那就飞久一点、大一点。寿命从 28–34 帧调到了 52–64 帧，蝙蝠也调大了。</p>
+<p>但第一帧的 alpha 大约是 <code>delta / life / 0.08</code>，寿命越长，第一帧越暗。判死的窗口从大约 0.4ms 扩到了 0.8ms。</p>
+<p>问题根本不是”看不清”，是”根本没飞”。方向错了，越调越糟（笑）。</p>
+<h2 id="3-复现坑①：自动点击，十次全成功"><a href="#3-复现坑①：自动点击，十次全成功" class="headerlink" title="3. 复现坑①：自动点击，十次全成功"></a>3. 复现坑①：自动点击，十次全成功</h2><p>克用内置浏览器对旧代码真点了 10 次，10 次都有蝙蝠。</p>
+<p>因为自动化工具发出的点击，跟真鼠标落在帧周期里的位置不一样，正好躲过了那 0.8ms。这也说明，这种bug很难靠”跑一下、点一下”测出来。</p>
+<h2 id="4-复现坑②：计数器把死蝙蝠也算成了成功"><a href="#4-复现坑②：计数器把死蝙蝠也算成了成功" class="headerlink" title="4. 复现坑②：计数器把死蝙蝠也算成了成功"></a>4. 复现坑②：计数器把死蝙蝠也算成了成功</h2><p>测试页的思路是：拦截画布的 <code>ctx.scale()</code>，只有画蝙蝠时才会调它，点击后有调用，就算这次飞出来了。</p>
+<p>结果漏了一点，动画循环是先画、后判死：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">update</span>(delta);</span><br><span class="line">p.<span class="title function_">draw</span>(ctx);</span><br><span class="line"><span class="keyword">if</span> (!p.<span class="title function_">alive</span>()) particles.<span class="title function_">splice</span>(i, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>第一帧就被判死的蝙蝠，也会先用 alpha 0 画一次，被计数器算成了”成功”。后来改成统计每次点击一共画了多少次：正常飞一趟是上千次，第一帧就死的只有 32 次左右。</p>
+<h2 id="5-复现坑③：有的点击一帧都没跑"><a href="#5-复现坑③：有的点击一帧都没跑" class="headerlink" title="5. 复现坑③：有的点击一帧都没跑"></a>5. 复现坑③：有的点击一帧都没跑</h2><p>改完计数器，有几次点击连光圈都没画。查了一下，是浏览器面板处于隐藏状态，<code>requestAnimationFrame</code> 被降到了大约一秒一帧，400ms 的统计窗口里一帧都没跑。</p>
+<p>这是测试环境的问题，跟代码无关。</p>
+<h2 id="6-复现坑④：一截图，画布就空了"><a href="#6-复现坑④：一截图，画布就空了" class="headerlink" title="6. 复现坑④：一截图，画布就空了"></a>6. 复现坑④：一截图，画布就空了</h2><p>想看看蝙蝠长啥样，截了个图，结果读出来的像素全是 0。</p>
+<p>原因是截图让页面的可见性切换了一下，触发了脚本里的这句：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;visibilitychange&#x27;</span>, <span class="function">() =&gt;</span> &#123; <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">hidden</span>) <span class="title function_">clearEffects</span>(); &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>画布被清空了。这个其实是正常行为：页面切到后台，本来就该把特效清掉。</p>
+<h2 id="7-最后的办法：自己接管帧时间戳"><a href="#7-最后的办法：自己接管帧时间戳" class="headerlink" title="7. 最后的办法：自己接管帧时间戳"></a>7. 最后的办法：自己接管帧时间戳</h2><p>既然真实的帧时间不可控，那就不用它。测试页里把 <code>requestAnimationFrame</code> 换成手动的，每一帧带什么时间戳，由测试说了算：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue = [], nextId = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">requestAnimationFrame</span> = <span class="function"><span class="params">cb</span> =&gt;</span> &#123; <span class="keyword">const</span> id = nextId++; queue.<span class="title function_">push</span>(&#123; id, cb &#125;); <span class="keyword">return</span> id; &#125;;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">cancelAnimationFrame</span> = <span class="function"><span class="params">id</span> =&gt;</span> &#123; queue = queue.<span class="title function_">filter</span>(<span class="function"><span class="params">q</span> =&gt;</span> q.<span class="property">id</span> !== id); &#125;;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">__frame</span> = <span class="function"><span class="params">ts</span> =&gt;</span> &#123; <span class="keyword">const</span> q = queue; queue = []; q.<span class="title function_">forEach</span>(<span class="function">(<span class="params">&#123; cb &#125;</span>) =&gt;</span> <span class="title function_">cb</span>(ts)); &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后模拟点击，第一帧喂不同的时间戳，同样的条件跑旧版和新版：</p>
+<table>
+<thead>
+<tr>
+<th>第一帧时间戳（相对点击）</th>
+<th>旧版</th>
+<th>新版</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-8ms &#x2F; -2ms &#x2F; 0 &#x2F; +0.3ms</td>
+<td>蝙蝠只画了 1 帧（看不见），只剩光圈</td>
+<td>每次飞约 62 帧</td>
+</tr>
+<tr>
+<td>+0.8ms &#x2F; +5ms &#x2F; +16.7ms</td>
+<td>正常飞约 60 帧</td>
+<td>正常飞约 62 帧</td>
+</tr>
+</tbody></table>
+<p>再读一次画布像素：新版第一帧只有光圈（约 536 个点亮的像素），之后每帧 2500–3800 个，蝙蝠确实飞出去了。</p>
+<p>模拟测试全过了，真鼠标的效果等部署之后我再点点看。</p>
+<h2 id="为啥上一轮没看出来"><a href="#为啥上一轮没看出来" class="headerlink" title="为啥上一轮没看出来"></a>为啥上一轮没看出来</h2><ul>
+<li>bug 藏在继承里：只看子类没错，只看父类也没错，放一起才错。</li>
+<li>最显眼的嫌疑点在点击处理那儿：忽略链接、选字时不触发、移动超过 7px、70ms 节流……”点十次出一次”，第一反应就是点击被过滤了。但它们全都没问题。</li>
+<li>自动化测试复现不出来（见坑①）。</li>
+<li>光圈还在，看着像”效果太弱”，于是去调大、调长（见第 2 条）。</li>
+</ul>
+<p>总结一下就是：</p>
+<blockquote>
+<p>遇到”偶尔才出现”的动画问题，别急着多点几次碰运气，先找出到底是哪个变量在随机，再把它固定下来测。这次随机的是第一帧的时间戳，接管 <code>requestAnimationFrame</code> 之后，问题一下就稳定复现了。</p>
+</blockquote>
+<p>万圣节快乐～</p>
+
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/BugFix/" rel="tag"># BugFix</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%8A%A8%E7%94%BB/" rel="tag"># 前端动画</a>
+              <a href="/tags/Claude/" rel="tag"># Claude</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9A%84%E9%9A%8F%E6%83%B3/" rel="prev" title="日常记录｜让空白悬着">
+                  <i class="fa fa-angle-left"></i> 日常记录｜让空白悬着
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/click-bats-v6.js?v=6a7939cf6443" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
+  <span class="halloween-edge-bat">🦇</span>
+  <div class="halloween-lantern">
+    <span class="halloween-lantern-handle"></span>
+    <span class="halloween-lantern-body">🎃</span>
+  </div>
+</div>
+
+</body>
+</html>
