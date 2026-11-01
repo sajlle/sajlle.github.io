@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
 
 const THEMES = {
   original: null,
@@ -34,9 +35,23 @@ hexo.extend.filter.register('theme_inject', injects => {
 
     // Override the brand partial in memory, leaving the NexT checkout intact.
     hexo.theme.setView('_partials/header/brand.njk', fs.readFileSync(
-      path.join(hexo.base_dir, 'source/_data/seasonal-brand.njk'), 'utf8'
+      path.join(hexo.base_dir, 'templates/seasonal-brand.njk'), 'utf8'
     ));
     injects.bodyEnd.file(`${name}-edge`, `source/_data/${name}-edge.njk`);
+  }
+
+  if (selected === 'halloween' && hexo.theme.config.back2top.enable && !hexo.theme.config.back2top.sidebar) {
+    const widgets = fs.readFileSync(path.join(hexo.theme_dir, 'layout/_partials/widgets.njk'), 'utf8');
+    const control = /<div class="back-to-top" role="button"[^>]*>[\s\S]*?<\/div>/;
+    if (!control.test(widgets)) throw new Error('NexT back-to-top template changed; review the Halloween control.');
+    const pumpkin = fs.readFileSync(path.join(hexo.base_dir, 'templates/halloween-pumpkin.njk'), 'utf8');
+    hexo.theme.setView('_partials/widgets.njk', widgets.replace(control, () => pumpkin));
+    injects.style.push('source/_data/halloween-pumpkin.styl');
+    const version = createHash('sha256')
+      .update(fs.readFileSync(path.join(hexo.source_dir, 'js/halloween-pumpkin.js')))
+      .digest('hex').slice(0, 12);
+    injects.bodyEnd.raw('halloween-pumpkin',
+      `<script src="{{ url_for('/js/halloween-pumpkin.js?v=${version}') }}" defer></script>`);
   }
 
   injects.style.push(`source/_data/${name}.styl`);

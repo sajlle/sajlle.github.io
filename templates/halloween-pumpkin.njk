@@ -1,0 +1,21 @@
+<div class="halloween-pumpkin-tools">
+  <button class="back-to-top halloween-back-to-top" type="button" aria-label="提灯回到顶部" title="提灯回到顶部">
+    {# NexT updates the first span with the reading percentage. #}
+    <span class="pumpkin-scroll-percent" aria-hidden="true">0%</span>
+    <i class="pumpkin-handle" aria-hidden="true"></i>
+    <i class="pumpkin-face" aria-hidden="true">🎃</i>
+  </button>
+  <button class="pumpkin-candy-toggle" type="button" aria-label="打开万圣节讨糖彩蛋" aria-expanded="false" aria-controls="pumpkin-treat-panel">
+    <span aria-hidden="true">🍬</span>
+  </button>
+  <div class="pumpkin-treat-panel" id="pumpkin-treat-panel" hidden>
+    <p class="pumpkin-top-tip">提灯回到顶部 ↑</p>
+    <p class="pumpkin-greeting">不给糖，就捣蛋～</p>
+    <div class="pumpkin-treat-actions">
+      <button type="button" data-pumpkin-action="treat">🍬 给你糖</button>
+      <button type="button" data-pumpkin-action="trick">🦇 就不给</button>
+    </div>
+    <p class="pumpkin-reply" role="status" aria-live="polite" aria-atomic="true">今晚，留一盏灯。</p>
+  </div>
+  <div class="pumpkin-candies" aria-hidden="true"></div>
+</div>
