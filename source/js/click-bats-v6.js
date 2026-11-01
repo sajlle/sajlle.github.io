@@ -521,7 +521,7 @@
     ctx.restore();
   }
 
-  function spawnBurst(x, y) {
+  function spawnBurst(x, y, upward = false) {
     const now = performance.now();
     if (now - lastBurst < 70 || !ensureCanvas()) return;
     lastBurst = now;
@@ -539,7 +539,9 @@
     if (particles.length + count > 48) particles.splice(0, particles.length + count - 48);
 
     for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i) / count + random(-0.14, 0.14);
+      const angle = (upward
+        ? -Math.PI / 2 + (Math.PI / 2 * (i + .5)) / count
+        : (Math.PI * 2 * i) / count) + random(-0.14, 0.14);
 
       let speed;
       if (mode === 'star') {
@@ -715,6 +717,12 @@
     window.addEventListener('resize', resizeCanvas, { passive: true });
     document.addEventListener('pointerdown', handlePointerDown, { passive: true });
     document.addEventListener('pointerup', handlePointerUp, { passive: true });
+    window.addEventListener('halloween:bat-burst', event => {
+      if (motionPreference.matches || forcedColors.matches || document.hidden) return;
+      const { x, y } = event.detail || {};
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+      spawnBurst(x, y, true);
+    });
     document.addEventListener('pointercancel', () => { pendingPointer = null; }, { passive: true });
     window.addEventListener('blur', () => { pendingPointer = null; });
     document.addEventListener('visibilitychange', () => { if (document.hidden) clearEffects(); });
