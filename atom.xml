@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-10-31T21:45:16.000Z</updated>
+  <updated>2026-11-01T10:31:05.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="博客装修" scheme="https://sajlle.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE/"/>
+    <id>https://sajlle.github.io/2026/11/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C11%E6%9C%88%E6%9D%A5%E4%BA%86%EF%BD%9E%E8%99%BD%E7%84%B6%E6%AD%A3%E4%BA%8B%E5%84%BF%E6%B2%A1%E5%B9%B2%EF%BC%8C%E4%BD%86%E6%98%AF%E5%8D%9A%E5%AE%A2%E8%BF%98%E6%98%AF%E8%A6%81%E8%A3%85%E4%BF%AE%E7%9A%84%EF%BD%9E/</id>
+    <link href="https://sajlle.github.io/2026/11/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C11%E6%9C%88%E6%9D%A5%E4%BA%86%EF%BD%9E%E8%99%BD%E7%84%B6%E6%AD%A3%E4%BA%8B%E5%84%BF%E6%B2%A1%E5%B9%B2%EF%BC%8C%E4%BD%86%E6%98%AF%E5%8D%9A%E5%AE%A2%E8%BF%98%E6%98%AF%E8%A6%81%E8%A3%85%E4%BF%AE%E7%9A%84%EF%BD%9E/"/>
+    <published>2026-11-01T10:31:05.000Z</published>
+    <summary>
+      <![CDATA[<p>万圣节到啦～本地没啥好玩的，我也不喜欢到人多的地方逛，所以写博客吧～</p>
+<p>昨儿装修了博客，搞了万圣节的皮肤～，顺带，又遇到一个小bug，是鼠标点击之后无法触发蝙蝠四散的动画，排查过程见这篇：<a href="https://sajlle.github.io/2026/10/31/BugFix%EF%BD%9C%E4%B8%87%E5%9C%A3%E8%8A%82%E6%8E%92b]]>
+    </summary>
+    <title>日常记录｜11月来了～虽然正事儿没干，但是博客还是要装修的～</title>
+    <updated>2026-11-01T10:31:05.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -540,27 +556,5 @@
     </summary>
     <title>日常记录｜看到Hugging Face给AI Agent写的llm.txt，我打算自己博客也给AI写点好玩的～</title>
     <updated>2026-09-22T09:57:17.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
-    <category term="代码审核" scheme="https://sajlle.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8/"/>
-    <id>https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/09/21/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9CCodex%E7%BB%99%E6%88%91%E7%B3%8A%E4%BA%867000%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C149%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%A1%E6%A0%B8%EF%BC%9F/"/>
-    <published>2026-09-21T11:22:54.000Z</published>
-    <summary>
-      <![CDATA[<p>我把 Agent V1 的执行文档扔给 Codex，回来一看：好家伙，给我糊了七千行。怎么审核呢？我想想：</p>
-<ol>
-<li>先做施工验收，而不是Code Review</li>
-<li>第一轮审核架构边界，对着总纲看重点</li>
-<li>第二轮审状态机和并发，重点看测试，不要只看实现</li>
-<li>第三轮审核durable recovery</li>
-<li>第四轮审Evid]]>
-    </summary>
-    <title>技术手记｜Codex 一口气给我改了 7000 行代码、149 个文件，怎么审核？</title>
-    <updated>2026-09-21T11:22:54.000Z</updated>
   </entry>
 </feed>

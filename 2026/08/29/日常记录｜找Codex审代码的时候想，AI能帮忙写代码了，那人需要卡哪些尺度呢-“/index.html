@@ -186,7 +186,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">219</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -197,7 +197,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-count">277</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -378,21 +378,34 @@
     <span class="toggle-line"></span>
   </div>
   <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
+  <div class="halloween-pumpkin-tools">
+  <button class="back-to-top halloween-back-to-top" type="button" aria-label="提灯回到顶部" title="提灯回到顶部">
+    
+    <span class="pumpkin-scroll-percent" aria-hidden="true">0%</span>
+    <i class="pumpkin-handle" aria-hidden="true"></i>
+    <i class="pumpkin-face" aria-hidden="true">🎃</i>
+  </button>
+  <button class="pumpkin-candy-toggle" type="button" aria-label="打开万圣节讨糖彩蛋" aria-expanded="false" aria-controls="pumpkin-treat-panel">
+    <span aria-hidden="true">🍬</span>
+  </button>
+  <div class="pumpkin-treat-panel" id="pumpkin-treat-panel" hidden>
+    <p class="pumpkin-top-tip">提灯回到顶部 ↑</p>
+    <p class="pumpkin-greeting">不给糖，就捣蛋～</p>
+    <div class="pumpkin-treat-actions">
+      <button type="button" data-pumpkin-action="treat">🍬 给你糖</button>
+      <button type="button" data-pumpkin-action="trick">🦇 就不给</button>
+    </div>
+    <p class="pumpkin-reply" role="status" aria-live="polite" aria-atomic="true">今晚，留一盏灯。</p>
   </div>
+  <div class="pumpkin-candies" aria-hidden="true"></div>
+</div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-<script src="/js/click-bats-v6.js?v=6a7939cf6443" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
+<script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
   <span class="halloween-edge-bat">🦇</span>
-  <div class="halloween-lantern">
-    <span class="halloween-lantern-handle"></span>
-    <span class="halloween-lantern-body">🎃</span>
-  </div>
 </div>
-
+<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script>
 </body>
 </html>
