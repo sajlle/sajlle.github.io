@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=7fb122a1268b">
+<link rel="stylesheet" href="/css/main.css?v=365df245d28c">
 
 
 
@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">280</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,138 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/07/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%8C%E4%B8%80%E4%B8%AAbug%EF%BC%8C%E6%88%91%E8%AE%A9GPT%EF%BC%8CFable-DeepSeek%E9%83%BD%E7%BB%99%E6%96%B9%E6%A1%88%EF%BC%8C%E6%9C%80%E5%90%8E%E6%96%B9%E6%A1%88Fable-GPT-DeepSeek/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/07/08/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E5%90%8C%E4%B8%80%E4%B8%AAbug%EF%BC%8C%E6%88%91%E8%AE%A9GPT%EF%BC%8CFable-DeepSeek%E9%83%BD%E7%BB%99%E6%96%B9%E6%A1%88%EF%BC%8C%E6%9C%80%E5%90%8E%E6%96%B9%E6%A1%88Fable-GPT-DeepSeek/" class="post-title-link" itemprop="url">技术手记｜两条规则各自合理，组合起来是资损窗口：三个AI的答卷对比</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-07-08 19:08:18" itemprop="dateCreated datePublished" datetime="2026-07-08T19:08:18+00:00">2026-07-08 19:08:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-07-08 19:08:18" itemprop="dateModified" datetime="2026-07-08T19:08:18+00:00">2026-07-08 19:08:18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题是这样的，退款场景的资损bug："><a href="#问题是这样的，退款场景的资损bug：" class="headerlink" title="问题是这样的，退款场景的资损bug："></a>问题是这样的，退款场景的资损bug：</h2><ol>
+<li>为了兼容乱序通知，打开closed -&gt; success</li>
+<li>为了恢复用户权益，closed的时候立刻active</li>
+<li>最后两个规则单独看起来合理，一组合就是资损窗口</li>
+</ol>
+<h2 id="DeepSeek方案如下："><a href="#DeepSeek方案如下：" class="headerlink" title="DeepSeek方案如下："></a>DeepSeek方案如下：</h2><ul>
+<li><p>方案A（事后追溯）：</p>
+<blockquote>
+<p>在执行 Closed -&gt; Success 时，去检查那笔被恢复的优惠券的最新状态。如果发现它已被再次使用，则： 取消这笔支付，发起退款（但这笔退款又可能因乱序而失败，陷入循环）。 记录一笔清晰的挂账，并立即触发人工审核，让运营去判断是补收钱、召回订单还是认栽。这是兜底方案。</p>
+</blockquote>
+</li>
+<li><p>方案B（事前锁定）：</p>
+<blockquote>
+<p>权益恢复时，不直接释放，而是进入一个“犹豫期”。在这段时间内，权益处于“已释放但不可用”或“可用但标记为待追回”的状态。只有在确认该订单的支付结果绝对尘埃落定后，才真正让权益变为可用。这牺牲了一点用户体验，换来了安全。</p>
+</blockquote>
+</li>
+<li><p>方案C（实时核销）：</p>
+<blockquote>
+<p>当用户要使用那张“恢复”的优惠券下单时，系统做一次硬检查，看看是否有关联的订单正在发生状态跃迁。如果检测到原来的订单有未决的异步通知风险，就暂时锁定优惠券。这需要很强的实时状态感知能力。</p>
+</blockquote>
+</li>
+<li><p>方案D（根本解：重定义状态机的副作用）：</p>
+<blockquote>
+<p>把 Closed 状态的进入动作，从“恢复权益”改成“标记待恢复”。然后，由一个独立的、不可逆的 Saga 编排器来负责最终的权益恢复。这个 Saga 只有在确认订单真的不可能再转回 Success（比如过了对账截止时间）后，才执行恢复</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="GPT-5-5-Thinking的方案如下："><a href="#GPT-5-5-Thinking的方案如下：" class="headerlink" title="GPT 5.5 Thinking的方案如下："></a>GPT 5.5 Thinking的方案如下：</h2><blockquote>
+<p>引入 CLOSED_PENDING_CONFIRM。 收到 CLOSED 不立即恢复权益。 二次查单确认 CLOSED 后再恢复。 确认期内 SUCCESS 可以正常覆盖 CLOSED_PENDING_CONFIRM。</p>
+</blockquote>
+<h2 id="Fable-5-High-的方案如下："><a href="#Fable-5-High-的方案如下：" class="headerlink" title="Fable 5 High 的方案如下："></a>Fable 5 High 的方案如下：</h2><ul>
+<li>让 closed → success 这条迁移带补偿动作:<blockquote>
+<p>既然允许翻案,翻案时就必须回收之前基于 closed 发放的权益。状态迁移不只是改字段,是”离开旧状态执行 undo,进入新状态执行 do”</p>
+</blockquote>
+</li>
+<li>把”权益已恢复 且 退款已成功”定义为不变量违例,让对账去扫,扫到就走冲正。</li>
+</ul>
+<h2 id="三模型的方案我的评价："><a href="#三模型的方案我的评价：" class="headerlink" title="三模型的方案我的评价："></a>三模型的方案我的评价：</h2><ol>
+<li>Fable是让99%的正常case保持体验，接受1%的case走补偿。因为没有强行要消除这个窗口期，而是让状态流转带副作用。后续对账部分定义不变量违例，哪怕前期状态流转没做好undo和do，也不是静默资损，后续对账能查到。所以这个是没有强行平掉窗口，而是把窗口变的可补偿可观测。</li>
+<li>GPT的 CLOSED_PENDING_CONFIRM 是让100%的closed订单都延迟恢复权益，来防御那不到1%的乱序case——用普遍的UX代价买确定性。这个方案牺牲了用户体验，但消除了资损窗口。</li>
+<li>最后是DeepSeek的方案，B&#x2F;D其实跟GPT的方案类似，但表述比较冗长（笑）切的不够准，把核心点绕着说了很多圈，其实说白了就是closed之后不要立刻真正释放权益。B把这个说成是犹豫期，D把这个说成是独立Saga编排器。它没有像Fable一样直接抓住状态迁移的副作用。也没有像GPT一样直接切一个明确状态。A&#x2F;C方案里，C方案把复杂度入侵到下游链路，A方案则会导致连环退款。</li>
+</ol>
+<p>面对同一个资损Bug，DeepSeek选择穷举，GPT选择消除，Fable选择补偿。这背后体现了不同工程哲学分野。<br>GPT 的方案偏向金融系统里的保守确定性，Fable 的方案偏向产品系统里的补偿弹性。前者尽量不让坏事发生，后者承认坏事会发生，但要求系统必须能看见、能追回、能冲正。而DeepSeek的方案则倾向于把复杂度分散到各个环节，试图通过事前事后各种手段来防御，但没有一个明确的核心原则。优点是覆盖面看起来很全，缺点是容易把问题拆散，变成一堆局部补丁。</p>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1338,112 +1470,6 @@
 </ul>
 <p>培训班的时期，我无法获得真实的工程经验。<br>但如今，我能靠着AI，在遇到真实问题的时候，获取藏在项目组，公司经验，师徒关系里的隐性知识。</p>
 <p>培训班给我的是跑通的代码，AI给我的是追问的机会。<br>而我本来的优势不是获取信息差，而是处理信息、拆问题、反复追问、把散乱东西组织成理解。<br>正好，AI时代，会奖励这些能力。</p>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/06/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9F%A5%E4%B9%8E%E8%A2%AB%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%E4%BA%86%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%8D%A2%E7%9C%8B%E4%B9%A6%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9F%A5%E4%B9%8E%E8%A2%AB%E9%AC%BC%E5%9B%BE%E5%90%93%E5%88%B0%E4%BA%86%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%8D%A2%E7%9C%8B%E4%B9%A6%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜最近厕所看知乎被鬼图吓到了，于是换看书～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-06-25 16:31:10" itemprop="dateCreated datePublished" datetime="2026-06-25T16:31:10+00:00">2026-06-25 16:31:10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-25 16:31:10" itemprop="dateModified" datetime="2026-06-25T16:31:10+00:00">2026-06-25 16:31:10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>嗯，如题。</p>
-<p>目前打算在厕所看的是《叫魂》，嗯，要不是今儿连着发两段摘抄，写的很精彩。</p>
-<p>回头一看作者孔飞力还有几本有趣的书，我列下来，等叫魂看完看：</p>
-<ul>
-<li>《中华帝国晚期的叛乱及其敌人：1796—1864年的军事化与社会结构》<ul>
-<li>《叫魂》讲的是：「恐慌如何穿透皇帝、官僚和民间社会？」</li>
-<li>这本讲的是：「暴乱如何迫使国家把暴力能力下放给地方精英？」</li>
-<li>大概会涉及「太平天国」「白莲教」「湘军」「团练」等等</li>
-</ul>
-</li>
-<li>《他者中的华人：中国近现代移民史》<ul>
-<li>这本讲的是：华人如何在中国、殖民帝国、当地社会、世界资本流动之间，被不断定位、利用、排斥、整合。</li>
-<li>跟《叫魂》很像的地方是，这本也在讲边缘人如何在夹缝中生存，叫魂里的边缘人是石匠，和尚，铁匠等等，这本书里的边缘人是华人移民</li>
-<li>这本书时间跨度很大，大概从1400年讲到改革开放</li>
-</ul>
-</li>
-</ul>
 
       
 

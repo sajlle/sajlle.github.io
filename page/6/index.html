@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=7fb122a1268b">
+<link rel="stylesheet" href="/css/main.css?v=365df245d28c">
 
 
 
@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">280</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/13/BugFix%EF%BD%9CAgentV0Bug%EF%BC%9AvoucherInstance%E8%A2%ABLIMIT-1%E9%9D%99%E9%BB%98%E6%88%AA%E6%96%AD/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：voucherInstance被LIMIT 1静默截断</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 17:31:21" itemprop="dateCreated datePublished" datetime="2026-09-13T17:31:21+00:00">2026-09-13 17:31:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-13 17:31:21" itemprop="dateModified" datetime="2026-09-13T17:31:21+00:00">2026-09-13 17:31:21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>项目事实层复用了 voucherInstanceMapper.getByOrderId，但是DB里，order_id只有普通索引，没有UNIQUE，理论上可能出现order1对应instanceA和instanceB。<br>但旧实现会告诉Agent，voucherInstance&#x3D;A。</p>
+<p>这导致的问题是「事实层偷偷替诊断层做了选择」。</p>
+<p>后续修成了FactLookup&lt;List<VoucherInstanceFact>&gt;，把DB里所有记录完整保留。于是分层变成了</p>
+<ul>
+<li>Facts: 我查到了2条数据</li>
+<li>Diagnosis：一订单两条instance为范 cardinality invariant</li>
+</ul>
+<p>概括一下就是：</p>
+<blockquote>
+<p>做Agent事实投影的时候发现业务Mapper默认LIMIT 1，但DB没有唯一约束。如果直接复用，会让Agent在脏数据场景下丢失证据。后续没有改生产Mapper，而是诊断为read-side，增加全量查询，让Facts保留全部记录，再由deterministic invariant判断cardinality violation</p>
+</blockquote>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1146,123 +1246,6 @@
 <p>朋友沉默很久。</p>
 <p>最后问：<br>“那要是公司真给你安排了个男朋友呢？”</p>
 <p>某人猛地抬头：<br>“这公司怎么还能弄虚作假呢？！”</p>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9Cubi%E6%AE%B5%E5%AD%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9Cubi%E6%AE%B5%E5%AD%90/" class="post-title-link" itemprop="url">脑洞｜「这东西不是说在养懒汉吗？————那情况不一样，现在是保障人的基本生活」</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-10 11:19:06" itemprop="dateCreated datePublished" datetime="2026-09-10T11:19:06+00:00">2026-09-10 11:19:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-10 11:19:06" itemprop="dateModified" datetime="2026-09-10T11:19:06+00:00">2026-09-10 11:19:06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%84%91%E6%B4%9E/" itemprop="url" rel="index"><span itemprop="name">脑洞</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>声明：本文纯属虚构～</p>
-<p>某人：<br>“UBI是什么玩意儿？”<br>“政府养懒汉？”<br>“都发钱不就等于都没发？”<br>“年轻人一天天不务正业，搞什么AI，搞什么技术，整那些虚头巴脑的。”<br>“人还是得脚踏实地。”<br>“进个厂，学门手艺，安安稳稳干一辈子。”</p>
-<p>旁边人：<br>“以后自动化呢？”</p>
-<p>某人：<br>“机器人还能把人全换了？”<br>“天天吓唬谁呢。”</p>
-<p>几年后。 厂门口贴出通知：<strong>智能产线升级。</strong><br>原来二十个人的岗位，变成三个人巡线。</p>
-<p>某人失业了。</p>
-<p>第一天： “没事。我有经验。”<br>第二周： “现在厂里怎么都不招人了？”<br>一个月后： “那个……失业补助在哪儿领？”</p>
-<p>工作人员： “往左边窗口。”<br>他排了半天。</p>
-<p>“听说不是还有那个……UBI吗？”</p>
-<p>工作人员抬头：<br>“原来讨论过。”</p>
-<p>某人眼睛一亮：<br>“对对对，就是那个，人人都发钱的。”</p>
-<p>工作人员：<br>“后来没推。”</p>
-<p>“为什么？”</p>
-<p>工作人员翻了翻资料：<br>“社会反对声音比较大。”</p>
-<p>某人皱眉：<br>“谁反对的？”</p>
-<p>工作人员：<br>“主要说是养懒汉。”</p>
-<p>某人：<br>“……”</p>
-<p>工作人员继续：<br>“还说都发等于没发。”</p>
-<p>某人：<br>“……”<br>“那现在还能重新讨论吗？”</p>
-<p>工作人员：<br>“可以啊。”<br>“您可以先填意见征集表。”</p>
-<p>某人赶紧接过来。</p>
-<p>第一栏：<br><strong>您是否支持建立无条件基本收入制度？</strong><br>他毫不犹豫勾：<br>☑ 强烈支持</p>
-<p>第二栏：<br><strong>请简述理由。</strong><br>某人想了半天，写：<br>“时代不一样了。”</p>
-<p>旁边一起排队的人瞄了一眼：<br>“叔，我记得你以前不是说这东西养懒汉吗？”</p>
-<p>某人立刻严肃起来：<br>“那时候情况不一样。”<br>“现在这是保障人民基本生活。”</p>
-<p>对方：<br>“哦。”<br>“那您现在属于人民了？”</p>
-<p>某人：<br>“……”</p>
-<p>远处新厂房里，机械臂继续上下料。<br>没有发表意见。</p>
 
       
 

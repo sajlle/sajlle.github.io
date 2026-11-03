@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1924" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
+
+<link rel="stylesheet" href="/css/main.css?v=365df245d28c">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sajlle.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-dark","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="下午电脑越用越卡，打开活动监视器按内存排了一下，第一名是 codex：49.31 GB。 我这台机器物理内存一共才 16 GB。  底下那栏也很吓人：已使用的交换 23.25 GB，被压缩 7.76 GB。我第一反应是截图甩给克（Claude）：「我去，克，codex吃了我40多G内存？」然后让它帮我查了一下，顺手记一篇。 1. 先搞清楚：这个 codex 是谁活动监视器里跟 Codex 有关的进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术手记｜我去，Codex吃了我40多G内存？">
+<meta property="og:url" content="https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/">
+<meta property="og:site_name" content="节点人生">
+<meta property="og:description" content="下午电脑越用越卡，打开活动监视器按内存排了一下，第一名是 codex：49.31 GB。 我这台机器物理内存一共才 16 GB。  底下那栏也很吓人：已使用的交换 23.25 GB，被压缩 7.76 GB。我第一反应是截图甩给克（Claude）：「我去，克，codex吃了我40多G内存？」然后让它帮我查了一下，顺手记一篇。 1. 先搞清楚：这个 codex 是谁活动监视器里跟 Codex 有关的进">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sajlle.github.io/uploads/optimized/codex-memory-leak/activity-monitor.webp">
+<meta property="article:published_time" content="2026-11-03T16:55:22.000Z">
+<meta property="article:modified_time" content="2026-11-03T16:55:22.000Z">
+<meta property="article:author" content="之瑞">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Codex">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="内存泄漏">
+<meta property="article:tag" content="排查">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sajlle.github.io/uploads/optimized/codex-memory-leak/activity-monitor.webp">
+
+
+<link rel="canonical" href="https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/","path":"2026/11/03/技术手记｜我去，Codex吃了我40多G内存？/","title":"技术手记｜我去，Codex吃了我40多G内存？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>技术手记｜我去，Codex吃了我40多G内存？ | 节点人生</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/#blogposting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/"},"headline":"技术手记｜我去，Codex吃了我40多G内存？","description":"下午电脑越用越卡，打开活动监视器按内存排了一下，第一名是 codex：49.31 GB。 我这台机器物理内存一共才 16 GB。 底下那栏也很吓人：已使用的交换 23.25 GB，被压缩 7.76 GB。我第一反应是截图甩给克（Claude）：「我去，克，codex吃了我40多G内存？」然后让它帮我查了一下，顺手记一篇。 1. 先搞清楚：这个 codex 是谁活动监视器里跟 Codex 有关的进…","datePublished":"2026-11-03T16:55:22.000Z","dateModified":"2026-11-03T16:55:22.000Z","inLanguage":"zh-CN","image":["https://sajlle.github.io/images/avatar-code-illustration-2026.webp"],"keywords":["Claude","Codex","macOS","内存泄漏","排查"],"author":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"publisher":{"@type":"Person","name":"之瑞","url":"https://sajlle.github.io/about/","sameAs":["https://github.com/sajlle"]},"isPartOf":{"@type":"Blog","@id":"https://sajlle.github.io/#website"}}</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="节点人生" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+<div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">节点人生<span class="seasonal-brand-icon" aria-hidden="true">🎃</span></p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">之瑞的技术复盘、AI Agent 实践与生活观察</p>
+    <p class="seasonal-tagline">南瓜夜读 · 今晚，留一盏灯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-精选"><a href="/featured/" rel="section"><i class="fa fa-star fa-fw"></i>精选</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-系列"><a href="/series/" rel="section"><i class="fa fa-book-open fa-fw"></i>系列</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-github"><a href="https://github.com/sajlle" rel="section" target="_blank"><i class="fa fa-github fa-fw"></i>github</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="halloween-visuals" aria-hidden="true">
+  <span class="halloween-stars"></span>
+  <span class="halloween-moon"></span>
+  <span class="halloween-bat halloween-bat--near">🦇</span>
+  <span class="halloween-bat halloween-bat--far">🦇</span>
+</div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E6%90%9E%E6%B8%85%E6%A5%9A%EF%BC%9A%E8%BF%99%E4%B8%AA-codex-%E6%98%AF%E8%B0%81"><span class="nav-number">1.</span> <span class="nav-text">1. 先搞清楚：这个 codex 是谁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A5%87%E6%80%AA%EF%BC%9ARSS-%E6%89%8D%E4%B8%83%E7%99%BE%E6%9D%A5-MB%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">2. 奇怪：RSS 才七百来 MB？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%94%A8-footprint-%E7%9C%8B%E7%9C%8B%E9%83%BD%E6%98%AF%E4%BA%9B%E4%BB%80%E4%B9%88%E5%86%85%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text">3. 用 footprint 看看都是些什么内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-16G-%E7%9A%84%E6%9C%BA%E5%99%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E8%A3%85%E4%B8%8B-42G-%E7%9A%84%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">4. 16G 的机器，怎么装下 42G 的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%B4%A2%EF%BC%9A%E6%B2%A1%E9%80%80%E5%87%BA%E7%9A%84-computer-use-%E8%BF%9B%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">5. 一个线索：没退出的 computer-use 进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%A4%84%E7%90%86%EF%BC%9ACmd-Q"><span class="nav-number">6.</span> <span class="nav-text">6. 处理：Cmd+Q</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="nav-number">7.</span> <span class="nav-text">命令速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E5%90%8E%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">8.</span> <span class="nav-text">以后怎么办</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="之瑞"
+      src="/images/avatar-code-illustration-2026.webp">
+  <p class="site-author-name" itemprop="name">之瑞</p>
+  <div class="site-description" itemprop="description">之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">280</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/11/03/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%88%91%E5%8E%BB%EF%BC%8CCodex%E5%90%83%E4%BA%86%E6%88%9140%E5%A4%9AG%E5%86%85%E5%AD%98%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="技术手记｜我去，Codex吃了我40多G内存？ | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          技术手记｜我去，Codex吃了我40多G内存？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-11-03 16:55:22" itemprop="dateCreated datePublished" datetime="2026-11-03T16:55:22+00:00">2026-11-03 16:55:22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-03 16:55:22" itemprop="dateModified" datetime="2026-11-03T16:55:22+00:00">2026-11-03 16:55:22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>下午电脑越用越卡，打开活动监视器按内存排了一下，第一名是 <code>codex</code>：<strong>49.31 GB</strong>。</p>
+<p>我这台机器物理内存一共才 16 GB。</p>
+<p><img data-src="/../uploads/optimized/codex-memory-leak/activity-monitor.webp" alt="活动监视器：codex 一个进程 49.31 GB"></p>
+<p>底下那栏也很吓人：已使用的交换 23.25 GB，被压缩 7.76 GB。我第一反应是截图甩给克（Claude）：「我去，克，codex吃了我40多G内存？」然后让它帮我查了一下，顺手记一篇。</p>
+<h2 id="1-先搞清楚：这个-codex-是谁"><a href="#1-先搞清楚：这个-codex-是谁" class="headerlink" title="1. 先搞清楚：这个 codex 是谁"></a>1. 先搞清楚：这个 codex 是谁</h2><p>活动监视器里跟 Codex 有关的进程有好几个，先看 PID 4776 到底是哪个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -o pid,ppid,rss,etime,<span class="built_in">command</span> -p 4776</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> PID  PPID    RSS     ELAPSED COMMAND</span><br><span class="line">4776  4381 723536 01-00:13:12 /Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex -c features.code_mode_host=true app-server ...</span><br></pre></td></tr></table></figure>
+
+<p>几个信息：</p>
+<ul>
+<li>它不是界面。界面是那几个 <code>Codex (Renderer)</code>，这个是 ChatGPT.app 里 Codex 在后台跑的 <code>app-server</code>。</li>
+<li>父进程 4381 就是截图里的 ChatGPT。</li>
+<li><code>ELAPSED</code> 是 <code>01-00:13:12</code>，也就是已经连续跑了一天零 13 分钟。</li>
+</ul>
+<h2 id="2-奇怪：RSS-才七百来-MB？"><a href="#2-奇怪：RSS-才七百来-MB？" class="headerlink" title="2. 奇怪：RSS 才七百来 MB？"></a>2. 奇怪：RSS 才七百来 MB？</h2><p><code>ps</code> 给的 RSS 是 723536 KB，七百来 MB，跟活动监视器的 49 GB 差得离谱。</p>
+<p>这俩其实不是一个口径：</p>
+<ul>
+<li><strong>RSS</strong>：只算现在还待在物理内存里的那部分。</li>
+<li><strong>活动监视器的「内存」列</strong>：是这个进程的 footprint，被系统压缩掉的、换到硬盘上的也都算进去。</li>
+</ul>
+<p>所以 RSS 小，不是说它没占内存，而是它占的大部分已经被系统压缩、或者挤到交换文件里去了。</p>
+<h2 id="3-用-footprint-看看都是些什么内存"><a href="#3-用-footprint-看看都是些什么内存" class="headerlink" title="3. 用 footprint 看看都是些什么内存"></a>3. 用 footprint 看看都是些什么内存</h2><p>macOS 自带一个 <code>footprint</code> 命令，可以按类别拆开看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">footprint 4776</span><br></pre></td></tr></table></figure>
+
+<p>结果里挑重点：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Dirty</th>
+<th>Reclaimable</th>
+<th>Regions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Malloc Small</td>
+<td>39 GB</td>
+<td>18 MB</td>
+<td>12088</td>
+</tr>
+<tr>
+<td>Malloc Large</td>
+<td>2692 MB</td>
+<td>0 B</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Malloc Metadata</td>
+<td>190 MB</td>
+<td>0 B</td>
+<td>387</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>42 GB</strong></td>
+<td>18 MB</td>
+<td>16384</td>
+</tr>
+</tbody></table>
+<p>最后还有两行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">phys_footprint: 42 GB</span><br><span class="line">phys_footprint_peak: 51 GB</span><br></pre></td></tr></table></figure>
+
+<p>（跑 <code>footprint</code> 的时候已经过了一会儿，从截图时的 49 GB 回落到了 42 GB，峰值到过 51 GB。）</p>
+<p>怎么看：</p>
+<ul>
+<li><strong>几乎全是 Malloc Small</strong>：程序自己 <code>malloc</code> 出来的小块内存，散在 1.2 万多个区域里。</li>
+<li><strong>全是 Dirty</strong>：写过数据的页，系统不能直接丢掉，只能压缩或者换出去。</li>
+<li><strong>Reclaimable 只有 18 MB</strong>：系统想回收也收不回来。</li>
+<li><strong>不是映射文件、不是缓存、不是代码段</strong>：就是堆上的对象一直攒着没释放。</li>
+</ul>
+<p>一个后台进程，堆上的小对象攒了 39 GB 还在涨，基本就是内存泄漏了。也可能是某个缓存没设上限、一直往里塞，不过从外面看，两种情况是一回事。</p>
+<h2 id="4-16G-的机器，怎么装下-42G-的？"><a href="#4-16G-的机器，怎么装下-42G-的？" class="headerlink" title="4. 16G 的机器，怎么装下 42G 的？"></a>4. 16G 的机器，怎么装下 42G 的？</h2><p>靠的是 macOS 的两招：</p>
+<ol>
+<li><strong>内存压缩</strong>：不常用的页先压一压，对应截图里的「被压缩 7.76 GB」。</li>
+<li><strong>交换</strong>：压完还放不下，就写到 SSD 上，对应「已使用的交换 23.25 GB」。</li>
+</ol>
+<p>所以机器没崩，但是会越来越卡：每次用到被换出去的内存，都要从硬盘读回来。而且一直在往 SSD 上写，对硬盘也不友好。</p>
+<h2 id="5-一个线索：没退出的-computer-use-进程"><a href="#5-一个线索：没退出的-computer-use-进程" class="headerlink" title="5. 一个线索：没退出的 computer-use 进程"></a>5. 一个线索：没退出的 computer-use 进程</h2><p>顺便看了一下它的子进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -axo pid,ppid,rss,etime,<span class="built_in">command</span> | awk <span class="string">&#x27;$2==4776&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>除了一个 <code>codex-code-mode-host</code>，还挂着 <strong>3 组</strong> computer-use 插件的 node 进程（<code>server.mjs</code>、两个 <code>node_repl</code>，再加一个带 <code>require-browser-access.mjs</code> 的）。三组分别是 67 分钟前、43 分钟前、17 分钟前启动的，旧的那两组都没退出。</p>
+<p>先说清楚：这些子进程每个才几 MB，内存不是它们吃的。</p>
+<p>但这说明我最近确实用了好几次 computer-use。computer-use 会不停截图，所以克的推测是：截图之类的数据可能一直留在 app-server 内存里没释放。<strong>这只是推测</strong>，<code>footprint</code> 只能看出是哪类内存，看不出里面装的是什么。</p>
+<h2 id="6-处理：Cmd-Q"><a href="#6-处理：Cmd-Q" class="headerlink" title="6. 处理：Cmd+Q"></a>6. 处理：Cmd+Q</h2><p>最直接的办法就是让这个进程重启。直接在 ChatGPT 里按 <strong>Cmd+Q</strong> 完全退出，只关窗口的话，后台的 app-server 可能还在跑。</p>
+<p>退出之后再查一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -axo pid,etime,rss,<span class="built_in">command</span> | grep -i <span class="string">&#x27;codex.*app-server&#x27;</span> | grep -v grep</span><br></pre></td></tr></table></figure>
+
+<p>没有输出，说明退干净了。再看交换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl vm.swapusage</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.swapusage: total = 4096.00M  used = 3329.44M  free = 766.56M  (encrypted)</span><br></pre></td></tr></table></figure>
+
+<p>交换从 23.25 GB 降到了 3.3 GB，<code>memory_pressure</code> 显示空闲内存 76%，电脑一下就不卡了～</p>
+<h2 id="命令速查"><a href="#命令速查" class="headerlink" title="命令速查"></a>命令速查</h2><table>
+<thead>
+<tr>
+<th>想知道什么</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>这个 PID 是谁、跑了多久</td>
+<td><code>ps -o pid,ppid,rss,etime,command -p &lt;PID&gt;</code></td>
+</tr>
+<tr>
+<td>它下面挂了哪些子进程</td>
+<td><code>ps -axo pid,ppid,rss,etime,command | awk &#39;$2==&lt;PID&gt;&#39;</code></td>
+</tr>
+<tr>
+<td>内存都是哪一类</td>
+<td><code>footprint &lt;PID&gt;</code></td>
+</tr>
+<tr>
+<td>交换用了多少</td>
+<td><code>sysctl vm.swapusage</code></td>
+</tr>
+<tr>
+<td>整体内存压力</td>
+<td><code>memory_pressure</code></td>
+</tr>
+</tbody></table>
+<p>想查得更细，还可以用 <code>vmmap --summary &lt;PID&gt;</code> 看内存区域，或者 <code>heap &lt;PID&gt;</code> 按对象类型统计。不过进程都 42 GB 了，<code>heap</code> 估计要跑很久，这次就没用。</p>
+<h2 id="以后怎么办"><a href="#以后怎么办" class="headerlink" title="以后怎么办"></a>以后怎么办</h2><ul>
+<li>Codex 别一挂好几天，隔段时间 Cmd+Q 重开一下。</li>
+<li>computer-use 用完的对话及时关掉。</li>
+<li>看看 ChatGPT 有没有更新。还会涨的话，就在 Codex 里提 feedback 报给 OpenAI，附上「app-server 运行 24 小时后 footprint 42 GB，几乎全是 Malloc Small」，比一句「很占内存」有用得多。</li>
+</ul>
+<p>总结一下就是：</p>
+<blockquote>
+<p>活动监视器里某个进程的内存大得离谱时，先用 <code>footprint</code> 看一眼分类。如果几乎全是 Malloc 的 Dirty 内存、Reclaimable 接近 0，基本就是泄漏，重启它最快。顺手记下运行时长和峰值，报 bug 的时候用得上。</p>
+</blockquote>
+
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Claude/" rel="tag"># Claude</a>
+              <a href="/tags/Codex/" rel="tag"># Codex</a>
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" rel="tag"># 内存泄漏</a>
+              <a href="/tags/%E6%8E%92%E6%9F%A5/" rel="tag"># 排查</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/11/01/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C11%E6%9C%88%E6%9D%A5%E4%BA%86%EF%BD%9E%E8%99%BD%E7%84%B6%E6%AD%A3%E4%BA%8B%E5%84%BF%E6%B2%A1%E5%B9%B2%EF%BC%8C%E4%BD%86%E6%98%AF%E5%8D%9A%E5%AE%A2%E8%BF%98%E6%98%AF%E8%A6%81%E8%A3%85%E4%BF%AE%E7%9A%84%EF%BD%9E/" rel="prev" title="日常记录｜11月来了～虽然正事儿没干，但是博客还是要装修的～">
+                  <i class="fa fa-angle-left"></i> 日常记录｜11月来了～虽然正事儿没干，但是博客还是要装修的～
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">之瑞</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="halloween-pumpkin-tools">
+  <button class="back-to-top halloween-back-to-top" type="button" aria-label="提灯回到顶部" title="提灯回到顶部">
+    
+    <span class="pumpkin-scroll-percent" aria-hidden="true">0%</span>
+    <i class="pumpkin-handle" aria-hidden="true"></i>
+    <i class="pumpkin-face" aria-hidden="true">🎃</i>
+  </button>
+  <button class="pumpkin-candy-toggle" type="button" aria-label="打开万圣节讨糖彩蛋" aria-expanded="false" aria-controls="pumpkin-treat-panel">
+    <span aria-hidden="true">🍬</span>
+  </button>
+  <div class="pumpkin-treat-panel" id="pumpkin-treat-panel" hidden>
+    <p class="pumpkin-top-tip">提灯回到顶部 ↑</p>
+    <p class="pumpkin-greeting">不给糖，就捣蛋～</p>
+    <div class="pumpkin-treat-actions">
+      <button type="button" data-pumpkin-action="treat">🍬 给你糖</button>
+      <button type="button" data-pumpkin-action="trick">🦇 就不给</button>
+    </div>
+    <p class="pumpkin-reply" role="status" aria-live="polite" aria-atomic="true">今晚，留一盏灯。</p>
+  </div>
+  <div class="pumpkin-candies" aria-hidden="true"></div>
+</div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<div class="seasonal-edge-scene" aria-hidden="true">
+  <span class="halloween-edge-bat">🦇</span>
+</div>
+<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script><script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script>
+</body>
+</html>

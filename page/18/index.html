@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=7fb122a1268b">
+<link rel="stylesheet" href="/css/main.css?v=365df245d28c">
 
 
 
@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">277</span>
+        <span class="site-state-item-count">280</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,138 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/06/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%94%B9createUser%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C%E6%8C%A1%E4%B8%8D%E4%BD%8F%E5%B9%B6%E5%8F%91%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E6%80%8E%E4%B9%88%E6%94%B9%EF%BC%9F/" class="post-title-link" itemprop="url">技术手记｜改createUser存在性校验挡不住并发重复注册怎么改？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-06 21:34:07" itemprop="dateCreated datePublished" datetime="2026-02-06T21:34:07+00:00">2026-02-06 21:34:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-06 21:34:07" itemprop="dateModified" datetime="2026-02-06T21:34:07+00:00">2026-02-06 21:34:07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>改之前的流程：</p>
+<ol>
+<li>构造user</li>
+<li>通过phone和userId查user是否存在，存在throw ErrorCode</li>
+<li>插入user</li>
+</ol>
+<p>改之前的问题：</p>
+<ol>
+<li>userId是刚生成的，不会重复</li>
+<li>真正重复的只有phone</li>
+<li>并发场景下：<ul>
+<li>两个请求同时查询</li>
+<li>都查询不到</li>
+<li>都insert</li>
+<li>都注册【重复注册】</li>
+</ul>
+</li>
+</ol>
+<p>所以这种「先查再插」在并发下必挂。</p>
+<p>改后思路：</p>
+<ol>
+<li>user.phone唯一索引【已有】</li>
+<li>createUser不做exists查询</li>
+<li>直接insert，靠捕获DuplicateKeyException防并发</li>
+</ol>
+<p>改完之后的思维模型是：</p>
+<ol>
+<li>参数校验</li>
+<li>构造user</li>
+<li>直接insert user<ul>
+<li>成功：继续</li>
+<li>DuplicateKeyException: 查已有user，直接用</li>
+</ul>
+</li>
+<li>确保 role 存在（insert + 忽略重复）</li>
+<li>确保 userRole 存在（insert + 忽略重复）</li>
+<li>return user</li>
+</ol>
+<p>另，存在性校验是干嘛的？</p>
+<blockquote>
+<p>存在性校验不是业务逻辑，而是数据完整性</p>
+</blockquote>
+<p>而且必须由DB唯一约束兜底。</p>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1334,209 +1466,6 @@
 <li><code>wait/notify</code>：同JVM，同对象monitor，线程间条件协调</li>
 <li><code>sleep</code>：单纯退避，让出CPU，不涉及协调</li>
 <li>分布式缓存重建：绝大多数是sleep&#x2F;退避 + 重试，不是wait&#x2F;notify</li>
-</ol>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/05/%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%8C%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%87%8D%E5%BB%BA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">互斥锁，逻辑过期，异步重建使用的区别？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-01-05 14:22:17" itemprop="dateCreated datePublished" datetime="2026-01-05T14:22:17+00:00">2026-01-05 14:22:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-05 14:22:17" itemprop="dateModified" datetime="2026-01-05T14:22:17+00:00">2026-01-05 14:22:17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>什么时候用逻辑过期，什么时候要加互斥锁，什么时候做缓存重建？</p>
-<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><p>先看「业务目标」，在看用什么。</p>
-<p>先理清楚概念，看看互斥锁，逻辑过期，缓存重建分别解决了什么问题？</p>
-<h2 id="互斥锁-mutex-Lock"><a href="#互斥锁-mutex-Lock" class="headerlink" title="互斥锁(mutex Lock)"></a>互斥锁(mutex Lock)</h2><p>解决的是：缓存刚实效的时候，大量请求同时查库（击穿）</p>
-<p>本质：用锁把缓存重建这件事变成一次只让一个人干</p>
-<h2 id="逻辑过期-logical-expire"><a href="#逻辑过期-logical-expire" class="headerlink" title="逻辑过期(logical expire)"></a>逻辑过期(logical expire)</h2><p>解决的是：不让用户请求等待重建（保证读接口稳定延迟）</p>
-<p>本质：数据表面没有过期（Key还在），但Value里带一个expireTime。</p>
-<p>过期了也先返回旧值，然后后台重建。</p>
-<h2 id="异步重建-vs-直接重建"><a href="#异步重建-vs-直接重建" class="headerlink" title="异步重建 vs 直接重建"></a>异步重建 vs 直接重建</h2><ul>
-<li>直接重建：这次请求miss&#x2F;过期了，我就查库写缓存再返回（用户多等一会儿）</li>
-<li>异步重建：这次请求不等，先返回旧值&#x2F;默认值，重建交给线程池或者MQ</li>
-</ul>
-<h2 id="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"><a href="#什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？" class="headerlink" title="什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？"></a>什么时候用逻辑过期，什么时候用互斥锁，重建要异步还是直接？</h2><h3 id="互斥锁适用场景（最常用）"><a href="#互斥锁适用场景（最常用）" class="headerlink" title="互斥锁适用场景（最常用）"></a>互斥锁适用场景（最常用）</h3><h4 id="条件："><a href="#条件：" class="headerlink" title="条件："></a>条件：</h4><ul>
-<li>你能接受miss那一次请求稍微慢一点，但要保证DB不被打爆</li>
-</ul>
-<h4 id="典型"><a href="#典型" class="headerlink" title="典型"></a>典型</h4><ul>
-<li>店铺详情</li>
-<li>商品详情</li>
-<li>用户信息</li>
-<li>任何“可以等几十毫秒～几百毫秒”的读接口</li>
-</ul>
-<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><ul>
-<li>TTL（物理过期）</li>
-<li>互斥锁</li>
-<li>直接重建</li>
-</ul>
-<h5 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h5><ul>
-<li>key真过期了 –&gt; miss</li>
-<li>抢锁的线程查库写回</li>
-<li>其他线程等待&#x2F;重试读缓存</li>
-</ul>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>实现简单，数据相对新，不会长期返回旧数据</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>在过期瞬间，少数读请求会慢</p>
-<h3 id="逻辑过期适用场景（你追求“读永远不抖”）"><a href="#逻辑过期适用场景（你追求“读永远不抖”）" class="headerlink" title="逻辑过期适用场景（你追求“读永远不抖”）"></a>逻辑过期适用场景（你追求“读永远不抖”）</h3><h4 id="条件：-1"><a href="#条件：-1" class="headerlink" title="条件："></a>条件：</h4><p>你不能接受用户请求因为重建而变慢，宁愿短时间，返回旧数据。</p>
-<h4 id="典型-1"><a href="#典型-1" class="headerlink" title="典型"></a>典型</h4><ul>
-<li>首页热门榜单</li>
-<li>探店Feed流</li>
-<li>TopN&#x2F;排行榜</li>
-<li>任何“读非常高频 + 不那么要求强一致”的接口</li>
-</ul>
-<h4 id="组合：逻辑过期-异步重建-锁"><a href="#组合：逻辑过期-异步重建-锁" class="headerlink" title="组合：逻辑过期 + 异步重建 + 锁"></a>组合：逻辑过期 + 异步重建 + 锁</h4><ul>
-<li>缓存里一直有值</li>
-<li>过期了：返回旧值（用户无感）</li>
-<li>后台线程区查库重建</li>
-</ul>
-<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>读接口延迟稳定</p>
-<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>可能返回旧数据一段时间，实现更复杂，需要线程池 + 防重建风暴</p>
-<h3 id="到底异步重建还是直接重建？"><a href="#到底异步重建还是直接重建？" class="headerlink" title="到底异步重建还是直接重建？"></a>到底异步重建还是直接重建？</h3><p>一句话判断：这个接口能不能让用户等？</p>
-<ul>
-<li>能等：直接重建</li>
-<li>不能等：异步重建<br>再补充一条：</li>
-<li>如果这个接口极高并发且热点极少，更偏向逻辑过期（例如首页榜单一个key顶全站）</li>
-</ul>
-<h3 id="异步重建需要加锁吗？"><a href="#异步重建需要加锁吗？" class="headerlink" title="异步重建需要加锁吗？"></a>异步重建需要加锁吗？</h3><p>需要，而且几乎总是需要。</p>
-<p>否则你会得到几乎经典的灾难：过期瞬间，1000个请求同时潘达UN逻辑过期 –&gt; 1000个线程池同时提交异步任务–&gt; 线程池&#x2F;DB爆炸</p>
-<p>所以异步重建一般是：</p>
-<ul>
-<li>读到Value</li>
-<li>判断逻辑过期</li>
-<li>尝试抢一个重建锁<ul>
-<li>抢到：提交异步任务</li>
-<li>没抢到：说明别人已经在重建了</li>
-</ul>
-</li>
-<li>直接返回旧值</li>
-</ul>
-<p>总结：逻辑过期 + 异步重建 &#x3D; 必须配合“重建锁”防止重复重建</p>
-<h1 id="一张表总结如何选择场景"><a href="#一张表总结如何选择场景" class="headerlink" title="一张表总结如何选择场景"></a>一张表总结如何选择场景</h1><table>
-<thead>
-<tr>
-<th>目标&#x2F;场景</th>
-<th>推荐方案</th>
-<th>用户体验</th>
-<th>DB 压力</th>
-<th>一致性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>读多写少，允许偶尔慢一下</td>
-<td>TTL + 互斥锁 + 直接重建</td>
-<td>偶发慢</td>
-<td>低</td>
-<td>较新</td>
-</tr>
-<tr>
-<td>读超高频，不能慢（首页&#x2F;榜单）</td>
-<td>逻辑过期 + 异步重建 + 重建锁</td>
-<td>稳定快</td>
-<td>很低</td>
-<td>可能旧</td>
-</tr>
-<tr>
-<td>强一致（写后立刻读到新）</td>
-<td>别指望纯缓存；用删缓存+延迟双删&#x2F;消息一致性等</td>
-<td>取决于设计</td>
-<td>中</td>
-<td>强</td>
-</tr>
-</tbody></table>
-<h1 id="模板伪代码"><a href="#模板伪代码" class="headerlink" title="模板伪代码"></a>模板伪代码</h1><h2 id="模板1：-TTL-互斥锁（直接重建）"><a href="#模板1：-TTL-互斥锁（直接重建）" class="headerlink" title="模板1： TTL + 互斥锁（直接重建）"></a>模板1： TTL + 互斥锁（直接重建）</h2><h3 id="用于：大部分详情接口"><a href="#用于：大部分详情接口" class="headerlink" title="用于：大部分详情接口"></a>用于：大部分详情接口</h3><ol>
-<li>get cache</li>
-<li>miss –&gt; tryLock</li>
-<li>lock owner rebuild &amp; set</li>
-<li>others sleep 50ms retry cache</li>
-</ol>
-<h2 id="模板2：逻辑过期-异步重建"><a href="#模板2：逻辑过期-异步重建" class="headerlink" title="模板2：逻辑过期 + 异步重建"></a>模板2：逻辑过期 + 异步重建</h2><h3 id="用于：首页榜单-热点聚合"><a href="#用于：首页榜单-热点聚合" class="headerlink" title="用于：首页榜单 &#x2F;热点聚合"></a>用于：首页榜单 &#x2F;热点聚合</h3><ol>
-<li>get cache(must exist)</li>
-<li>if logicalExpired:<ul>
-<li>tryLock</li>
-<li>if lock submit async rebuild</li>
-</ul>
-</li>
-<li>return stale cache immediately</li>
 </ol>
 
       
