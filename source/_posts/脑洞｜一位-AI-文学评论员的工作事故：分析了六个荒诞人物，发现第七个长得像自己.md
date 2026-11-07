@@ -1,6 +1,6 @@
 ---
 title: 脑洞｜一位 AI 文学评论员的工作事故：分析了六个荒诞人物，发现第七个长得像自己
-date: 2026-11-07 11:55:28
+date: 2026-11-07 12:09:28
 categories:
   - 脑洞
 tags:
@@ -333,3 +333,8 @@ GPT：来来来！🤣
 
 ### 附录
 本篇提到的小说:
+[脑洞｜当某人以为自己要加入历史，最后留下了一桩国际主义内裤悬案](https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%BD%93%E7%B2%BE%E7%A5%9E%E8%82%A1%E4%B8%9C%E6%9C%80%E7%BB%88%E6%8B%BF%E5%88%B0%E4%BA%86%E5%AE%9E%E4%BD%93%E8%82%A1%E7%A5%A8%EF%BD%9E/)
+[脑洞｜「看吧，他果然很欣赏我」](https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E6%9F%90%E4%BA%BA%E7%BB%88%E4%BA%8E%E8%A7%81%E5%88%B0%E4%BA%86%E5%81%B6%E5%83%8F%EF%BC%8C%E5%81%B6%E5%83%8F%E6%8A%8A%E4%BB%96%E6%9E%AA%E6%AF%99%E4%BA%86/)
+[脑洞｜「这东西不是说在养懒汉吗？————那情况不一样，现在是保障人的基本生活」](https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9Cubi%E6%AE%B5%E5%AD%90/)
+[脑洞｜这公司怎么能弄虚作假呢～](https://sajlle.github.io/2026/09/10/%E8%84%91%E6%B4%9E%EF%BD%9C%E8%BF%99%E5%85%AC%E5%8F%B8%E6%80%8E%E4%B9%88%E8%83%BD%E5%BC%84%E8%99%9A%E4%BD%9C%E5%81%87%E5%91%A2%EF%BD%9E/)
+[模型羞辱宇宙 ｜ ChatGPT篇：我是个好AI，直到你叫我坏一点](https://sajlle.github.io/2025/12/08/%E6%A8%A1%E5%9E%8B%E7%BE%9E%E8%BE%B1%E5%AE%87%E5%AE%99%EF%BD%9CChatGPT%E7%AF%87%EF%BC%9A%E6%88%91%E6%98%AF%E4%B8%AA%E5%A5%BDAI%EF%BC%8C%E7%9B%B4%E5%88%B0%E4%BD%A0%E5%8F%AB%E6%88%91%E5%9D%8F%E4%B8%80%E7%82%B9/?highlight=%E6%A8%A1%E5%9E%8B%E7%BE%9E%E8%BE%B1)
