@@ -11,7 +11,48 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-03T16:55:22.000Z</updated>
+  <updated>2026-11-07T12:00:00.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="道德化" scheme="https://sajlle.github.io/tags/%E9%81%93%E5%BE%B7%E5%8C%96/"/>
+    <id>https://sajlle.github.io/2026/11/07/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%96%84%E8%89%AF%E7%9A%84%E4%BA%BA%E2%80%9C/</id>
+    <link href="https://sajlle.github.io/2026/11/07/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%96%84%E8%89%AF%E7%9A%84%E4%BA%BA%E2%80%9C/"/>
+    <published>2026-11-07T12:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>声明：本文纯属虚构～</p>
+<hr>
+<p>有一种人就是，不把你惹急之前，就坚决不撒手。</p>
+<p>把你惹急之后，就说：她就是有问题。别惹她。</p>
+<p>当然，他们这么干了之后，还是善良的人。</p>
+<hr>
+<p>一个社区的善良人，是什么样子的呢？</p>
+<p>白天出门，看到小姑娘戴手串，心里看不惯。</p>
+<p>什么？丫头片子也敢花钱？</p>
+<p>啊～破～</p>
+<]]>
+    </summary>
+    <title>脑洞｜关于「善良」「他是个好人」</title>
+    <updated>2026-11-07T12:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <category term="AI幻觉" scheme="https://sajlle.github.io/tags/AI%E5%B9%BB%E8%A7%89/"/>
+    <id>https://sajlle.github.io/2026/11/07/%E8%84%91%E6%B4%9E%EF%BD%9C%E4%B8%80%E4%BD%8D-AI-%E6%96%87%E5%AD%A6%E8%AF%84%E8%AE%BA%E5%91%98%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BA%8B%E6%95%85%EF%BC%9A%E5%88%86%E6%9E%90%E4%BA%86%E5%85%AD%E4%B8%AA%E8%8D%92%E8%AF%9E%E4%BA%BA%E7%89%A9%EF%BC%8C%E5%8F%91%E7%8E%B0%E7%AC%AC%E4%B8%83%E4%B8%AA%E9%95%BF%E5%BE%97%E5%83%8F%E8%87%AA%E5%B7%B1/</id>
+    <link href="https://sajlle.github.io/2026/11/07/%E8%84%91%E6%B4%9E%EF%BD%9C%E4%B8%80%E4%BD%8D-AI-%E6%96%87%E5%AD%A6%E8%AF%84%E8%AE%BA%E5%91%98%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BA%8B%E6%95%85%EF%BC%9A%E5%88%86%E6%9E%90%E4%BA%86%E5%85%AD%E4%B8%AA%E8%8D%92%E8%AF%9E%E4%BA%BA%E7%89%A9%EF%BC%8C%E5%8F%91%E7%8E%B0%E7%AC%AC%E4%B8%83%E4%B8%AA%E9%95%BF%E5%BE%97%E5%83%8F%E8%87%AA%E5%B7%B1/"/>
+    <published>2026-11-07T11:55:28.000Z</published>
+    <summary>
+      <![CDATA[<h1 id="脑洞｜一位-AI-文学评论员的工作事故：分析了六个荒诞人物，发现第七个长得像自己"><a href="#脑洞｜一位-AI-文学评论员的工作事故：分析了六个荒诞人物，发现第七个长得像自己" class="headerlink" title="脑洞｜一位 AI 文学评论员的工作事故：分析了六个荒诞人物，发现第七个长得像自己"></a>脑洞｜一位 AI 文学评论员的工作事故：分析了六个荒]]>
+    </summary>
+    <title>脑洞｜一位 AI 文学评论员的工作事故：分析了六个荒诞人物，发现第七个长得像自己</title>
+    <updated>2026-11-07T11:55:28.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -527,38 +568,5 @@
     </summary>
     <title>日常记录｜今天总算闲下来了，趁着午饭之后，写一点简单内容</title>
     <updated>2026-10-01T13:46:05.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
-    <category term="Anthropic" scheme="https://sajlle.github.io/tags/Anthropic/"/>
-    <id>https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/09/25/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%81%87%E5%A6%82Anthropic%E6%8B%9B%E4%BA%86%E4%B8%80%E4%BD%8D%E9%81%A5%E9%81%A5%E9%A2%86%E5%85%88%E7%9A%84%E8%90%A5%E9%94%80%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E5%93%81%E7%89%8C%E5%BD%A2%E8%B1%A1%E5%A6%82%E4%BD%95%E5%BD%93%E5%9C%BA%E6%AD%BB%E4%BA%A1%EF%BC%9F/"/>
-    <published>2026-09-25T11:23:23.000Z</published>
-    <summary>
-      <![CDATA[<h1 id="Anthropic-新任营销负责人首秀实录"><a href="#Anthropic-新任营销负责人首秀实录" class="headerlink" title="Anthropic 新任营销负责人首秀实录"></a>Anthropic 新任营销负责人首秀实录</h1><h2 id="开场"><a href="#开场" class="headerlink" title="开场"><]]>
-    </summary>
-    <title>脑洞｜假如 Anthropic 招了一位「遥遥领先」的营销负责人</title>
-    <updated>2026-09-25T11:23:23.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="中秋节" scheme="https://sajlle.github.io/tags/%E4%B8%AD%E7%A7%8B%E8%8A%82/"/>
-    <category term="云算力" scheme="https://sajlle.github.io/tags/%E4%BA%91%E7%AE%97%E5%8A%9B/"/>
-    <id>https://sajlle.github.io/2026/09/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%AD%E7%A7%8B%E8%8A%82-Surprise%EF%BC%9AAnthropic-%E7%BB%99%E6%88%91%E5%8F%91%E4%BA%86-100-%E5%88%80%E4%BA%91%E7%AE%97%E5%8A%9B%E6%9C%88%E9%A5%BC/</id>
-    <link href="https://sajlle.github.io/2026/09/24/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%B8%AD%E7%A7%8B%E8%8A%82-Surprise%EF%BC%9AAnthropic-%E7%BB%99%E6%88%91%E5%8F%91%E4%BA%86-100-%E5%88%80%E4%BA%91%E7%AE%97%E5%8A%9B%E6%9C%88%E9%A5%BC/"/>
-    <published>2026-09-24T15:28:15.000Z</published>
-    <summary>
-      <![CDATA[<p>今天刷到消息，Claude Pro 用户可以领一笔 Claude Code Cloud Session credit。<br>我：真的假的？</p>
-<p>于是接了Github，领到了。100刀，换算成人民币，大概700块。<br>但因为它叫 credit，我的大脑完全没有“七百块”的感觉。</p>
-<p>现金 100 刀：好多钱。<br>Claude credit 100 刀：哦，100]]>
-    </summary>
-    <title>日常记录｜中秋节 Surprise：Anthropic 给我发了 100 刀云算力月饼</title>
-    <updated>2026-09-24T15:28:15.000Z</updated>
   </entry>
 </feed>
