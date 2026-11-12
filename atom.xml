@@ -108,8 +108,8 @@
       <name>之瑞</name>
     </author>
     <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="Claude" scheme="https://sajlle.github.io/tags/Claude/"/>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="macOS" scheme="https://sajlle.github.io/tags/macOS/"/>
     <category term="内存泄漏" scheme="https://sajlle.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
     <category term="排查" scheme="https://sajlle.github.io/tags/%E6%8E%92%E6%9F%A5/"/>
