@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=393d03743dfa">
+<link rel="stylesheet" href="/css/main.css?v=056ce8aa6dff">
 
 
 
@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">224</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">286</span>
+        <span class="site-state-item-count">287</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,115 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/14/BugFix%EF%BD%9CAgentVOBug%EF%BC%9ANOT-FOUND%E5%92%8CREFERENCE-UNAVAILABLE%E7%9A%84%E8%AF%AD%E4%B9%89%E5%88%86%E6%AD%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/14/BugFix%EF%BD%9CAgentVOBug%EF%BC%9ANOT-FOUND%E5%92%8CREFERENCE-UNAVAILABLE%E7%9A%84%E8%AF%AD%E4%B9%89%E5%88%86%E6%AD%A7/" class="post-title-link" itemprop="url">BugFix｜AgentV0Bug：NOT_FOUND和REFERENCE_UNAVAILABLE的语义分歧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-14 15:23:02" itemprop="dateCreated datePublished" datetime="2026-09-14T15:23:02+00:00">2026-09-14 15:23:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-09-14 15:23:02" itemprop="dateModified" datetime="2026-09-14T15:23:02+00:00">2026-09-14 15:23:02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/BugFix/" itemprop="url" rel="index"><span itemprop="name">BugFix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题～</p>
+<p>最开始Payment不存在看起来像是一个Optional empty。<br>但实际上存在两种完全不同的情况。</p>
+<p>情况一：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">refund.paymentRecordId = 123</span><br><span class="line">查不到payment</span><br><span class="line">-&gt; NOT<span class="emphasis">_FOUND</span></span><br></pre></td></tr></table></figure>
+
+<p>情况二：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">refund.paymentRecordId = null</span><br><span class="line">根本不知道该查哪一条</span><br><span class="line">-&gt; REFERENCE<span class="emphasis">_UNAVAILABLE</span></span><br></pre></td></tr></table></figure>
+
+<p>如果混掉了，后面的Agent会产生错误结论。</p>
+<p>比如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Payment不存在</span><br><span class="line">-&gt; 没有 transaction mismatch</span><br><span class="line">-&gt; NORMAL</span><br></pre></td></tr></table></figure>
+<p>这个显然错了</p>
+<p>所以从2态升级到了3态。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PRESENT</span><br><span class="line">NOT<span class="emphasis">_FOUND</span></span><br><span class="line"><span class="emphasis">REFERENCE_</span>UNAVAILABLE</span><br></pre></td></tr></table></figure>
+
+<p>所以MissingEvidence才可以正确表达：「已知应该但是没有」和「现在连关联都没有，不能判断」。</p>
+<p>这条的核心是：</p>
+<blockquote>
+<p>Agent如何减少幻觉？不靠Prompt，而是靠数据模型把不确定性编码出来</p>
+</blockquote>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1167,102 +1276,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/11/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E7%BB%99Agent%E6%8E%A5%E4%BA%86%E7%9C%9F%E5%AE%9EAPI%E5%81%9A%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%E5%86%99%E5%AE%8C%E4%BA%86%EF%BD%9E/" class="post-title-link" itemprop="url">日常记录｜今天给Agent接了真实API做测试，冒烟测试写完了～</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-09-11 15:36:22" itemprop="dateCreated datePublished" datetime="2026-09-11T15:36:22+00:00">2026-09-11 15:36:22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-09-11 15:36:22" itemprop="dateModified" datetime="2026-09-11T15:36:22+00:00">2026-09-11 15:36:22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如题～</p>
-<p>昨儿审了几千行代码 + 写了6篇博客，后续大半夜的让WorkBuddy给我把博客markdown排版一下。晚上11点才睡。<br>生产队的驴也不能这么用呀。</p>
-<p>于是今天继续降速。今儿就接API做测试，写文档。<br>边做测试，边想，DeepSeek真有价格优势呀～（笑）</p>
-<p>然后打算再接一个谷歌的API，毕竟每天有免费的额度。<br>目前我这边项目还不需要很聪明的模型。</p>
-<p>另，目前项目接入的是OpenAI的SDK，再接上Anthropic的SDK，差不多就能兼容市面上主流模型的API接入格式了。</p>
-<p>再，因为订阅稳定了，好几个月没折腾海外支付卡了，还不确定我现在这张能不能买API。<br>最近懒得折腾，所以测试用的DeepSeek，好买，价格便宜，还不需要立刻折腾付款设施。</p>
-<p>再，昨儿让workBuddy给我博客文章排版的时候，有点感叹，之前我一直烦的就是，一篇文章发不同平台，得改不同标题，排版，现在我只需要写文章，平台适配，配图&#x2F;改标题之类的，完全可以交给AI。<br>对本人这种重内容，轻格式的人来说，是个好消息～</p>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1319,9 +1332,9 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-<script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
+<div class="seasonal-edge-scene" aria-hidden="true">
   <span class="halloween-edge-bat">🦇</span>
 </div>
-<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script>
+<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script><script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script>
 </body>
 </html>
