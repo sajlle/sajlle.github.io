@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-12T15:51:09.000Z</updated>
+  <updated>2026-11-14T12:23:57.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="如题" scheme="https://sajlle.github.io/tags/%E5%A6%82%E9%A2%98/"/>
+    <id>https://sajlle.github.io/2026/11/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E8%A2%ABClaude%E5%BC%B9%E5%87%BAKYC%E4%BA%86%EF%BC%8C%E5%BE%88%E4%B8%8D%E7%88%BD%E5%93%8E%EF%BC%8C%E4%B8%8A%E6%B8%B8%E6%9C%8D%E5%8A%A1%E5%95%86%E5%B8%A6%E6%9D%A5%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%A6%81%E6%89%94%E7%BB%99%E4%B8%8B%E6%B8%B8%E7%94%A8%E6%88%B7%E6%9D%A5%E6%B6%88%E5%8C%96%EF%BC%9F/</id>
+    <link href="https://sajlle.github.io/2026/11/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E8%A2%ABClaude%E5%BC%B9%E5%87%BAKYC%E4%BA%86%EF%BC%8C%E5%BE%88%E4%B8%8D%E7%88%BD%E5%93%8E%EF%BC%8C%E4%B8%8A%E6%B8%B8%E6%9C%8D%E5%8A%A1%E5%95%86%E5%B8%A6%E6%9D%A5%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%A6%81%E6%89%94%E7%BB%99%E4%B8%8B%E6%B8%B8%E7%94%A8%E6%88%B7%E6%9D%A5%E6%B6%88%E5%8C%96%EF%BC%9F/"/>
+    <published>2026-11-14T12:23:57.000Z</published>
+    <summary>
+      <![CDATA[<p>哇～今天超级不爽，被Anthropic弹kyc验证。账户KYC过了之前，功能无法使用。所以下午找apple那边申请退款。oai那边产品朝令夕改。anthropic这边是产品不烂但封号风险高。我本人的体感是，这两家都需要下游用户来帮他们消化不确定性。所以以后用模型，也许hugging face上下载开源模型自己本地跑才是出路。</p>
+<p>两家都需要下游用户去付出额外成本消化他们带来的不确定]]>
+    </summary>
+    <title>日常记录｜今天被Claude弹出KYC了，很不爽哎，上游服务商带来的不确定性要扔给下游用户来消化？</title>
+    <updated>2026-11-14T12:23:57.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -547,22 +563,5 @@
     </summary>
     <title>日常记录｜写上一篇很烦，要不停的做事实核查</title>
     <updated>2026-10-13T12:14:26.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="客观" scheme="https://sajlle.github.io/tags/%E5%AE%A2%E8%A7%82/"/>
-    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/</id>
-    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%92%8C%E5%AE%A2%E8%A7%82/"/>
-    <published>2026-10-13T09:41:42.000Z</published>
-    <summary>
-      <![CDATA[<p>反正早上吃完饭了，不想立刻写算法，就先写一下博客？</p>
-<p>早饭是牛奶燕麦西红柿辣椒丝瓜汤。算了下，一顿碳水55克，蛋白质30克，脂肪30克，热量大概600卡。十分钟出锅。<br>成本：牛奶2元一盒，丝瓜我妈种的，西红柿不到5毛钱，辣椒一个5毛。燕麦30克3毛钱。花生5毛钱，早饭成本（食材）不到4RMB。<br>味道：类似奶辣风味的咖喱炖菜。</p>
-<p>今天早饭碳水不低，我还是得打]]>
-    </summary>
-    <title>日常记录｜早餐，SNS包装和客观的尺度</title>
-    <updated>2026-10-13T09:41:42.000Z</updated>
   </entry>
 </feed>
