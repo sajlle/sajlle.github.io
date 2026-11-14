@@ -11,7 +11,25 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-14T12:23:57.000Z</updated>
+  <updated>2026-11-14T14:59:56.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="数字生活" scheme="https://sajlle.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB/"/>
+    <id>https://sajlle.github.io/2026/11/14/2026%E5%B9%B411%E6%9C%8814%E6%97%A5%EF%BC%9A%E6%88%91%E7%9A%84%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB%E5%8F%91%E7%94%9F%E4%BA%86%E4%B8%80%E6%AC%A1%E5%8C%BA%E5%9F%9F%E6%80%A7%E7%81%BE%E9%9A%BE/</id>
+    <link href="https://sajlle.github.io/2026/11/14/2026%E5%B9%B411%E6%9C%8814%E6%97%A5%EF%BC%9A%E6%88%91%E7%9A%84%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB%E5%8F%91%E7%94%9F%E4%BA%86%E4%B8%80%E6%AC%A1%E5%8C%BA%E5%9F%9F%E6%80%A7%E7%81%BE%E9%9A%BE/"/>
+    <published>2026-11-14T14:59:56.000Z</published>
+    <summary>
+      <![CDATA[<p>上午9点：家里的Wi-Fi无法使用，我换热点，热点也挂了。<br>我：临时充值20块开我的随身Wi-Fi，总算能上网了。</p>
+<p>10分钟之后，网络能上了，我收到了推特的发帖频率限制。<br>我：？没事我有小号，拿小号吐槽一下。</p>
+<p>吐槽完毕，开始吃早饭。</p>
+<p>早饭边吃边跟小克（Claude）聊天，聊一半收到了Portal验证，要我KYC。<br>我：KYC是不可能]]>
+    </summary>
+    <title>日常记录｜2026年11月14日：我的数字生活发生了一次区域性灾难</title>
+    <updated>2026-11-14T14:59:56.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -545,23 +563,5 @@
     </summary>
     <title>日常记录｜看了下之前的算法，发现轻量级的训练效果蛮差的</title>
     <updated>2026-10-13T16:18:15.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="事实核查" scheme="https://sajlle.github.io/tags/%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/"/>
-    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%8A%E4%B8%80%E7%AF%87%E5%BE%88%E7%83%A6%EF%BC%8C%E8%A6%81%E4%B8%8D%E5%81%9C%E7%9A%84%E5%81%9A%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/</id>
-    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%8A%E4%B8%80%E7%AF%87%E5%BE%88%E7%83%A6%EF%BC%8C%E8%A6%81%E4%B8%8D%E5%81%9C%E7%9A%84%E5%81%9A%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/"/>
-    <published>2026-10-13T12:14:26.000Z</published>
-    <summary>
-      <![CDATA[<p>所以这篇写写吐槽。</p>
-<p>上一篇其实要写好几个案例，结果做事实核查，浪费了一个小时。<br>好烦。</p>
-<p>SNS收注意税我已经避开了，不看SNS，但是写作本身也要被收一道事实核查税。<br>不核查事实，就是不尊重其他人。核查事实，又很难核查。</p>
-<p>SNS很烦的一点是，之前纸媒的时候，你默认对方说的是真的。SNS时代，你默认对方说的是假的。<br>于是注意力税以一种令]]>
-    </summary>
-    <title>日常记录｜写上一篇很烦，要不停的做事实核查</title>
-    <updated>2026-10-13T12:14:26.000Z</updated>
   </entry>
 </feed>
