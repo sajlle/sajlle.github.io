@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-14T14:59:56.000Z</updated>
+  <updated>2026-11-15T00:00:00.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="AI" scheme="https://sajlle.github.io/tags/AI/"/>
+    <category term="Anthropic" scheme="https://sajlle.github.io/tags/Anthropic/"/>
+    <category term="商业模式" scheme="https://sajlle.github.io/tags/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://sajlle.github.io/2026/11/15/%E8%84%91%E6%B4%9E%EF%BD%9CClaude%E5%B0%81%E5%8F%B7%E9%99%A9%EF%BC%9A%E4%B8%80%E5%AE%B6AI%E5%85%AC%E5%8F%B8%E5%A6%82%E4%BD%95%E5%B8%A6%E5%8A%A8%E4%B8%8B%E6%B8%B8%E9%87%91%E8%9E%8D%E4%BA%A7%E4%B8%9A%E5%8F%91%E5%B1%95/</id>
+    <link href="https://sajlle.github.io/2026/11/15/%E8%84%91%E6%B4%9E%EF%BD%9CClaude%E5%B0%81%E5%8F%B7%E9%99%A9%EF%BC%9A%E4%B8%80%E5%AE%B6AI%E5%85%AC%E5%8F%B8%E5%A6%82%E4%BD%95%E5%B8%A6%E5%8A%A8%E4%B8%8B%E6%B8%B8%E9%87%91%E8%9E%8D%E4%BA%A7%E4%B8%9A%E5%8F%91%E5%B1%95/"/>
+    <published>2026-11-15T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h3 id="一、发现商机"><a href="#一、发现商机" class="headerlink" title="一、发现商机"></a>一、发现商机</h3><p>昨天，我还在批评 Anthropic 的商业模式。</p>
+<p>用户预付订阅费，平台掌握账号的实际控制权。平台可以根据服务条款限制或终止服务，而用户如果遭遇封禁，还需要自行申诉、申请退款、承担沟通成本。</p>
+<p>服务商掌]]>
+    </summary>
+    <title>脑洞｜Claude封号险：一家AI公司如何带动下游金融产业发展</title>
+    <updated>2026-11-15T00:00:00.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -142,8 +161,8 @@
       <name>之瑞</name>
     </author>
     <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="Claude" scheme="https://sajlle.github.io/tags/Claude/"/>
     <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
+    <category term="Claude" scheme="https://sajlle.github.io/tags/Claude/"/>
     <category term="macOS" scheme="https://sajlle.github.io/tags/macOS/"/>
     <category term="内存泄漏" scheme="https://sajlle.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
     <category term="排查" scheme="https://sajlle.github.io/tags/%E6%8E%92%E6%9F%A5/"/>
@@ -542,26 +561,5 @@
     </summary>
     <title>日常记录｜上一篇文章没拿给AI提意见，爽了，哇，就这么写博客才爽～</title>
     <updated>2026-10-13T17:10:01.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="算法" scheme="https://sajlle.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E4%BA%86%E4%B8%8B%E4%B9%8B%E5%89%8D%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%8C%E5%8F%91%E7%8E%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%88%E6%9E%9C%E8%9B%AE%E5%B7%AE%E7%9A%84/</id>
-    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%8B%E4%BA%86%E4%B8%8B%E4%B9%8B%E5%89%8D%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%8C%E5%8F%91%E7%8E%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%88%E6%9E%9C%E8%9B%AE%E5%B7%AE%E7%9A%84/"/>
-    <published>2026-10-13T16:18:15.000Z</published>
-    <summary>
-      <![CDATA[<p>最近拿了之前写过的题做复测训练。<br>发现7月～9月那段时间，一天一题或者2题，没有模板总结，也没有集中主题的训练，效果蛮差的。<br>基本可以算是浪费时间。</p>
-<p>所以最近重新写这段吧。<br>教训就是：</p>
-<ol>
-<li>轻量级的训练不行</li>
-<li>不复写不行</li>
-<li>不记录进度不行</li>
-</ol>]]>
-    </summary>
-    <title>日常记录｜看了下之前的算法，发现轻量级的训练效果蛮差的</title>
-    <updated>2026-10-13T16:18:15.000Z</updated>
   </entry>
 </feed>
