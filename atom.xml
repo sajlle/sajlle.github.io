@@ -57,6 +57,26 @@
     <author>
       <name>之瑞</name>
     </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="AI" scheme="https://sajlle.github.io/tags/AI/"/>
+    <category term="Anthropic" scheme="https://sajlle.github.io/tags/Anthropic/"/>
+    <category term="金融衍生品" scheme="https://sajlle.github.io/tags/%E9%87%91%E8%9E%8D%E8%A1%8D%E7%94%9F%E5%93%81/"/>
+    <category term="BDS" scheme="https://sajlle.github.io/tags/BDS/"/>
+    <category term="V-Claude" scheme="https://sajlle.github.io/tags/V-Claude/"/>
+    <id>https://sajlle.github.io/2026/11/15/%E8%84%91%E6%B4%9E%EF%BD%9CClaude%E6%81%90%E6%85%8C%E6%8C%87%E6%95%B0%EF%BC%9A%E5%BD%93%E5%8D%8E%E5%B0%94%E8%A1%97%E5%BC%80%E5%A7%8B%E4%BA%A4%E6%98%93%E5%B0%9A%E6%9C%AA%E5%8F%91%E7%94%9F%E7%9A%84%E5%B0%81%E5%8F%B7/</id>
+    <link href="https://sajlle.github.io/2026/11/15/%E8%84%91%E6%B4%9E%EF%BD%9CClaude%E6%81%90%E6%85%8C%E6%8C%87%E6%95%B0%EF%BC%9A%E5%BD%93%E5%8D%8E%E5%B0%94%E8%A1%97%E5%BC%80%E5%A7%8B%E4%BA%A4%E6%98%93%E5%B0%9A%E6%9C%AA%E5%8F%91%E7%94%9F%E7%9A%84%E5%B0%81%E5%8F%B7/"/>
+    <published>2026-11-15T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p><em>本文为虚构金融讽刺故事，涉及的金融产品、指数、行情及事件均为文学设定。</em></p>
+<h3 id="一、金融危机之后，我们决定继续创新"><a href="#一、金融危机之后，我们决定继续创新" class="headerlink" title="一、金融危机之后，我们决定继续创新"></a>一、金融危机之后，我们决定继续创新</h3><p>上回说到，某市某社区人工智能产业园区]]>
+    </summary>
+    <title>脑洞｜Claude恐慌指数：当华尔街开始交易尚未发生的封号</title>
+    <updated>2026-11-15T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
     <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
     <category term="数字生活" scheme="https://sajlle.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB/"/>
     <id>https://sajlle.github.io/2026/11/14/2026%E5%B9%B411%E6%9C%8814%E6%97%A5%EF%BC%9A%E6%88%91%E7%9A%84%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB%E5%8F%91%E7%94%9F%E4%BA%86%E4%B8%80%E6%AC%A1%E5%8C%BA%E5%9F%9F%E6%80%A7%E7%81%BE%E9%9A%BE/</id>
@@ -546,24 +566,5 @@
     </summary>
     <title>日常记录｜吐槽一下，最近GPT超级蠢，再这么下去，我真的要退订了</title>
     <updated>2026-10-14T11:48:47.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="AI" scheme="https://sajlle.github.io/tags/AI/"/>
-    <id>https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/</id>
-    <link href="https://sajlle.github.io/2026/10/13/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8EAI%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%BB%BA%E8%AE%AE%E5%90%90%E6%A7%BD/"/>
-    <published>2026-10-13T17:30:06.000Z</published>
-    <summary>
-      <![CDATA[<p>哎呀，马上要去拿快递，所以只说一点想法。</p>
-<p>其实就是把模型自己没有判断好情境的风险转嫁给用户了。<br>也就是，我也不知道这个地方要不要提醒一下用户，但提醒一下用户总归是好的。</p>
-<p>于是……悲催了～<br>本来说的是A，模型提醒你B，你争辩C，最后原始问题呢？原始问题的时间被占用了。</p>
-<p>所以，还是独断专行吧～</p>
-<p>另，模型没有灰区对弈的经验，总是要]]>
-    </summary>
-    <title>日常记录｜关于AI大平均建议吐槽</title>
-    <updated>2026-10-13T17:30:06.000Z</updated>
   </entry>
 </feed>
