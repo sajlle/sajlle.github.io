@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=bec698773cf0">
+<link rel="stylesheet" href="/css/main.css?v=1605d0549eda">
 
 
 
@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">229</span>
+          <span class="site-state-item-count">230</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">289</span>
+        <span class="site-state-item-count">291</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/11/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E4%BB%8A%E6%97%A5%E6%96%B0bug%EF%BC%9Atoken%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%AF%AF/" class="post-title-link" itemprop="url">技术手记｜今日新bug：token校验失误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-11 10:53:04" itemprop="dateCreated datePublished" datetime="2026-02-11T10:53:04+00:00">2026-02-11 10:53:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-11 10:53:04" itemprop="dateModified" datetime="2026-02-11T10:53:04+00:00">2026-02-11 10:53:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题。（笑）。</p>
+<p>昨儿我测试发现，cachedTokenId跟前端传的tokenId一样，为啥还是校验失败？<br>难道是pepper每次都随机生成一个新的，不是固定常量？（因为之前出现过类似错误，但我检查了一下pepper，没错哎）。</p>
+<p>tokenId对得上，那传递没问题，问题就出在加密上了。<br>后续排查，发现，创建token存redis的时候，token &#x3D; sha256(sha256(tokenId))，校验的时候，用的是token &#x3D; sha256(tokenId)，我说怎么tokenId对了，但校验老失败。</p>
+<p>另，出现这次问题，是因为写saveRefreshToken的时候，没有在文档里写清楚，存token还是存tokenId作校验。所以，写清楚文档，真的很必要啊（笑）</p>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1300,106 +1393,6 @@
 <p>存在性校验不是业务逻辑，而是数据完整性</p>
 </blockquote>
 <p>而且必须由DB唯一约束兜底。</p>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/02/06/%E4%BA%BA%E7%94%9F%E5%A6%82%E6%AD%8C%EF%BD%9C%E8%BF%99%E4%B8%89%E5%B9%B4%E6%88%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B9%B4%EF%BC%8C%E6%98%AF%E4%B8%89%E9%A6%96%E6%AD%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/02/06/%E4%BA%BA%E7%94%9F%E5%A6%82%E6%AD%8C%EF%BD%9C%E8%BF%99%E4%B8%89%E5%B9%B4%E6%88%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B9%B4%EF%BC%8C%E6%98%AF%E4%B8%89%E9%A6%96%E6%AD%8C/" class="post-title-link" itemprop="url">人生如歌｜这三年我的每一年，是三首歌</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-06 19:59:18" itemprop="dateCreated datePublished" datetime="2026-02-06T19:59:18+00:00">2026-02-06 19:59:18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-06 19:59:18" itemprop="dateModified" datetime="2026-02-06T19:59:18+00:00">2026-02-06 19:59:18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">日常记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>2024年：Parler d’avenir（谈论未来）</li>
-<li>2025年：C’est pas l’heure（不是此刻）</li>
-<li>2026年：Love dance（还没有开始这一年，我私心喜欢这首歌）</li>
-</ul>
-<p>另，贴一段关于音乐的文字：</p>
-<blockquote>
-<p>而我，在这歌声的境界里（置身于歌声的玻璃罩中），心里感到幸福……</p>
-<p>在歌中，忧愁并不浅薄，笑声也不勉强，爱情并不可笑，仇恨并不怯懦；在歌中，人们爱的身心合一；在歌中，爱情就是爱情，痛苦就是痛苦；在歌中，各种价值还没有被蹂躏。</p>
-<p>于是我似乎看到，在歌里，有我的出路，我的本色，我的归宿。</p>
-</blockquote>
 
       
 
