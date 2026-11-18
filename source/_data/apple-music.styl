@@ -1,0 +1,36 @@
+// Only the surrounding card is styled here. Playback stays in Apple's iframe.
+.post-body .apple-music-card {
+  background: var(--card-bg-color);
+  border: 1px solid rgba(127, 127, 127, .2);
+  border-radius: 14px;
+  box-sizing: border-box;
+  margin: 1.5em 0;
+  max-width: 660px;
+  padding: 10px;
+  width: 100%;
+}
+
+.post-body .apple-music-card__player {
+  border: 0;
+  border-radius: 10px;
+  color-scheme: inherit;
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+
+.post-body .apple-music-card__footer {
+  align-items: baseline;
+  color: var(--blockquote-color);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .75em;
+  gap: 4px 16px;
+  justify-content: space-between;
+  line-height: 1.6;
+  margin: 8px 4px 0;
+}
+
+.post-body .apple-music-card__footer a {
+  border-bottom: 0;
+}
