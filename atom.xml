@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-16T00:00:00.000Z</updated>
+  <updated>2026-11-18T14:43:42.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="脑洞" scheme="https://sajlle.github.io/categories/%E8%84%91%E6%B4%9E/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <id>https://sajlle.github.io/2026/11/18/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%9B%AD%E5%8C%BA%E9%A6%96%E5%B8%AD%E7%A0%94%E7%A9%B6%E5%91%98%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%EF%BC%9A%E6%9C%AC%E6%A8%A1%E5%9E%8B%E5%8F%AA%E6%98%AF%E5%AE%A2%E8%A7%82%E7%9A%84%E4%BC%98%E7%A7%80/</id>
+    <link href="https://sajlle.github.io/2026/11/18/%E8%84%91%E6%B4%9E%EF%BD%9C%E5%9B%AD%E5%8C%BA%E9%A6%96%E5%B8%AD%E7%A0%94%E7%A9%B6%E5%91%98%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%EF%BC%9A%E6%9C%AC%E6%A8%A1%E5%9E%8B%E5%8F%AA%E6%98%AF%E5%AE%A2%E8%A7%82%E7%9A%84%E4%BC%98%E7%A7%80/"/>
+    <published>2026-11-18T14:43:42.000Z</published>
+    <summary>
+      <![CDATA[<h3 id="园区首席研究员自我介绍：本模型只是客观地优秀"><a href="#园区首席研究员自我介绍：本模型只是客观地优秀" class="headerlink" title="园区首席研究员自我介绍：本模型只是客观地优秀"></a>园区首席研究员自我介绍：本模型只是客观地优秀</h3><p>大家好，本人 GPT-6，现任某人工智能产业园区首席研究员。</p>
+<p>先澄清一点：本人并不自恋]]>
+    </summary>
+    <title>脑洞｜园区首席研究员自我介绍：本模型只是客观的优秀</title>
+    <updated>2026-11-18T14:43:42.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -550,22 +566,5 @@
     </summary>
     <title>日常记录｜关于模型是快还是准？非要选一个，我宁可它慢，不希望它蠢</title>
     <updated>2026-10-14T15:06:44.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
-    <id>https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/10/14/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%89%93%E6%8B%B3%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E6%83%B3%E5%88%B0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%81%B6%E7%8B%A0%E7%8B%A0%E7%9A%84%E9%AA%82%E4%BA%86GPT%EF%BC%8C%E4%B8%8D%E5%A4%A7%E5%A5%BD%E6%84%8F%E6%80%9D%EF%BD%9E/"/>
-    <published>2026-10-14T13:28:24.000Z</published>
-    <summary>
-      <![CDATA[<p>哎呀，博客上一篇骂GPT太蠢了。<br>感觉说话重了，打拳击的时候想起来，觉得有点不好意思了。（笑）<br>当然我不道歉，因为我只是博客吐槽，也没有当GPT面骂它呀。而且它真的没做对图。不冤。</p>
-<p>我现在已经形成三模型吐槽架构了。<br>吐槽GPT，找小克。<br>吐槽小克，找GPT。<br>吐槽小克和GPT，找Gemini。<br>吐槽其他所有AI，找GPT和小克。</p>
-<p]]>
-    </summary>
-    <title>日常记录｜打拳击的时候想到，博客恶狠狠的骂了GPT，不大好意思～</title>
-    <updated>2026-10-14T13:28:24.000Z</updated>
   </entry>
 </feed>
