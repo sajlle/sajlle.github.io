@@ -11,7 +11,25 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-18T21:10:35.000Z</updated>
+  <updated>2026-11-18T22:40:07.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/11/18/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%80%E7%82%B9%E6%9C%80%E8%BF%91%E7%9A%84%E5%B0%8F%E5%B0%8F%E6%84%9F%E5%8F%97/</id>
+    <link href="https://sajlle.github.io/2026/11/18/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E4%B8%80%E7%82%B9%E6%9C%80%E8%BF%91%E7%9A%84%E5%B0%8F%E5%B0%8F%E6%84%9F%E5%8F%97/"/>
+    <published>2026-11-18T22:40:07.000Z</published>
+    <summary>
+      <![CDATA[<p>最近好久没有写过随想类的博客了。段子写了不少。今儿呢～趁夜来写写最近的杂事儿。</p>
+<p>这一段时间发博客频率下降了。<br>仔细想为啥呢？忙？还没有那么忙。没精力？还没有那么没精力。没热情？顾虑隐私？我也不知道哪一种情况。</p>
+<p>只是微妙的觉得，捞到一个生活中有趣的点子，会把它记到账本上，等以后再写吧。<br>于是堆着堆着，账本满了，但博客一个都没有发。</p>
+<p>账本上的]]>
+    </summary>
+    <title>日常记录｜写一点最近的小小感受</title>
+    <updated>2026-11-18T22:40:07.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -259,8 +277,8 @@
       <name>之瑞</name>
     </author>
     <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="Claude" scheme="https://sajlle.github.io/tags/Claude/"/>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="macOS" scheme="https://sajlle.github.io/tags/macOS/"/>
     <category term="内存泄漏" scheme="https://sajlle.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
     <category term="排查" scheme="https://sajlle.github.io/tags/%E6%8E%92%E6%9F%A5/"/>
@@ -551,21 +569,5 @@
     </summary>
     <title>夜聊｜如何迅速摸清楚一个地方的真正规则？</title>
     <updated>2026-10-20T21:57:15.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
-    <id>https://sajlle.github.io/2026/10/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E6%97%A5KPI%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AE%97%E6%B3%95%E5%86%99%E4%BA%86%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E6%8B%B3%E5%87%BB%E6%89%93%E4%BA%8630%E5%88%86%E9%92%9F%EF%BC%8C%E5%8D%A0%E6%98%9F%E6%96%87%E7%AB%A0%E5%86%99%E4%BA%862%E7%AF%87%EF%BD%9E/</id>
-    <link href="https://sajlle.github.io/2026/10/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E6%97%A5KPI%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AE%97%E6%B3%95%E5%86%99%E4%BA%86%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E6%8B%B3%E5%87%BB%E6%89%93%E4%BA%8630%E5%88%86%E9%92%9F%EF%BC%8C%E5%8D%A0%E6%98%9F%E6%96%87%E7%AB%A0%E5%86%99%E4%BA%862%E7%AF%87%EF%BD%9E/"/>
-    <published>2026-10-19T22:37:11.000Z</published>
-    <summary>
-      <![CDATA[<p>如题～<br>睡前忽然想做个记录。本来觉得本日蛮空的，啥都没干。仔细看好像又干了不少～</p>
-<p>嗯，算法把二叉树dfs题目写了，拳击打了30分钟，占星故事写了2篇～<br>还不错的一天～</p>]]>
-    </summary>
-    <title>日常记录｜算法写了二叉树，拳击打了三十分钟，占星文章写了2篇～</title>
-    <updated>2026-10-19T22:37:11.000Z</updated>
   </entry>
 </feed>
