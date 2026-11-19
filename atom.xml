@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-19T20:04:33.000Z</updated>
+  <updated>2026-11-19T20:27:29.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="成本" scheme="https://sajlle.github.io/tags/%E6%88%90%E6%9C%AC/"/>
+    <id>https://sajlle.github.io/2026/11/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%88%90%E6%9C%AC/</id>
+    <link href="https://sajlle.github.io/2026/11/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%85%B3%E4%BA%8E%E6%88%90%E6%9C%AC/"/>
+    <published>2026-11-19T20:27:29.000Z</published>
+    <summary>
+      <![CDATA[<p>上一篇写到，在父母家住，注意力成本是很大的。<br>那么我再来写一写，这个注意力成本到底是啥？</p>
+<p>先讲一个八卦吧～<br>我老家村里，有一位孝子，老爹瘫痪十多年了，都是老婆照顾，老婆脾气特别好，好到什么程度呢？说她，她不吭声，骂她，她不反驳。只是一心一意的做家务，伺候公公。<br>这个好媳妇48岁就死了，去年死的。我还在家写微信支付的流程呢～村里八卦她死了。</p>
+<p>媳妇死]]>
+    </summary>
+    <title>日常记录｜关于评价和被评价，以及被评价的成本</title>
+    <updated>2026-11-19T20:27:29.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -550,23 +567,5 @@
     </summary>
     <title>日常记录｜吃完午饭，空闲着，不如写写博客？</title>
     <updated>2026-10-28T13:37:16.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="post 技术手记" scheme="https://sajlle.github.io/categories/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="如题" scheme="https://sajlle.github.io/tags/%E5%A6%82%E9%A2%98/"/>
-    <id>https://sajlle.github.io/2026/10/22/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%9C%80%E8%BF%91%E7%94%A8codex%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%80%83/</id>
-    <link href="https://sajlle.github.io/2026/10/22/post-%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0%EF%BD%9C%E6%9C%80%E8%BF%91%E7%94%A8codex%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%80%83/"/>
-    <published>2026-10-22T20:16:43.000Z</published>
-    <summary>
-      <![CDATA[<p>几个点。简单说，不长篇大论的说了。</p>
-<ol>
-<li>让AI互相审核的时候，什么时候该停？MVP阶段，能跑就行，先跑出来产品再做严格的互审。互审的时候如果不是核心步骤出错，直接忽略或者小改都行。先把产品做出来再说。没产品的严格互审，是房子没盖好就开始考虑装修细节————没啥用。</li>
-<li>MVP出来了之后，如果达到原来定好的核心目标，那就修细节，这个时候做互审（严格一点，没问]]>
-    </summary>
-    <title>post 技术手记｜最近用AI的几个想法</title>
-    <updated>2026-10-22T20:16:43.000Z</updated>
   </entry>
 </feed>
