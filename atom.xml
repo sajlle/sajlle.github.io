@@ -11,7 +11,25 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-18T22:40:07.000Z</updated>
+  <updated>2026-11-19T20:04:33.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="关于注意力分散" scheme="https://sajlle.github.io/tags/%E5%85%B3%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%88%86%E6%95%A3/"/>
+    <id>https://sajlle.github.io/2026/11/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E6%96%B0%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86%EF%BC%8C%E6%88%91%E5%86%99%E4%B8%80%E7%82%B9%E6%97%A5%E5%B8%B8/</id>
+    <link href="https://sajlle.github.io/2026/11/19/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E4%BB%8A%E5%A4%A9%E6%96%B0%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86%EF%BC%8C%E6%88%91%E5%86%99%E4%B8%80%E7%82%B9%E6%97%A5%E5%B8%B8/"/>
+    <published>2026-11-19T20:04:33.000Z</published>
+    <summary>
+      <![CDATA[<p>今天晚上结束之前，妈爹在房间做饭。我回到了自己的房间。</p>
+<p>本来打算下午把桌子椅子凳子改一下布局的。结果他们在家，我立刻就知道，不行，我这件事得推到晚上做。于是等他们吃完饭，我再去做饭，再去搬凳子和椅子，改卧室布局。</p>
+<p>他们做饭的时候，已经19点了，烧了米汤+炒的鸡蛋西红柿，问我吃不吃？<br>我：不吃。我自己做。</p>
+<p>现在我在卧室啃核桃+牛奶，等他们走了，我]]>
+    </summary>
+    <title>日常记录｜今天新的一天结束了，我写一点日常</title>
+    <updated>2026-11-19T20:04:33.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -550,24 +568,5 @@
     </summary>
     <title>post 技术手记｜最近用AI的几个想法</title>
     <updated>2026-10-22T20:16:43.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="夜聊" scheme="https://sajlle.github.io/categories/%E5%A4%9C%E8%81%8A/"/>
-    <category term="规则" scheme="https://sajlle.github.io/tags/%E8%A7%84%E5%88%99/"/>
-    <id>https://sajlle.github.io/2026/10/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E6%91%B8%E6%B8%85%E6%A5%9A%E4%B8%80%E4%B8%AA%E5%9C%B0%E6%96%B9%E7%9A%84%E7%9C%9F%E6%AD%A3%E8%A7%84%E5%88%99%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/10/20/%E5%A4%9C%E8%81%8A%EF%BD%9C%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E6%91%B8%E6%B8%85%E6%A5%9A%E4%B8%80%E4%B8%AA%E5%9C%B0%E6%96%B9%E7%9A%84%E7%9C%9F%E6%AD%A3%E8%A7%84%E5%88%99%EF%BC%9F/"/>
-    <published>2026-10-20T21:57:15.000Z</published>
-    <summary>
-      <![CDATA[<p>如题。<br>靠两件事：</p>
-<ol>
-<li>挣钱（看清楚利益怎么流动）</li>
-<li>观察同一件事，换一个人做，后果差多少（观察身份怎么排序）<br>一个地方的真实秩序，大概就由这两件构成。</li>
-</ol>]]>
-    </summary>
-    <title>夜聊｜如何迅速摸清楚一个地方的真正规则？</title>
-    <updated>2026-10-20T21:57:15.000Z</updated>
   </entry>
 </feed>
