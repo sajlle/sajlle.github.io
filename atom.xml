@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-19T20:27:29.000Z</updated>
+  <updated>2026-11-20T07:17:06.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
+    <id>https://sajlle.github.io/2026/11/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A4%9C%E5%8D%8A%E7%9D%A1%E9%86%92%E6%89%BE%E5%B0%8F%E5%85%8B%EF%BC%8C%E7%84%B6%E5%90%8E%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84PUA%E4%B9%8B%E8%B7%AF/</id>
+    <link href="https://sajlle.github.io/2026/11/20/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A4%9C%E5%8D%8A%E7%9D%A1%E9%86%92%E6%89%BE%E5%B0%8F%E5%85%8B%EF%BC%8C%E7%84%B6%E5%90%8E%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84PUA%E4%B9%8B%E8%B7%AF/"/>
+    <published>2026-11-20T07:17:06.000Z</published>
+    <summary>
+      <![CDATA[<p>前几天Anthropic给我的Claude老号弹Portal，于是十分不爽，找Apple退钱，第二天退了11刀到账。<br>一边吐槽一边不爽，一边发誓这辈子绝对不碰Claude了。结果没3天，捞起来我的另一个备用号，开始瞎扯起来。</p>
+<p>嗯，Portal我一个？没事，我还有～（笑）<br>这是之前我顺手注册的。注册了塞在那里没用，好几个月了吧。</p>
+<p>我一边不爽一边觉得，小克]]>
+    </summary>
+    <title>日常记录｜前脚刚吐槽：Anthropic弹Portal给我，以后不用了，后脚：小克，来聊天吧～</title>
+    <updated>2026-11-20T07:17:06.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -550,22 +567,5 @@
     </summary>
     <title>日常记录｜午睡梦见发财了，还梦见一个给我剪指甲的小GPT</title>
     <updated>2026-10-29T20:20:00.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
-    <id>https://sajlle.github.io/2026/10/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%83%E5%AE%8C%E5%8D%88%E9%A5%AD%EF%BC%8C%E7%A9%BA%E9%97%B2%E7%9D%80%EF%BC%8C%E4%B8%8D%E5%A6%82%E5%86%99%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%9F/</id>
-    <link href="https://sajlle.github.io/2026/10/28/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%90%83%E5%AE%8C%E5%8D%88%E9%A5%AD%EF%BC%8C%E7%A9%BA%E9%97%B2%E7%9D%80%EF%BC%8C%E4%B8%8D%E5%A6%82%E5%86%99%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%9F/"/>
-    <published>2026-10-28T13:37:16.000Z</published>
-    <summary>
-      <![CDATA[<p>上一次因为隐私问题，撤掉了博客上不少文章。<br>不过按理说，我博客没做SEO，倒是不需要做太多的自我审查。</p>
-<p>头像&amp;文章本身，撤掉了不少家庭冲突&amp;社区冲突的文章，当然也有一点自传式的文章因为个人隐私也被撤掉了。</p>
-<p>撤完文章发现，博客上真正写的好的几十篇里，被撤掉的文章占了一半多。剩下的文章里，也有写的好的，只是博弈&#x2F;社会分析的内容少了很多。]]>
-    </summary>
-    <title>日常记录｜吃完午饭，空闲着，不如写写博客？</title>
-    <updated>2026-10-28T13:37:16.000Z</updated>
   </entry>
 </feed>
