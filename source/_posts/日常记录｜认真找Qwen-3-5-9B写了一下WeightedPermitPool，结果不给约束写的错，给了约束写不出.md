@@ -6,14 +6,6 @@ categories:
 tags:
   - Qwen
 ---
----
-title: 日常记录｜认真找Qwen 3.5 9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束写不出
-date: 2026-11-21 20:52:49
-categories:
-  - 日常记录
-tags:
-  - Qwen
----
 
 如题。
 
