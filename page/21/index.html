@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#1c1924">
 
-<link rel="stylesheet" href="/css/main.css?v=0a7e37ff7e2e">
+<link rel="stylesheet" href="/css/main.css?v=359b5fbd77ad">
 
 
 
@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">241</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-count">297</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,161 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
+      <meta itemprop="name" content="之瑞">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="节点人生">
+      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 节点人生">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/05/sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="post-title-link" itemprop="url">sleep和wait的区别？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-05 15:01:04" itemprop="dateCreated datePublished" datetime="2026-01-05T15:01:04+00:00">2026-01-05 15:01:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-05 15:01:04" itemprop="dateModified" datetime="2026-01-05T15:01:04+00:00">2026-01-05 15:01:04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术手记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><p>为啥缓存miss，重建缓存的时候，没有抢到锁，线程要sleep而不是wait？</p>
+<h1 id="答"><a href="#答" class="headerlink" title="答"></a>答</h1><h2 id="为啥不用wait？"><a href="#为啥不用wait？" class="headerlink" title="为啥不用wait？"></a>为啥不用wait？</h2><h3 id="wait不是简单休眠，而是条件队列等待。"><a href="#wait不是简单休眠，而是条件队列等待。" class="headerlink" title="wait不是简单休眠，而是条件队列等待。"></a><code>wait</code>不是简单休眠，而是条件队列等待。</h3><ul>
+<li>wait必须在<code>synchronized(obj)</code>持有同一个对象的monitor锁时调用，否则直接爆炸：<code>IlleagalMonitorStateException</code></li>
+<li><code>wait</code>调用后会：<ol>
+<li>释放monitor锁</li>
+<li>把线程放到这个对象的wait里</li>
+<li>必须等别人<code>notify/notifyAll</code>才会醒（超时&#x2F;中断）<br>而我们的场景是：</li>
+</ol>
+</li>
+<li>抢的是Redis分布式锁，不是JVM里某个对象的<code>monitor</code>锁</li>
+<li>也没有任何地方会对某个<code>obj</code>去<code>notify()</code></li>
+<li>我们只想“别太着急，过50ms再去看redis缓存有没有被重建，不是要等某个条件被通知。</li>
+</ul>
+<p>所以<code>wait()</code>会让代码逻辑变得非常尴尬：</p>
+<ul>
+<li>我们得额外造一个本地对象锁，再设计一个notify机制，但notify的时机又跨JVM（因为重建者可能在另外一台机器&#x2F;另一个进程），让人根本没法正确notify</li>
+</ul>
+<p>所以我们的场景是：要短暂退避 + 重试（backoff + retry)，不是条件同步等待（wait&#x2F;notify）</p>
+<p><code>sleep</code>不释放锁，<code>wait</code>会释放锁，在我们这个场景里：</p>
+<ul>
+<li><code>Thread.sleep(50)</code>：只是让出CPU的时间片，不释放任何monitor锁</li>
+<li><code>Object.wait(...)</code>：释放该对象的monitor锁<br>问题是：我们本来没在<code>synchronized</code>里，也没有持有任何monitor锁，我们持有的是“Redis 锁”，实际是一个Key的租约，跟JVM的monitor是两码事。</li>
+</ul>
+<p>所以：不是因为Sleep不释放对象锁而选择sleep，而是因为没有可以wait的对象，也没有可以notify的人。</p>
+<h3 id="Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？"><a href="#Thread-sleep-50-了，后续需要catch-InterruptedException-e-，这个InterruptedException是干嘛的？" class="headerlink" title="Thread.sleep(50)了，后续需要catch(InterruptedException e)，这个InterruptedException是干嘛的？"></a><code>Thread.sleep(50)</code>了，后续需要<code>catch(InterruptedException e)</code>，这个<code>InterruptedException</code>是干嘛的？</h3><p>这个catch抓的是：线程在sleep或者wait&#x2F;join期间被中断时抛出的异常。</p>
+<h4 id="那这个InterruptedException是啥？"><a href="#那这个InterruptedException是啥？" class="headerlink" title="那这个InterruptedException是啥？"></a>那这个InterruptedException是啥？</h4><p>它不是普通异常，而是让线程：</p>
+<blockquote>
+<p>别睡了，别等了，有人要求你尽快停止当前等待并响应中断</p>
+</blockquote>
+<p>谁会中断线程？</p>
+<ul>
+<li>线程池要关闭（shutdownNow)</li>
+<li>服务器要停机</li>
+<li>上层业务要主动取消任务</li>
+<li>某些框架在超时&#x2F;取消时会发interrupt</li>
+</ul>
+<h4 id="它跟业务异常-运行时异常的区别？"><a href="#它跟业务异常-运行时异常的区别？" class="headerlink" title="它跟业务异常&#x2F;运行时异常的区别？"></a>它跟业务异常&#x2F;运行时异常的区别？</h4><p><code>InterruptedException</code>是<strong>checked exception</strong>，属于并发控制协议的一部分，Java强制要求显式处理它。</p>
+<h4 id="那catch里为啥要Thread-currentThread-interrupt-？"><a href="#那catch里为啥要Thread-currentThread-interrupt-？" class="headerlink" title="那catch里为啥要Thread.currentThread().interrupt()？"></a>那catch里为啥要<code>Thread.currentThread().interrupt()</code>？</h4><p>这就是并发编程的一个规矩：</p>
+<blockquote>
+<p>当你catch了<code>InterruptedException</code>，Java会把当前线程的interrupt 标记清除。</p>
+<p>如果你吞了它，上层就不知道线程曾经被要求中断，取消信号就丢了</p>
+</blockquote>
+<p>所以正确姿势通常是：</p>
+<ol>
+<li><code>Thread.currentThread().interrupt();</code>把被中断这个信号还给线程。</li>
+<li>然后要么：<ul>
+<li>直接返回&#x2F;退出</li>
+<li>或者降级处理（比如直接查库）</li>
+</ul>
+</li>
+</ol>
+<h4 id="那能不能更工程化地替代sleep？"><a href="#那能不能更工程化地替代sleep？" class="headerlink" title="那能不能更工程化地替代sleep？"></a>那能不能更工程化地替代sleep？</h4><p>有办法，而且更优雅。</p>
+<h5 id="自旋锁（带退避），比如重试3次"><a href="#自旋锁（带退避），比如重试3次" class="headerlink" title="自旋锁（带退避），比如重试3次"></a>自旋锁（带退避），比如重试3次</h5><ul>
+<li>50ms –&gt; 100ms –&gt; 200ms 这种指数级退避</li>
+<li>仍未命中再查库（或者直接返回空）</li>
+</ul>
+<h5 id="用锁的等待队列"><a href="#用锁的等待队列" class="headerlink" title="用锁的等待队列"></a>用锁的等待队列</h5><p>分布式场景一般不搞wait&#x2F;notify，而是：</p>
+<ul>
+<li>轮询缓存</li>
+<li>或者用消息通知（MQ&#x2F;pubsub)</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li><code>wait/notify</code>：同JVM，同对象monitor，线程间条件协调</li>
+<li><code>sleep</code>：单纯退避，让出CPU，不涉及协调</li>
+<li>分布式缓存重建：绝大多数是sleep&#x2F;退避 + 重试，不是wait&#x2F;notify</li>
+</ol>
+
+      
+
+
+      
+
+    </div>
+
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1477,97 +1632,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sajlle.github.io/2025/12/26/%E5%A4%9C%E8%81%8A%EF%BD%9C%E7%94%A8%E6%83%AF%E4%BA%86ChatGPT%E5%86%99%E6%AE%B5%E5%AD%90%EF%BC%8C%E5%AE%83%E5%86%99%E7%9A%84%E5%A4%AA%E5%BF%AB%EF%BC%8C%E6%88%91%E5%BC%80%E5%A7%8B%E8%BF%BD%E4%B8%8D%E4%B8%8A%E5%AE%83%E7%9A%84%E4%BA%A7%E5%87%BA%E9%80%9F%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-code-illustration-2026.webp">
-      <meta itemprop="name" content="之瑞">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="节点人生">
-      <meta itemprop="description" content="之瑞的个人博客，记录 Java、Spring Boot、Redis、RabbitMQ、AI Agent 工程实践、问题复盘与生活观察。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 节点人生">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/26/%E5%A4%9C%E8%81%8A%EF%BD%9C%E7%94%A8%E6%83%AF%E4%BA%86ChatGPT%E5%86%99%E6%AE%B5%E5%AD%90%EF%BC%8C%E5%AE%83%E5%86%99%E7%9A%84%E5%A4%AA%E5%BF%AB%EF%BC%8C%E6%88%91%E5%BC%80%E5%A7%8B%E8%BF%BD%E4%B8%8D%E4%B8%8A%E5%AE%83%E7%9A%84%E4%BA%A7%E5%87%BA%E9%80%9F%E5%BA%A6/" class="post-title-link" itemprop="url">夜聊｜用惯了ChatGPT写段子，它写的太快，我开始追不上它的产出速度</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-12-26 22:04:09" itemprop="dateCreated datePublished" datetime="2025-12-26T22:04:09+00:00">2025-12-26 22:04:09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-26 22:04:09" itemprop="dateModified" datetime="2025-12-26T22:04:09+00:00">2025-12-26 22:04:09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今天中午我整理段子，花了一个小时，才整理了30%。这一年，我让ChatGPT给我写的段子数量，可能发一年都发不完。</p>
-<p>它产出太快，我开始跟不上它写段子的速度了。</p>
-
-      
-
-
-      
-
-    </div>
-
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/22/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1624,9 +1688,9 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-<script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script><div class="seasonal-edge-scene" aria-hidden="true">
+<div class="seasonal-edge-scene" aria-hidden="true">
   <span class="halloween-edge-bat">🦇</span>
 </div>
-<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script>
+<script src="/js/halloween-pumpkin.js?v=f615534eab4f" defer></script><script src="/js/click-bats-v6.js?v=08b28053bd5e" data-mouse-effect="bats" defer></script>
 </body>
 </html>
