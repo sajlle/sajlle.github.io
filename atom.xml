@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-21T19:26:10.000Z</updated>
+  <updated>2026-11-21T20:52:49.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="Qwen" scheme="https://sajlle.github.io/tags/Qwen/"/>
+    <id>https://sajlle.github.io/2026/11/21/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%A4%E7%9C%9F%E6%89%BEQwen-3-5-9B%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%8BWeightedPermitPool%EF%BC%8C%E7%BB%93%E6%9E%9C%E4%B8%8D%E7%BB%99%E7%BA%A6%E6%9D%9F%E5%86%99%E7%9A%84%E9%94%99%EF%BC%8C%E7%BB%99%E4%BA%86%E7%BA%A6%E6%9D%9F%E5%86%99%E4%B8%8D%E5%87%BA/</id>
+    <link href="https://sajlle.github.io/2026/11/21/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%A4%E7%9C%9F%E6%89%BEQwen-3-5-9B%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%8BWeightedPermitPool%EF%BC%8C%E7%BB%93%E6%9E%9C%E4%B8%8D%E7%BB%99%E7%BA%A6%E6%9D%9F%E5%86%99%E7%9A%84%E9%94%99%EF%BC%8C%E7%BB%99%E4%BA%86%E7%BA%A6%E6%9D%9F%E5%86%99%E4%B8%8D%E5%87%BA/"/>
+    <published>2026-11-21T20:52:49.000Z</published>
+    <summary>
+      <![CDATA[<p>如题。<br>上一篇段子写Qwen写WeightedPermitPool代码过不了编译，权重不生效，锁的状态不对，超时和关闭都问题严重。<br>我当时给的Prompt是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre>]]>
+    </summary>
+    <title>日常记录｜认真找Qwen 3.5 9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束写不出</title>
+    <updated>2026-11-21T20:52:49.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -394,8 +410,8 @@
       <name>之瑞</name>
     </author>
     <category term="技术手记" scheme="https://sajlle.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E8%AE%B0/"/>
-    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="Claude" scheme="https://sajlle.github.io/tags/Claude/"/>
+    <category term="Codex" scheme="https://sajlle.github.io/tags/Codex/"/>
     <category term="macOS" scheme="https://sajlle.github.io/tags/macOS/"/>
     <category term="内存泄漏" scheme="https://sajlle.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
     <category term="排查" scheme="https://sajlle.github.io/tags/%E6%8E%92%E6%9F%A5/"/>
@@ -540,23 +556,5 @@
     </summary>
     <title>社会观察｜熟人环境如何“消化”一个异类</title>
     <updated>2026-10-29T20:25:00.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="社会观察" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F/"/>
-    <category term="群体心理" scheme="https://sajlle.github.io/tags/%E7%BE%A4%E4%BD%93%E5%BF%83%E7%90%86/"/>
-    <id>https://sajlle.github.io/2026/10/29/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F%EF%BD%9C%E4%B8%80%E4%B8%AA%E7%BE%A4%E4%BD%93%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E8%A6%81%E5%88%B6%E9%80%A0%E6%96%B0%E7%9A%84%E2%80%9C%E5%9D%8F%E4%BA%BA%E2%80%9D/</id>
-    <link href="https://sajlle.github.io/2026/10/29/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F%EF%BD%9C%E4%B8%80%E4%B8%AA%E7%BE%A4%E4%BD%93%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E8%A6%81%E5%88%B6%E9%80%A0%E6%96%B0%E7%9A%84%E2%80%9C%E5%9D%8F%E4%BA%BA%E2%80%9D/"/>
-    <published>2026-10-29T20:24:00.000Z</published>
-    <summary>
-      <![CDATA[<p>有一阵，我在一个地方被一些根本不认识的人起哄、议论、传闲话。我做了什么呢？不就是过自己的生活嘛？</p>
-<p>来写写为什么会这样，一点机制猜想。</p>
-<p>不是我多么越界，而是这个群体需要一个人当「坏人」，被捉弄取乐，而群体会持续地、自发地奖励这种行为。</p>
-<p>生活里本来就有怨气、无聊、挫败和互相监视 → 某个人因为显眼、不同、已有冲突或反应可见，被证明“拿她开涮成本不高” →]]>
-    </summary>
-    <title>社会观察｜一个群体为什么总要制造新的“坏人”</title>
-    <updated>2026-10-29T20:24:00.000Z</updated>
   </entry>
 </feed>
