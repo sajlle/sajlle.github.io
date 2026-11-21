@@ -1270,7 +1270,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ad444e;
+    background: #11d2ff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2948,6 +2948,40 @@ header.header {
     padding: 10px 12px;
   }
 }
+.post-body .apple-music-card {
+  background: var(--card-bg-color);
+  border: 1px solid rgba(127,127,127,0.2);
+  border-radius: 14px;
+  box-sizing: border-box;
+  margin: 1.5em 0;
+  max-width: 660px;
+  padding: 10px;
+  width: 100%;
+}
+.post-body .apple-music-card__player {
+  border: 0;
+  border-radius: 10px;
+  color-scheme: inherit;
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+.post-body .apple-music-card__footer {
+  align-items: baseline;
+  color: var(--blockquote-color);
+  display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.75em;
+  gap: 4px 16px;
+  justify-content: space-between;
+  line-height: 1.6;
+  margin: 8px 4px 0;
+}
+.post-body .apple-music-card__footer a {
+  border-bottom: 0;
+}
 @media screen and (hover: hover) and (pointer: fine) and (forced-colors: none) {
   body {
     cursor: url("/images/cursors/bat-default.svg") 2 2, auto;
@@ -3569,40 +3603,6 @@ header.header .seasonal-tagline {
     border: 0;
     box-shadow: none;
   }
-}
-.post-body .apple-music-card {
-  background: var(--card-bg-color);
-  border: 1px solid rgba(127,127,127,0.2);
-  border-radius: 14px;
-  box-sizing: border-box;
-  margin: 1.5em 0;
-  max-width: 660px;
-  padding: 10px;
-  width: 100%;
-}
-.post-body .apple-music-card__player {
-  border: 0;
-  border-radius: 10px;
-  color-scheme: inherit;
-  display: block;
-  margin: 0;
-  width: 100%;
-}
-.post-body .apple-music-card__footer {
-  align-items: baseline;
-  color: var(--blockquote-color);
-  display: flex;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: 0.75em;
-  gap: 4px 16px;
-  justify-content: space-between;
-  line-height: 1.6;
-  margin: 8px 4px 0;
-}
-.post-body .apple-music-card__footer a {
-  border-bottom: 0;
 }
 .search-active .search-pop-overlay {
   background: rgba(7,13,24,0.72);
