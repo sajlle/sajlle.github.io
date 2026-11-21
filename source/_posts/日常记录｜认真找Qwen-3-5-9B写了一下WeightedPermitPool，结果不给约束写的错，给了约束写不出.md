@@ -6,29 +6,45 @@ categories:
 tags:
   - Qwen
 ---
+---
+title: 日常记录｜认真找Qwen 3.5 9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束写不出
+date: 2026-11-21 20:52:49
+categories:
+  - 日常记录
+tags:
+  - Qwen
+---
+
 如题。
-上一篇段子写Qwen写WeightedPermitPool代码过不了编译，权重不生效，锁的状态不对，超时和关闭都问题严重。
-我当时给的Prompt是：
+
+上一篇[段子](https://sajlle.github.io/2026/11/21/%E8%84%91%E6%B4%9E%EF%BD%9CHugging-Face-%C2%B7-%E6%A8%A1%E5%9E%8B%E5%BA%B7%E5%A4%8D%E4%B8%AD%E5%BF%83/)写 Qwen 写 `WeightedPermitPool` 代码过不了编译，权重不生效，锁的状态不对，超时和关闭都问题严重。
+
+我当时给的 Prompt 是：
+
 ```markdown
-写一个加权许可池，WeightedPermitPool。用Java。于是效果如上
+写一个加权许可池，WeightedPermitPool。用Java。
 ```
 
-我后续一想，也许约束给的不清晰，贸然判断Qwen不行不大严谨，于是换了一个版本的Prompt(太长，放到文章末尾了)，结果它思考了49个步骤，终于成功的死机了。代码都没出来。
-全在我想想，wait, actually, But wait, Wait, one detail, Wait, one detail…… 了
+于是效果如上。
+
+我后续一想，也许约束给得不清晰，贸然判断 Qwen 不行不大严谨，于是换了一个版本的 Prompt（太长，放到文章末尾了）。结果它思考了 49 个步骤，终于成功地死机了。代码都没出来。
+
+全在「我想想，wait, actually, But wait, Wait, one detail, Wait, one detail……」了。
 
 最经典的一段摘出来：
-> Condition.await() 返回后，还持有锁吗？
-Wait，不持有？
-Wait，应该持有？
-Yes，持有。
-Wait，真的吗？
-Yes！
 
-实际上 Condition.await() 返回前会重新获取关联的锁。它大部分的思考就这样，反复推翻自己已经想清楚的思路，然后不停的wait，最后交白卷了。（也就是代码一行没写～
+> `Condition.await()` 返回后，还持有锁吗？  
+> Wait，不持有？  
+> Wait，应该持有？  
+> Yes，持有。  
+> Wait，真的吗？  
+> Yes！
 
+实际上，`Condition.await()` 返回前会重新获取关联的锁。它大部分的思考就这样，反复推翻自己已经想清楚的思路，然后不停地 wait，最后交白卷了。（也就是代码一行没写～）
 
-### 第二次给千问的Prompt
-```markdown
+### 第二次给千问的 Prompt
+
+````markdown
 # IC01｜WeightedPermitPool（加权许可池）
 
 **语言：** Java 21  
@@ -155,5 +171,4 @@ public final class WeightedPermitPool implements AutoCloseable {
 5. 简要解释采用的同步机制和关键并发不变量。
 
 请独立完成实现，不需要提供其他替代设计。
-```
-
+````
