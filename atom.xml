@@ -22,8 +22,8 @@
     <link href="https://sajlle.github.io/2026/11/21/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E8%AE%A4%E7%9C%9F%E6%89%BEQwen-3-5-9B%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%8BWeightedPermitPool%EF%BC%8C%E7%BB%93%E6%9E%9C%E4%B8%8D%E7%BB%99%E7%BA%A6%E6%9D%9F%E5%86%99%E7%9A%84%E9%94%99%EF%BC%8C%E7%BB%99%E4%BA%86%E7%BA%A6%E6%9D%9F%E5%86%99%E4%B8%8D%E5%87%BA/"/>
     <published>2026-11-21T20:52:49.000Z</published>
     <summary>
-      <![CDATA[<p>如题。<br>上一篇段子写Qwen写WeightedPermitPool代码过不了编译，权重不生效，锁的状态不对，超时和关闭都问题严重。<br>我当时给的Prompt是：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre>]]>
+      <![CDATA[<hr>
+<h2 id="title-日常记录｜认真找Qwen-3-5-9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束写不出date-2026-11-21-20-52-49categories-日常记录tags-Qwen"><a href="#title-日常记录｜认真找Qwen-3-5-9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束]]>
     </summary>
     <title>日常记录｜认真找Qwen 3.5 9B写了一下WeightedPermitPool，结果不给约束写的错，给了约束写不出</title>
     <updated>2026-11-21T20:52:49.000Z</updated>
