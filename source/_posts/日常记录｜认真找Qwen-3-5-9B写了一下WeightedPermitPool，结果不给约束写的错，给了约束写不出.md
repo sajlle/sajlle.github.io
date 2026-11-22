@@ -6,7 +6,6 @@ categories:
 tags:
   - Qwen
 ---
-
 如题。
 
 上一篇[段子](https://sajlle.github.io/2026/11/21/%E8%84%91%E6%B4%9E%EF%BD%9CHugging-Face-%C2%B7-%E6%A8%A1%E5%9E%8B%E5%BA%B7%E5%A4%8D%E4%B8%AD%E5%BF%83/)写 Qwen 写 `WeightedPermitPool` 代码过不了编译，权重不生效，锁的状态不对，超时和关闭都问题严重。
