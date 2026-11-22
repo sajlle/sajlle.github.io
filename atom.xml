@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-21T20:52:49.000Z</updated>
+  <updated>2026-11-22T17:24:04.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="日常" scheme="https://sajlle.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
+    <category term="投影仪" scheme="https://sajlle.github.io/tags/%E6%8A%95%E5%BD%B1%E4%BB%AA/"/>
+    <id>https://sajlle.github.io/2026/11/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A5%BD%E4%B9%85%E6%B2%A1%E7%9C%8B%E8%BF%87%E5%89%A7%E4%BA%86%EF%BC%8C%E4%BB%8A%E5%A4%A9%E8%A3%85%E5%A5%BD%E6%8A%95%E5%BD%B1%E4%BB%AA%E4%B9%8B%E5%90%8E%EF%BC%8C%E7%9C%8B%E4%BA%86%E4%B8%9C%E4%BA%AC%E6%95%99%E7%88%B6%EF%BC%8C%E6%BB%A1%E6%B8%A9%E9%A6%A8%E7%9A%84/</id>
+    <link href="https://sajlle.github.io/2026/11/22/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%A5%BD%E4%B9%85%E6%B2%A1%E7%9C%8B%E8%BF%87%E5%89%A7%E4%BA%86%EF%BC%8C%E4%BB%8A%E5%A4%A9%E8%A3%85%E5%A5%BD%E6%8A%95%E5%BD%B1%E4%BB%AA%E4%B9%8B%E5%90%8E%EF%BC%8C%E7%9C%8B%E4%BA%86%E4%B8%9C%E4%BA%AC%E6%95%99%E7%88%B6%EF%BC%8C%E6%BB%A1%E6%B8%A9%E9%A6%A8%E7%9A%84/"/>
+    <published>2026-11-22T17:24:04.000Z</published>
+    <summary>
+      <![CDATA[<p>如题。</p>
+<p>好久没看过电视剧&#x2F;电影了，差不多有一年多了吧。<br>今儿在帘子里放投影仪，放来放去，哎，东京教父吧～</p>
+<p>挺温馨的，一年多都是生活里冲突也好，算法训练也好，都是蛮紧张的生活。<br>选片子，选一个轻松点的吧～</p>
+<p>试了试60寸，普通的投影布+入门的投影仪，能用。<br>亮度还行。<br>后续接了电脑或者手柄，还能投屏打游戏。反正空间分区就]]>
+    </summary>
+    <title>日常记录｜好久没看过剧了，今天装好投影仪之后，新片放东京教父</title>
+    <updated>2026-11-22T17:24:04.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -538,23 +557,5 @@
     </summary>
     <title>社会观察｜没有书房的家庭，是最早被刷下来的</title>
     <updated>2026-10-29T20:26:00.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="社会观察" scheme="https://sajlle.github.io/categories/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F/"/>
-    <category term="消化异类" scheme="https://sajlle.github.io/tags/%E6%B6%88%E5%8C%96%E5%BC%82%E7%B1%BB/"/>
-    <id>https://sajlle.github.io/2026/10/29/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F%EF%BD%9C%E7%86%9F%E4%BA%BA%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E2%80%9C%E6%B6%88%E5%8C%96%E2%80%9D%E4%B8%80%E4%B8%AA%E5%BC%82%E7%B1%BB/</id>
-    <link href="https://sajlle.github.io/2026/10/29/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F%EF%BD%9C%E7%86%9F%E4%BA%BA%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E2%80%9C%E6%B6%88%E5%8C%96%E2%80%9D%E4%B8%80%E4%B8%AA%E5%BC%82%E7%B1%BB/"/>
-    <published>2026-10-29T20:25:00.000Z</published>
-    <summary>
-      <![CDATA[<p>去年跟GPT聊到一段邻里摩擦，它说了一句：这就像是熟人社区如何消化异类的过程。</p>
-<p>当时没太在意，最近忽然想起来。</p>
-<h2 id="从一首歌开始"><a href="#从一首歌开始" class="headerlink" title="从一首歌开始"></a>从一首歌开始</h2><p>起因很小：在家照常放歌，音量也正常，周围却开始有了各种反应。</p>
-<p>我当时还有点]]>
-    </summary>
-    <title>社会观察｜熟人环境如何“消化”一个异类</title>
-    <updated>2026-10-29T20:25:00.000Z</updated>
   </entry>
 </feed>
