@@ -11,7 +11,37 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-25T14:02:44.000Z</updated>
+  <updated>2026-11-25T15:21:39.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="段子" scheme="https://sajlle.github.io/tags/%E6%AE%B5%E5%AD%90/"/>
+    <category term="HashMap" scheme="https://sajlle.github.io/tags/HashMap/"/>
+    <id>https://sajlle.github.io/2026/11/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AD%A3%E5%A5%BDGPT%E5%AE%A1%E6%A0%B8%E4%BB%A3%E7%A0%81%E5%91%A2%EF%BD%9E%E6%88%91%E6%9D%A5%E5%86%99%E4%B8%AAHashMap%E6%AE%B5%E5%AD%90/</id>
+    <link href="https://sajlle.github.io/2026/11/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%AD%A3%E5%A5%BDGPT%E5%AE%A1%E6%A0%B8%E4%BB%A3%E7%A0%81%E5%91%A2%EF%BD%9E%E6%88%91%E6%9D%A5%E5%86%99%E4%B8%AAHashMap%E6%AE%B5%E5%AD%90/"/>
+    <published>2026-11-25T15:21:39.000Z</published>
+    <summary>
+      <![CDATA[<p>面试官：</p>
+<blockquote>
+<p>来讲讲HashMap</p>
+</blockquote>
+<p>候选人：</p>
+<blockquote>
+<p>数组链表红黑树？</p>
+</blockquote>
+<p>面试官：</p>
+<blockquote>
+<p>讲讲treeifyBin()？</p>
+</blockquote>
+<p>候选人：</p>
+<blockquote>
+<]]>
+    </summary>
+    <title>日常记录｜正好GPT审核代码呢～我来写个HashMap段子</title>
+    <updated>2026-11-25T15:21:39.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -540,22 +570,5 @@
     </summary>
     <title>BugFix｜万圣节排bug合集：点十次鼠标，蝙蝠只飞一次</title>
     <updated>2026-10-31T21:45:16.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="随想" scheme="https://sajlle.github.io/tags/%E9%9A%8F%E6%83%B3/"/>
-    <id>https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9A%84%E9%9A%8F%E6%83%B3/</id>
-    <link href="https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E6%9C%80%E8%BF%91%E7%9A%84%E9%9A%8F%E6%83%B3/"/>
-    <published>2026-10-31T17:50:30.000Z</published>
-    <summary>
-      <![CDATA[<p>最近老在想注意力分配这件事。<br>我也爱好刷抖音快手，也会领签到红包，还会蹲购物平台有无优惠。<br>动手之前，我想，我只是领取一个优惠，3分钟就行了。但一点进去，一小时就过去了。</p>
-<p>一天里，几个三分钟这么堆起来，日常的闲暇就被消耗完了。</p>
-<p>那为啥我还要反复去点呢？<br>因为我闲的时候，不知道该干点啥。毕业好几年之后，一直处在一种被催促的忙慌状态。好像休闲，坐下来]]>
-    </summary>
-    <title>日常记录｜让空白悬着</title>
-    <updated>2026-10-31T17:50:30.000Z</updated>
   </entry>
 </feed>
