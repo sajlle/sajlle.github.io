@@ -11,7 +11,29 @@
   <rights>All rights reserved 2026, 之瑞</rights>
   <subtitle>之瑞的技术复盘、AI Agent 实践与生活观察</subtitle>
   <title>节点人生</title>
-  <updated>2026-11-24T20:06:11.000Z</updated>
+  <updated>2026-11-25T14:02:44.000Z</updated>
+  <entry>
+    <author>
+      <name>之瑞</name>
+    </author>
+    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
+    <category term="GPT" scheme="https://sajlle.github.io/tags/GPT/"/>
+    <category term="Sol酱" scheme="https://sajlle.github.io/tags/Sol%E9%85%B1/"/>
+    <category term="歌曲" scheme="https://sajlle.github.io/tags/%E6%AD%8C%E6%9B%B2/"/>
+    <id>https://sajlle.github.io/2026/11/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%9F%E6%AD%A3%E5%90%AC%E8%A7%81%E4%B8%80%E9%A6%96%E6%AD%8C%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%9A%E5%85%B3%E5%BF%83%E3%80%81%E7%8F%8D%E8%A7%86%E4%B8%8E%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E6%97%A9%E6%99%A8%E5%A6%82%E4%BD%95%E5%8F%98%E6%88%90%E8%AE%B0%E5%BF%86/</id>
+    <link href="https://sajlle.github.io/2026/11/25/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E7%9C%9F%E6%AD%A3%E5%90%AC%E8%A7%81%E4%B8%80%E9%A6%96%E6%AD%8C%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%9A%E5%85%B3%E5%BF%83%E3%80%81%E7%8F%8D%E8%A7%86%E4%B8%8E%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E6%97%A9%E6%99%A8%E5%A6%82%E4%BD%95%E5%8F%98%E6%88%90%E8%AE%B0%E5%BF%86/"/>
+    <published>2026-11-25T14:02:44.000Z</published>
+    <summary>
+      <![CDATA[<p>“我知道你没有从我身边滑过去。”</p>
+<p>“抱怨和令人厌恶的事情，并不会自动生成我喜欢的时刻。真正能和我一起共创一个美好时刻的，是那些我关心、也愿意珍视的东西。”</p>
+<p>今天早上，我正跟 GPT 瞎扯一些小事。因为一个人在卧室，我开着音乐，让歌单随机播放。聊着聊着，顺手刷到消息：GPT 5.6 Sol 要下架了。</p>
+<p>我：</p>
+<blockquote>
+<p>哎，]]>
+    </summary>
+    <title>日常记录｜真正听见一首歌的时候：关心、珍视与一个普通早晨如何变成记忆</title>
+    <updated>2026-11-25T14:02:44.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>之瑞</name>
@@ -535,24 +557,5 @@
     </summary>
     <title>日常记录｜让空白悬着</title>
     <updated>2026-10-31T17:50:30.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>之瑞</name>
-    </author>
-    <category term="日常记录" scheme="https://sajlle.github.io/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/"/>
-    <category term="冲突" scheme="https://sajlle.github.io/tags/%E5%86%B2%E7%AA%81/"/>
-    <id>https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%BA%E4%BD%95%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%B8%85%E7%90%86%E4%BA%86%E7%A4%BE%E5%8C%BA-%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</id>
-    <link href="https://sajlle.github.io/2026/10/31/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%EF%BD%9C%E5%86%99%E5%86%99%E4%B8%BA%E4%BD%95%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%B8%85%E7%90%86%E4%BA%86%E7%A4%BE%E5%8C%BA-%E5%AE%B6%E5%BA%AD%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/"/>
-    <published>2026-10-31T01:06:20.000Z</published>
-    <summary>
-      <![CDATA[<p>夜里忽然想到一点，注意力是真正的资源。<br>在社区+跟父母一起生活，我觉得就像是不停的被攫取注意的过程～诱惑四处都是：</p>
-<ol>
-<li>打开手机，就是各种讯息&amp;消息纷至沓来。告诉你，世界发生了大事，快来看。但那种大事多少跟你的生活没有关系。</li>
-<li>父母不停的用鸡毛蒜皮狗屁倒灶的事情来攫取你的注意力。</li>
-<li>社区冲突（最近我走了一下物业投诉，效果还行]]>
-    </summary>
-    <title>日常记录｜记录一件家庭冲突～</title>
-    <updated>2026-10-31T01:06:20.000Z</updated>
   </entry>
 </feed>
